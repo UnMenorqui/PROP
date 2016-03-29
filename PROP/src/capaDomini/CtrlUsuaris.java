@@ -3,11 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+
 package capaDomini;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.nio.file.Paths;
+
+/**
+ *
+ * @author toni_
+ */
 
 public class CtrlUsuaris {
     public String ruta_BD;

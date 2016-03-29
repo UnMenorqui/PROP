@@ -7,8 +7,9 @@ package capaDomini;
 
 /**
  *
- * @author Oriolcapo
+ * @author toni_
  */
+
 public class UsuariConvidat {
     
     public void consulta() {

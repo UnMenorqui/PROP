@@ -10,8 +10,9 @@ import java.util.Scanner;
 
 /**
  *
- * @author Oriolcapo
+ * @author toni_
  */
+
 public class Administrador extends UsuariNormal {
     private void elimina_user() {
         
@@ -43,7 +44,9 @@ public void gestionaGraf() {
         Scanner scan = new Scanner(System.in);
         cas = scan.nextInt();
         while (cas != 0) {
-            switch (cas) {         
+            switch (cas) {
+                // Les seguents necessiten d'un import
+                // de les funcions basiques del Graf
                 case 1: elimina_node();
 
                 case 2: modifica_node();
