@@ -10,7 +10,6 @@ package capaDomini;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.nio.file.Paths;
 
 /**
  *

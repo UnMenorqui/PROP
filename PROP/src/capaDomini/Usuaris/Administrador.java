@@ -54,8 +54,11 @@ public void gestionaGraf() {
                 case 3: crea_node();
                 
                 case 4: eliminar_aresta();
+                
+                case 5: cosa_random();
 
                 cas = scan.nextInt();
+                    
             }
         }
     }
