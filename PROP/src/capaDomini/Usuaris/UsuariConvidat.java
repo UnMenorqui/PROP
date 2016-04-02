@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package capaDomini;
+package capaDomini.Usuaris;
 
 /**
  *
@@ -12,6 +12,16 @@ package capaDomini;
 
 public class UsuariConvidat {
     
+    /*  Funció utilitzada per a portar a terme la consulta principal
+        encarregada de portar a terme la funció principal del Projecte,
+        consultar les dades necessàries i mes o menys importants, etc..
+    */
+    /* 
+    Pre:    Cap.
+    
+    Post:   Aquesta funció utilitzarà la classe CONSULTA, que conté
+            el codi principal d'aquesta funció.
+    */
     public void consulta() {
     }  
 }
