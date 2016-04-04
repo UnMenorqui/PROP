@@ -78,8 +78,8 @@ public class UsuariNormal extends UsuariConvidat {
     
     Post:   Retorna l'identificador de l'usuari.
     */
-    public String consulta_userID() {
-        return user_name;
+    public String consulta_Nom() {
+        return Nom;
     }
     
     /*  Modifica l'atribut user_identifier.
@@ -89,8 +89,8 @@ public class UsuariNormal extends UsuariConvidat {
     
     Post:   user_identifier ha quedat modificat.
     */
-    public void modifica_userID(Integer user_id) {
-        user_identifier = user_id;
+    public void modifica_Nom(String nom) {
+        Nom = nom;
     }
     
     /*  Modifca el nom de l'usuari.

@@ -45,21 +45,36 @@ import org.xml.sax.SAXException;
  */
 
 public class CtrlUsuaris {
-    private String ruta_BD;
     private Document document = null;
     
     
-    public void main () {
+    public void main () throws TransformerException, SAXException, IOException, ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        String BDusers = null;
         
-        crea_BD();
+        String user = "toni";
+        String pass = "abc";
+        String Nom = "Toni Riera Pons";
+        
+        crea_BD(factory);
+        Document document = null;
+        codifica_BD(document,BDusers);
+        if(!existeix(BDusers,user)) {
+            AfegirInformacio(BDusers,user,pass,Nom);
+        }
     }
     
     
-    public void crea_BD() {
+    // Crearà la Base de Dades
+    /* 
+    Pre:    Cap.
+    
+    Post:   Base de Dades creada.
+    */
+    
+    public void crea_BD(DocumentBuilderFactory factory) {
         
         try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             
             DocumentBuilder builder = factory.newDocumentBuilder();
             DOMImplementation implementation = builder.getDOMImplementation();
@@ -91,6 +106,15 @@ public class CtrlUsuaris {
         }
     }
     
+    
+    /*  Codificarà la base de dades com un arxiu, per a poder utilittzar-la
+        i així guardar tota la informació.
+    */
+    /* 
+    Pre:    Cap.
+    
+    Post:   Base de Dades codificada.
+    */
     public static void codifica_BD (Document document, String BDusers) throws TransformerException {
         try {
             TransformerFactory transFact = TransformerFactory.newInstance();
@@ -120,6 +144,12 @@ public class CtrlUsuaris {
         }
     }
     
+    // Afegirà informació a la Base de Dades
+    /* 
+    Pre:    Cal saber la informació que es vol afegir.
+    
+    Post:   Base de Dades actualitzada amb la nova informació.
+    */
     public void AfegirInformacio(String BDusers,String user, String pass, String Nom) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -131,7 +161,6 @@ public class CtrlUsuaris {
         }
         
         Element node_super = document.getDocumentElement();
-        
         Text usuari = document.createTextNode(user);
         Text passw = document.createTextNode(pass);
         Text nom = document.createTextNode(Nom);
@@ -143,6 +172,12 @@ public class CtrlUsuaris {
         node_super.appendChild(nou_node);
     }
     
+    // Busca a la Base de Dades per nom d'usuari.
+    /* 
+    Pre:    Cal saber el nom de l'usuari.
+    
+    Post:   Retorna el node de l'usuari amb la informació per a treballar amb ell.
+    */
     public Node cerca_per_nom(String BDusers, String nom) throws SAXException, IOException, ParserConfigurationException {
 
         //Cargamos el document del fichero XML existente
@@ -159,36 +194,51 @@ public class CtrlUsuaris {
         return null;
     }
     
+    // Busca a la Base de Dades per nom d'usuari si existeix.
+    /* 
+    Pre:    Cal saber el nom de l'usuari.
+    
+    Post:   retorna true o false si existeix o no, respectivament.
+    */
+    public boolean existeix(String BDusers, String nom) throws SAXException, IOException, ParserConfigurationException {
+
+        //Cargamos el document del fichero XML existente
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        document = db.parse(new File(BDusers));
+        document.getDocumentElement().normalize();
+
+        NodeList nodeUsuari = document.getDocumentElement().getElementsByTagName("Usuari");
+        for (int i = 0; i < nodeUsuari.getLength(); ++i) {
+            String nomm = nodeUsuari.item(i).getAttributes().getNamedItem("user").getTextContent();
+            if (nomm.equals(nom)) return true;
+        }
+        return false;
+    }
+    
+    
+    
     public void elimina_usuari(String BDusers, String user) throws SAXException, IOException, ParserConfigurationException {
-        Node node = cerca_per_nom(BDusers, user);
-    }
-    
-    public void modifica_informacio() {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        document = db.parse(new File(BDusers));
+        document.getDocumentElement().normalize();
+
+        NodeList nodeUsuari = document.getDocumentElement().getElementsByTagName("Usuari");
         
+        
+        int i = 0;
+        int mida = nodeUsuari.getLength(); // per no consultar lenght a cada iteració del while
+        while (i < mida) {
+            String user_cercat = nodeUsuari.item(i).getAttributes().getNamedItem("user").getTextContent();
+            if (user_cercat.equals(user)) {
+                nodeUsuari.item(i).removeChild(nodeUsuari.item(i));
+                i = mida;
+            }
+            ++i;
+        }
     }
     
-    
-    
-    
-    
-    
-    // Carregarà la Base de Dades
-    /* 
-    Pre:    Cap.
-    
-    Post:   Base de Dades carregada.
-    */
-
-    
-    /*  Codificarà la base de dades com un arxiu, per a poder utilittzar-la
-        i així guardar tota la informació.
-    */
-    /* 
-    Pre:    Cap.
-    
-    Post:   Base de Dades codificada.
-    */
-
     
     /*  Utilitzarà l'arixiu creat anteriorment com a Base de Dades
         per a escriure sobre aquest, i/o modificarl-o, poguent així
@@ -200,5 +250,33 @@ public class CtrlUsuaris {
     
     Post:   Modificació de la Base de Dades.
     */
+    public void modifica_informacio_usuari(String BDusers, String user_antic, String user_nou, String Nom, String pass) throws SAXException, IOException, ParserConfigurationException {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        document = db.parse(new File(BDusers));
+        document.getDocumentElement().normalize();
 
+        NodeList nodeUsuari = document.getDocumentElement().getElementsByTagName("Usuari");
+        
+        
+        int i = 0;
+        int mida = nodeUsuari.getLength(); // per no consultar lenght a cada iteració del while
+        while (i < mida) {
+            String user_cercat = nodeUsuari.item(i).getAttributes().getNamedItem("user").getTextContent();
+            if (user_cercat.equals(user_antic)) {
+                Text usuari = document.createTextNode(user_antic);
+                Text nou_pass = document.createTextNode(pass);
+                Text nou_nom = document.createTextNode(Nom);
+                Node nou_node = document.createElement("Usuari");
+                nou_node.appendChild(usuari);
+                nou_node.appendChild(nou_pass);
+                nou_node.appendChild(nou_nom);
+                //Canvia el node antinc, per el nou node amb la informcio actualitzada
+                nodeUsuari.item(i).replaceChild(nou_node, (Node) nodeUsuari.item(i).getAttributes());
+                // Sortim del while assignant a i el valor maxim
+                i = mida;
+            }
+            ++i;
+        }
+    }
 }
