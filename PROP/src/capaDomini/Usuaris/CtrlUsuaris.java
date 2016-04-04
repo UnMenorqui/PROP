@@ -22,6 +22,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.DOMException;
 
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -85,7 +86,7 @@ public class CtrlUsuaris {
             Usuari.appendChild(user);
             Usuari.appendChild(pass);
         }
-        catch (Exception e){
+        catch (ParserConfigurationException | DOMException e){
             System.err.println("Error al crear la Base de Dades");
         }
     }
@@ -94,7 +95,7 @@ public class CtrlUsuaris {
         try {
             TransformerFactory transFact = TransformerFactory.newInstance();
 
-            transFact.setAttribute("indent-number", new Integer(3));
+            transFact.setAttribute("indent-number", 3);
 
             Transformer trans = transFact.newTransformer();
             trans.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -108,18 +109,14 @@ public class CtrlUsuaris {
             trans.transform(domSource, sr);
             
             try {
-                PrintWriter writer = new PrintWriter (new FileWriter(BDusers));
-                
-                writer.println(sw.toString());
-                
-                writer.close();
+                try (PrintWriter writer = new PrintWriter (new FileWriter(BDusers))) {
+                    writer.println(sw.toString());
+                }
             }
             catch (IOException e) {
-                e.printStackTrace();
             }
         }
-        catch (Exception ex) {
-            ex.printStackTrace();
+        catch (IllegalArgumentException | TransformerException ex) {
         }
     }
     
@@ -130,18 +127,10 @@ public class CtrlUsuaris {
             document = db.parse(new File(BDusers));
             document.getDocumentElement().normalize();
         }
-        catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
-        catch (SAXException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
+        catch (ParserConfigurationException | SAXException | IOException e) {
         }
         
         Element node_super = document.getDocumentElement();
-        NodeList nodeUsuari = document.getDocumentElement().getElementsByTagName("Usuari");
         
         Text usuari = document.createTextNode(user);
         Text passw = document.createTextNode(pass);
@@ -154,29 +143,28 @@ public class CtrlUsuaris {
         node_super.appendChild(nou_node);
     }
     
-    public Node cerca_per_nom(String BDusers, String nom) {
-        try {
+    public Node cerca_per_nom(String BDusers, String nom) throws SAXException, IOException, ParserConfigurationException {
+
         //Cargamos el document del fichero XML existente
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         document = db.parse(new File(BDusers));
         document.getDocumentElement().normalize();
-    } 
-        catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } 
-        catch (SAXException e) {
-            e.printStackTrace();
-        }    
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+
         NodeList nodeUsuari = document.getDocumentElement().getElementsByTagName("Usuari");
         for (int i = 0; i < nodeUsuari.getLength(); ++i) {
             String nomm = nodeUsuari.item(i).getAttributes().getNamedItem("user").getTextContent();
-            if (nomm == nom) return nodeUsuari.item(i);
+            if (nomm.equals(nom)) return nodeUsuari.item(i);
         }
         return null;
+    }
+    
+    public void elimina_usuari(String BDusers, String user) throws SAXException, IOException, ParserConfigurationException {
+        Node node = cerca_per_nom(BDusers, user);
+    }
+    
+    public void modifica_informacio() {
+        
     }
     
     
@@ -190,9 +178,7 @@ public class CtrlUsuaris {
     
     Post:   Base de Dades carregada.
     */
-    protected void carrega() {
-        
-    }
+
     
     /*  Codificarà la base de dades com un arxiu, per a poder utilittzar-la
         i així guardar tota la informació.
@@ -202,24 +188,7 @@ public class CtrlUsuaris {
     
     Post:   Base de Dades codificada.
     */
-    protected boolean codifica() {
-        File f = null;
-        String v;
-        boolean bool = false;
-         // create new file
-        f = new File("Usuaris.txt");
 
-        // pathname string from abstract pathname.
-        v = f.getPath();
-        ruta_BD = v;
-
-        // true if the file path exists.
-        bool = f.exists();
-
-        // if file exists
-        if (bool) return true;
-        return false;
-    }
     
     /*  Utilitzarà l'arixiu creat anteriorment com a Base de Dades
         per a escriure sobre aquest, i/o modificarl-o, poguent així
@@ -231,12 +200,5 @@ public class CtrlUsuaris {
     
     Post:   Modificació de la Base de Dades.
     */
-    protected void modifica_arxiu(Integer user_identifier) {
-        BufferedWriter bw;
-        String ruta = ruta_BD;
-        //if(ruta.exists()) {
-        //} 
-        //else {
-         //}
-    }
+
 }

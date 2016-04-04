@@ -17,9 +17,8 @@ package capaDomini.Usuaris;
  */
 
 public class UsuariNormal extends UsuariConvidat {
-    
-    private Integer user_identifier;
     private String user_name;
+    private String Nom;
     private String password;
     
     /*  Utilitza la funció de la Classe Apunts, que guarda
