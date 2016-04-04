@@ -13,7 +13,7 @@ package capaDomini.Usuaris;
 public class UsuariConvidat {
     
     /*  Funció utilitzada per a portar a terme la consulta principal
-        encarregada de portar a terme la funció principal del Projecte,
+        del Projecte,
         consultar les dades necessàries i mes o menys importants, etc..
     */
     /* 

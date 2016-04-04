@@ -15,29 +15,29 @@ import java.util.Scanner;
  * Aquesta classe, està definida per a poder portar a terme les
  * operacions que un administrador faria, tals como modificar usuaris,
  * eliminar-los, i altres operacions de gestionar la base de dades principals
- * i també el GRAF
+ * i també el GRAF.
  */
 
 public class Administrador extends UsuariNormal {
-    // Elimina usuari de la base de dades d'usuari
+    // Elimina usuari de la base de dades d'usuari.
     /* 
     Pre:    Quan cridem aquesta funcio sabrem quin usuari
-            es voldrà eliminar de la base de dades
+            es voldrà eliminar de la base de dades.
     
     Post:   L'usuari amb l'identificador d'usuari proporcionat
-            que serà el seu "user_identifier", serà eliminat
+            que serà el seu "user_identifier", serà eliminat.
     */
     private void elimina_user(Integer user_identifier) {
         
     }
     
-    // Modifica un usuari de la bases de dades d'usuari
+    // Modifica un usuari de la bases de dades d'usuari.
     /* 
     Pre:    Quan cridem aquesta funcio sabrem quin usuari
-            es voldrà eliminar de la base de dades
+            es voldrà eliminar de la base de dades.
     
     Post:   L'usuari amb l'identificador d'usuari proporcionat
-            que serà el seu "user_name", serà modificat
+            que serà el seu "user_name", serà modificat.
     */
     private void modifica_user(Integer user_identifier, String user_name, String password) {
         
@@ -46,14 +46,14 @@ public class Administrador extends UsuariNormal {
     
     /*  Funció que utilizara altres funciones per a
         per a gestionar els usuaris de la BD, podrà
-        eliminar i modificar usuaris
+        eliminar i modificar usuaris.
     */
     /* 
     Pre:    Quan cridem aquesta funcio sabrem quin usuari
-            es voldrà eliminar de la base de dades
+            es voldrà eliminar de la base de dades.
     
     Post:   L'usuari amb l'identificador d'usuari proporcionat
-            que serà el seu "user_name", serà gestionat
+            que serà el seu "user_name", serà gestionat.
     */
     public void gestiona_users_BD() {
         int cas;
@@ -80,10 +80,10 @@ public class Administrador extends UsuariNormal {
     */
     /* 
     Pre:    Quan cridem aquesta funcio sabrem quin usuari
-            es voldrà eliminar de la base de dades
+            es voldrà eliminar de la base de dades.
     
     Post:   L'usuari amb l'identificador d'usuari proporcionat
-            que serà el seu "user_name", serà gestionat
+            que serà el seu "user_name", serà gestionat.
     */
     
     
@@ -95,15 +95,15 @@ public class Administrador extends UsuariNormal {
             switch (cas) {
                 // Les seguents necessiten d'un import
                 // de les funcions basiques del Graf
-                case 1: elimina_node();
+                case 1: //elimina_node();
 
-                case 2: modifica_node();
+                case 2: //modifica_node();
 
-                case 3: crea_node();
+                case 3: //crea_node();
 
-                case 4: eliminar_aresta();
+                case 4: //eliminar_aresta();
 
-                case 5: cosa_random();
+                case 5: //cosa_random();
 
                 cas = scan.nextInt();
 
@@ -114,12 +114,12 @@ public class Administrador extends UsuariNormal {
     
     /*  Funció que utilitzarà funcions de la classe "BASE DE DADES"
         que permetrà a l'administrador gestionar la informació
-        continguda a la base de dades principals
+        continguda a la base de dades principals.
     */
     /*
-    Pre: Cap
+    Pre:    Cap
     
-    Post: s'hauran portat a terme les operacions desitjades.
+    Post:   S'hauran portat a terme les operacions desitjades.
     */
     public void gestionaBD () {
         
