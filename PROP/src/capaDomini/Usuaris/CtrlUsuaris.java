@@ -115,7 +115,7 @@ public class CtrlUsuaris {
     
     Post:   Base de Dades codificada.
     */
-    public static void codifica_BD (Document document, String BDusers) throws TransformerException {
+    public static void codifica_BD (Document document, String BDusers) {
         try {
             TransformerFactory transFact = TransformerFactory.newInstance();
 
@@ -133,15 +133,21 @@ public class CtrlUsuaris {
             trans.transform(domSource, sr);
             
             try {
-                try (PrintWriter writer = new PrintWriter (new FileWriter(BDusers))) {
-                    writer.println(sw.toString());
-                }
-            }
+            //Creamos fichero para escribir en modo texto
+            PrintWriter writer = new PrintWriter(new FileWriter(BDusers));
+
+            //Escribimos todo el árbol en el fichero
+            writer.println(sw.toString());
+
+            //Cerramos el fichero
+            writer.close();
+        } 
             catch (IOException e) {
-            }
+            e.printStackTrace();
         }
-        catch (IllegalArgumentException | TransformerException ex) {
-        }
+    } catch(Exception ex) {
+        ex.printStackTrace();
+    }
     }
     
     // Afegirà informació a la Base de Dades
