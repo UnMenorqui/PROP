@@ -55,9 +55,10 @@ public class CtrlUsuaris {
         String user = "toni";
         String pass = "abc";
         String Nom = "Toni Riera Pons";
-        
-        crea_BD(factory);
-        Document document = null;
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        DOMImplementation implementation = builder.getDOMImplementation();
+        document = implementation.createDocument(null, "xml", null);
+        crea_BD(document,factory);
         codifica_BD(document,BDusers);
         if(!existeix(BDusers,user)) {
             AfegirInformacio(BDusers,user,pass,Nom);
@@ -72,14 +73,9 @@ public class CtrlUsuaris {
     Post:   Base de Dades creada.
     */
     
-    public void crea_BD(DocumentBuilderFactory factory) {
+    public void crea_BD(Document document, DocumentBuilderFactory factory) {
         
         try {
-            
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            DOMImplementation implementation = builder.getDOMImplementation();
-            document = implementation.createDocument(null, "xml", null);
-            
             
             //Creació d'elements
             Element Usuaris = document.createElement("Usuaris");
@@ -101,7 +97,7 @@ public class CtrlUsuaris {
             Usuari.appendChild(user);
             Usuari.appendChild(pass);
         }
-        catch (ParserConfigurationException | DOMException e){
+        catch (DOMException e){
             System.err.println("Error al crear la Base de Dades");
         }
     }
