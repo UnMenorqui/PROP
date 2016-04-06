@@ -1,5 +1,6 @@
 package capaDomini.Usuaris;
 
+import capaPersistencia.DadesUsuari;
 import java.util.Scanner;
 
 /**
@@ -20,6 +21,8 @@ public class DriverUsuariNormal {
         UsuariNormal usn;
         usn = new UsuariNormal(usuari,password);
         
+        DadesUsuari dades = new DadesUsuari();
+        
         Boolean bool = false;
         
         System.out.println("Tria una opció:");
@@ -27,7 +30,7 @@ public class DriverUsuariNormal {
         System.out.println("Si vols modificar el nom de l'usuari marca 2.");
         System.out.println("Si vols consultar la contrasenya marca 3.");
         System.out.println("Si vols modificar la contrasenya marca 4.");
-        System.out.println("Si vols sortir marca 5.");
+        System.out.println("Si vols acabar la prova de driver marca 5.");
 
         while(!bool) {
             int prova = sc.nextInt();
@@ -50,7 +53,6 @@ public class DriverUsuariNormal {
                     usn.modificar_pass(new_password);
                     break;  
                 case 5:
-                    bool = true;
                     break;
             }
         }
