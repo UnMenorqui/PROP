@@ -7,6 +7,8 @@ package capaPersistencia;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -14,17 +16,31 @@ import java.io.File;
  */
 public class DadesUsuari {
     
-    public void crea_arxiu() {
-        File dir = new File(".");
-        String ruta = "/home/mario/archivo.txt";
-        File archivo = new File(ruta);
+    private String ruta_BD;
+    
+    
+    public DadesUsuari() {
+        
+    }
+    
+    public static void main(String[] args) throws IOException {
+        DadesUsuari dades = new DadesUsuari();
+        dades.crea_arxiu();
+    }
+    
+    
+    public void crea_arxiu() throws IOException {
+        File archivo = new File("BD_users.txt");
+        ruta_BD = archivo.getCanonicalPath();
+        System.out.println(ruta_BD);
         BufferedWriter bw;
         if(archivo.exists()) {
-              // El fichero ya existe
+            bw = new BufferedWriter(new FileWriter(archivo));
+            bw.write("El fichero de texto ya estaba creado.");
         } else {
-              // El fichero no existe y hay que crearlo
+            bw = new BufferedWriter(new FileWriter(archivo));
+            bw.write("Acabo de crear el fichero de texto.");
         }
-        
-        
-   
+        bw.close();
+    }
 }
