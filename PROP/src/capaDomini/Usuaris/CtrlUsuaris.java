@@ -65,6 +65,10 @@ public class CtrlUsuaris {
     Post:   Base de Dades creada.
     */
     
+    //CONSTRUCTORA SENSE PARÀMETRES
+    public CtrlUsuaris() {
+    }
+    
     public void crea_BD(Document document, DocumentBuilderFactory factory) {
         
         try {

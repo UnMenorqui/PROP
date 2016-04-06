@@ -5,6 +5,13 @@
  */
 package prop;
 
+import capaDomini.Usuaris.CtrlUsuaris;
+import capaDomini.Usuaris.DriverUsuariNormal;
+import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
+
 
 
 /**
@@ -16,8 +23,11 @@ public class PROP {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws TransformerException, SAXException, IOException, ParserConfigurationException {
         // TODO code application logic here
+        DriverUsuariNormal driver = new DriverUsuariNormal();
+        driver.main();
+        
     }
     
 }

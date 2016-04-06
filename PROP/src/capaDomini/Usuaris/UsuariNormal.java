@@ -22,7 +22,9 @@ public class UsuariNormal extends UsuariConvidat {
     
     //CONSTRUCTORA AMB PARÀMETRE
     UsuariNormal(String usuari, String nom, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.user_name = usuari;
+        this.Nom = nom;
+        this.password = password;
     }
     
     /*  Utilitza la funció de la Classe Apunts, que guarda
