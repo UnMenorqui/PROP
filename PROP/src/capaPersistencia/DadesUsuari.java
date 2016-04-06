@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 
 /**
  *
@@ -29,8 +30,8 @@ public class DadesUsuari {
     public static void main(String[] args) throws IOException {
         DadesUsuari dades = new DadesUsuari();
         dades.crea_arxiu();
-        String user_name = "hola";
-        String password = "que tal?";
+        String user_name = "aaaaa";
+        String password = "bbbbbbbbb";
         GuardarUsuari(user_name,password);
     }
     
@@ -41,33 +42,25 @@ public class DadesUsuari {
     }
     
     public static void GuardarUsuari(String user_name, String password){
-       FileOutputStream fos = null;
-       ObjectOutputStream salida = null;
-       File f = null;
-       try{
-            f = new File("BD_users.txt");
-            //System.out.println(f.getAbsolutePath());
-            fos = new FileOutputStream(f.getAbsolutePath());
-            salida = new ObjectOutputStream(fos);
-            try {
-                salida.reset();
-                salida.writeObject(user_name+"  "+password);
-            } catch (Exception e1) {
-                // TODO Auto-generated catch block
-                System.out.println(e1.getMessage());
-            }                      
-       }catch (FileNotFoundException e) {
-           System.out.println(e.getMessage());
-       } catch (IOException e) {
-           System.out.println(e.getMessage());
-       } finally {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try
+        {
+            fichero = new FileWriter("BD_users.txt",true);
+            pw = new PrintWriter(fichero);
+            pw.println(user_name+"  "+password);
+        } catch (Exception e) {
+            
+        } finally {
            try {
-               if(fos!=null) fos.close();
-               if(salida!=null) salida.close();
-           } catch (IOException e) {
-               System.out.println(e.getMessage());
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              
            }
-       }
+        }
     }
     
     public void crea_arxiu() throws IOException {
@@ -76,10 +69,8 @@ public class DadesUsuari {
         BufferedWriter bw;
         if(archivo.exists()) {
             bw = new BufferedWriter(new FileWriter(archivo));
-            bw.write("El fichero de texto ya estaba creado.");
         } else {
             bw = new BufferedWriter(new FileWriter(archivo));
-            bw.write("Acabo de crear el fichero de texto.");
         }
         bw.close();
     }
