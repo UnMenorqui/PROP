@@ -5,6 +5,7 @@
  */
 package capaPersistencia;
 
+import capaDomini.Usuaris.UsuariNormal;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,7 +33,9 @@ public class DadesUsuari {
         dades.crea_arxiu();
         String user_name = "aaaaa";
         String password = "bbbbbbbbb";
-        GuardarUsuari(user_name,password);
+        UsuariNormal usn;
+        usn = new UsuariNormal(user_name,password);
+        GuardarUsuari(usn);
     }
     
     public static Boolean existeix_arxiu() {
@@ -41,14 +44,14 @@ public class DadesUsuari {
         else return false;
     }
     
-    public static void GuardarUsuari(String user_name, String password){
+    public static void GuardarUsuari(UsuariNormal us){
         FileWriter fichero = null;
         PrintWriter pw = null;
         try
         {
             fichero = new FileWriter("BD_users.txt",true);
             pw = new PrintWriter(fichero);
-            pw.println(user_name+"  "+password);
+            pw.print(us.consultar_username()+"  "+us.consultar_password());
         } catch (Exception e) {
             
         } finally {
@@ -65,13 +68,5 @@ public class DadesUsuari {
     
     public void crea_arxiu() throws IOException {
         File archivo = new File("BD_users.txt");
-        ruta_BD = archivo.getCanonicalPath();
-        BufferedWriter bw;
-        if(archivo.exists()) {
-            bw = new BufferedWriter(new FileWriter(archivo));
-        } else {
-            bw = new BufferedWriter(new FileWriter(archivo));
-        }
-        bw.close();
     }
 }

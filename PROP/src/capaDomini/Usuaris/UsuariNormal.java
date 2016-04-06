@@ -12,18 +12,16 @@ package capaDomini.Usuaris;
 
 public class UsuariNormal extends UsuariConvidat {
     private String user_name;
-    private String Nom;
     private String password;
     
     
     //CONSTRUCTORA SENSE PARÀMETRES
-    UsuariNormal() {
+    public UsuariNormal() {
     }
     
     //CONSTRUCTORA AMB PARÀMETRES
-    UsuariNormal(String usuari, String nom, String password) {
+    public UsuariNormal(String usuari, String password) {
         this.user_name = usuari;
-        this.Nom = nom;
         this.password = password;
     }
     
@@ -65,22 +63,6 @@ public class UsuariNormal extends UsuariConvidat {
         return password; 
     }
     
-    /*  Retorna l'identificador de l'usuari.
-    Pre:    Cap.
-    Post:   Retorna l'identificador de l'usuari.
-    */
-    public String consultar_Nom() {
-        return Nom;
-    }
-    
-    /*  Modifica l'atribut user_identifier.
-    Pre:    Cap.
-    Post:   user_identifier ha quedat modificat.
-    */
-    public void modificar_Nom(String nom) {
-        this.Nom = nom;
-    }
-    
     /*  Modifca el nom de l'usuari.
     Pre:    Cap.
     Post:   El nom de l'usuari ha quedat modificat.
@@ -102,7 +84,6 @@ public class UsuariNormal extends UsuariConvidat {
     Post:   Retorna true si es correcte, else false.
     */
     public boolean correct_pass(String pass) {
-        
         return true;
     }
     
@@ -114,7 +95,6 @@ public class UsuariNormal extends UsuariConvidat {
     Post:   Retorna true si existeix, else false.
     */
     public boolean user_exists(String pass) {
-        
         return true;
     }
 }
