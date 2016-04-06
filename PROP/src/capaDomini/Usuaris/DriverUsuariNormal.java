@@ -3,13 +3,11 @@ package capaDomini.Usuaris;
 import java.util.Scanner;
 
 /**
- *
  * @author aleixabrieprat
  */
 public class DriverUsuariNormal {
-    
-    
-    public void main () {
+ 
+    public static void main (String[] args) {
         DriverUsuariNormal us = new DriverUsuariNormal();
         Scanner sc = new Scanner(System.in);
         String usuari, password, nom;
@@ -25,18 +23,15 @@ public class DriverUsuariNormal {
         Boolean bool = false;
         
         System.out.println("Tria una opció:");
-            System.out.println("Si vols consultar el nom de l'usuari marca 1.");
-            System.out.println("Si vols modificar el nom de l'usuari marca 2.");
-            System.out.println("Si vols consultar la contrasenya marca 3.");
-            System.out.println("Si vols modificar la contrasenya marca 4.");
-            System.out.println("Si vols consultar el nom marca 5.");
-            System.out.println("Si vols modificar el nom marca 6.");
-            System.out.println("Si vols acabar la prova de driver marca 7.");
-            System.out.println();
-            System.out.println("Marca la opció desitjada: ");
-        
+        System.out.println("Si vols consultar el nom de l'usuari marca 1.");
+        System.out.println("Si vols modificar el nom de l'usuari marca 2.");
+        System.out.println("Si vols consultar la contrasenya marca 3.");
+        System.out.println("Si vols modificar la contrasenya marca 4.");
+        System.out.println("Si vols consultar el nom marca 5.");
+        System.out.println("Si vols modificar el nom marca 6.");
+        System.out.println("Si vols acabar la prova de driver marca 7.");
+
         while(!bool) {
-            
             int prova = sc.nextInt();
             switch(prova) {
                 case 1:
@@ -63,7 +58,6 @@ public class DriverUsuariNormal {
                     String nom_nou;
                     System.out.println("Entra el nou nom: ");
                     nom_nou = sc.next();
-                    
                     usn.modificar_Nom(nom_nou);
                     break;
                 case 7:
@@ -72,5 +66,6 @@ public class DriverUsuariNormal {
             }
         }
         sc.close();
-    }
+        System.out.println(); 
+    }   
 }

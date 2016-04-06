@@ -5,10 +5,12 @@
  */
 package prop;
 
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 /**
- *
  * @author toni_
  */
 public class PROP {
@@ -18,7 +20,10 @@ public class PROP {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
     }
     
 }

@@ -20,7 +20,7 @@ public class UsuariNormal extends UsuariConvidat {
     UsuariNormal() {
     }
     
-    //CONSTRUCTORA AMB PARÀMETRE
+    //CONSTRUCTORA AMB PARÀMETRES
     UsuariNormal(String usuari, String nom, String password) {
         this.user_name = usuari;
         this.Nom = nom;
