@@ -12,4 +12,8 @@ package capaDomini.Usuaris;
 
 public class CtrlUsuaris {
     
+    public static void main(String[] args) {
+        
+    }
+    
 }
