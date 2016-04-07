@@ -1,19 +1,51 @@
 package capaDomini.Usuaris;
 
-
+import capaPersistencia.CtrlDadesUsuari;
 
 /**
  * @author toni_
  * 
- * Aquesta classe està dedicada exlcusivament per a crear la
- * Base de Dades d'usuaris, les operacions seran tals com
- * carregar la BD, codificar la BD en un arxiu, modificar-la, etc..
+ * Aquesta classe està dedicada exlcusivament per a conectar les
+ * classes d'usuaris de la capa domini amb el controlador de la base de dades de
+ * la capa persistència. Les operacions bàsiques seràn consultar un usuari a la BD
+ * a partir del seu user_name o a partir d'un objecte usuari, modificar un usuari, elminar-lo o
+ * insertar-n'hi un de nou.
  */
 
 public class CtrlUsuaris {
     
-    public static void main(String[] args) {
-        
+    private static CtrlDadesUsuari du;
+    
+    public CtrlUsuaris() {
+        du = new CtrlDadesUsuari();
+    }
+    
+    public static Boolean modificar_usuari(UsuariNormal usn, String new_username) {
+        if (ExisteixUsuari_contrasenya(usn)) {
+            String username = usn.consultar_username();
+            String password = usn.consultar_password();
+            if (du.modificar_usuari(username,password,new_username)) return true;
+        }
+        return false;
+    }
+    
+    public static Boolean modificar_password(UsuariNormal usn, String new_password) {
+        if (ExisteixUsuari_contrasenya(usn)) {
+            String username = usn.consultar_username();
+            String password = usn.consultar_password();
+            if (du.modificar_password(username,password,new_password)) return true;
+        }
+        return false;
+    }
+    
+    public static Boolean ExisteixUsuari_contrasenya(UsuariNormal usn) {
+        String username = usn.consultar_username();
+        String password = usn.consultar_password();
+        return du.ExisteixUsuari_contrasenya(username, password);
+    }
+    
+    public static Boolean ExisteixUsuari(String username) {
+        return du.ExisteixUsuari(username);
     }
     
 }
