@@ -1,10 +1,7 @@
 package capaDomini.Usuaris;
 
-import static capaDomini.Usuaris.CtrlUsuaris.ExisteixUsuari;
-import static capaDomini.Usuaris.CtrlUsuaris.ExisteixUsuari_contrasenya;
-import static capaDomini.Usuaris.CtrlUsuaris.borrarlinea;
-import capaPersistencia.DadesUsuari; // ??????
-import static capaPersistencia.DadesUsuari.GuardarUsuari;
+
+import capaDomini.Usuaris.CtrlUsuaris;
 import java.util.Scanner;
 
 /**
@@ -25,8 +22,6 @@ public class DriverUsuariNormal {
         UsuariNormal usn;
         usn = new UsuariNormal(usuari,password);
         
-        DadesUsuari dades = new DadesUsuari();
-        
         Boolean bool = false;
         
         System.out.println("Tria una opció:");
@@ -42,6 +37,7 @@ public class DriverUsuariNormal {
             int prova = sc.nextInt();
             String user;
             String pass;
+            UsuariNormal usr= new UsuariNormal();
             switch(prova) {
                 case 1:
                     System.out.println(usn.consultar_username());
@@ -64,18 +60,18 @@ public class DriverUsuariNormal {
                     user = sc.next();
                     System.out.println("Entra la contrasenya: ");
                     pass = sc.next();
-                    GuardarUsuari(user, pass);
+                    CtrlUsuaris.GuardarUsuari(user,pass);
                     break;
                 case 6:
                     System.out.println("Entra el nom de l'usuari: ");
                     user = sc.next();
-                    if (ExisteixUsuari(user).equals(false)) { 
+                    if (CtrlUsuaris.ExisteixUsuari(user).equals(false)) { 
                         System.out.println("L'usuari no existeix");
                         boolean acabat = false;
                         while(!acabat) {
                             System.out.println("Escriu de nou el nom de l'usuari: ");
                             user = sc.next();
-                            if (! ExisteixUsuari(user)) System.out.println("L'usuari no existeix");
+                            if (!CtrlUsuaris.ExisteixUsuari(user)) System.out.println("L'usuari no existeix");
                             else acabat = true;
                         }
                     }
@@ -85,17 +81,17 @@ public class DriverUsuariNormal {
                     usr_prova = new UsuariNormal();
                     usr_prova.modificar_user(user);
                     usr_prova.modificar_pass(pass);
-                    if (ExisteixUsuari_contrasenya(usr_prova).equals(false)) {
+                    if (CtrlUsuaris.ExisteixUsuari_contrasenya(usr_prova).equals(false)) {
                         System.out.println("Constrasenya incorrecta");
                         boolean acabat = false;
                         while(!acabat) {
                             System.out.println("Escriu de nou la contrasenya de l'usuari: ");
                             user = sc.next();
-                            if (! ExisteixUsuari(user)) System.out.println("Constraseya incorrecta");
+                            if (!CtrlUsuaris.ExisteixUsuari(user)) System.out.println("Constraseya incorrecta");
                             else acabat = true;
                         }
                     }
-                    borrarlinea(user,pass);
+                    CtrlUsuaris.borrarlinea(user,pass);
                     break;
                 case 7:
                     bool = true;
