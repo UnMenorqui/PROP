@@ -48,7 +48,7 @@ public class CtrlUsuaris {
         return du.ExisteixUsuari(username);
     }
     
-    public Boolean borrarlinea(String username, String password) {
+    public static Boolean borrarlinea(String username, String password) {
         return du.borrarlinea(username, password);
     }
     
