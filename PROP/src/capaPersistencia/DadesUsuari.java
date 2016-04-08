@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 /**
  *
@@ -15,7 +16,6 @@ import java.io.PrintWriter;
 public class DadesUsuari {
     
     private final static String nom_BD = "BD_users.txt";
-    
     
     public DadesUsuari() {
         
@@ -157,11 +157,61 @@ public class DadesUsuari {
         return true;
     }
     
+    
+    public static boolean borrarlinea(String user, String pass) {
+ 
+    try {
+ 
+      File inFile = new File("BD_users.txt");
+      
+      if (!inFile.isFile()) {
+        System.out.println("Parameter is not an existing file");
+        return false;
+      }
+       
+      //Construct the new file that will later be renamed to the original filename. 
+      File tempFile = new File(inFile.getAbsolutePath() + ".tmp");
+      
+      BufferedReader br = new BufferedReader(new FileReader("BD_users.txt"));
+      PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+      
+      String line = null;
+ 
+      //Read from the original file and write to the new 
+      //unless content matches data to be removed.
+      while ((line = br.readLine()) != null) {
+        String borra = user+"  "+pass;
+        if (!line.trim().equals(borra)) {
+ 
+          pw.println(line);
+          pw.flush();
+        }
+      }
+      pw.close();
+      br.close();
+      
+      //Delete the original file
+      if (!inFile.delete()) {
+        System.out.println("Could not delete file");
+      } 
+      
+      //Rename the new file to the filename the original file had.
+      if (!tempFile.renameTo(inFile))
+        System.out.println("Could not rename file");
+    }
+    catch (FileNotFoundException ex) {
+      ex.printStackTrace();
+    }
+    catch (IOException ex) {
+      ex.printStackTrace();
+    }
+    return true;
+  }
+    
     //FETA
-    public static boolean borrarlinea(String username, String password) {
+    /*public static boolean borrarlinea(String username, String password) {
         try {
             String borra = (username+"  "+password);
-
             File inFile = new File("BD_users");
             if (!inFile.isFile()) return false;
             
@@ -198,5 +248,5 @@ public class DadesUsuari {
             ex.printStackTrace();
         } 
         return true;
-    }
+    }*/
 }
