@@ -1,5 +1,6 @@
 package capaPersistencia;
 
+import static capaDomini.Usuaris.CtrlUsuaris.ExisteixUsuari_contrasenya;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -131,29 +132,17 @@ public class DadesUsuari {
     }
     
     // FALTA PER FER
-    public static Boolean modificar_username(String username, String password, String new_username) {
+    public static Boolean modificar_username(String username,String nou_user, String password) {
         //Es sap que l'usuari existeix a la BD
-        try {
-            
-        }
-        catch(Exception e) {
-            
-        }
-        
+        borrarlinea(username,password);
+        GuardarUsuari(nou_user,password);
         return true;
         
     }
     
     //FALTA PER FER
-    public static Boolean modificar_password(String username, String password, String new_password) {
+    public static Boolean modificar_password(String username,String nou_user, String password) {
         //Es sap que l'usuari existeix a la BD
-        try {
-            
-        }
-        catch(Exception e) {
-            
-        }
-        
         return true;
     }
     

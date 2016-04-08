@@ -20,21 +20,12 @@ public class CtrlUsuaris {
         du = new CtrlDadesUsuari();
     }
     
-    public static Boolean modificar_usuari(UsuariNormal usn, String new_username) {
-        String password = usn.consultar_password();
-        if (!ExisteixUsuari(new_username)) {
-            return du.modificar_usuari(new_username,password);
-        }
-        return false;    
+    public static Boolean modificar_usuari(String username,String nou_user, String password) {
+        return du.modificar_usuari(username,nou_user,password);
     }
     
     public static Boolean modificar_password(UsuariNormal usn, String new_password) {
-        if (ExisteixUsuari_contrasenya(usn)) {
-            String username = usn.consultar_username();
-            String password = usn.consultar_password();
-            if (du.modificar_password(username,password,new_password)) return true;
-        }
-        return false;
+        return true;
     }
     
     public static Boolean ExisteixUsuari_contrasenya(UsuariNormal usn) {

@@ -51,9 +51,25 @@ public class DriverUsuariNormal {
                     System.out.println(usn.consultar_username());
                     break;
                 case 2:
-                    System.out.println("Entra el nou nom: ");
+                    System.out.println("Entra el nom: ");
                     user = sc.next();
-                    usn.modificar_user(user);
+                    if (!CtrlUsuaris.ExisteixUsuari(user)) {
+                        System.out.println("Usuari no-existent");
+                    }
+                    else {
+                        System.out.println("Escriu la contrasenya de l'usuari");
+                        password = sc.next();
+                        usn = new UsuariNormal(user,password);
+                        if (!CtrlUsuaris.ExisteixUsuari_contrasenya(usn)) {
+                            System.out.println("Contrasenya incorrecta.");
+                        }
+                        else {
+                            System.out.println("Password correcta.");
+                            System.out.println("Escriu el nou usuari: ");
+                            String nou_user = sc.next();
+                            CtrlUsuaris.modificar_usuari(user,nou_user,password);
+                        }
+                    }
                     break;
                 case 3:
                     System.out.println(usn.consultar_password());
