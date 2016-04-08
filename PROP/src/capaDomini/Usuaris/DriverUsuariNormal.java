@@ -66,9 +66,13 @@ public class DriverUsuariNormal {
                 case 5:
                     System.out.println("Entra el nom de l'usuari: ");
                     user = sc.next();
-                    System.out.println("Entra la contrasenya: ");
-                    pass = sc.next();
-                    CtrlUsuaris.GuardarUsuari(user,pass);
+                    if (CtrlUsuaris.ExisteixUsuari(user)) {
+                        System.out.println("Aquest Usuari ja existeix");
+                    } else {               
+                        System.out.println("Entra la contrasenya: ");
+                        pass = sc.next();
+                        CtrlUsuaris.GuardarUsuari(user,pass);
+                    }
                     break;
                 case 6:
                     System.out.println("Entra el nom de l'usuari: ");
