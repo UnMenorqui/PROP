@@ -21,12 +21,11 @@ public class CtrlUsuaris {
     }
     
     public static Boolean modificar_usuari(UsuariNormal usn, String new_username) {
-        if (ExisteixUsuari_contrasenya(usn)) {
-            String username = usn.consultar_username();
-            String password = usn.consultar_password();
-            if (du.modificar_usuari(username,password,new_username)) return true;
+        String password = usn.consultar_password();
+        if (!ExisteixUsuari(new_username)) {
+            return du.modificar_usuari(new_username,password);
         }
-        return false;
+        return false;    
     }
     
     public static Boolean modificar_password(UsuariNormal usn, String new_password) {
