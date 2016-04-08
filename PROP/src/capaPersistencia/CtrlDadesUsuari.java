@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package capaPersistencia;
-
-import capaPersistencia.DadesUsuari;
 /**
  * @author aleixabrieprat
  */
@@ -25,5 +23,11 @@ public class CtrlDadesUsuari {
     
     public Boolean ExisteixUsuari(String username) {
         return DadesUsuari.ExisteixUsuari(username);
+    }
+    public Boolean borrarlinea(String username, String password) {
+        return DadesUsuari.borrarlinea(username, password);
+    }
+    public void GuardarUsuari(String username, String password) {
+        DadesUsuari.GuardarUsuari(username, password);
     }
 }

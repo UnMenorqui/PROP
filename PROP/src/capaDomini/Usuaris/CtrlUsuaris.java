@@ -48,4 +48,12 @@ public class CtrlUsuaris {
         return du.ExisteixUsuari(username);
     }
     
+    public Boolean borrarlinea(String username, String password) {
+        return du.borrarlinea(username, password);
+    }
+    
+    public static void GuardarUsuari(String username, String password) {
+        du.GuardarUsuari(username, password);
+    }
+    
 }
