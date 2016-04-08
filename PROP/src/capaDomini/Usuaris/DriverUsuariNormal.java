@@ -38,7 +38,7 @@ public class DriverUsuariNormal {
         int i = 0;
         while(!bool) {
             if(i != 0) {
-                System.out.println("Operació realitzada");
+                System.out.println("Operació realitzada.");
                 System.out.println("---------------------");
                 System.out.println("Torna a entrar la operació a fer: ");
             }
