@@ -16,20 +16,20 @@ import java.util.Vector;
  *
  * @author marc_
  */
-public class PerfilArticle extends Perfil {
+public class PerfilAutor extends Perfil { 
     
-    List<String> aux = new Vector<String>();
+    List<String> aux = new Vector<String>(); 
     
-    public List<String> autors_importants(int quantitat) {
+    public List<String> articles_importants(int quantitat) {
         return aux;
     }
     
     public List<String> conferencies_importants(int quantitat) {
-        return aux;
+         return aux;
     }
     
     public List<String> termes_importants(int quantitat) {
-        return aux;
+         return aux;
     }
     
 }
