@@ -40,12 +40,12 @@ public class PerfilConf extends Perfil {
     }
     
     public static List<String> articles_importants() {
-        // obtenir_autors(autors,nom,quantitat_autors);
+        // obtenir_articles(articles,nom,quantitat_articles);
         return articles;
     }
     
     public static List<String> autors_importants() {
-        // obtenir_conferencies(conferencies,nom,quantitat_conf);
+        // obtenir_autors(autors,nom,quantitat_autors);
         return autors;
     }
     

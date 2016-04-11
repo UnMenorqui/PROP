@@ -21,10 +21,18 @@ public class Perfil {
     public static void creacio_perfil(int marca, String entitat) {
         nom = entitat;
         switch(marca) {
-            case 1: PerfilAutor.crear_perfil_autor();
-            case 2: PerfilConf.crear_perfil_conf();
-            case 3: PerfilArticle.crear_perfil_article();
-            case 4: PerfilTerme.crear_perfil_terme();
+            case 1: 
+                PerfilAutor.crear_perfil_autor();
+                break;
+            case 2: 
+                PerfilConf.crear_perfil_conf();
+                break;
+            case 3: 
+                PerfilArticle.crear_perfil_article();
+                break;
+            case 4: 
+                PerfilTerme.crear_perfil_terme();
+                break;
         }
     }
     

@@ -40,7 +40,8 @@ public class PerfilTerme extends Perfil {
     }
     
     public static List<String> articles_importants() {
-        // obtenir_autors(autors,nom,quantitat_autors);
+        
+        // obtenir_articles(articles,nom,quantitat_articles);
         return articles;
     }
     
@@ -50,7 +51,7 @@ public class PerfilTerme extends Perfil {
     }
     
     public static List<String> autors_importants() {
-        // obtenir_termes(termes,nom,quantitat_termes);
+        // obtenir_autors(autors,nom,quantitat_autors);
         return autors;
     }
     
