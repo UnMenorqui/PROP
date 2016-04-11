@@ -24,14 +24,12 @@ public class CtrlUsuaris {
         return du.modificar_usuari(username,nou_user,password);
     }
     
-    public static Boolean modificar_password(UsuariNormal usn, String new_password) {
-        return true;
+    public static Boolean modificar_password(String username, String password, String new_password) {
+        return du.modificar_password(username,password,new_password);
     }
-    
+
     public static Boolean ExisteixUsuari_contrasenya(UsuariNormal usn) {
-        String username = usn.consultar_username();
-        String password = usn.consultar_password();
-        return du.ExisteixUsuari_contrasenya(username, password);
+        return du.ExisteixUsuari_contrasenya(usn.consultar_username(),usn.consultar_password());
     }
     
     public static Boolean ExisteixUsuari(String username) {
@@ -44,6 +42,14 @@ public class CtrlUsuaris {
     
     public static void GuardarUsuari(String username, String password) {
         du.GuardarUsuari(username, password);
+    }
+    
+    public static void consultaBD() {
+        du.consultaBD();
+    }
+    
+    public static String consultar_password(String username) {
+        return du.consultar_password(username);
     }
     
 }

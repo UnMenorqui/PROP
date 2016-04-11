@@ -13,8 +13,8 @@ public class CtrlDadesUsuari {
         return DadesUsuari.modificar_username(username,nou_user,password);
     }
     
-    public Boolean modificar_password(String username, String password) {
-        return true;
+    public Boolean modificar_password(String username, String password, String new_password) {
+        return DadesUsuari.modificar_password(username, password, new_password);
     }
     
     public Boolean ExisteixUsuari_contrasenya(String username, String password) {
@@ -30,4 +30,11 @@ public class CtrlDadesUsuari {
     public void GuardarUsuari(String username, String password) {
         DadesUsuari.GuardarUsuari(username, password);
     }
+    public void consultaBD() {
+        DadesUsuari.consultaBD();
+    }
+    
+    public String consultar_password(String username) {
+        return DadesUsuari.consultar_password(username);
+    } 
 }
