@@ -18,42 +18,42 @@ import java.util.Vector;
  */
 public class PerfilAutor extends Perfil {
     
-    List<String> termes = new Vector<String>();
-    List<String> conferencies = new Vector<String>();
-    List<String> articles = new Vector<String>();
-    int quantitat_termes;
-    int quantitat_conf;
-    int quantitat_articles;
+    static List<String> termes = new Vector<String>();
+    static List<String> conferencies = new Vector<String>();
+    static List<String> articles = new Vector<String>();
+    static int quantitat_termes;
+    static int quantitat_conf;
+    static int quantitat_articles;
     
     
-    public int get_quantitat_termes() {
+    public static int get_quantitat_termes() {
         return quantitat_termes;
     }
     
-    public int get_quantitat_conf() {
+    public static int get_quantitat_conf() {
         return quantitat_conf;
     }
     
-    public int get_quantitat_articles() {
+    public static int get_quantitat_articles() {
         return quantitat_articles;
     }
     
-    public List<String> articles_importants() {
+    public static List<String> articles_importants() {
         // obtenir_autors(autors,nom,quantitat_autors);
         return articles;
     }
     
-    public List<String> conferencies_importants() {
+    public static List<String> conferencies_importants() {
         // obtenir_conferencies(conferencies,nom,quantitat_conf);
         return conferencies;
     }
     
-    public List<String> termes_importants() {
+    public static List<String> termes_importants() {
         // obtenir_termes(termes,nom,quantitat_termes);
         return termes;
     }
     
-    public void crear_perfil() {
+    public static void crear_perfil_autor() {
         articles_importants();
         conferencies_importants();
         termes_importants();

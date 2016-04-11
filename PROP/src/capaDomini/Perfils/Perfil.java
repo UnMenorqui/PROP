@@ -11,16 +11,21 @@ package capaDomini.Perfils;
  */
 public class Perfil {
     
-    public String nom; // nom de l'entitat (article,autor,conferencia,terme)
+    public static String nom; // nom de l'entitat (article,autor,conferencia,terme)
     
     
-    
-    public void informacio_rellevant() {
+    public Perfil() {
         
     }
     
-    public void crear_perfil() {
-        
+    public static void creacio_perfil(int marca, String entitat) {
+        nom = entitat;
+        switch(marca) {
+            case 1: PerfilAutor.crear_perfil_autor();
+            case 2: PerfilConf.crear_perfil_conf();
+            case 3: PerfilArticle.crear_perfil_article();
+            case 4: PerfilTerme.crear_perfil_terme();
+        }
     }
     
 }
