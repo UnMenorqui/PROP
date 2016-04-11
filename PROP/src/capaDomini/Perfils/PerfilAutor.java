@@ -13,14 +13,14 @@ import java.util.Vector;
  *
  * @author marc_
  */
-public class PerfilArticle extends Perfil {
+public class PerfilAutor extends Perfil {
     
     static List<String> termes = new Vector<String>();
     static List<String> conferencies = new Vector<String>();
-    static List<String> autors = new Vector<String>();
+    static List<String> articles = new Vector<String>();
     static int quantitat_termes;
     static int quantitat_conf;
-    static int quantitat_autors;
+    static int quantitat_articles;
     
     
     public static int get_quantitat_termes() {
@@ -31,13 +31,13 @@ public class PerfilArticle extends Perfil {
         return quantitat_conf;
     }
     
-    public static int get_quantitat_autors() {
-        return quantitat_autors;
+    public static int get_quantitat_articles() {
+        return quantitat_articles;
     }
     
-    public static List<String> autors_importants() {
-        // obtenir_autors(autors,nom,quantitat_autors);
-        return autors;
+    public static List<String> articles_importants() {
+        // obtenir_articles(articles,nom,quantitat_articles);
+        return articles;
     }
     
     public static List<String> conferencies_importants() {
@@ -50,25 +50,25 @@ public class PerfilArticle extends Perfil {
         return termes;
     }
     
-    public static void crear_perfil_article() {
-        autors_importants();
+    public static void crear_perfil_autor() {
+        articles_importants();
         conferencies_importants();
         termes_importants();
         System.out.println(nom);
-        System.out.println();
-        System.out.println("Conferencies més rellevants d'aquest article:");
+        System.out.println("");
+        System.out.println("Conferencies més rellevants d'aquest autor:");
         for (int i = 0; i < conferencies.size(); ++i) {
             String aux = conferencies.get(i);
             System.out.println(aux);
         }
         System.out.println("");
-        System.out.println("Autors més rellevants d'aquest article:");
-        for (int i = 0; i < autors.size(); ++i) {
-            String aux = autors.get(i);
+        System.out.println("Articles més rellevants d'aquest autor:");
+        for (int i = 0; i < articles.size(); ++i) {
+            String aux = articles.get(i);
             System.out.println(aux);
         }
         System.out.println("");
-        System.out.println("Termes més rellevants d'aquest article:");
+        System.out.println("Termes més rellevants d'aquest autor:");
         for (int i = 0; i < termes.size(); ++i) {
             String aux = termes.get(i);
             System.out.println(aux);
