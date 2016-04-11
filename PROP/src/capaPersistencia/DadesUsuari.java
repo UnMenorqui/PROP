@@ -172,6 +172,7 @@ public class DadesUsuari {
           //Es sap que l'usuari existeix a la BD
           if (borrarlinea(username,password)) {
               GuardarUsuari(username,new_password);
+              //ESTA FET
               return true;
           }
           return false;
