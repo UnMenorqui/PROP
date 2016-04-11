@@ -20,12 +20,20 @@ public class CtrlUsuaris {
         du = new CtrlDadesUsuari();
     }
     
-    public static Boolean modificar_usuari(String username,String nou_user, String password) {
-        return du.modificar_usuari(username,nou_user,password);
+    public static Boolean modificar_usuari(UsuariNormal usn, String nou_user) {
+        if (ExisteixUsuari_contrasenya(usn)) {
+            du.modificar_usuari(usn.consultar_username(),nou_user,usn.consultar_password());
+            return true;
+        }
+        return false;
     }
     
-    public static Boolean modificar_password(String username, String password, String new_password) {
-        return du.modificar_password(username,password,new_password);
+    public static Boolean modificar_password(UsuariNormal usn, String new_password) {
+        if (ExisteixUsuari_contrasenya(usn)) {
+            du.modificar_password(usn.consultar_username(),usn.consultar_password(),new_password);
+            return true;
+        }
+        return false;
     }
 
     public static Boolean ExisteixUsuari_contrasenya(UsuariNormal usn) {
@@ -36,12 +44,18 @@ public class CtrlUsuaris {
         return du.ExisteixUsuari(username);
     }
     
-    public static Boolean borrarlinea(String username, String password) {
-        return du.borrarlinea(username, password);
+    public static Boolean borrarlinea(UsuariNormal usn) {
+        if (ExisteixUsuari_contrasenya(usn)) {
+            du.borrarlinea(usn.consultar_username(), usn.consultar_password());
+            return true;
+        }
+        return false;
     }
     
-    public static void GuardarUsuari(String username, String password) {
-        du.GuardarUsuari(username, password);
+    public static void GuardarUsuari(UsuariNormal usn) {
+        if (!ExisteixUsuari_contrasenya(usn)) {
+            du.GuardarUsuari(usn.consultar_username(), usn.consultar_password());
+        }
     }
     
     public static void consultaBD() {
@@ -49,7 +63,9 @@ public class CtrlUsuaris {
     }
     
     public static String consultar_password(String username) {
-        return du.consultar_password(username);
+        if (ExisteixUsuari(username)) {
+            return du.consultar_password(username);
+        }
+        return "";
     }
-    
 }
