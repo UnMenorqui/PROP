@@ -6,9 +6,6 @@
 package capaDomini.Perfils;
 
 
-import static java.nio.file.Files.list;
-import static java.rmi.Naming.list;
-import static java.util.Collections.list;
 import java.util.List;
 import java.util.Vector;
 
