@@ -44,8 +44,8 @@ public class CtrlUsuaris {
         du.GuardarUsuari(username, password);
     }
     
-    public static void consultaBD() {
-        du.consultaBD();
+    public static void consultaUsuarisBD() {
+        du.consultaUsuarisBD();
     }
     
     public static String consultar_password(String username) {

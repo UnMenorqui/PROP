@@ -34,7 +34,7 @@ public class DriverUsuariNormal {
                 int prova = sc.nextInt();
                 switch(prova) {
                     case 1:
-                        CtrlUsuaris.consultaBD();
+                        CtrlUsuaris.consultaUsuarisBD();
                         break;
                     case 2:
                         System.out.println("Entra el teu username: ");

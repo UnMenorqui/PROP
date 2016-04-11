@@ -40,7 +40,7 @@ public class DriverPerfil {
             PerfilArticle p_article = new PerfilArticle();
             switch(marca) {
                 case 1:
-                    System.out.println("Introdueix l'entitat que destjes cercar:");
+                    System.out.println("Introdueix l'entitat que desitjes cercar:");
                     entitat = sc.next();
                     System.out.println("Introdueix la quantitat de conferencies:");
                     num = sc.nextInt();
@@ -54,7 +54,7 @@ public class DriverPerfil {
                     p_autor.creacio_perfil(marca,entitat);
                     break;
                 case 2: 
-                    System.out.println("Introdueix l'entitat que destjes cercar:");
+                    System.out.println("Introdueix l'entitat que desitjes cercar:");
                     entitat = sc.next();
                     System.out.println("Introdueix la quantitat d'autors:");
                     num = sc.nextInt();
@@ -68,7 +68,7 @@ public class DriverPerfil {
                     p_conf.creacio_perfil(marca,entitat);
                     break;
                 case 3:
-                    System.out.println("Introdueix l'entitat que destjes cercar:");
+                    System.out.println("Introdueix l'entitat que desitjes cercar:");
                     entitat = sc.next();
                     System.out.println("Introdueix la quantitat de conferencies:");
                     num = sc.nextInt();
@@ -82,7 +82,7 @@ public class DriverPerfil {
                     p_article.creacio_perfil(marca,entitat);
                     break;
                 case 4:
-                    System.out.println("Introdueix l'entitat que destjes cercar:");
+                    System.out.println("Introdueix l'entitat que desitjes cercar:");
                     entitat = sc.next();
                     System.out.println("Introdueix la quantitat de conferencies:");
                     num = sc.nextInt();
@@ -100,5 +100,6 @@ public class DriverPerfil {
                     break;
             } 
         }
+        sc.close();
     }
 }

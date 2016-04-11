@@ -230,7 +230,7 @@ public class DadesUsuari {
           return true;
     } 
     
-    public static void consultaBD() {
+    public static void consultaUsuarisBD() {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -245,7 +245,10 @@ public class DadesUsuari {
            String linea;
            String aux = "";
            while((linea=br.readLine())!=null) {
-              System.out.println(linea);
+               int i = 0;
+               while (linea.charAt(i) != ' ') ++i;
+               aux = linea.substring(0,i);
+               System.out.println(aux);
            }
         }
         catch(Exception e){}
