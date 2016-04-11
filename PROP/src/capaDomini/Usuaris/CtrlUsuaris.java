@@ -20,42 +20,44 @@ public class CtrlUsuaris {
         du = new CtrlDadesUsuari();
     }
     
-    public static Boolean modificar_usuari(UsuariNormal usn, String nou_user) {
-        if (ExisteixUsuari_contrasenya(usn)) {
-            du.modificar_usuari(usn.consultar_username(),nou_user,usn.consultar_password());
+    public static Boolean modificar_usuari(String username, String password, String nou_user) {
+        if (ExisteixUsuari_contrasenya(username,password)) {
+            du.modificar_usuari(username,nou_user,password);
             return true;
         }
         return false;
     }
     
-    public static Boolean modificar_password(UsuariNormal usn, String new_password) {
-        if (ExisteixUsuari_contrasenya(usn)) {
-            du.modificar_password(usn.consultar_username(),usn.consultar_password(),new_password);
+    public static Boolean modificar_password(String username, String password, String new_password) {
+        if (ExisteixUsuari_contrasenya(username, password)) {
+            du.modificar_password(username, password, new_password);
             return true;
         }
         return false;
     }
 
-    public static Boolean ExisteixUsuari_contrasenya(UsuariNormal usn) {
-        return du.ExisteixUsuari_contrasenya(usn.consultar_username(),usn.consultar_password());
+    public static Boolean ExisteixUsuari_contrasenya(String username, String password) {
+        return du.ExisteixUsuari_contrasenya(username,password);
     }
     
     public static Boolean ExisteixUsuari(String username) {
         return du.ExisteixUsuari(username);
     }
     
-    public static Boolean borrarlinea(UsuariNormal usn) {
-        if (ExisteixUsuari_contrasenya(usn)) {
-            du.borrarlinea(usn.consultar_username(), usn.consultar_password());
+    public static Boolean borrarlinea(String username, String password) {
+        if (ExisteixUsuari_contrasenya(username, password)) {
+            du.borrarlinea(username, password);
             return true;
         }
         return false;
     }
     
-    public static void GuardarUsuari(UsuariNormal usn) {
-        if (!ExisteixUsuari_contrasenya(usn)) {
-            du.GuardarUsuari(usn.consultar_username(), usn.consultar_password());
+    public static boolean GuardarUsuari(String username, String password) {
+        if (!ExisteixUsuari_contrasenya(username, password)) {
+            du.GuardarUsuari(username, password);
+            return true;
         }
+        return false;
     }
     
     public static void consultaBD() {

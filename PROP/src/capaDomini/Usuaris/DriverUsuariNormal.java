@@ -13,6 +13,7 @@ public class DriverUsuariNormal {
         try (Scanner sc = new Scanner(System.in)) {
             Boolean bool = false;
             Boolean primer = true;
+            CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
             System.out.println("Tria una opció:");
             System.out.println("Si vols consultar tots els usuaris de la BD marca 1.");
             System.out.println("Si vols modificar el nom de l'usuari marca 2.");
@@ -42,7 +43,7 @@ public class DriverUsuariNormal {
                         pass = sc.next();
                         System.out.println("Escriu el nou username:");
                         String nou_user = sc.next();
-                        if (CtrlUsuaris.modificar_usuari(new UsuariNormal(user,nou_user),pass)) {
+                        if (CtrlUsuaris.modificar_usuari(user, pass, nou_user)) {
                            System.out.println("Usuari modificat correctament"); 
                         } else {
                             System.out.println("Usuari i/o contrasenya incorrecte");
@@ -65,7 +66,7 @@ public class DriverUsuariNormal {
                         pass = sc.next();
                         System.out.println("Escriu la nova contrasenya:");
                         String new_pass = sc.next();
-                        if (CtrlUsuaris.modificar_password(new UsuariNormal(user,pass), new_pass)) {
+                        if (CtrlUsuaris.modificar_password(user,pass,new_pass)) {
                             System.out.println("Contrasenya modificada correctament");
                         }
                         else {
@@ -77,7 +78,7 @@ public class DriverUsuariNormal {
                         user = sc.next();
                         System.out.println("Entra la contrasenya: ");
                         pass = sc.next();
-                        if (CtrlUsuaris.GuardarUsuari(new UsuariNormal(user,pass))) {
+                        if (CtrlUsuaris.GuardarUsuari(user,pass)) {
                             System.out.println("Usuari afegit correctament");
                         } else {
                             System.out.println("Usuari ja existent");
@@ -88,7 +89,7 @@ public class DriverUsuariNormal {
                         user = sc.next();
                         System.out.println("Escriu la contrasenya de l'usuari");
                         pass = sc.next();
-                        if (CtrlUsuaris.borrarlinea(new UsuariNormal(user,pass))) {
+                        if (CtrlUsuaris.borrarlinea(user,pass)) {
                             System.out.println("Usuari borrat correctament");
                         } else {
                             System.out.println("Usuari i/o contrasenya incorrecte");
