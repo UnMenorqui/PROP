@@ -23,6 +23,7 @@ public class DriverUsuariNormal {
             System.out.println("Si vols acabar la prova de driver marca 7.");
             String user;
             String pass = null;
+            CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
             int i;
             while(!bool) {
                 if(!primer) {
