@@ -28,12 +28,22 @@ public class PerfilConf extends Perfil {
         return quantitat_termes;
     }
     
-    public static int get_quantitat_autors() {
-        return quantitat_autors;
+    public static void set_quantitat_termes(int q_terme) {
+        quantitat_termes = q_terme;
     }
     
     public static int get_quantitat_articles() {
         return quantitat_articles;
+    }
+    public static void set_quantitat_articles(int q_articles) {
+        quantitat_articles = q_articles;
+    }
+    
+    public static int get_quantitat_autors() {
+        return quantitat_autors;
+    }
+    public static void set_quantitat_autors(int q_autor) {
+        quantitat_autors = q_autor;
     }
     
     public static ArrayList<String> articles_importants() {

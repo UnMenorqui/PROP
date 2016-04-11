@@ -25,18 +25,27 @@ public class PerfilTerme extends Perfil {
     static int quantitat_articles;
     
     
-    public static int get_quantitat_autors() {
-        return quantitat_autors;
+    public static int get_quantitat_articles() {
+        return quantitat_articles;
+    }
+    
+    public static void set_quantitat_articles(int q_articles) {
+        quantitat_articles = q_articles;
     }
     
     public static int get_quantitat_conf() {
         return quantitat_conf;
     }
-    
-    public static int get_quantitat_articles() {
-        return quantitat_articles;
+    public static void set_quantitat_conf(int q_conferencia) {
+        quantitat_conf = q_conferencia;
     }
     
+    public static int get_quantitat_autors() {
+        return quantitat_autors;
+    }
+    public static void set_quantitat_autors(int q_autor) {
+        quantitat_autors = q_autor;
+    }
     public static ArrayList<String> articles_importants() {
         
         // obtenir_articles(articles,nom,quantitat_articles);

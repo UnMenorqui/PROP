@@ -20,7 +20,6 @@ public class DadesUsuari {
         
     }
     
-    //FETA
     public static void GuardarUsuari(String username, String password){
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -80,7 +79,6 @@ public class DadesUsuari {
         return null;
     }
     
-    //FETA
     public static Boolean ExisteixUsuari_contrasenya(String username, String password) {
         File archivo = null;
         FileReader fr = null;
@@ -121,7 +119,6 @@ public class DadesUsuari {
         return false;
     }
     
-    //FETA
     public static Boolean ExisteixUsuari(String username) {
         File archivo = null;
         FileReader fr = null;
@@ -158,7 +155,7 @@ public class DadesUsuari {
         return false;
       }
 
-      public static boolean modificar_username(String username, String nou_user, String password) {
+    public static boolean modificar_username(String username, String nou_user, String password) {
           //Es sap que l'usuari existeix a la BD i que el nou nom de l'usuari no està a la BD.
           if (borrarlinea(username,password)) {
               GuardarUsuari(nou_user,password);
@@ -167,18 +164,16 @@ public class DadesUsuari {
           return false;
       }
 
-      //FALTA PER FER
-      public static boolean modificar_password(String username,String password, String new_password) {
+    public static boolean modificar_password(String username,String password, String new_password) {
           //Es sap que l'usuari existeix a la BD
           if (borrarlinea(username,password)) {
               GuardarUsuari(username,new_password);
-              //ESTA FET
               return true;
           }
           return false;
       }
 
-      public static boolean borrarlinea(String user, String pass) {
+    public static boolean borrarlinea(String user, String pass) {
           BufferedReader br = null;
           PrintWriter pw = null;
           try {
