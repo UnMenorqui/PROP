@@ -58,7 +58,7 @@ public class PerfilArticle extends Perfil {
         conferencies_importants();
         termes_importants();
         System.out.println(nom);
-        System.out.println("");
+        System.out.println();
         System.out.println("Conferencies més rellevants d'aquest article:");
         for (int i = 0; i < conferencies.size(); ++i) {
             String aux = conferencies.get(i);
