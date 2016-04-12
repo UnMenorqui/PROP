@@ -97,4 +97,6 @@ public class UsuariNormal extends UsuariConvidat {
     public boolean user_exists(String pass) {
         return true;
     }
+    
+    
 }
