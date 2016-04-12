@@ -15,24 +15,27 @@ public class DriverUsuariNormal {
             Boolean primer = true;
             System.out.println("Tria una opció:");
             System.out.println("Si vols consultar tots els usuaris de la BD marca 1.");
-            //ja esta a admin
+            //ja esta a Administrador
             
             System.out.println("Si vols modificar el nom de l'usuari marca 2.");
+            //ja esta a UsuariNormal
             
             System.out.println("Si vols consultar la contrasenya marca 3.");
+            //ja esta a Usuari Normal
             
             System.out.println("Si vols modificar la contrasenya marca 4.");
+            //ja esta a UsuariNormal
             
             System.out.println("Si vols guardar un nou usari marca 5.");
             
+            
             System.out.println("Si vols borrar un usuari marca 6.");
-            //ja esta a admin
+            //ja esta a Administrador
             
             System.out.println("Si vols acabar la prova de driver marca 7.");
             
             String user;
             String pass = null;
-            CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
             int i;
             while(!bool) {
                 if(!primer) {
