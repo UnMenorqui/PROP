@@ -78,7 +78,7 @@ public class UsuariNormal extends UsuariConvidat {
                 while (i <= 3 && !contrasenya) {
                     System.out.println("Escriu la contrasenya de l'usuari");
                     pass = sc.next();
-                    if (!CtrlUsuaris.ExisteixUsuari_contrasenya(new UsuariNormal(user_name,pass))) {
+                    if (!CtrlUsuaris.ExisteixUsuari_contrasenya(user_name,pass)) {
                         System.out.println("Contrasenya incorrecta.");
                         System.out.println("Et queden "+(3-i)+" intents");
                     }
@@ -131,7 +131,7 @@ public class UsuariNormal extends UsuariConvidat {
                 while (i <= 3 && !contrasenya) {
                     System.out.println("Escriu la contrasenya de l'usuari");
                     pass = sc.next();
-                    if (!CtrlUsuaris.ExisteixUsuari_contrasenya(new UsuariNormal(user_name,pass))) {
+                    if (!CtrlUsuaris.ExisteixUsuari_contrasenya(user_name,pass)) {
                         System.out.println("Contrasenya incorrecta.");
                         System.out.println("Et queden "+(3-i)+" intents");
                     }

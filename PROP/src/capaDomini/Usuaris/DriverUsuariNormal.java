@@ -4,8 +4,9 @@ package capaDomini.Usuaris;
 import java.util.Scanner;
 
 /**
- * @author cacadevaca
+ * @author toni
  */
+
 public class DriverUsuariNormal {
  
     public static void main (String[] args) {
@@ -37,12 +38,11 @@ public class DriverUsuariNormal {
             
             String user;
             String pass = null;
-            int i;
             while(!bool) {
                 if(!primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
-                    System.out.println("Torna a entrar la operació a fer: ");
+                    System.out.println("Torna a entrar la operació a fer:");
                 } else primer = false;
                 int prova = sc.nextInt();
                 switch(prova) {
