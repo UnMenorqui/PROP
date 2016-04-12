@@ -20,16 +20,24 @@ public class CtrlUsuaris {
         du = new CtrlDadesUsuari();
     }
     
-    public static Boolean modificar_usuari(String username,String nou_user, String password) {
-        return du.modificar_usuari(username,nou_user,password);
+    public static Boolean modificar_usuari(String username, String password, String nou_user) {
+        if (ExisteixUsuari_contrasenya(username,password)) {
+            du.modificar_usuari(username,nou_user,password);
+            return true;
+        }
+        return false;
     }
     
     public static Boolean modificar_password(String username, String password, String new_password) {
-        return du.modificar_password(username,password,new_password);
+        if (ExisteixUsuari_contrasenya(username, password)) {
+            du.modificar_password(username, password, new_password);
+            return true;
+        }
+        return false;
     }
 
-    public static Boolean ExisteixUsuari_contrasenya(UsuariNormal usn) {
-        return du.ExisteixUsuari_contrasenya(usn.consultar_username(),usn.consultar_password());
+    public static Boolean ExisteixUsuari_contrasenya(String username, String password) {
+        return du.ExisteixUsuari_contrasenya(username,password);
     }
     
     public static Boolean ExisteixUsuari(String username) {
@@ -37,11 +45,19 @@ public class CtrlUsuaris {
     }
     
     public static Boolean borrarlinea(String username, String password) {
-        return du.borrarlinea(username, password);
+        if (ExisteixUsuari_contrasenya(username, password)) {
+            du.borrarlinea(username, password);
+            return true;
+        }
+        return false;
     }
     
-    public static void GuardarUsuari(String username, String password) {
-        du.GuardarUsuari(username, password);
+    public static boolean GuardarUsuari(String username, String password) {
+        if (!ExisteixUsuari_contrasenya(username, password)) {
+            du.GuardarUsuari(username, password);
+            return true;
+        }
+        return false;
     }
     
     public static void consultaUsuarisBD() {
@@ -49,7 +65,9 @@ public class CtrlUsuaris {
     }
     
     public static String consultar_password(String username) {
-        return du.consultar_password(username);
+        if (ExisteixUsuari(username)) {
+            return du.consultar_password(username);
+        }
+        return "";
     }
-    
 }

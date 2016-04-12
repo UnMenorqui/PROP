@@ -13,6 +13,7 @@ public class DriverUsuariNormal {
         try (Scanner sc = new Scanner(System.in)) {
             Boolean bool = false;
             Boolean primer = true;
+            CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
             System.out.println("Tria una opció:");
             System.out.println("Si vols consultar tots els usuaris de la BD marca 1.");
             //ja esta a Administrador
@@ -51,116 +52,60 @@ public class DriverUsuariNormal {
                     case 2:
                         System.out.println("Entra el teu username: ");
                         user = sc.next();
-                        if (!CtrlUsuaris.ExisteixUsuari(user)) {
-                            System.out.println("Usuari no-existent");
-                        }
-                        else {
-                            i = 1;
-                            boolean contrasenya = false;
-                            while (i <= 3 && !contrasenya) {
-                                System.out.println("Escriu la contrasenya de l'usuari");
-                                pass = sc.next();
-                                if (!CtrlUsuaris.ExisteixUsuari_contrasenya(new UsuariNormal(user,pass))) {
-                                    System.out.println("Contrasenya incorrecta.");
-                                    System.out.println("Et queden "+(3-i)+" intents");
-                                }
-                                else {
-                                    System.out.println("Password correcta.");
-                                    contrasenya = true;
-                                }
-                                ++i;
-                            }
-                            if (i > 3) {
-                                System.out.println("Se t'han acabat tots els intents.");
-                            }
-                            else if (contrasenya) {
-                                System.out.println("Escriu el nou username:");
-                                String nou_user = sc.next();
-                                if (!CtrlUsuaris.ExisteixUsuari(nou_user)) {
-                                    CtrlUsuaris.modificar_usuari(user,nou_user,pass);
-                                    System.out.println("Username modificat correctament.");
-                                }
-                                else {
-                                    System.out.println("Aquest usuari ja existeix. Torna-ho a provar");                          
-                                }
-                            }
+                        System.out.println("Entra el teu password: ");
+                        pass = sc.next();
+                        System.out.println("Escriu el nou username:");
+                        String nou_user = sc.next();
+                        if (CtrlUsuaris.modificar_usuari(user, pass, nou_user)) {
+                           System.out.println("Usuari modificat correctament"); 
+                        } else {
+                            System.out.println("Usuari i/o contrasenya incorrecte");
                         }
                         break;
                     case 3:
                         System.out.println("Entra el teu username:");
                         user = sc.next();
-                        if (!CtrlUsuaris.ExisteixUsuari(user)) System.out.println("No existeix l'usuari");
-                        else {
-                            System.out.println("La teva contrasenya és: "+CtrlUsuaris.consultar_password(user));
+                        String contr = CtrlUsuaris.consultar_password(user);
+                        if (contr.equals("")) {
+                            System.out.println("Usuari incorrecte");
+                        } else {
+                            System.out.println("La teva contrasenya és: "+contr);
                         }
                         break;
                     case 4:
                         System.out.println("Entra el teu username: ");
                         user = sc.next();
-                        if (!CtrlUsuaris.ExisteixUsuari(user)) System.out.println("No existeix l'usuari");
+                        System.out.println("Escriu la contrasenya de l'usuari");
+                        pass = sc.next();
+                        System.out.println("Escriu la nova contrasenya:");
+                        String new_pass = sc.next();
+                        if (CtrlUsuaris.modificar_password(user,pass,new_pass)) {
+                            System.out.println("Contrasenya modificada correctament");
+                        }
                         else {
-                            boolean contrasenya = false;
-                            i = 1;
-                            while (i <= 3 && !contrasenya) {
-                                System.out.println("Escriu la contrasenya de l'usuari");
-                                pass = sc.next();
-                                if (!CtrlUsuaris.ExisteixUsuari_contrasenya(new UsuariNormal(user,pass))) {
-                                    System.out.println("Contrasenya incorrecta.");
-                                    System.out.println("Et queden "+(3-i)+" intents");
-                                }
-                                else {
-                                    System.out.println("Password correcta.");
-                                    contrasenya = true;
-                                }
-                                ++i;
-                            }
-                            if (i > 3) {
-                                System.out.println("Se t'han acabat tots els intents.");
-                            }
-                            else if (contrasenya) {
-                                System.out.println("Escriu la nova contrasenya:");
-                                String new_pass = sc.next();
-                                CtrlUsuaris.modificar_password(user,pass,new_pass);
-                                System.out.println("Contrasenya de l'usuari modificada correctament.");
-                            }
+                            System.out.println("Usuari i/o contrasenya incorrecte");
                         }
                         break;
                     case 5:
                         System.out.println("Entra el nom de l'usuari:");
                         user = sc.next();
-                        if (CtrlUsuaris.ExisteixUsuari(user)) System.out.println("Aquest Usuari ja existeix");
-                        else {
-                            System.out.println("Entra la contrasenya: ");
-                            pass = sc.next();
-                            CtrlUsuaris.GuardarUsuari(user,pass);
+                        System.out.println("Entra la contrasenya: ");
+                        pass = sc.next();
+                        if (CtrlUsuaris.GuardarUsuari(user,pass)) {
+                            System.out.println("Usuari afegit correctament");
+                        } else {
+                            System.out.println("Usuari ja existent");
                         }
                         break;
                     case 6:
                         System.out.println("Entra el nom de l'usuari: ");
                         user = sc.next();
-                        if (!CtrlUsuaris.ExisteixUsuari(user)) {
-                            System.out.println("L'usuari no existeix");
-                        }
-                        else {
-                            boolean contrasenya = false;
-                            i = 1;
-                            while (i <= 3 && !contrasenya) {
-                                System.out.println("Escriu la contrasenya de l'usuari");
-                                pass = sc.next();
-                                if (!CtrlUsuaris.ExisteixUsuari_contrasenya(new UsuariNormal(user,pass))) {
-                                    System.out.println("Contrasenya incorrecta.");
-                                    System.out.println("Et queden "+(3-i)+" intents");
-                                }
-                                else {
-                                    System.out.println("Password correcta.");
-                                    contrasenya = true;
-                                }
-                                ++i;
-                            }
-                            if (i > 3) {
-                                System.out.println("Se t'han acabat tots els intents.");
-                            }
-                            if (contrasenya) CtrlUsuaris.borrarlinea(user,pass);
+                        System.out.println("Escriu la contrasenya de l'usuari");
+                        pass = sc.next();
+                        if (CtrlUsuaris.borrarlinea(user,pass)) {
+                            System.out.println("Usuari borrat correctament");
+                        } else {
+                            System.out.println("Usuari i/o contrasenya incorrecte");
                         }
                         break;
                     case 7:

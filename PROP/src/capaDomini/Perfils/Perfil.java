@@ -18,6 +18,14 @@ public class Perfil {
         
     }
     
+    public static void set_name(String nom1) {
+        nom = nom1;
+    }
+    
+    public static String get_name() {
+        return nom;
+    }
+    
     public static void creacio_perfil(int marca, String entitat) {
         nom = entitat;
         switch(marca) {

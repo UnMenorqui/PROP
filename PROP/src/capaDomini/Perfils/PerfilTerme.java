@@ -7,6 +7,7 @@ package capaDomini.Perfils;
 
 
 import static capaDomini.Perfils.Perfil.nom;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -16,38 +17,47 @@ import java.util.Vector;
  */
 public class PerfilTerme extends Perfil {
     
-    static List<String> autors = new Vector<String>();
-    static List<String> conferencies = new Vector<String>();
-    static List<String> articles = new Vector<String>();
+    static ArrayList<String> autors = new ArrayList<>();
+    static ArrayList<String> conferencies = new ArrayList<>();
+    static ArrayList<String> articles = new ArrayList<>();
     static int quantitat_autors;
     static int quantitat_conf;
     static int quantitat_articles;
     
     
-    public static int get_quantitat_autors() {
-        return quantitat_autors;
+    public static int get_quantitat_articles() {
+        return quantitat_articles;
+    }
+    
+    public static void set_quantitat_articles(int q_articles) {
+        quantitat_articles = q_articles;
     }
     
     public static int get_quantitat_conf() {
         return quantitat_conf;
     }
-    
-    public static int get_quantitat_articles() {
-        return quantitat_articles;
+    public static void set_quantitat_conf(int q_conferencia) {
+        quantitat_conf = q_conferencia;
     }
     
-    public static List<String> articles_importants() {
+    public static int get_quantitat_autors() {
+        return quantitat_autors;
+    }
+    public static void set_quantitat_autors(int q_autor) {
+        quantitat_autors = q_autor;
+    }
+    public static ArrayList<String> articles_importants() {
         
         // obtenir_articles(articles,nom,quantitat_articles);
         return articles;
     }
     
-    public static List<String> conferencies_importants() {
+    public static ArrayList<String> conferencies_importants() {
         // obtenir_conferencies(conferencies,nom,quantitat_conf);
         return conferencies;
     }
     
-    public static List<String> autors_importants() {
+    public static ArrayList<String> autors_importants() {
         // obtenir_autors(autors,nom,quantitat_autors);
         return autors;
     }

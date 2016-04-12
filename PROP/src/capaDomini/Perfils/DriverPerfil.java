@@ -42,6 +42,7 @@ public class DriverPerfil {
                 case 1:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
                     entitat = sc.next();
+                    // if (consulta_entitat()>1) System.out.println("Tria quina vols:");
                     System.out.println("Introdueix la quantitat de conferencies:");
                     num = sc.nextInt();
                     p_autor.quantitat_conf = num;

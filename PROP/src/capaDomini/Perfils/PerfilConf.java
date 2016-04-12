@@ -8,7 +8,7 @@ package capaDomini.Perfils;
 
 import static capaDomini.Perfils.Perfil.nom;
 import java.util.List;
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,9 +16,9 @@ import java.util.Vector;
  */
 public class PerfilConf extends Perfil {
     
-    static List<String> termes = new Vector<String>();
-    static List<String> autors = new Vector<String>();
-    static List<String> articles = new Vector<String>();
+    static ArrayList<String> termes = new ArrayList<>();
+    static ArrayList<String> autors = new ArrayList<>();
+    static ArrayList<String> articles = new ArrayList<>();
     static int quantitat_termes;
     static int quantitat_autors;
     static int quantitat_articles;
@@ -28,25 +28,35 @@ public class PerfilConf extends Perfil {
         return quantitat_termes;
     }
     
-    public static int get_quantitat_autors() {
-        return quantitat_autors;
+    public static void set_quantitat_termes(int q_terme) {
+        quantitat_termes = q_terme;
     }
     
     public static int get_quantitat_articles() {
         return quantitat_articles;
     }
+    public static void set_quantitat_articles(int q_articles) {
+        quantitat_articles = q_articles;
+    }
     
-    public static List<String> articles_importants() {
+    public static int get_quantitat_autors() {
+        return quantitat_autors;
+    }
+    public static void set_quantitat_autors(int q_autor) {
+        quantitat_autors = q_autor;
+    }
+    
+    public static ArrayList<String> articles_importants() {
         // obtenir_articles(articles,nom,quantitat_articles);
         return articles;
     }
     
-    public static List<String> autors_importants() {
+    public static ArrayList<String> autors_importants() {
         // obtenir_autors(autors,nom,quantitat_autors);
         return autors;
     }
     
-    public static List<String> termes_importants() {
+    public static ArrayList<String> termes_importants() {
         // obtenir_termes(termes,nom,quantitat_termes);
         return termes;
     }
