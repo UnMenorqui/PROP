@@ -9,6 +9,6 @@ package capaDomini.Graf;
  *
  * @author Toni
  */
-public class Node {
+public class DriverGraf {
     
 }
