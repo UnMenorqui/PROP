@@ -5,8 +5,10 @@
  */
 package capaDomini.Graf;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 /**
  *
@@ -14,53 +16,60 @@ import java.util.Map;
  */
 public class DriverGraf {
     
-    private Map<Integer,Double> node = new HashMap<Integer,Double>();
-    
-    private Map<Integer, Map<Integer,Double> > Matriu = new HashMap<Integer, Map<Integer,Double>>();
-    
     public void main (String args[]) {
-        node.put(100, 1.0);
-        node.put(101,1.0);
-        node.put(70, 1.0);
-        node.put(51,1.0);
-        node.put(102,0.0);
-        node.put(103,0.0);
-        node.put(52,0.0);
-        node.put(104,0.0);
-        node.put(72,0.0);
-        node.put(71,0.0);
-        Matriu.put(1, node);
+        
+        Double matriu [][] = new Double[4][11];
+        
+        matriu[0][0] = -1.0;
+        matriu[0][1] = 100.;
+        matriu[0][2] = 101.;
+        matriu[0][3] = 102.;
+        matriu[0][4] = 103.;
+        matriu[0][5] = 104.;
+        matriu[0][6] = 51.;
+        matriu[0][7] = 52.;
+        matriu[0][8] = 70.;
+        matriu[0][9] = 71.;
+        matriu[0][10] = 72.0;
         
         
-        node.clear();
-        node.put(100, 0.0);
-        node.put(101,0.0);
-        node.put(70, 0.0);
-        node.put(51,1.0);
-        node.put(102,1.0);
-        node.put(103,0.0);
-        node.put(52,0.0);
-        node.put(104,0.0);
-        node.put(72,0.0);
-        node.put(71,1.0);
-        Matriu.put(2, node);
+        matriu[1][0] = 1.;
+        matriu[1][1] = 0.5;
+        matriu[1][2] = 0.5;
+        matriu[1][3] = 0.;
+        matriu[1][4] = 0.;
+        matriu[1][5] = 0.;
+        matriu[1][6] = 1.;
+        matriu[1][7] = 0.;
+        matriu[1][8] = 1.;
+        matriu[1][9] = 0.;
+        matriu[1][10] = 0.;
         
         
-        node.clear();
-        node.put(100, 1.0);
-        node.put(101,0.0);
-        node.put(70, 0.0);
-        node.put(51,0.0);
-        node.put(102,0.0);
-        node.put(103,1.0);
-        node.put(52,1.0);
-        node.put(104,1.0);
-        node.put(72,1.0);
-        node.put(71,0.0);
-        Matriu.put(3, node);
+        matriu[2][0] = 2.;
+        matriu[2][1] = 0.;
+        matriu[2][2] = 0.;
+        matriu[2][3] = 1.;
+        matriu[2][4] = 0.;
+        matriu[2][5] = 0.;
+        matriu[2][6] = 1.;
+        matriu[2][7] = 0.;
+        matriu[2][8] = 0.;
+        matriu[2][9] = 1.;
+        matriu[2][10] = 0.;
         
         
-        
+        matriu[3][0] = 3.0;
+        matriu[3][1] = 0.33;
+        matriu[3][2] = 0.;
+        matriu[3][3] = 0.;
+        matriu[3][4] = 0.33;
+        matriu[3][5] = 0.33;
+        matriu[3][6] = 0.;
+        matriu[3][7] = 1.;
+        matriu[3][8] = 0.;
+        matriu[3][9] = 0.;
+        matriu[3][10] = 1.0;
         
     }
     
