@@ -18,19 +18,25 @@ public class Historial {
         loadHistorial();
     }
     
-    public Boolean afegirCerca() {
-        return true;
+    public void afegirCerca(Apunts cerca) {
+        LlistaConsultes.add(cerca);
+        saveHistorial();
     }
     
     public ArrayList<Apunts> consultar() {       
         return Utils.cloneArrayList(LlistaConsultes);
     }
     
-    public void esborrar() {
-        LlistaConsultes = new ArrayList();
+    public void esborrar(int n) {
+        LlistaConsultes.remove(n);
+        saveHistorial();
     }
     
     private void loadHistorial() {
-        
+        LlistaConsultes = capaPersistencia.CtrlDadesHistorial.getHistorial();
+    }
+    
+    private void saveHistorial() {
+        capaPersistencia.CtrlDadesHistorial.saveHistorial(LlistaConsultes);
     }
 }

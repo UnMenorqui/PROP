@@ -18,8 +18,7 @@ public class Apunts {
     
     public Apunts(Consulta c) {
         try {
-            Consulta n = new Consulta();
-            n = (Consulta) c.clone();
+            Consulta n = (Consulta) c.clone();
             consulta = n;
         } catch (CloneNotSupportedException ex) {
             Logger.getLogger(Apunts.class.getName()).log(Level.SEVERE, null, ex);
