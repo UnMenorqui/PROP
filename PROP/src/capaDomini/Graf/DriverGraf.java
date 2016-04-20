@@ -5,11 +5,6 @@
  */
 package capaDomini.Graf;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
-
 /**
  *
  * @author Toni
@@ -18,8 +13,7 @@ public class DriverGraf {
     
     public void main (String args[]) {
         
-        Double matriu [][] = new Double[4][11];
-        
+        double matriu [][] = new double[4][11];
         matriu[0][0] = -1.0;
         matriu[0][1] = 100.;
         matriu[0][2] = 101.;
@@ -71,6 +65,17 @@ public class DriverGraf {
         matriu[3][9] = 0.;
         matriu[3][10] = 1.0;
         
+    }
+    
+    
+    /*  Donat un node retornarà la probabilitat d'aquest node en relació 
+        a un article. IDEA: si es desitjen buscar autors mes importants en funció d'un terme
+        només d'han de mirar els articles més importants relacionats amb un terme, i un cop
+        allí, per cada article important, els autors més importants de cada article.
+    */
+    public static double return_prob(Double node) {
+        double prob = 0.;
+        return prob;
     }
     
 }
