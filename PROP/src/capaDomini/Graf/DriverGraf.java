@@ -30,10 +30,9 @@ public class DriverGraf {
         matriu[4][7] = 25;
         matriu[5][8] = 26;
         matriu[6][8] = 27;
-        matriu[5][9] = 28;
+        matriu[5][10] = 28;
         matriu[7][9] = 29;
         matriu[6][11] = 30;
-        matriu[5][10] = 32;
         matriu[7][12] = 31;
         
         
@@ -45,10 +44,9 @@ public class DriverGraf {
         matriu[7][4] = 25;
         matriu[8][5] = 26;
         matriu[8][6] = 27;
-        matriu[9][5] = 28;
+        matriu[10][5] = 28;
         matriu[9][7] = 29;
-        matriu[11][6] = 30;
-        matriu[10][5] = 32;
+        matriu[11][6] = 28;
         matriu[12][7] = 31; 
     }
     
