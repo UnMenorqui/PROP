@@ -12,7 +12,6 @@ package capaDomini.Graf;
 public class DriverGraf {
     
     public void main (String args[]) {
-        
         double matriu [][] = new double[4][11];
         matriu[0][0] = -1.0;
         matriu[0][1] = 100.;
@@ -65,9 +64,12 @@ public class DriverGraf {
         matriu[3][9] = 0.;
         matriu[3][10] = 1.0;
         
+        
+        String[] Info = new String[13];
+        
+        
+        
     }
-    
-    
     /*  Donat un node retornarà la probabilitat d'aquest node en relació 
         a un article. IDEA: si es desitjen buscar autors mes importants en funció d'un terme
         només d'han de mirar els articles més importants relacionats amb un terme, i un cop
