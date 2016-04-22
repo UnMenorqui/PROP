@@ -23,6 +23,8 @@ public class Main {
         
         String usr_admin = "Administrador";
         String admin_pass = "1234";
+        CtrlUsuaris ctrl = new CtrlUsuaris();
+        
         System.out.println("BENVINGUT A L'APLICACIÓ DE PROP");
         System.out.println();
         System.out.println();
@@ -56,8 +58,8 @@ public class Main {
                 System.out.print("Entra la contrasenya: ");
                 pass = sc.next();
                 System.out.println();
-                if(CtrlUsuaris.ExisteixUsuari_contrasenya(user,pass)) {
-                    CtrlNormal norm = null;
+                if(ctrl.ExisteixUsuari_contrasenya(user,pass)) {
+                    CtrlNormal norm = new CtrlNormal();
                     norm.main(user,pass);
                 }
                 else System.out.println("Usuari o contrasenya incorrecta");
@@ -70,7 +72,7 @@ public class Main {
                     System.out.print("Entra la clau mestre: ");
                     pass = sc.next();
                     if (pass.equals(admin_pass)) {
-                        CtrlAdministrador admin = null;
+                        CtrlAdministrador admin = new CtrlAdministrador();
                         admin.main();
                     }
                     else System.out.print("Clau mestre incorrecta.");
@@ -81,10 +83,10 @@ public class Main {
             case 4:
                 System.out.print("Entra el nou usuari: ");
                 user = sc.next();
-                if(!CtrlUsuaris.ExisteixUsuari(user)) {
+                if(!ctrl.ExisteixUsuari(user)) {
                     System.out.print("Entra la contrasenya: ");
                     pass = sc.next();
-                    CtrlUsuaris.GuardarUsuari(user, pass);
+                    ctrl.GuardarUsuari(user, pass);
                 }
                 else System.out.print("Usuari existent.");
                 break;

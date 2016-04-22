@@ -14,17 +14,23 @@ import java.util.Scanner;
 public class CtrlNormal {
     public void main(String user, String pass) {
         boolean bool= false;
-        boolean primer = false;
+        boolean primer = true;
         Scanner sc = new Scanner(System.in);
         
-        System.out.println("Si vols consultar l'usuari marca 1.");
-        System.out.println("Si vols consultar la contrasenya marca 2.");
-        System.out.println("Si vols modificar el nom de l'usuari marca 3.");
-        System.out.println("Si vols modificar la contrasenya marca 4.");
+        System.out.println("Login correcte.");
+        
+        
+        
         
         UsuariNormal usr = new UsuariNormal(user,pass);
         
+        
+        
         while(!bool) {
+            System.out.println("Si vols consultar l'usuari marca 1.");
+            System.out.println("Si vols consultar la contrasenya marca 2.");
+            System.out.println("Si vols modificar el nom de l'usuari marca 3.");
+            System.out.println("Si vols modificar la contrasenya marca 4.");
                 if(!primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");

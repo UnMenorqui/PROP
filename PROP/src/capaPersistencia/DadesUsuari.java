@@ -157,20 +157,16 @@ public class DadesUsuari {
 
     public static boolean modificar_username(String username, String nou_user, String password) {
           //Es sap que l'usuari existeix a la BD i que el nou nom de l'usuari no està a la BD.
-          if (borrarlinea(username,password)) {
-              GuardarUsuari(nou_user,password);
-              return true;
-          }
-          return false;
+          borrarlinea(username,password);
+          GuardarUsuari(nou_user,password);
+          return true;
       }
 
     public static boolean modificar_password(String username,String password, String new_password) {
           //Es sap que l'usuari existeix a la BD
-          if (borrarlinea(username,password)) {
-              GuardarUsuari(username,new_password);
-              return true;
-          }
-          return false;
+          borrarlinea(username,password);
+          GuardarUsuari(username,new_password);
+          return true;
       }
 
     public static boolean borrarlinea(String user, String pass) {
@@ -190,14 +186,14 @@ public class DadesUsuari {
             br = new BufferedReader(new FileReader("BD_users.txt"));
             pw = new PrintWriter(new FileWriter(tempFile));
 
-            String line = null;
-
+            String line;
+            String borra = user+"  "+pass;
             //Read from the original file and write to the new 
             //unless content matches data to be removed.
             while ((line = br.readLine()) != null) {
-              String borra = user+"  "+pass;
+              
               if (!line.trim().equals(borra)) {
-                pw.println(line);
+                pw.println();
                 pw.flush();
               }
             }

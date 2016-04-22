@@ -59,16 +59,34 @@ public class UsuariNormal extends UsuariConvidat {
     Pre:    Cap.
     Post:   El nom de l'usuari ha quedat modificat.
     */
+    
     public void modifica_user() {
+        Scanner sc = new Scanner(System.in);
+        String user,pass;
+        System.out.println("Entra el teu username: ");
+                        user = sc.next();
+                        System.out.println("Entra el teu password: ");
+                        pass = sc.next();
+                        System.out.println("Escriu el nou username:");
+                        String nou_user = sc.next();
+                        CtrlUsuaris ctrl = new CtrlUsuaris();
+                        if (ctrl.modificar_usuari(user, pass, nou_user)) {
+                           System.out.println("Usuari modificat correctament"); 
+                        } else {
+                            System.out.println("Usuari i/o contrasenya incorrecte");
+                        }
+    }
+    /*public void modifica_user() {
         Integer i;
         String pass = null;
+        CtrlUsuaris ctrl = new CtrlUsuaris();
         Scanner sc = new Scanner(System.in);
-        if (!CtrlUsuaris.ExisteixUsuari(user_name)) {
+        if (!ctrl.ExisteixUsuari(user_name)) {
             System.out.println("Usuari no-existent");
         }
         else {
             System.out.print("El teu usuari és: ");
-            System.out.println(user_name);
+            System.out.print(user_name);
             System.out.print(".");
             System.out.println("Si desitjeu modificar-lo marqueu 1.");
             System.out.println("Altrament no es modificara l'usuari.");
@@ -79,7 +97,7 @@ public class UsuariNormal extends UsuariConvidat {
                 while (i <= 3 && !contrasenya) {
                     System.out.println("Escriu la contrasenya de l'usuari");
                     pass = sc.next();
-                    if (!CtrlUsuaris.ExisteixUsuari_contrasenya(user_name,pass)) {
+                    if (!ctrl.ExisteixUsuari_contrasenya(user_name,pass)) {
                         System.out.println("Contrasenya incorrecta.");
                         System.out.println("Et queden "+(3-i)+" intents");
                     }
@@ -95,8 +113,8 @@ public class UsuariNormal extends UsuariConvidat {
                 else if (contrasenya) {
                     System.out.println("Escriu el nou username:");
                     String nou_user = sc.next();
-                    if (!CtrlUsuaris.ExisteixUsuari(nou_user)) {
-                        CtrlUsuaris.modificar_usuari(user_name,nou_user,pass);
+                    if (!ctrl.ExisteixUsuari(nou_user)) {
+                        CtrlUsuaris.modificar_password(nou_user,pass,pass);
                         System.out.println("Username modificat correctament.");
                         user_name = nou_user;
                     }
@@ -106,7 +124,7 @@ public class UsuariNormal extends UsuariConvidat {
                 }
             }
         }
-    }
+    }*/
     
     /*  Modifica l'atribut password.
     Pre:    Cap.
