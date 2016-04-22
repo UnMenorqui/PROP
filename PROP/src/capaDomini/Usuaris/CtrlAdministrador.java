@@ -7,10 +7,10 @@ import java.util.Scanner;
  * @author toni
  */
 
-public class DriverUsuariNormal {
+public class CtrlAdministrador {
  
-    public static void main (String[] args) {
-        DriverUsuariNormal us = new DriverUsuariNormal();
+    public void main () {
+        CtrlAdministrador us = new CtrlAdministrador();
         try (Scanner sc = new Scanner(System.in)) {
             Boolean bool = false;
             Boolean primer = true;
@@ -34,7 +34,7 @@ public class DriverUsuariNormal {
             System.out.println("Si vols borrar un usuari marca 6.");
             //ja esta a Administrador
             
-            System.out.println("Si vols acabar la prova de driver marca 7.");
+            System.out.println("Si vols acabar marca 7.");
             
             String user;
             String pass = null;

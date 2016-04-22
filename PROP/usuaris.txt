@@ -1,5 +1,5 @@
-1		Joan
-2		Margalida
-3		Pere
-4		Bernat
-5		Leopoldo
+1		David Hogg
+2		Gadu Agam
+3		Hiroshi Kawasaki
+4		Katsushi Ikeuchi
+5		James Davis

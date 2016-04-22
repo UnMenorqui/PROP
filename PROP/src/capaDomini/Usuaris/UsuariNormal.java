@@ -32,6 +32,7 @@ public class UsuariNormal extends UsuariConvidat {
     Post:   Retorna el nom d'usuari.
     */
     public String consultar_username() {
+        System.out.println("El teu usuari és: "+user_name+".");
         return user_name;
     }
     
