@@ -13,8 +13,9 @@ import java.util.Scanner;
  */
 public class DriverGraf {
     
-    public void main (String args[]) {
-        double matriu [][] = new double[13][13];
+    public int matriu[][] = new int[13][13]; 
+    
+    public DriverGraf() {
         for (int i = 0; i < 13; ++i) {
             for (int j = 0; j < 13; ++j) {
                 matriu[i][j] = -1;
@@ -32,6 +33,7 @@ public class DriverGraf {
         matriu[5][9] = 28;
         matriu[7][9] = 29;
         matriu[6][11] = 30;
+        matriu[5][10] = 32;
         matriu[7][12] = 31;
         
         
@@ -46,14 +48,9 @@ public class DriverGraf {
         matriu[9][5] = 28;
         matriu[9][7] = 29;
         matriu[11][6] = 30;
-        matriu[12][7] = 31;
-        
-
-        
-        
-        
+        matriu[10][5] = 32;
+        matriu[12][7] = 31; 
     }
-    
     
     public int simula_id (String nom) {
         int id;
@@ -61,6 +58,21 @@ public class DriverGraf {
         Scanner sc = new Scanner(System.in);
         id = sc.nextInt();
         return id;
+    }
+    
+    public int[][] getMadj() {
+        return matriu;
+    }
+    
+    public int size() {
+        return 13;
+    }
+    
+    public String getTipusNode(int id) {
+        if (id <= 4) return "Autor";
+        else if (id <= 7) return "Article";
+        else if (id <= 9) return "Conferencia"; 
+        return "Terme";
     }
     
     public String simula_nom_entitat (int id) {
