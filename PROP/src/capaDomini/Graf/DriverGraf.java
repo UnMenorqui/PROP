@@ -5,6 +5,8 @@
  */
 package capaDomini.Graf;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Toni
@@ -12,72 +14,61 @@ package capaDomini.Graf;
 public class DriverGraf {
     
     public void main (String args[]) {
-        double matriu [][] = new double[4][11];
-        matriu[0][0] = -1.0;
-        matriu[0][1] = 100.;
-        matriu[0][2] = 101.;
-        matriu[0][3] = 102.;
-        matriu[0][4] = 103.;
-        matriu[0][5] = 104.;
-        matriu[0][6] = 51.;
-        matriu[0][7] = 52.;
-        matriu[0][8] = 70.;
-        matriu[0][9] = 71.;
-        matriu[0][10] = 72.0;
+        double matriu [][] = new double[13][13];
+        for (int i = 0; i < 13; ++i) {
+            for (int j = 0; j < 13; ++j) {
+                matriu[i][j] = -1;
+            }
+        }
+        
+        matriu[0][5] = 20;
+        matriu[1][5] = 21;
+        matriu[2][5] = 22;
+        matriu[3][6] = 23;
+        matriu[0][7] = 24;
+        matriu[4][7] = 25;
+        matriu[5][8] = 26;
+        matriu[6][8] = 27;
+        matriu[5][9] = 28;
+        matriu[7][9] = 29;
+        matriu[6][11] = 30;
+        matriu[7][12] = 31;
         
         
-        matriu[1][0] = 1.;
-        matriu[1][1] = 0.5;
-        matriu[1][2] = 0.5;
-        matriu[1][3] = 0.;
-        matriu[1][4] = 0.;
-        matriu[1][5] = 0.;
-        matriu[1][6] = 1.;
-        matriu[1][7] = 0.;
-        matriu[1][8] = 1.;
-        matriu[1][9] = 0.;
-        matriu[1][10] = 0.;
+        matriu[5][0] = 20;
+        matriu[5][1] = 21;
+        matriu[5][2] = 22;
+        matriu[6][3] = 23;
+        matriu[7][0] = 24;
+        matriu[7][4] = 25;
+        matriu[8][5] = 26;
+        matriu[8][6] = 27;
+        matriu[9][5] = 28;
+        matriu[9][7] = 29;
+        matriu[11][6] = 30;
+        matriu[12][7] = 31;
         
-        
-        matriu[2][0] = 2.;
-        matriu[2][1] = 0.;
-        matriu[2][2] = 0.;
-        matriu[2][3] = 1.;
-        matriu[2][4] = 0.;
-        matriu[2][5] = 0.;
-        matriu[2][6] = 1.;
-        matriu[2][7] = 0.;
-        matriu[2][8] = 0.;
-        matriu[2][9] = 1.;
-        matriu[2][10] = 0.;
-        
-        
-        matriu[3][0] = 3.0;
-        matriu[3][1] = 0.33;
-        matriu[3][2] = 0.;
-        matriu[3][3] = 0.;
-        matriu[3][4] = 0.33;
-        matriu[3][5] = 0.33;
-        matriu[3][6] = 0.;
-        matriu[3][7] = 1.;
-        matriu[3][8] = 0.;
-        matriu[3][9] = 0.;
-        matriu[3][10] = 1.0;
-        
-        
-        String[] Info = new String[13];
+
         
         
         
     }
-    /*  Donat un node retornarà la probabilitat d'aquest node en relació 
-        a un article. IDEA: si es desitjen buscar autors mes importants en funció d'un terme
-        només d'han de mirar els articles més importants relacionats amb un terme, i un cop
-        allí, per cada article important, els autors més importants de cada article.
-    */
-    public static double return_prob(Double node) {
-        double prob = 0.;
-        return prob;
+    
+    
+    public int simula_id (String nom) {
+        int id;
+        System.out.print("Entra l'identificador de simulació: ");
+        Scanner sc = new Scanner(System.in);
+        id = sc.nextInt();
+        return id;
+    }
+    
+    public String simula_nom_entitat (int id) {
+        String nom;
+        System.out.print("Entra el nom de simulació: ");
+        Scanner sc = new Scanner(System.in);
+        nom = sc.next();
+        return nom;
     }
     
 }

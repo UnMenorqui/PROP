@@ -1,0 +1,3 @@
+6		Pomes
+7		Peres
+8		Tomatics
