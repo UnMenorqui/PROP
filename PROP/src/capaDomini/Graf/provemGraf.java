@@ -10,7 +10,7 @@ package capaDomini.Graf;
  *
  * @author aleixabrieprat
  */
-public class probemGraf {
+public class provemGraf {
     
     public static void main(String[] Args) {
         Graf_PageRank pk = new Graf_PageRank();

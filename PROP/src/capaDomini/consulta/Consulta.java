@@ -9,18 +9,8 @@ import java.util.Map;
  * @author aleixabrieprat
  */
 public class Consulta {
-    
-    public void cerca_tipus(String nom,double id, String tipus) {
-        id = 100.;
-        tipus = "autor";
-    }
-    
-    
+    //alsfhañeifh
     public void obtenir_autors(ArrayList<String> autors, String nom, int quantitat) {
-        double id = 0;
-        String tipus = null;
-        cerca_tipus(nom,id,tipus);
-        
         
     }
     public void obtenir_termes(ArrayList<String> termes, String nom, int quantitat) {

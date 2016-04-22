@@ -58,6 +58,54 @@ public class DriverGraf {
         return id;
     }
     
+    public int getID(String nom) {
+        int id;
+        switch(nom) {
+            case "Souad Hadjres": 
+                id = 0;
+                break;
+            case "Yan Zhang":
+                id = 1;
+                break;
+            case "David Hogg":
+                id = 2;
+                break;
+            case "Martial Hebert":
+                id = 3;
+                break;
+            case "Gady Agam":
+                id = 4;
+                break;
+            case "Some Philosophical Problems with Formal Learning Theory.":
+                id = 5;
+                break;
+            case "Terminological Cycles in KL-ONE-based Knowledge Representation Languages.":
+                id = 6;
+                break;
+            case "Integrating Description Logics and Action Formalisms: First Results.":
+                id = 7;
+                break;
+            case "AAAI":
+                id = 8;
+                break;
+            case "CIKM":
+                id = 9;
+                break;
+            case "some":
+                id = 10;
+                break;
+            case "terminological":
+                id = 11;
+                break;
+            case "integrating":
+                id = 12;
+                break;
+            default:
+                id = -1;
+        }
+        return id;
+    }
+    
     public int[][] getMadj() {
         return matriu;
     }
