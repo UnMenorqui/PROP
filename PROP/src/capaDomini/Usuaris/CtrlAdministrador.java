@@ -29,13 +29,11 @@ public class CtrlAdministrador {
             System.out.println("Si vols borrar un usuari marca 3.");
             //ja esta a Administrador
             
-            System.out.println("Si vols acabar marca 4.");
+            System.out.println("Si vols fer una consulta marca 4.");
             
-            System.out.println("Si vols fer una consulta marca 5.");
+            System.out.println("Si vols consultar l'historial de consultes marca 5.");
             
-            System.out.println("Si vols consultar l'historial de consultes marca 6.");
-            
-            System.out.println("Si vols acabar marca 7.");
+            System.out.println("Si vols acabar marca 6.");
             
             String user;
             String pass = null;
@@ -75,20 +73,18 @@ public class CtrlAdministrador {
                             System.out.println("Usuari i/o contrasenya incorrecte");
                         }
                         break;
-                    case 4:
-                        bool = true;
-                        break;
                         
-                    case 5:
+                    case 4:
                         CtrlPerfil ctrls = new CtrlPerfil();
                         ctrls.main(G);
                         break;
-                    case 6:
+                    case 5:
                         Historial hist = new Historial();
                         //Crida a escriure historial
                         break;
                         
-                    case 7:
+                    case 6:
+                        bool = true;
                         break;
                 }
             }
