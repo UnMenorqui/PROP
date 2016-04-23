@@ -53,7 +53,7 @@ public class Main {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
                     System.out.println("Torna a entrar la operació a fer:");
-                } else primer = false;
+                } else primer = true;
                 int id = sc.nextInt();
                 switch(id) {
                 
