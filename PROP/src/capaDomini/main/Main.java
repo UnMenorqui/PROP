@@ -47,7 +47,7 @@ public class Main {
         
         boolean bool = false;
         boolean primer = false;
-        
+        boolean acabat = false;
         while(!bool) {
                 if(primer) {
                     System.out.println("Operació realitzada.");
@@ -104,6 +104,7 @@ public class Main {
 
                 case 5:
                     System.out.print("Gràcies per utilitzar l'aplicaió, fins aviat!");
+                    bool = true;
                     break;
 
             }
