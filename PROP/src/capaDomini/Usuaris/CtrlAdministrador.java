@@ -4,7 +4,10 @@ package capaDomini.Usuaris;
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.CtrlPerfil;
 import capaDomini.consulta.Historial;
+<<<<<<< HEAD
 import java.io.IOException;
+=======
+>>>>>>> Merge-Consultes-i-Main
 import java.util.Scanner;
 
 /**
@@ -33,11 +36,14 @@ public class CtrlAdministrador {
             
             System.out.println("Si vols consultar l'historial de consultes marca 5.");
             
-            System.out.println("Si vols acabar marca 6.");
+            System.out.println("Si vols consultar l'historial de consultes marca 6.");
+            
+            System.out.println("Si vols acabar marca 7.");
             
             String user;
             String pass = null;
             CtrlUsuaris ctrl = new CtrlUsuaris();
+            Graf_PageRank G = new Graf_PageRank();
             while(!bool) {
                 if(!primer) {
                     System.out.println("Operació realitzada.");
@@ -79,12 +85,25 @@ public class CtrlAdministrador {
                         ctrls.main(G);
                         break;
                     case 5:
+<<<<<<< HEAD
+                        Historial hist = new Historial();
+                        //Crida a escriure historial
+=======
+                        CtrlPerfil ctrls = new CtrlPerfil();
+                        ctrls.main(G);
+>>>>>>> Merge-Consultes-i-Main
+                        break;
+                        
+                    case 6:
+<<<<<<< HEAD
+                        bool = true;
+=======
                         Historial hist = new Historial();
                         //Crida a escriure historial
                         break;
                         
-                    case 6:
-                        bool = true;
+                    case 7:
+>>>>>>> Merge-Consultes-i-Main
                         break;
                 }
             }

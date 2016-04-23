@@ -8,7 +8,10 @@ package capaDomini.Usuaris;
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.CtrlPerfil;
 import capaDomini.consulta.Historial;
+<<<<<<< HEAD
 import java.io.IOException;
+=======
+>>>>>>> Merge-Consultes-i-Main
 import java.util.Scanner;
 
 /**
@@ -22,6 +25,12 @@ public class CtrlNormal {
         Scanner sc = new Scanner(System.in);
         System.out.println("Login correcte.");
         UsuariNormal usr = new UsuariNormal(user,pass);
+<<<<<<< HEAD
+=======
+        
+        
+        Graf_PageRank G = new Graf_PageRank();
+>>>>>>> Merge-Consultes-i-Main
         while(!bool) {
             System.out.println("Si vols consultar l'usuari marca 1.");
             System.out.println("Si vols consultar la contrasenya marca 2.");
