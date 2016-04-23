@@ -11,7 +11,7 @@ import java.util.Comparator;
  * @author aleixabrieprat
  */
 public class Consulta {
-    
+    //Consulta
     public void obtenir_autors(ArrayList<String> autors, String nom, int quantitat, Graf_PageRank G) 
     {
         int id = G.getID(nom);
