@@ -50,7 +50,6 @@ public class Main {
         
         boolean bool = false;
         boolean primer = false;
-        boolean acabat = false;
         while(!bool) {
                 if(primer) {
                     System.out.println("Operació realitzada.");

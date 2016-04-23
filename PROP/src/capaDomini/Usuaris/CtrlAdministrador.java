@@ -1,6 +1,7 @@
 package capaDomini.Usuaris;
 
 
+import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.CtrlPerfil;
 import java.util.Scanner;
 
@@ -35,6 +36,7 @@ public class CtrlAdministrador {
             String user;
             String pass = null;
             CtrlUsuaris ctrl = new CtrlUsuaris();
+            Graf_PageRank G = new Graf_PageRank();
             while(!bool) {
                 if(!primer) {
                     System.out.println("Operació realitzada.");
@@ -76,7 +78,7 @@ public class CtrlAdministrador {
                         
                     case 5:
                         CtrlPerfil ctrls = new CtrlPerfil();
-                        ctrls.main();
+                        ctrls.main(G);
                         break;
                     case 6:
                         break;

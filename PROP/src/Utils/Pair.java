@@ -9,25 +9,11 @@ package Utils;
  *
  * @author aleixabrieprat
  */
-<<<<<<< Updated upstream
+
 public class Pair implements Comparable {
     private int first;
     private int second;
-=======
-public class Pair {
 
-    public Pair(int j, int mat) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int GetS() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int GetF() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
->>>>>>> Stashed changes
     
    public Pair() {
        first = 0;

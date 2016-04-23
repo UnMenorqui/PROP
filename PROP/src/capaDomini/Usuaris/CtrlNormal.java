@@ -5,6 +5,7 @@
  */
 package capaDomini.Usuaris;
 
+import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.CtrlPerfil;
 import java.util.Scanner;
 
@@ -26,7 +27,7 @@ public class CtrlNormal {
         UsuariNormal usr = new UsuariNormal(user,pass);
         
         
-        
+        Graf_PageRank G = new Graf_PageRank();
         while(!bool) {
             System.out.println("Si vols consultar l'usuari marca 1.");
             System.out.println("Si vols consultar la contrasenya marca 2.");
@@ -55,7 +56,7 @@ public class CtrlNormal {
                         usr.modifica_pass();
                     case 5:
                         CtrlPerfil ctrl = new CtrlPerfil();
-                        ctrl.main();
+                        ctrl.main(G);
                         break;
                     case 6:
                         break;
