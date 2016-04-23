@@ -19,27 +19,26 @@ public class DriverHistorial {
         Graf_PageRank G = new Graf_PageRank();
         Historial historial = new Historial();
         int opcio;
-        try (Scanner sc = new Scanner(System.in)) {
+        escriure_opcions();
+        Scanner sc = new Scanner(System.in);
+        opcio = sc.nextInt();
+        while(opcio != 4) {
+            switch(opcio) {
+                case 1: 
+                    consultar(G);
+                    break;
+                case 2: 
+                    System.out.println("Escriu la teva consulta (nom\\n id\\n tipus):");
+                    Apunts consulta = llegirConsulta(sc);
+                    historial.afegirCerca(consulta);
+                    break;
+                case 3: 
+                    System.out.println("Escriu l'índex de la consulta que vols esborrar:");
+                    int i = sc.nextInt();
+                    historial.esborrar(historial.size()-i);
+            }
             escriure_opcions();
             opcio = sc.nextInt();
-            while(opcio != 4) {
-                switch(opcio) {
-                    case 1: 
-                        consultar(G);
-                        break;
-                    case 2: 
-                        System.out.println("Escriu la teva consulta (nom\\n id\\n tipus):");
-                        Apunts consulta = llegirConsulta(sc);
-                        historial.afegirCerca(consulta);
-                        break;
-                    case 3: 
-                        System.out.println("Escriu l'índex de la consulta que vols esborrar:");
-                        int i = sc.nextInt();
-                        historial.esborrar(historial.size()-i);
-                }
-                escriure_opcions();
-                opcio = sc.nextInt();
-            }
         }
     }
     

@@ -62,7 +62,5 @@ public class DriverNormal {
                     break;
             }
         }
-        //sc.close();
-        
     }
 }
