@@ -5,6 +5,8 @@
  */
 package capaDomini.Perfils;
 
+import java.util.Scanner;
+
 /**
  *
  * @author marc_
@@ -26,11 +28,13 @@ public class Perfil {
         return nom;
     }
     
-    public static void creacio_perfil(int marca, String entitat) {
+    public void creacio_perfil(int marca, String entitat) {
         nom = entitat;
+        PerfilAutor perfilautor = new PerfilAutor();
+        Scanner sc = new Scanner(System.in);
         switch(marca) {
             case 1: 
-                PerfilAutor.crear_perfil_autor();
+                perfilautor.crear_perfil_autor();
                 break;
             case 2: 
                 PerfilConf.crear_perfil_conf();

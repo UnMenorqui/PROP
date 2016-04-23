@@ -38,6 +38,7 @@ public class CtrlAdministrador {
             
             String user;
             String pass = null;
+            CtrlUsuaris ctrl = new CtrlUsuaris();
             while(!bool) {
                 if(!primer) {
                     System.out.println("Operació realitzada.");
@@ -47,7 +48,7 @@ public class CtrlAdministrador {
                 int prova = sc.nextInt();
                 switch(prova) {
                     case 1:
-                        CtrlUsuaris.consultaUsuarisBD();
+                        ctrl.consultaUsuarisBD();
                         break;
                     case 2:
                         System.out.println("Entra el teu username: ");
@@ -56,7 +57,7 @@ public class CtrlAdministrador {
                         pass = sc.next();
                         System.out.println("Escriu el nou username:");
                         String nou_user = sc.next();
-                        if (CtrlUsuaris.modificar_usuari(user, pass, nou_user)) {
+                        if (ctrl.modificar_usuari(user, pass, nou_user)) {
                            System.out.println("Usuari modificat correctament"); 
                         } else {
                             System.out.println("Usuari i/o contrasenya incorrecte");
@@ -65,7 +66,7 @@ public class CtrlAdministrador {
                     case 3:
                         System.out.println("Entra el teu username:");
                         user = sc.next();
-                        String contr = CtrlUsuaris.consultar_password(user);
+                        String contr = ctrl.consultar_password(user);
                         if (contr.equals("")) {
                             System.out.println("Usuari incorrecte");
                         } else {
@@ -79,7 +80,7 @@ public class CtrlAdministrador {
                         pass = sc.next();
                         System.out.println("Escriu la nova contrasenya:");
                         String new_pass = sc.next();
-                        if (CtrlUsuaris.modificar_password(user,pass,new_pass)) {
+                        if (ctrl.modificar_password(user,pass,new_pass)) {
                             System.out.println("Contrasenya modificada correctament");
                         }
                         else {
@@ -91,7 +92,7 @@ public class CtrlAdministrador {
                         user = sc.next();
                         System.out.println("Entra la contrasenya: ");
                         pass = sc.next();
-                        if (CtrlUsuaris.GuardarUsuari(user,pass)) {
+                        if (ctrl.GuardarUsuari(user,pass)) {
                             System.out.println("Usuari afegit correctament");
                         } else {
                             System.out.println("Usuari ja existent");
@@ -102,7 +103,7 @@ public class CtrlAdministrador {
                         user = sc.next();
                         System.out.println("Escriu la contrasenya de l'usuari");
                         pass = sc.next();
-                        if (CtrlUsuaris.borrarlinea(user,pass)) {
+                        if (ctrl.borrarlinea(user,pass)) {
                             System.out.println("Usuari borrat correctament");
                         } else {
                             System.out.println("Usuari i/o contrasenya incorrecte");

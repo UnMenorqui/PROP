@@ -23,44 +23,44 @@ public class PerfilAutor extends Perfil {
     static int quantitat_articles;
     
     
-    public static int get_quantitat_termes() {
+    public int get_quantitat_termes() {
         return quantitat_termes;
     }
     
-    public static void set_quantitat_termes(int q_terme) {
+    public void set_quantitat_termes(int q_terme) {
         quantitat_termes = q_terme;
     }
     
-    public static int get_quantitat_conf() {
+    public int get_quantitat_conf() {
         return quantitat_conf;
     }
-    public static void set_quantitat_conf(int q_conferencia) {
+    public void set_quantitat_conf(int q_conferencia) {
         quantitat_conf = q_conferencia;
     }
     
-    public static int get_quantitat_articles() {
+    public int get_quantitat_articles() {
         return quantitat_articles;
     }
-    public static void set_quantitat_articles(int q_articles) {
+    public void set_quantitat_articles(int q_articles) {
         quantitat_articles = q_articles;
     }
     
-    public static ArrayList<String> articles_importants() {
+    public ArrayList<String> articles_importants() {
         // obtenir_articles(articles,nom,quantitat_articles);
         return articles;
     }
     
-    public static ArrayList<String> conferencies_importants() {
+    public ArrayList<String> conferencies_importants() {
         // obtenir_conferencies(conferencies,nom,quantitat_conf);
         return conferencies;
     }
     
-    public static ArrayList<String> termes_importants() {
+    public ArrayList<String> termes_importants() {
         // obtenir_termes(termes,nom,quantitat_termes);
         return termes;
     }
     
-    public static void crear_perfil_autor() {
+    public void crear_perfil_autor() {
         articles_importants();
         conferencies_importants();
         termes_importants();

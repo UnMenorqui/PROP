@@ -5,13 +5,15 @@
  */
 package capaDomini.Usuaris;
 
+import capaDomini.Perfils.CtrlPerfil;
+
 /**
  *
  * @author Toni
  */
 public class CtrlConvidat {
     public void main() {
-        UsuariConvidat uc = new UsuariConvidat();
-        uc.consulta();
+        CtrlPerfil ctrl = new CtrlPerfil();
+        ctrl.main();
     }
 }

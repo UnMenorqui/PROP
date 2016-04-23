@@ -45,10 +45,11 @@ public class UsuariNormal extends UsuariConvidat {
         Scanner sc = new Scanner(System.in);                
         String pass;
         String user = sc.next();
-        if (!CtrlUsuaris.ExisteixUsuari(user)) System.out.println("No existeix l'usuari");
+        CtrlUsuaris ctrl = new CtrlUsuaris();
+        if (!ctrl.ExisteixUsuari(user)) System.out.println("No existeix l'usuari");
         else if (user.equals(user_name)) { 
             System.out.println("Usuari correcte");
-            pass = CtrlUsuaris.consultar_password(user);
+            pass = ctrl.consultar_password(user);
             if (pass.equals(password)) System.out.println("La teva contrasenya és: "+pass);
             return password;
         }
@@ -91,7 +92,8 @@ public class UsuariNormal extends UsuariConvidat {
         Integer i;
         String pass = null;
         Scanner sc = new Scanner(System.in);
-        if (!CtrlUsuaris.ExisteixUsuari(user_name)) {
+        CtrlUsuaris ctrl = new CtrlUsuaris();
+        if (!ctrl.ExisteixUsuari(user_name)) {
             System.out.println("Usuari no-existent");
         }
         else {
@@ -108,7 +110,7 @@ public class UsuariNormal extends UsuariConvidat {
                 while (i <= 3 && !contrasenya) {
                     System.out.println("Escriu la contrasenya de l'usuari");
                     pass = sc.next();
-                    if (!CtrlUsuaris.ExisteixUsuari_contrasenya(user_name,pass)) {
+                    if (!ctrl.ExisteixUsuari_contrasenya(user_name,pass)) {
                         System.out.println("Contrasenya incorrecta.");
                         System.out.println("Et queden "+(3-i)+" intents");
                     }
@@ -124,7 +126,7 @@ public class UsuariNormal extends UsuariConvidat {
                 else if (contrasenya) {
                     System.out.println("Escriu la nova contrasenya:");
                     String new_pass = sc.next();
-                    CtrlUsuaris.modificar_password(user_name,pass,new_pass);
+                    ctrl.modificar_password(user_name,pass,new_pass);
                     System.out.println("Contrasenya de l'usuari modificada correctament.");
                     password = new_pass;
                 }

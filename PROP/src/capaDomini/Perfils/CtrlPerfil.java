@@ -11,9 +11,9 @@ import java.util.Scanner;
  *
  * @author marc_
  */
-public class DriverPerfil {
+public class CtrlPerfil {
     
-    public static void main (String[] args) {
+    public void main () {
         Perfil perfil = new Perfil();
         System.out.println("Per a la creació d'un perfil, determina el tipus:");
         System.out.println("Marca 1 si vols un perfil d'autor");

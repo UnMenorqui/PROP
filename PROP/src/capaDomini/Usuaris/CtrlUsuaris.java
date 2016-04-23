@@ -1,4 +1,4 @@
-package capaDomini.Usuaris;
+  package capaDomini.Usuaris;
 
 import capaPersistencia.CtrlDadesUsuari;
 
@@ -20,7 +20,7 @@ public class CtrlUsuaris {
         du = new CtrlDadesUsuari();
     }
     
-    public static Boolean modificar_usuari(String username, String password, String nou_user) {
+    public Boolean modificar_usuari(String username, String password, String nou_user) {
         if (ExisteixUsuari_contrasenya(username,password)) {
             du.modificar_usuari(username,nou_user,password);
             return true;
@@ -28,7 +28,7 @@ public class CtrlUsuaris {
         return false;
     }
     
-    public static Boolean modificar_password(String username, String password, String new_password) {
+    public Boolean modificar_password(String username, String password, String new_password) {
         if (ExisteixUsuari_contrasenya(username, password)) {
             du.modificar_password(username, password, new_password);
             return true;
@@ -36,15 +36,15 @@ public class CtrlUsuaris {
         return false;
     }
 
-    public static Boolean ExisteixUsuari_contrasenya(String username, String password) {
+    public Boolean ExisteixUsuari_contrasenya(String username, String password) {
         return du.ExisteixUsuari_contrasenya(username,password);
     }
     
-    public static Boolean ExisteixUsuari(String username) {
+    public Boolean ExisteixUsuari(String username) {
         return du.ExisteixUsuari(username);
     }
     
-    public static Boolean borrarlinea(String username, String password) {
+    public Boolean borrarlinea(String username, String password) {
         if (ExisteixUsuari_contrasenya(username, password)) {
             du.borrarlinea(username, password);
             return true;
@@ -52,7 +52,7 @@ public class CtrlUsuaris {
         return false;
     }
     
-    public static boolean GuardarUsuari(String username, String password) {
+    public boolean GuardarUsuari(String username, String password) {
         if (!ExisteixUsuari_contrasenya(username, password)) {
             du.GuardarUsuari(username, password);
             return true;
@@ -60,11 +60,11 @@ public class CtrlUsuaris {
         return false;
     }
     
-    public static void consultaUsuarisBD() {
+    public void consultaUsuarisBD() {
         du.consultaUsuarisBD();
     }
     
-    public static String consultar_password(String username) {
+    public String consultar_password(String username) {
         if (ExisteixUsuari(username)) {
             return du.consultar_password(username);
         }

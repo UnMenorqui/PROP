@@ -21,16 +21,18 @@ import java.util.Scanner;
 public class Administrador extends UsuariNormal {
     
     public static void consultaBD() {
-        CtrlUsuaris.consultaUsuarisBD();
+        CtrlUsuaris ctrl = new CtrlUsuaris();
+        ctrl.consultaUsuarisBD();
     }
     
     public static void borra_user() {
+        CtrlUsuaris ctrl = new CtrlUsuaris();
         System.out.println("Entra el nom de l'usuari: ");
         Integer i;
         String user,pass = null;
         Scanner sc = new Scanner(System.in);
         user = sc.next();
-        if (!CtrlUsuaris.ExisteixUsuari(user)) {
+        if (!ctrl.ExisteixUsuari(user)) {
             System.out.println("L'usuari no existeix");
         }
         else {
@@ -39,7 +41,7 @@ public class Administrador extends UsuariNormal {
             while (i <= 3 && !contrasenya) {
                 System.out.println("Escriu la contrasenya de l'usuari");
                 pass = sc.next();
-                if (!CtrlUsuaris.ExisteixUsuari_contrasenya(user,pass)) {
+                if (!ctrl.ExisteixUsuari_contrasenya(user,pass)) {
                     System.out.println("Contrasenya incorrecta.");
                     System.out.println("Et queden "+(3-i)+" intents");
                 }
@@ -52,7 +54,7 @@ public class Administrador extends UsuariNormal {
             if (i > 3) {
                 System.out.println("Se t'han acabat tots els intents.");
             }
-            if (contrasenya) CtrlUsuaris.borrarlinea(user,pass);
+            if (contrasenya) ctrl.borrarlinea(user,pass);
         }
         sc.close();
     }
