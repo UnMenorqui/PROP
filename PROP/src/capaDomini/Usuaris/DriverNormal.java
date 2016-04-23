@@ -40,7 +40,7 @@ public class DriverNormal {
             int prova = sc.nextInt();
             switch(prova) {
                 case 1:
-                    ctrlusuaris.consultar_username();
+                    usr.consultar_username();
                     break;
                 case 2:
                     usr.consultar_password();
