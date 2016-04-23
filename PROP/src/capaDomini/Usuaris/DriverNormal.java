@@ -6,7 +6,7 @@
 package capaDomini.Usuaris;
 
 import capaDomini.Graf.Graf_PageRank;
-import capaDomini.Perfils.CtrlPerfil;
+import capaDomini.Perfils.DriverPerfil;
 import capaDomini.consulta.Historial;
 import java.io.IOException;
 import java.util.Scanner;
@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  * @author Toni
  */
-public class CtrlNormal {
+public class DriverNormal {
     public void main(String user, String pass, Graf_PageRank G) throws IOException {
         boolean bool= false;
         boolean primer = true;
@@ -50,15 +50,11 @@ public class CtrlNormal {
                     case 4:
                         usr.modifica_pass();
                     case 5:
-                        CtrlPerfil ctrl = new CtrlPerfil();
+                        DriverPerfil ctrl = new DriverPerfil();
                         ctrl.main(G);
                         break;
                     case 6:
                         Historial hist = new Historial();
-<<<<<<< HEAD
-=======
-                        hist.consultar();
->>>>>>> aaaaaaaaaaa
                         break;
                     case 7:
                         break;

@@ -2,7 +2,7 @@ package capaDomini.Usuaris;
 
 
 import capaDomini.Graf.Graf_PageRank;
-import capaDomini.Perfils.CtrlPerfil;
+import capaDomini.Perfils.DriverPerfil;
 import capaDomini.consulta.Historial;
 import java.io.IOException;
 import java.util.Scanner;
@@ -11,10 +11,10 @@ import java.util.Scanner;
  * @author toni
  */
 
-public class CtrlAdministrador {
+public class DriverAdministrador {
  
     public void main (Graf_PageRank G) throws IOException {
-        CtrlAdministrador us = new CtrlAdministrador();
+        DriverAdministrador us = new DriverAdministrador();
         try (Scanner sc = new Scanner(System.in)) {
             Boolean bool = false;
             Boolean primer = true;
@@ -40,7 +40,6 @@ public class CtrlAdministrador {
             String user;
             String pass = null;
             CtrlUsuaris ctrl = new CtrlUsuaris();
-            Graf_PageRank G = new Graf_PageRank();
             while(!bool) {
                 if(!primer) {
                     System.out.println("Operació realitzada.");
@@ -78,29 +77,18 @@ public class CtrlAdministrador {
                         break;
                         
                     case 4:
-                        CtrlPerfil ctrls = new CtrlPerfil();
+                        DriverPerfil ctrls = new DriverPerfil();
                         ctrls.main(G);
                         break;
                     case 5:
-<<<<<<< HEAD
-                        CtrlPerfil ctrls = new CtrlPerfil();
-                        ctrls.main(G);
-=======
-                        Historial hist = new Historial();
-                        //Crida a escriure historial
->>>>>>> aaaaaaaaaaa
                         break;
                         
                     case 6:
-<<<<<<< HEAD
-                        Historial hist = new Historial();
                         //Crida a escriure historial
                         break;
                         
                     case 7:
-=======
                         bool = true;
->>>>>>> aaaaaaaaaaa
                         break;
                 }
             }

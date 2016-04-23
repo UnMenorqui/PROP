@@ -5,10 +5,10 @@
  */
 package capaDomini.main;
 
-import capaDomini.Usuaris.CtrlConvidat;
-import capaDomini.Usuaris.CtrlNormal;
+import capaDomini.Usuaris.DriverConvidat;
+import capaDomini.Usuaris.DriverNormal;
 import capaDomini.Usuaris.CtrlUsuaris;
-import capaDomini.Usuaris.CtrlAdministrador;
+import capaDomini.Usuaris.DriverAdministrador;
 import capaDomini.Graf.Graf_PageRank;
 import java.io.IOException;
 import java.util.Scanner;
@@ -61,7 +61,7 @@ public class Main {
                 switch(id) {
                 
                 case 1:
-                    CtrlConvidat uc = new CtrlConvidat();
+                    DriverConvidat uc = new DriverConvidat();
                     uc.main(gf);
                     break;
                 case 2:
@@ -73,7 +73,7 @@ public class Main {
                     pass = sc.next();
                     System.out.println();
                     if(ctrl.ExisteixUsuari_contrasenya(user,pass)) {
-                        CtrlNormal norm = new CtrlNormal();
+                        DriverNormal norm = new DriverNormal();
                         norm.main(user,pass,gf);
                     }
                     else System.out.println("Usuari o contrasenya incorrecta");
@@ -86,7 +86,7 @@ public class Main {
                         System.out.print("Entra la clau mestre: ");
                         pass = sc.next();
                         if (pass.equals(admin_pass)) {
-                            CtrlAdministrador admin = new CtrlAdministrador();
+                            DriverAdministrador admin = new DriverAdministrador();
                             admin.main(gf);
                         }
                         else System.out.print("Clau mestre incorrecta.");

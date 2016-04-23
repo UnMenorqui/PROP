@@ -5,10 +5,13 @@
  */
 package capaDomini.consulta;
 
-import capaDomini.consulta.Apunts;
+
 import java.util.ArrayList;
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.Perfil;
+import capaDomini.Perfils.PerfilArticle;
+import capaDomini.Perfils.PerfilAutor;
+import capaDomini.Perfils.PerfilConf;
 import java.util.Scanner;
 
 /**
@@ -47,13 +50,21 @@ public class Historial {
 	while(n != -1) {
             Perfil p = new Perfil();
             Apunts a = LlistaConsultes.get(n-1);
-            int marca = 4;
             switch(a.getTipus()) {
-                    case "Autor": marca = 1; break;
-                    case "Conferencia": marca = 2; break;
-                    case "Article": marca = 3; break;
+                    case "Autor":
+                        PerfilAutor pa = new PerfilAutor();
+                        pa.crear_perfil_autor(G);
+                        break;
+                    case "Conferencia": 
+                            PerfilConf pc = new PerfilConf();
+                            pc.crear_perfil_conf(G);
+                            break;
+                    case "Article":
+                        PerfilArticle par = new PerfilArticle();
+                        par.crear_perfil_article(G);
+                        break;
+                    case "Terme" : 
             }
-            p.creacio_perfil(marca, a.getNom(), G);
             System.out.print("\n");
             System.out.println("Selecciona un número de cerca o -1 per sortir");
             n = sc.nextInt();

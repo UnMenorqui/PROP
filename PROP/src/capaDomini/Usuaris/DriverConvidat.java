@@ -5,7 +5,7 @@
  */
 package capaDomini.Usuaris;
 
-import capaDomini.Perfils.CtrlPerfil;
+import capaDomini.Perfils.DriverPerfil;
 import capaDomini.Graf.Graf_PageRank;
 import java.io.IOException;
 
@@ -14,9 +14,9 @@ import java.io.IOException;
  * @author Toni
  */
 
-public class CtrlConvidat {
+public class DriverConvidat {
     public void main(Graf_PageRank G) throws IOException {
-        CtrlPerfil ctrl = new CtrlPerfil();
+        DriverPerfil ctrl = new DriverPerfil();
         ctrl.main(G);
     }
 }

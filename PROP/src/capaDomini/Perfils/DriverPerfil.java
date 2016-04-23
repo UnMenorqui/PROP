@@ -15,7 +15,7 @@ import java.util.Scanner;
  *
  * @author marc_
  */
-public class CtrlPerfil {
+public class DriverPerfil {
     
     public void main (Graf_PageRank G) throws IOException {
         Perfil perfil = new Perfil();
