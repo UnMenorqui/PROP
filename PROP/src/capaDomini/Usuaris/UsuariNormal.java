@@ -70,11 +70,16 @@ public class UsuariNormal extends UsuariConvidat {
                         System.out.println("Escriu el nou username:");
                         String nou_user = sc.next();
                         CtrlUsuaris ctrl = new CtrlUsuaris();
-                        if (ctrl.modificar_usuari(user, pass, nou_user)) {
-                           System.out.println("Usuari modificat correctament");
-                           user_name = nou_user;
-                        } else {
-                            System.out.println("Usuari i/o contrasenya incorrecte");
+                        if (!ctrl.ExisteixUsuari(nou_user)) {
+                            if (ctrl.modificar_usuari(user, pass, nou_user)) {
+                               System.out.println("Usuari modificat correctament");
+                               user_name = nou_user;
+                            } else {
+                                System.out.println("Usuari i/o contrasenya incorrecte");
+                            }
+                        }
+                        else {
+                            System.out.println("Usuari Existent.");
                         }
     }
     
@@ -91,8 +96,9 @@ public class UsuariNormal extends UsuariConvidat {
         }
         else {
             System.out.print("El teu usuari és: ");
-            System.out.println(user_name);
+            System.out.print(user_name);
             System.out.print(".");
+            System.out.println();
             System.out.println("Si desitjeu modificar la contrasenya marqueu 1.");
             System.out.println("Altrament no es modificara la contrasenya.");
             Integer h = sc.nextInt();

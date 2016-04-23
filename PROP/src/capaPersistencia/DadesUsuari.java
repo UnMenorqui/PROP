@@ -193,7 +193,7 @@ public class DadesUsuari {
             while ((line = br.readLine()) != null) {
               
               if (!line.trim().equals(borra)) {
-                pw.println();
+                pw.println(line);
                 pw.flush();
               }
             }

@@ -103,7 +103,7 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.print("Gràcies per utilitzar l'aplicaió, fins aviat!");
+                    System.out.println("Gràcies per utilitzar l'aplicaió, fins aviat!");
                     bool = true;
                     break;
 
