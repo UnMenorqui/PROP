@@ -1,5 +1,6 @@
   package capaDomini.Usuaris;
 
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.consulta.Apunts;
 import capaDomini.consulta.CtrlHistorial;
@@ -20,6 +21,7 @@ public class CtrlUsuaris {
     private static CtrlDadesUsuari du;
     private CtrlHistorial hist;
     private UsuariNormal un = new UsuariNormal();
+    private CtrlGraf CG = new CtrlGraf();
     
     public CtrlUsuaris() {
         du = new CtrlDadesUsuari();
@@ -73,8 +75,8 @@ public class CtrlUsuaris {
         du.consultaUsuarisBD();
     }
     
-    public String consultar_password() {
-            return du.consultar_password();
+    public String consultar_password(String username) {
+            return du.consultar_password(username);
     }
     
     public void afegirCerca(Apunts cerca) {
@@ -88,4 +90,22 @@ public class CtrlUsuaris {
     public void esborrar(int n) {
         hist.esborrar(n);
     }
+    public void afegirNode(String tipus,String nom) {
+        CG.afegirNode(tipus, nom);
+    }
+    
+    
+    public void eliminarNode(String nomNode) {
+        CG.eliminarNode(nomNode);
+    }
+    
+    public void eliminarAresta(String nom1, String nom2) {
+        CG.eliminarAresta(nom1, nom2);
+    }
+    
+    public void afegirAresta(String nom1, String nom2) {
+        CG.afegirAresta(nom1, nom2);
+    }
+    
+    
 }

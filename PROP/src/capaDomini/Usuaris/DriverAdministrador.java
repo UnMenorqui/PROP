@@ -1,9 +1,9 @@
 package capaDomini.Usuaris;
 
 
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.DriverPerfil;
-import capaDomini.consulta.Historial;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -19,6 +19,7 @@ public class DriverAdministrador {
             Boolean bool = false;
             Boolean primer = true;
             CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
+            CtrlGraf CG = new CtrlGraf();
             System.out.println("Tria una opció:");
             System.out.println("Si vols consultar tots els usuaris de la BD marca 1.");
             //ja esta a Administrador
@@ -31,12 +32,21 @@ public class DriverAdministrador {
             
             System.out.println("Si vols fer una consulta marca 4.");
             
-            System.out.println("Si vols consultar l'historial de consultes marca 5.");
+            System.out.println("Si vols afegir un Node marca 5.");
             
-            System.out.println("Si vols acabar marca 6.");
+            System.out.println("Si vols afegir una Aresta marca 6.");
+            
+            System.out.println("Si vols eliminar un Node marca 7.");
+            
+            System.out.println("Si vols eliminar una Aresta marca 8.");
+            
+            System.out.println("Si vols consultar l'historial de consultes marca 9.");
+            
+            System.out.println("Si vols acabar marca 10.");
             
             String user;
             String pass = null;
+            String nom,tipus,node1,node2;
             CtrlUsuaris ctrl = new CtrlUsuaris();
             while(!bool) {
                 if(!primer) {
@@ -76,13 +86,37 @@ public class DriverAdministrador {
                         
                     case 4:
                         DriverPerfil ctrls = new DriverPerfil();
-                        ctrls.main(G);
+                        ctrls.main();
                         break;
+                    
                     case 5:
+                        System.out.println("Entra el Tipus del Node: ");
+                        tipus = sc.nextLine();
+                        System.out.println("Entra el nom del Node: ");
+                        nom = sc.nextLine();
+                        CG.afegirNode(tipus, nom);
+                    case 6:
+                        System.out.println("Entra el nom del Node1: ");
+                        node1 = sc.nextLine();
+                        System.out.println("Entra el nom del Node2: ");
+                        node2 = sc.nextLine();
+                        CG.afegirAresta(node1, node2);
+                        
+                    case 7:
+                        System.out.println("Entra el nom del Node1: ");
+                        node1 = sc.nextLine();
+                        CG.eliminarNode(node1);
+                    case 8:
+                        System.out.println("Entra el nom del Node1: ");
+                        node1 = sc.nextLine();
+                        System.out.println("Entra el nom del Node2: ");
+                        node2 = sc.nextLine();
+                        CG.eliminarAresta(node1,node2);
+                    case 9:
                         ctrlusuaris.consultar(G);
                         break;
                         
-                    case 6:
+                    case 10:
                         bool = true;
                         break;
                 }

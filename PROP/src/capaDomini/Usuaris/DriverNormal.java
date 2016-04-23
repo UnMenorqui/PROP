@@ -51,7 +51,7 @@ public class DriverNormal {
                         usr.modifica_pass();
                     case 5:
                         DriverPerfil ctrl = new DriverPerfil();
-                        ctrl.main(G);
+                        ctrl.main();
                         break;
                     case 6:
                         ctrlusuaris.consultar(G);

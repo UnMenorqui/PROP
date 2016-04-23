@@ -9,7 +9,7 @@ package capaDomini.Graf;
  *
  * @author aleixabrieprat
  */
-public class Graf_PageRank extends DriverGraf {
+public class Graf_PageRank extends StubGraf {
     private final int d = 85;
     private int Mat[][];
     private final int prob_Autor, prob_Conf, prob_Article;

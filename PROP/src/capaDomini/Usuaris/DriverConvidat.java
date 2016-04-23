@@ -17,6 +17,6 @@ import java.io.IOException;
 public class DriverConvidat {
     public void main(Graf_PageRank G) throws IOException {
         DriverPerfil ctrl = new DriverPerfil();
-        ctrl.main(G);
+        ctrl.main();
     }
 }
