@@ -7,22 +7,35 @@ import java.util.Scanner;
  * @author toni
  */
 
-public class DriverUsuariNormal {
+public class CtrlAdministrador {
  
-    public static void main (String[] args) {
-        DriverUsuariNormal us = new DriverUsuariNormal();
+    public void main () {
+        CtrlAdministrador us = new CtrlAdministrador();
         try (Scanner sc = new Scanner(System.in)) {
             Boolean bool = false;
             Boolean primer = true;
             CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
             System.out.println("Tria una opció:");
             System.out.println("Si vols consultar tots els usuaris de la BD marca 1.");
+            //ja esta a Administrador
+            
             System.out.println("Si vols modificar el nom de l'usuari marca 2.");
+            //ja esta a UsuariNormal
+            
             System.out.println("Si vols consultar la contrasenya marca 3.");
+            //ja esta a Usuari Normal
+            
             System.out.println("Si vols modificar la contrasenya marca 4.");
+            //ja esta a UsuariNormal
+            
             System.out.println("Si vols guardar un nou usari marca 5.");
+            
+            
             System.out.println("Si vols borrar un usuari marca 6.");
-            System.out.println("Si vols acabar la prova de driver marca 7.");
+            //ja esta a Administrador
+            
+            System.out.println("Si vols acabar marca 7.");
+            
             String user;
             String pass = null;
             while(!bool) {
@@ -34,7 +47,7 @@ public class DriverUsuariNormal {
                 int prova = sc.nextInt();
                 switch(prova) {
                     case 1:
-                        CtrlUsuaris.consultaBD();
+                        CtrlUsuaris.consultaUsuarisBD();
                         break;
                     case 2:
                         System.out.println("Entra el teu username: ");

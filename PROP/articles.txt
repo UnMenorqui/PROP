@@ -1,0 +1,3 @@
+6		Case-Based Introspection.
+7		Clustering by Exceptions.
+8		Panel: Directions for Expert Systems.

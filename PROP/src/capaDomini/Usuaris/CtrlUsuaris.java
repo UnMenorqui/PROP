@@ -60,8 +60,8 @@ public class CtrlUsuaris {
         return false;
     }
     
-    public static void consultaBD() {
-        du.consultaBD();
+    public static void consultaUsuarisBD() {
+        du.consultaUsuarisBD();
     }
     
     public static String consultar_password(String username) {

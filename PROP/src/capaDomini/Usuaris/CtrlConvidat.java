@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package capaPersistencia;
+package capaDomini.Usuaris;
 
 /**
  *
- * @author toni_
+ * @author Toni
  */
-public class prova {
-    
+public class CtrlConvidat {
+    public void main() {
+        UsuariConvidat uc = new UsuariConvidat();
+        uc.consulta();
+    }
 }

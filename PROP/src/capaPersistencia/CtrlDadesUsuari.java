@@ -30,8 +30,8 @@ public class CtrlDadesUsuari {
     public void GuardarUsuari(String username, String password) {
         DadesUsuari.GuardarUsuari(username, password);
     }
-    public void consultaBD() {
-        DadesUsuari.consultaBD();
+    public void consultaUsuarisBD() {
+        DadesUsuari.consultaUsuarisBD();
     }
     
     public String consultar_password(String username) {
