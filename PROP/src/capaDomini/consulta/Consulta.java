@@ -12,14 +12,13 @@ import java.util.Comparator;
  */
 public class Consulta {
     //Consulta
-    public void obtenir_autors(ArrayList<String> autors, String nom, int quantitat, Graf_PageRank G) 
-    {
+    public void obtenir_autors(ArrayList<String> autors, String nom, int quantitat, Graf_PageRank G) {
         int id = G.getID(nom);
         int size = G.size();
         int[][] mat = G.getMadj();
         ArrayList<Pair> autors1 = new ArrayList<>();
         if (G.getTipusNode(id).equals("Article")) {
-            for (int j=0; j<size; ++j) {
+            for (int j=0; j<size; j++) {
                 if (mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Autor")) {
                     Pair o = new Pair(j,mat[j][j]);
                     autors1.add(o);
@@ -32,14 +31,15 @@ public class Consulta {
                     Pair b = (Pair)o2;
                     return new Integer(a.GetS()).compareTo(b.GetS());
                 }
-            }); 
-            for (int i= 0; i<quantitat; ++i) {
+            });
+            if (quantitat > autors1.size()) quantitat = autors1.size();
+            for (int i= 0; i<quantitat; i++) {
                 autors.add(G.getNom(autors1.get(i).GetF()));
             }
         } else if (G.getTipusNode(id).equals("Autor")) 
         {
             ArrayList<Pair> articles = new ArrayList<>();
-            for (int j=0; j<size; ++j) {
+            for (int j=0; j<size; j++) {
                 if (mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
                     Pair o = new Pair(j,mat[j][j]);
                     articles.add(o);
@@ -53,9 +53,9 @@ public class Consulta {
                     return new Integer(a.GetS()).compareTo(b.GetS());
                 }
             });
-            for (int i=0; i<articles.size(); ++i) {
+            for (int i=0; i<articles.size(); i++) {
                 int identificador = articles.get(i).GetF();
-                for (int j=0; j<size; ++j) {
+                for (int j=0; j<size; j++) {
                     if (mat[identificador][j] >= 0 && identificador != j && j != id && G.getTipusNode(j).equals("Autor")) {
                         Pair o = new Pair(j,mat[j][j]);
                         autors1.add(o);
@@ -70,13 +70,17 @@ public class Consulta {
                     return new Integer(a.GetS()).compareTo(b.GetS());
                 }
             });
-            for (int i= 0; i<quantitat; ++i) {
+            if (quantitat > autors1.size()) {
+               for (int i= 0; i<autors1.size(); i++)
                 autors.add(G.getNom(autors1.get(i).GetF()));
             }
-        } else if (G.getTipusNode(id).equals("Conferencia")) 
-        {
+            else {
+                for (int i= 0; i<quantitat; i++) 
+                    autors.add(G.getNom(autors1.get(i).GetF()));
+            }
+        } else if (G.getTipusNode(id).equals("Conferencia")) {
             ArrayList<Pair> articles = new ArrayList<>();
-            for (int j=0; j<size; ++j) {
+            for (int j=0; j<size; j++) {
                 if (mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
                     Pair o = new Pair(j,mat[j][j]);
                     articles.add(o);
@@ -90,9 +94,9 @@ public class Consulta {
                     return new Integer(a.GetS()).compareTo(b.GetS());
                 }
             });
-            for (int i=0; i<articles.size(); ++i) {
+            for (int i=0; i<articles.size(); i++) {
                 int identificador = articles.get(i).GetF();
-                for (int j=0; j<size; ++j) {
+                for (int j=0; j<size; j++) {
                     if (mat[identificador][j] >= 0 && identificador != j && G.getTipusNode(j).equals("Autor")) {
                         Pair o = new Pair(j,mat[j][j]);
                         autors1.add(o);
@@ -107,12 +111,19 @@ public class Consulta {
                     return new Integer(a.GetS()).compareTo(b.GetS());
                 }
             });
-            for (int i= 0; i<quantitat; ++i) {
-                autors.add(G.getNom(autors1.get(i).GetF()));
+            if (quantitat > autors1.size()) {
+                for (int i=0; i<autors1.size(); i++) 
+                    autors.add(G.getNom(autors1.get(i).GetF()));
+            } 
+            else {
+                for (int i=0; i<quantitat; i++) 
+                    autors.add(G.getNom(autors1.get(i).GetF()));    
             }
-        } else {
+            articles.clear();
+        } 
+        else {
             ArrayList<Pair> articles = new ArrayList<>();
-            for (int j=0; j<size; ++j) {
+            for (int j=0; j<size; j++) {
                 if (mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
                     Pair o = new Pair(j,mat[j][j]);
                     articles.add(o);
@@ -127,9 +138,9 @@ public class Consulta {
                 }
             });
             
-            for (int i=0; i<articles.size(); ++i) {
+            for (int i=0; i<articles.size(); i++) {
                 int identificador = articles.get(i).GetF();
-                for (int j=0; j<size; ++j) {
+                for (int j=0; j<size; j++) {
                     if (mat[identificador][j] >= 0 && identificador != j && G.getTipusNode(j).equals("Autor")) {
                         Pair o = new Pair(j,mat[j][j]);
                         autors1.add(o);
@@ -145,22 +156,30 @@ public class Consulta {
                     return new Integer(a.GetS()).compareTo(b.GetS());
                 }
             });
-            for (int i= 0; i<quantitat; ++i) {
-                autors.add(G.getNom(autors1.get(i).GetF()));
+            if (quantitat > autors1.size()) {
+                for (int i= 0; i<autors1.size(); i++) 
+                    autors.add(G.getNom(autors1.get(i).GetF()));
+            } else {
+                for (int i= 0; i<quantitat; i++) 
+                    autors.add(G.getNom(autors1.get(i).GetF()));
             }
+            articles.clear();
         }
+        autors1.clear();
         
     }
     public void obtenir_termes(ArrayList<String> termes, String nom, int quantitat, Graf_PageRank G) {
 	int id = G.getID(nom);
+        int size = G.size();
 	int[][] mat = G.getMadj();
 	ArrayList<Pair> auxTermes = new ArrayList<>();
-
-	if(G.getTipusNode(id).equals("Article")) {
-		for(int j = 0; j < G.size(); j++) {
+        ArrayList<Pair> Articles = new ArrayList<>();
+        String tipus = G.getTipusNode(id);
+        switch(tipus) {
+            case "Article":
+                for(int j = 0; j<size; j++) {
 			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Terme")) {
-				Pair aux = new Pair(j, mat[j][j]);
-				auxTermes.add(aux);
+				auxTermes.add(new Pair(j, mat[j][j]));
 			}
 		}
 		Collections.sort(auxTermes, new Comparator() {
@@ -171,17 +190,19 @@ public class Consulta {
 				return new Integer(a.GetS()).compareTo(b.GetS());
 			}	
 		});
+                if (quantitat > auxTermes.size()) quantitat = auxTermes.size();
 		for(int i = 0; i < quantitat; i++) {
 			termes.add(G.getNom(auxTermes.get(i).GetF()));
-		}
-	} else if(G.getTipusNode(id).equals("Autor")) {
-		for(int j = 0; j < G.size(); j++) {
-			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Terme")) {
-				Pair aux = new Pair(j, mat[j][j]);
-				auxTermes.add(aux);
+                }
+                break;
+            
+            case "Autor":
+                for(int j = 0; j < size; j++) {
+			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
+				Articles.add(new Pair(j, mat[j][j]));
 			}
 		}
-		Collections.sort(auxTermes, new Comparator() {
+		Collections.sort(Articles, new Comparator() {
 			@Override
 			public int compare(Object o1, Object o2) {
 				Pair a = (Pair) o1;
@@ -189,39 +210,39 @@ public class Consulta {
 				return new Integer(a.GetS()).compareTo(b.GetS());
 			}
 		});
-		for(int i = 0; i < quantitat; i++) {
-			termes.add(G.getNom(auxTermes.get(i).GetF()));
-		}
-	} else if(G.getTipusNode(id).equals("Conferencia")) {
-		for(int j = 0; j < G.size(); j++) {
-			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Terme")) {
-				Pair aux = new Pair(j, mat[j][j]);
-				auxTermes.add(aux);
+                for (int i=0; i<Articles.size(); i++) {
+                    int identificador = Articles.get(i).GetF();
+                    for (int j=0; j<size; j++) {
+                        if(mat[identificador][j] >= 0 && identificador != j && G.getTipusNode(j).equals("Terme")) {
+				auxTermes.add(new Pair(j, mat[j][j]));
 			}
-		}
-		Collections.sort(auxTermes, new Comparator() {
-			@Override 
+                    }
+                }
+                Collections.sort(auxTermes, new Comparator() {
+			@Override
 			public int compare(Object o1, Object o2) {
 				Pair a = (Pair) o1;
 				Pair b = (Pair) o2;
 				return new Integer(a.GetS()).compareTo(b.GetS());
 			}
 		});
-		for(int i = 0; i < quantitat; i++) {
-			termes.add(G.getNom(auxTermes.get(i).GetF()));
-		}
-	} else if(G.getTipusNode(id).equals("Terme")) {
-		for(int j = 0; j < G.size(); j++) {
+                if (quantitat > auxTermes.size()) {
+                    for (int i= 0; i<auxTermes.size(); i++) 
+                        termes.add(G.getNom(auxTermes.get(i).GetF()));
+                }
+                else {
+                    for (int i= 0; i<quantitat; i++) 
+                        termes.add(G.getNom(auxTermes.get(i).GetF()));
+                }
+                break;
+            
+            case "Conferencia":
+		for(int j = 0; j < size; j++) {
 			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-				for(int k = 0; k = G.size(); k++) {
-					if(mat[j][k] >= && j != k && G.getTipusNode(k).equals("Terme")) {
-						Pair aux = new Pair(k, mat[k][k]);
-						auxTermes.add(aux);
-					}
-				}
+                            Articles.add(new Pair(j,mat[j][j]));
 			}
 		}
-		Collections.sort(auxTermes, new Comparator() {
+                Collections.sort(Articles, new Comparator() {
 			@Override 
 			public int compare(Object o1, Object o2) {
 				Pair a = (Pair) o1;
@@ -229,21 +250,86 @@ public class Consulta {
 				return new Integer(a.GetS()).compareTo(b.GetS());
 			}
 		});
-		for(int i = 0; i < quantitat; i++) {
-			termes.add(G.getNom(auxTermes.get(i).GetF()));
+                for (int i=0; i<Articles.size(); i++) {
+                    int identificador = Articles.get(i).GetF();
+                    for (int j=0; j<size; j++) {
+                        if (mat[identificador][j] >= 0 && identificador!=j && G.getTipusNode(j).equals("Terme")) {
+                            auxTermes.add(new Pair(j,mat[j][j]));
+                        }  
+                    }
+                }
+                Collections.sort(auxTermes, new Comparator() {
+                    @Override
+                    public int compare(Object o1, Object o2) {
+                        Pair a = (Pair)o1;
+                        Pair b = (Pair)o2;
+                        return new Integer(a.GetS()).compareTo(b.GetS());
+                    }
+                });
+                if (quantitat > auxTermes.size()) {
+                    for (int i= 0; i<auxTermes.size(); i++) 
+                        termes.add(G.getNom(auxTermes.get(i).GetF()));
+                }
+                else {
+                    for (int i= 0; i<quantitat; i++) 
+                        termes.add(G.getNom(auxTermes.get(i).GetF()));
+                }
+                Articles.clear();
+                break;
+                
+            default:
+		for(int j = 0; j < size; j++) {
+			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
+                            Articles.add(new Pair(j,mat[j][j]));
+			}
 		}
-	}
+                Collections.sort(Articles, new Comparator() {
+			@Override 
+			public int compare(Object o1, Object o2) {
+				Pair a = (Pair) o1;
+				Pair b = (Pair) o2;
+				return new Integer(a.GetS()).compareTo(b.GetS());
+			}
+		});
+                
+                for (int i=0; i<Articles.size(); i++) {
+                    int identificador = Articles.get(i).GetF();
+                    for (int j=0; j<size; ++j) {
+                        if (mat[identificador][j] >= 0 && identificador != j && j != id && G.getTipusNode(j).equals("Autor")) {
+                            auxTermes.add(new Pair(j,mat[j][j]));
+                        }  
+                    }
+                }
+                Collections.sort(auxTermes, new Comparator() {
+                    @Override
+                    public int compare(Object o1, Object o2) {
+                        Pair a = (Pair)o1;
+                        Pair b = (Pair)o2;
+                        return new Integer(a.GetS()).compareTo(b.GetS());
+                    }
+                });
+                if (quantitat > auxTermes.size()) {
+                    for (int i= 0; i<auxTermes.size(); i++) 
+                        termes.add(G.getNom(auxTermes.get(i).GetF()));
+                }
+                else {
+                    for (int i= 0; i<quantitat; i++) 
+                        termes.add(G.getNom(auxTermes.get(i).GetF()));
+                }
+                break;
+        }
+        auxTermes.clear();
+        Articles.clear();
     }
     public void obtenir_conferencies(ArrayList<String> conferencies, String nom, int quantitat, Graf_PageRank G) {
     	int id = G.getID(nom);
+        int size = G.size();
 	int[][] mat = G.getMadj();
 	ArrayList<Pair> auxConferencies = new ArrayList<>();
-
 	if(G.getTipusNode(id).equals("Article")) {
-		for(int j = 0; j < G.size(); j++) {
+		for(int j = 0; j < size; j++) {
 			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Conferencia")) {
-				Pair aux = new Pair(j, mat[j][j]);
-				auxConferencies.add(aux);
+				auxConferencies.add(new Pair(j, mat[j][j]));
 			}
 		}
 		Collections.sort(auxConferencies, new Comparator() {
@@ -254,17 +340,22 @@ public class Consulta {
 				return new Integer(a.GetS()).compareTo(b.GetS());
 			}	
 		});
-		for(int i = 0; i < quantitat; i++) {
+                if (quantitat > auxConferencies.size()) {
+                    for(int i = 0; i < auxConferencies.size(); i++) 
 			conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
 		}
-	} else if(G.getTipusNode(id).equals("Autor")) {
-		for(int j = 0; j < G.size(); j++) {
-			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Conferencia")) {
-				Pair aux = new Pair(j, mat[j][j]);
-				auxConferencies.add(aux);
+                else {
+                    for(int i = 0; i < quantitat; i++) 
+			conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
+		}
+	} else if (G.getTipusNode(id).equals("Autor")) {
+            ArrayList<Pair> Articles = new ArrayList<>();
+		for(int j = 0; j < size; j++) {
+			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
+				Articles.add(new Pair(j, mat[j][j]));
 			}
 		}
-		Collections.sort(auxConferencies, new Comparator() {
+		Collections.sort(Articles, new Comparator() {
 			@Override
 			public int compare(Object o1, Object o2) {
 				Pair a = (Pair) o1;
@@ -272,17 +363,40 @@ public class Consulta {
 				return new Integer(a.GetS()).compareTo(b.GetS());
 			}
 		});
-		for(int i = 0; i < quantitat; i++) {
+                for (int i=0; i<Articles.size(); i++) {
+                    int identificador = Articles.get(i).GetF();
+                    for(int j=0; j<size; j++) {
+                        if (mat[identificador][j] >= 0 && identificador!=j && G.getTipusNode(j).equals("Conferencia")) {
+                            auxConferencies.add(new Pair(j,mat[j][j]));
+                        }
+                    }
+                }
+                Collections.sort(auxConferencies, new Comparator() {
+			@Override
+			public int compare(Object o1, Object o2) {
+				Pair a = (Pair) o1;
+				Pair b = (Pair) o2;
+				return new Integer(a.GetS()).compareTo(b.GetS());
+			}
+		});
+                if (quantitat > auxConferencies.size()) {
+                    for(int i = 0; i < auxConferencies.size(); i++) 
 			conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
 		}
-	} else if(G.getTipusNode(id).equals("Terme")) {
-		for(int j = 0; j < G.size(); j++) {
-			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Conferencia")) {
-				Pair aux = new Pair(j, mat[j][j]);
-				auxConferencies.add(aux);
+                else {
+                    for(int i = 0; i < quantitat; i++) 
+			conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
+		}
+                Articles.clear();
+	} 
+        else if(G.getTipusNode(id).equals("Terme")) {
+            ArrayList<Pair> Articles = new ArrayList<>();
+		for(int j = 0; j < size; j++) {
+			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
+				Articles.add(new Pair(j, mat[j][j]));
 			}
 		}
-		Collections.sort(auxConferencies, new Comparator() {
+		Collections.sort(Articles, new Comparator() {
 			@Override 
 			public int compare(Object o1, Object o2) {
 				Pair a = (Pair) o1;
@@ -290,21 +404,42 @@ public class Consulta {
 				return new Integer(a.GetS()).compareTo(b.GetS());
 			}
 		});
-		for(int i = 0; i < quantitat; i++) {
+                for (int i=0; i<Articles.size(); i++) {
+                    int identificador = Articles.get(i).GetF();
+                    for(int j=0; j<size; j++) {
+                        if (mat[identificador][j] >= 0 && identificador!=j && G.getTipusNode(j).equals("Conferencia")) {
+                            auxConferencies.add(new Pair(j,mat[j][j]));
+                        }
+                    }
+                }
+                Collections.sort(auxConferencies, new Comparator() {
+			@Override
+			public int compare(Object o1, Object o2) {
+				Pair a = (Pair) o1;
+				Pair b = (Pair) o2;
+				return new Integer(a.GetS()).compareTo(b.GetS());
+			}
+		});
+                if (quantitat > auxConferencies.size()) {
+                    for(int i = 0; i < auxConferencies.size(); i++) 
 			conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
 		}
+                else {
+                    for(int i = 0; i < quantitat; i++) 
+			conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
+		}
+                Articles.clear();
 	}
+        auxConferencies.clear();
     }
     public void obtenir_articles(ArrayList<String> articles, String nom, int quantitat, Graf_PageRank G) {
 	int id = G.getID(nom);
 	int[][] mat = G.getMadj();
 	ArrayList<Pair> auxArticles = new ArrayList<>();
-
 	if(G.getTipusNode(id).equals("Conferencia")) {
 		for(int j = 0; j < G.size(); j++) {
 			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-				Pair aux = new Pair(j, mat[j][j]);
-				auxArticles.add(aux);
+				auxArticles.add(new Pair(j, mat[j][j]));
 			}
 		}
 		Collections.sort(auxArticles, new Comparator() {
@@ -315,14 +450,18 @@ public class Consulta {
 				return new Integer(a.GetS()).compareTo(b.GetS());
 			}	
 		});
-		for(int i = 0; i < quantitat; i++) {
+                if (quantitat > auxArticles.size()) {
+                    for(int i = 0; i < auxArticles.size(); i++) 
+			articles.add(G.getNom(auxArticles.get(i).GetF()));
+		}
+                else {
+                    for(int i = 0; i < quantitat; i++) 
 			articles.add(G.getNom(auxArticles.get(i).GetF()));
 		}
 	} else if(G.getTipusNode(id).equals("Autor")) {
 		for(int j = 0; j < G.size(); j++) {
 			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-				Pair aux = new Pair(j, mat[j][j]);
-				auxArticles.add(aux);
+				auxArticles.add(new Pair(j, mat[j][j]));
 			}
 		}
 		Collections.sort(auxArticles, new Comparator() {
@@ -333,14 +472,18 @@ public class Consulta {
 				return new Integer(a.GetS()).compareTo(b.GetS());
 			}
 		});
-		for(int i = 0; i < quantitat; i++) {
+                if (quantitat > auxArticles.size()) {
+                    for(int i = 0; i < auxArticles.size(); i++) 
+			articles.add(G.getNom(auxArticles.get(i).GetF()));
+		}
+                else {
+                    for(int i = 0; i < quantitat; i++) 
 			articles.add(G.getNom(auxArticles.get(i).GetF()));
 		}
 	} else if(G.getTipusNode(id).equals("Terme")) {
 		for(int j = 0; j < G.size(); j++) {
 			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-				Pair aux = new Pair(j, mat[j][j]);
-				auxArticles.add(aux);
+				auxArticles.add(new Pair(j, mat[j][j]));
 			}
 		}
 		Collections.sort(auxArticles, new Comparator() {
@@ -351,9 +494,15 @@ public class Consulta {
 				return new Integer(a.GetS()).compareTo(b.GetS());
 			}
 		});
-		for(int i = 0; i < quantitat; i++) {
+                if (quantitat > auxArticles.size()) {
+                    for(int i = 0; i < auxArticles.size(); i++) 
 			articles.add(G.getNom(auxArticles.get(i).GetF()));
 		}
-	}    	
+                else {
+                    for(int i = 0; i < quantitat; i++) 
+			articles.add(G.getNom(auxArticles.get(i).GetF()));
+		}
+	}
+        auxArticles.clear();        
     }
 }

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public class Apunts {
     
     Consulta consulta;
-    
+    /*
     public Apunts(Consulta c) {
         try {
             Consulta n = new Consulta();
@@ -29,10 +29,11 @@ public class Apunts {
     public Consulta getConsulta() {
         Consulta n = new Consulta();
         try {
-            n = (Consulta) consulta.clone();
+          //  n = (Consulta) consulta.clone();
         } catch (CloneNotSupportedException ex) {
             Logger.getLogger(Apunts.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n;
     }
+    */
 }

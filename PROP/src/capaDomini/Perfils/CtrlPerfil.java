@@ -37,8 +37,6 @@ public class CtrlPerfil {
                 System.out.println("Torna a introduir el tipus:");
             }
             marca = sc.nextInt();
-            int num;
-            String entitat = "";
             PerfilAutor p_autor = new PerfilAutor();
             PerfilConf p_conf = new PerfilConf();
             PerfilTerme p_terme = new PerfilTerme();
@@ -46,7 +44,7 @@ public class CtrlPerfil {
             switch(marca) {
                 case 1:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    entitat = bf.readLine();
+                    p_autor.set_name(bf.readLine());
                     System.out.println("Introdueix la quantitat de conferencies:");
                     p_autor.set_quantitat_conf(sc.nextInt());
                     System.out.println("Introdueix la quantitat de termes:");
@@ -54,50 +52,41 @@ public class CtrlPerfil {
                     System.out.println("Introdueix la quantitat d'articles:");
                     p_autor.set_quantitat_articles(sc.nextInt());
                     System.out.println("Introdueix la quantitat de co-autors:");
-                    p_autor.set_quatitat_autors(sc.nextInt());
-                    p_autor.creacio_perfil(marca,entitat,G);
+                    p_autor.set_quantitat_autors(sc.nextInt());
+                    p_autor.crear_perfil_autor(G);
                     break;
                 case 2: 
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    entitat = bf.readLine();
+                    p_conf.set_name(bf.readLine());
                     System.out.println("Introdueix la quantitat d'autors:");
-                    num = sc.nextInt();
-                    p_conf.quantitat_autors = num;
+                    p_conf.set_quantitat_autors(sc.nextInt());
                     System.out.println("Introdueix la quantitat de termes:");
-                    num = sc.nextInt();
-                    p_conf.quantitat_termes = num;
+                    p_conf.set_quantitat_termes(sc.nextInt());
                     System.out.println("Introdueix la quantitat d'articles:");
-                    num = sc.nextInt();
-                    p_conf.quantitat_articles = num;
-                    p_conf.creacio_perfil(marca,entitat,G);
+                    p_conf.set_quantitat_articles(sc.nextInt());
+                    p_conf.crear_perfil_conf(G);
                     break;
                 case 3:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    entitat = bf.readLine();
+                    p_article.set_name(bf.readLine());
                     System.out.println("Introdueix la quantitat de conferencies:");
-                    num = sc.nextInt();
-                    p_article.quantitat_conf = num;
+                    p_article.set_quantitat_conf(sc.nextInt());
                     System.out.println("Introdueix la quantitat d'autors:");
-                    num = sc.nextInt();
-                    p_article.quantitat_autors = num;
+                    p_article.set_quantitat_autors(sc.nextInt());
                     System.out.println("Introdueix la quantitat de termes:");
-                    num = sc.nextInt();
-                    p_article.quantitat_termes = num;
-                    p_article.creacio_perfil(marca,entitat,G);
+                    p_article.set_quantitat_termes(sc.nextInt());
+                    p_article.crear_perfil_article(G);
                     break;
                 case 4:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    entitat = bf.readLine();
+                    p_terme.set_name(bf.readLine());
                     System.out.println("Introdueix la quantitat de conferencies:");
-                    num = sc.nextInt();
-                    p_terme.quantitat_conf = num;
+                    p_terme.set_quantitat_conf(sc.nextInt());
                     System.out.println("Introdueix la quantitat de articles:");
-                    num = sc.nextInt();
-                    p_terme.quantitat_articles = num;
+                    p_terme.set_quantitat_articles(sc.nextInt());
                     System.out.println("Introdueix la quantitat d'autors:");
-                    num = sc.nextInt();
-                    p_terme.quantitat_autors = num;
-                    p_terme.creacio_perfil(marca,entitat,G);
+                    p_terme.set_quantitat_autors(sc.nextInt());
+                    p_terme.crear_perfil_terme(G);
                     break;
                 case 5:
                     bool = true;

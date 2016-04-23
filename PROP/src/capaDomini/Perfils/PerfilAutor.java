@@ -47,15 +47,15 @@ public class PerfilAutor extends Perfil {
     public void set_quantitat_articles(int q_articles) {
         quantitat_articles = q_articles;
     }
-    public void set_quatitat_autors(int q_coautors) {
+    public void set_quantitat_autors(int q_coautors) {
         quantitat_coautors = q_coautors;
     }
     
     public void crear_perfil_autor(Graf_PageRank G) {
         Consulta cs = new Consulta();
-        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
-        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
-        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
+        cs.obtenir_articles(articles,nom,quantitat_articles,G);
+        cs.obtenir_termes(termes,nom,quantitat_termes,G);
+        cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
         cs.obtenir_autors(co_autors,nom,quantitat_coautors,G);
         System.out.println(nom);
         System.out.println("");

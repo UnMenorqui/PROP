@@ -10,6 +10,7 @@ import capaDomini.Usuaris.CtrlNormal;
 import capaDomini.Usuaris.CtrlUsuaris;
 import capaDomini.Usuaris.CtrlAdministrador;
 import capaDomini.Graf.Graf_PageRank;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Scanner;
 public class Main {
     
     
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         
         Graf_PageRank gf = new Graf_PageRank();
         

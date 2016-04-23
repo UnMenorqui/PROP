@@ -8,7 +8,6 @@ package capaDomini.Perfils;
 
 import capaDomini.consulta.Consulta;
 import capaDomini.Graf.Graf_PageRank;
-import static capaDomini.Perfils.Perfil.nom;
 import java.util.ArrayList;
 
 /**
@@ -25,34 +24,34 @@ public class PerfilConf extends Perfil {
     static int quantitat_articles;
     
     
-    public static int get_quantitat_termes() {
+    public int get_quantitat_termes() {
         return quantitat_termes;
     }
     
-    public static void set_quantitat_termes(int q_terme) {
+    public void set_quantitat_termes(int q_terme) {
         quantitat_termes = q_terme;
     }
     
-    public static int get_quantitat_articles() {
+    public int get_quantitat_articles() {
         return quantitat_articles;
     }
-    public static void set_quantitat_articles(int q_articles) {
+    public void set_quantitat_articles(int q_articles) {
         quantitat_articles = q_articles;
     }
     
-    public static int get_quantitat_autors() {
+    public int get_quantitat_autors() {
         return quantitat_autors;
     }
-    public static void set_quantitat_autors(int q_autor) {
+    public void set_quantitat_autors(int q_autor) {
         quantitat_autors = q_autor;
     }
     
     
-    public static void crear_perfil_conf(Graf_PageRank G) {
+    public void crear_perfil_conf(Graf_PageRank G) {
         Consulta cs = new Consulta();
-        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
+        cs.obtenir_articles(articles,nom,quantitat_articles,G);
         cs.obtenir_autors(autors,nom,quantitat_autors,G);
-        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
+        cs.obtenir_termes(termes,nom,quantitat_termes,G);
         System.out.println(nom);
         System.out.println("");
         System.out.println("Autors més rellevants d'aquesta conferencia:");
