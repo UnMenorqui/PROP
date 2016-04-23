@@ -44,19 +44,21 @@ public class Main {
         System.out.println("Si vol sortir de l'aplicació, marqui 5.");
         
         Scanner sc = new Scanner(System.in);
-        int id = sc.nextInt();
+        
         boolean bool = false;
-        boolean primer = true;
+        boolean primer = false;
         
         while(!bool) {
-                if(!primer) {
+                if(primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
                     System.out.println("Torna a entrar la operació a fer:");
                 } else primer = false;
-            switch(id) {
+                int id = sc.nextInt();
+                switch(id) {
+                
                 case 1:
-                    CtrlConvidat uc = null;
+                    CtrlConvidat uc = new CtrlConvidat();
                     uc.main();
                     break;
                 case 2:
