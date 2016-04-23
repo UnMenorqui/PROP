@@ -5,12 +5,14 @@
  */
 package capaPersistencia;
 
-import capaDomini.Apunts;
+import capaDomini.consulta.Apunts;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -33,16 +35,24 @@ public class DadesHistorial {
 	}
     }
     
+    private static Object fromJson(String jsonString, Type type) {
+        return new Gson().fromJson(jsonString, type);
+    }
+
+    
     public static ArrayList<Apunts> getHistorial() {
         Gson gson = new Gson();
-
+        
 	try {
 
 		BufferedReader br = new BufferedReader(
 		new FileReader(path));
 
 		//convert the json string back to object
-		ArrayList<Apunts> LlistaConsultes = gson.fromJson(br, ArrayList.class);
+                String jsonString = br.readLine();
+		ArrayList<Apunts> LlistaConsultes = (ArrayList<Apunts>) fromJson(jsonString,
+                    new TypeToken<ArrayList<Apunts>>() {
+                    }.getType());
 
                 return LlistaConsultes;
 

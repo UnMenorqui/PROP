@@ -5,7 +5,7 @@
  */
 package capaPersistencia;
 
-import capaDomini.Apunts;
+import capaDomini.consulta.Apunts;
 import java.util.ArrayList;
 
 /**
