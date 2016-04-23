@@ -4,6 +4,7 @@ package capaDomini.Usuaris;
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.CtrlPerfil;
 import capaDomini.consulta.Historial;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Scanner;
 
 public class CtrlAdministrador {
  
-    public void main () {
+    public void main (Graf_PageRank G) throws IOException {
         CtrlAdministrador us = new CtrlAdministrador();
         try (Scanner sc = new Scanner(System.in)) {
             Boolean bool = false;
@@ -28,9 +29,9 @@ public class CtrlAdministrador {
             System.out.println("Si vols borrar un usuari marca 3.");
             //ja esta a Administrador
             
-            System.out.println("Si vols acabar marca 4.");
+            System.out.println("Si vols fer una consulta marca 4.");
             
-            System.out.println("Si vols fer una consulta marca 5.");
+            System.out.println("Si vols consultar l'historial de consultes marca 5.");
             
             System.out.println("Si vols consultar l'historial de consultes marca 6.");
             
@@ -75,20 +76,31 @@ public class CtrlAdministrador {
                             System.out.println("Usuari i/o contrasenya incorrecte");
                         }
                         break;
-                    case 4:
-                        bool = true;
-                        break;
                         
-                    case 5:
+                    case 4:
                         CtrlPerfil ctrls = new CtrlPerfil();
                         ctrls.main(G);
                         break;
+                    case 5:
+<<<<<<< HEAD
+                        CtrlPerfil ctrls = new CtrlPerfil();
+                        ctrls.main(G);
+=======
+                        Historial hist = new Historial();
+                        //Crida a escriure historial
+>>>>>>> aaaaaaaaaaa
+                        break;
+                        
                     case 6:
+<<<<<<< HEAD
                         Historial hist = new Historial();
                         //Crida a escriure historial
                         break;
                         
                     case 7:
+=======
+                        bool = true;
+>>>>>>> aaaaaaaaaaa
                         break;
                 }
             }

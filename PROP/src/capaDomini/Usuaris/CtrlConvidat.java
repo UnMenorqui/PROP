@@ -7,6 +7,7 @@ package capaDomini.Usuaris;
 
 import capaDomini.Perfils.CtrlPerfil;
 import capaDomini.Graf.Graf_PageRank;
+import java.io.IOException;
 
 /**
  *
@@ -14,7 +15,7 @@ import capaDomini.Graf.Graf_PageRank;
  */
 
 public class CtrlConvidat {
-    public void main(Graf_PageRank G) {
+    public void main(Graf_PageRank G) throws IOException {
         CtrlPerfil ctrl = new CtrlPerfil();
         ctrl.main(G);
     }
