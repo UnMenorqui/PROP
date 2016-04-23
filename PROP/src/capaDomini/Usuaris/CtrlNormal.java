@@ -7,6 +7,7 @@ package capaDomini.Usuaris;
 
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.CtrlPerfil;
+import capaDomini.consulta.Historial;
 import java.util.Scanner;
 
 /**
@@ -34,7 +35,8 @@ public class CtrlNormal {
             System.out.println("Si vols modificar el nom de l'usuari marca 3.");
             System.out.println("Si vols modificar la contrasenya marca 4.");
             System.out.println("Si vols fer una consulta marca 5.");
-            System.out.println("Si vols acabar marca 6.");
+            System.out.println("Si vols consultar l'historial de consultes marca 6.");
+            System.out.println("Si vols acabar marca 7.");
                 if(!primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
@@ -59,6 +61,10 @@ public class CtrlNormal {
                         ctrl.main(G);
                         break;
                     case 6:
+                        Historial hist = new Historial();
+                        hist.consultar();
+                        break;
+                    case 7:
                         break;
                 }
             }

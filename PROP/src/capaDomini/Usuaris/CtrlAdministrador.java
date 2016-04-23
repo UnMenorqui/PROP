@@ -3,6 +3,7 @@ package capaDomini.Usuaris;
 
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.CtrlPerfil;
+import capaDomini.consulta.Historial;
 import java.util.Scanner;
 
 /**
@@ -31,7 +32,9 @@ public class CtrlAdministrador {
             
             System.out.println("Si vols fer una consulta marca 5.");
             
-            System.out.println("Si vols acabar marca 6.");
+            System.out.println("Si vols consultar l'historial de consultes marca 6.");
+            
+            System.out.println("Si vols acabar marca 7.");
             
             String user;
             String pass = null;
@@ -81,6 +84,11 @@ public class CtrlAdministrador {
                         ctrls.main(G);
                         break;
                     case 6:
+                        Historial hist = new Historial();
+                        //Crida a escriure historial
+                        break;
+                        
+                    case 7:
                         break;
                 }
             }
