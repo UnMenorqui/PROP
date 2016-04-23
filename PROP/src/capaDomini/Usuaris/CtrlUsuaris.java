@@ -4,6 +4,7 @@ import capaDomini.Graf.CtrlGraf;
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.consulta.Apunts;
 import capaDomini.consulta.CtrlHistorial;
+import capaDomini.consulta.DriverHistorial;
 import capaPersistencia.CtrlDadesUsuari;
 
 /**
@@ -80,12 +81,9 @@ public class CtrlUsuaris {
             return du.consultar_password(username);
     }
     
-    public void afegirCerca(Apunts cerca) {
-        hist.afegirCerca(cerca);
-    }
-    
     public void consultar(Graf_PageRank G) {
-        hist.consultar(G);
+        DriverHistorial dr = new DriverHistorial();
+        dr.main();
     }
 
     public void esborrar(int n) {

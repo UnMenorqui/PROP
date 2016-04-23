@@ -8,7 +8,9 @@ package capaDomini.Perfils;
 
 import capaDomini.consulta.Consulta;
 import capaDomini.Graf.Graf_PageRank;
+import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -47,7 +49,7 @@ public class PerfilConf extends Perfil {
     }
     
     
-    public void crear_perfil_conf(Graf_PageRank G) {
+    public void crear_perfil_conf(Graf_PageRank G, boolean usuaris) {
         Consulta cs = new Consulta();
         cs.obtenir_articles(articles,nom,quantitat_articles,G);
         cs.obtenir_autors(autors,nom,quantitat_autors,G);
@@ -79,6 +81,19 @@ public class PerfilConf extends Perfil {
         }
         if (quantitat_termes > termes.size()) {
             System.out.println("No hi ha tants termes per la quantitat desitjada");
+        }
+        if (usuaris) {
+            System.out.println("Vols Guardar la Consulta?(S/N)");
+            Scanner sc = new Scanner(System.in); 
+            String sino = sc.next();
+            switch(sino) {
+                case "S":
+                    CtrlHistorial hist = new CtrlHistorial();
+                    hist.afegirCerca(nom,G.getID(nom),G.getTipusNode(G.getID(nom)));
+                    
+                    
+            }
+            
         }
         termes.clear();
         articles.clear();

@@ -52,7 +52,7 @@ public class DriverNormal {
                     usr.modifica_pass();
                     break;
                 case 5:
-                    ctrl.main(G);
+                    ctrl.main(G,true);
                     break;
                 case 6:
                     ctrlusuaris.consultar(G);

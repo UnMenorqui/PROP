@@ -13,7 +13,6 @@ import java.util.Scanner;
 public class DriverAdministrador {
  
     public void main (Graf_PageRank G) {
-        DriverAdministrador us = new DriverAdministrador();
             Boolean bool = false;
             Boolean primer = true;
             CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
@@ -85,7 +84,7 @@ public class DriverAdministrador {
                         
                     case 4:
                         DriverPerfil ctrls = new DriverPerfil();
-                        ctrls.main(G);
+                        ctrls.main(G,true);
                         break;
                     
                     case 5:

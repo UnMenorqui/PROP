@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,7 +9,9 @@ package capaDomini.Perfils;
 
 import capaDomini.consulta.Consulta;
 import capaDomini.Graf.Graf_PageRank;
+import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -46,7 +49,7 @@ public class PerfilTerme extends Perfil {
         quantitat_autors = q_autor;
     }
     
-    public void crear_perfil_terme(Graf_PageRank G) {
+    public void crear_perfil_terme(Graf_PageRank G, boolean usuari) {
         Consulta cs = new Consulta();
         cs.obtenir_articles(articles,nom,quantitat_articles,G);
         cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
@@ -78,6 +81,19 @@ public class PerfilTerme extends Perfil {
         }
         if (quantitat_autors > autors.size()) {
             System.out.println("No hi ha tants autors per la quantitat desitjada");
+        }
+        if (usuari) {
+            System.out.println("Vols Guardar la Consulta?(S/N)");
+            Scanner sc = new Scanner(System.in); 
+            String sino = sc.next();
+            switch(sino) {
+                case "S":
+                    CtrlHistorial hist = new CtrlHistorial();
+                    hist.afegirCerca(nom,G.getID(nom),G.getTipusNode(G.getID(nom)));
+                    
+                    
+            }
+            
         }
         articles.clear();
         conferencies.clear();

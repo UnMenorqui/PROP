@@ -5,7 +5,7 @@
  */
 package capaDomini.consulta;
 
-import capaDomini.Graf.Graf_PageRank;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,12 +14,13 @@ import capaDomini.Graf.Graf_PageRank;
 public class CtrlHistorial {
     private Historial hist = new Historial();
     
-    public void afegirCerca(Apunts cerca) {
+    public void afegirCerca(String nom, int id, String tipus) {
+        Apunts cerca = new Apunts(nom,id,tipus);
         hist.afegirCerca(cerca);
     }
     
-    public void consultar(Graf_PageRank G) {
-        hist.consultar(G);
+    public ArrayList<Apunts> getList() {
+        return hist.getList();
     }
 
     public void esborrar(int n) {
