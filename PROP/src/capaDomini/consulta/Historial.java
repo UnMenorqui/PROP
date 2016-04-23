@@ -22,25 +22,31 @@ public class Historial {
     public Historial() {
         loadHistorial();
     }
+    
+    public int size() {
+        return LlistaConsultes.size();
+    }
 
     public void afegirCerca(Apunts cerca) {
         LlistaConsultes.add(cerca);
         saveHistorial();
     }
-
+    
     public void consultar(Graf_PageRank G) {
 	Scanner sc = new Scanner(System.in);
         System.out.println("HISTORIAL");
 	for(int i = LlistaConsultes.size()-1; i >= 0; i--) {
 		System.out.print(LlistaConsultes.size()-i);
-		System.out.println(". " + LlistaConsultes.get(i).getNom());
+		System.out.print(". ");
+                Apunts aux = LlistaConsultes.get(i);
+                System.out.println(aux.getNom());
 	}
 	System.out.print("\n");
 	System.out.println("Selecciona un número de cerca o -1 per sortir");
         int n = sc.nextInt();
 	while(n != -1) {
             Perfil p = new Perfil();
-            Apunts a = LlistaConsultes.get(LlistaConsultes.size()-n);
+            Apunts a = LlistaConsultes.get(n-1);
             int marca = 4;
             switch(a.getTipus()) {
                     case "Autor": marca = 1; break;
@@ -61,6 +67,10 @@ public class Historial {
     
     private void loadHistorial() {
         LlistaConsultes = capaPersistencia.CtrlDadesHistorial.getHistorial();
+        if(LlistaConsultes == null) {
+            LlistaConsultes = new ArrayList<>();
+            saveHistorial();
+        }
     }
     
     private void saveHistorial() {
