@@ -17,14 +17,12 @@ import java.util.Scanner;
  */
 public class DriverPerfil {
     
-    public void main (Graf_PageRank G) throws IOException {
-        Perfil perfil = new Perfil();
+    public void main () throws IOException {
         System.out.println("Per a la creació d'un perfil, determina el tipus:");
         System.out.println("Marca 1 si vols un perfil d'autor");
         System.out.println("Marca 2 si vols un perfil d'una conferencia");
         System.out.println("Marca 3 si vols un perfil d'un article");
-        System.out.println("Marca 4 si vols un perfil d'un terme");
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in)); 
+        System.out.println("Marca 4 si vols un perfil d'un terme"); 
         Scanner sc = new Scanner(System.in);
         int marca;
         boolean bool = false;
@@ -37,63 +35,67 @@ public class DriverPerfil {
                 System.out.println("Torna a introduir el tipus:");
             }
             marca = sc.nextInt();
-            PerfilAutor p_autor = new PerfilAutor();
-            PerfilConf p_conf = new PerfilConf();
-            PerfilTerme p_terme = new PerfilTerme();
-            PerfilArticle p_article = new PerfilArticle();
+            String nom = "";
+            int q_articles = 0;
+            int q_termes = 0;
+            int q_conferencies = 0;
+            int q_autors = 0;
             switch(marca) {
                 case 1:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    p_autor.set_name(bf.readLine());
+                    sc.nextLine();
+                    nom = sc.nextLine();
                     System.out.println("Introdueix la quantitat de conferencies:");
-                    p_autor.set_quantitat_conf(sc.nextInt());
+                    q_conferencies = sc.nextInt();
                     System.out.println("Introdueix la quantitat de termes:");
-                    p_autor.set_quantitat_termes(sc.nextInt());
+                    q_termes = sc.nextInt();
                     System.out.println("Introdueix la quantitat d'articles:");
-                    p_autor.set_quantitat_articles(sc.nextInt());
+                    q_articles = sc.nextInt();
                     System.out.println("Introdueix la quantitat de co-autors:");
-                    p_autor.set_quantitat_autors(sc.nextInt());
-                    p_autor.crear_perfil_autor(G);
+                    q_autors = sc.nextInt();
+                    //Passar a controlador
                     break;
                 case 2: 
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    p_conf.set_name(bf.readLine());
+                    sc.nextLine();
+                    nom = sc.nextLine();
                     System.out.println("Introdueix la quantitat d'autors:");
-                    p_conf.set_quantitat_autors(sc.nextInt());
+                    q_autors = sc.nextInt();
                     System.out.println("Introdueix la quantitat de termes:");
-                    p_conf.set_quantitat_termes(sc.nextInt());
+                    q_termes = sc.nextInt();
                     System.out.println("Introdueix la quantitat d'articles:");
-                    p_conf.set_quantitat_articles(sc.nextInt());
-                    p_conf.crear_perfil_conf(G);
+                    q_articles = sc.nextInt();
+                    //Passar a controlador
                     break;
                 case 3:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    p_article.set_name(bf.readLine());
+                    sc.nextLine();
+                    nom = sc.nextLine();
                     System.out.println("Introdueix la quantitat de conferencies:");
-                    p_article.set_quantitat_conf(sc.nextInt());
+                    q_conferencies = sc.nextInt();
                     System.out.println("Introdueix la quantitat d'autors:");
-                    p_article.set_quantitat_autors(sc.nextInt());
+                    q_autors = sc.nextInt();
                     System.out.println("Introdueix la quantitat de termes:");
-                    p_article.set_quantitat_termes(sc.nextInt());
-                    p_article.crear_perfil_article(G);
+                    q_termes = sc.nextInt();
+                    //Passar a controlador
                     break;
                 case 4:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    p_terme.set_name(bf.readLine());
+                    sc.nextLine();
+                    nom = sc.nextLine();
                     System.out.println("Introdueix la quantitat de conferencies:");
-                    p_terme.set_quantitat_conf(sc.nextInt());
+                    q_conferencies = sc.nextInt();
                     System.out.println("Introdueix la quantitat de articles:");
-                    p_terme.set_quantitat_articles(sc.nextInt());
+                    q_articles = sc.nextInt();
                     System.out.println("Introdueix la quantitat d'autors:");
-                    p_terme.set_quantitat_autors(sc.nextInt());
-                    p_terme.crear_perfil_terme(G);
+                    q_autors = sc.nextInt();
+                    //Passar a controlador
                     break;
                 case 5:
                     bool = true;
                     break;
             } 
         }
-        bf.close();
         sc.close();
     }
 }
