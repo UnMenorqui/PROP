@@ -4,7 +4,6 @@ package capaDomini.Usuaris;
 import capaDomini.Graf.CtrlGraf;
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.DriverPerfil;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -13,15 +12,21 @@ import java.util.Scanner;
 
 public class DriverAdministrador {
  
-    public void main (Graf_PageRank G) throws IOException {
+    public void main (Graf_PageRank G) {
         DriverAdministrador us = new DriverAdministrador();
-        try (Scanner sc = new Scanner(System.in)) {
             Boolean bool = false;
             Boolean primer = true;
             CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
             CtrlGraf CG = new CtrlGraf();
             System.out.println("Tria una opció:");
-            System.out.println("Si vols consultar tots els usuaris de la BD marca 1.");
+            Scanner sc = new Scanner(System.in);
+            
+            String user;
+            String pass = null;
+            String nom,tipus,node1,node2;
+            CtrlUsuaris ctrl = new CtrlUsuaris();
+            while(!bool) {
+                System.out.println("Si vols consultar tots els usuaris de la BD marca 1.");
             //ja esta a Administrador
             
             System.out.println("Si vols modificar el nom d'un usuari marca 2.");
@@ -43,12 +48,6 @@ public class DriverAdministrador {
             System.out.println("Si vols consultar l'historial de consultes marca 9.");
             
             System.out.println("Si vols acabar marca 10.");
-            
-            String user;
-            String pass = null;
-            String nom,tipus,node1,node2;
-            CtrlUsuaris ctrl = new CtrlUsuaris();
-            while(!bool) {
                 if(!primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
@@ -122,6 +121,5 @@ public class DriverAdministrador {
                 }
             }
         }
-        System.out.println(); 
+        //System.out.println(); 
     }   
-}

@@ -17,6 +17,7 @@ import java.util.Scanner;
  */
 public class DriverPerfil {
     
+<<<<<<< Updated upstream
     public void main (Graf_PageRank G) throws IOException {
         System.out.println("Per a la creació d'un perfil, determina el tipus:");
         System.out.println("Marca 1 si vols un perfil d'autor");
@@ -25,12 +26,22 @@ public class DriverPerfil {
         System.out.println("Marca 4 si vols un perfil d'un terme"); 
         System.out.println("Marca 5 si vols un perfil general"); 
         System.out.println("Marca 6 si vols surtir de la consulta");
+=======
+    public void main (Graf_PageRank G) {
+        
+>>>>>>> Stashed changes
         Scanner sc = new Scanner(System.in);
         CtrlPerfils ctrl = new CtrlPerfils();
         int marca;
         boolean bool = false;
         boolean primer = false;
         while (!bool) {
+            System.out.println("Per a la creació d'un perfil, determina el tipus:");
+            System.out.println("Marca 1 si vols un perfil d'autor");
+            System.out.println("Marca 2 si vols un perfil d'una conferencia");
+            System.out.println("Marca 3 si vols un perfil d'un article");
+            System.out.println("Marca 4 si vols un perfil d'un terme"); 
+            System.out.println("Marca 5 si vols surtir de la consulta");
             if (!primer) {
                 primer = true;
             }
@@ -149,6 +160,7 @@ public class DriverPerfil {
                     break;
             }
         }
-        sc.close();
+        //sc.close();
+        
     }
 }

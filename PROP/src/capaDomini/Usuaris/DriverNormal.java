@@ -31,36 +31,38 @@ public class DriverNormal {
             System.out.println("Si vols fer una consulta marca 5.");
             System.out.println("Si vols consultar l'historial de consultes marca 6.");
             System.out.println("Si vols acabar marca 7.");
-                if(!primer) {
-                    System.out.println("Operació realitzada.");
-                    System.out.println("---------------------");
-                    System.out.println("Torna a entrar la operació a fer:");
-                } 
-                else primer = false;
-                int prova = sc.nextInt();
-                switch(prova) {
-                    case 1:
-                        ctrlusuaris.consultar_username();
-                        break;
-                    case 2:
-                        usr.consultar_password();
-                        break;
-                    case 3:
-                        usr.modifica_user();
-                        break;
-                    case 4:
-                        usr.modifica_pass();
-                        break;
-                    case 5:
-                        ctrl.main(G);
-                        break;
-                    case 6:
-                        ctrlusuaris.consultar(G);
-                        break;
-                    case 7:
-                        bool = true;
-                        break;
-                }
+            if(!primer) {
+                System.out.println("Operació realitzada.");
+                System.out.println("---------------------");
+                System.out.println("Torna a entrar la operació a fer:");
+            } 
+            else primer = false;
+            int prova = sc.nextInt();
+            switch(prova) {
+                case 1:
+                    ctrlusuaris.consultar_username();
+                    break;
+                case 2:
+                    usr.consultar_password();
+                    break;
+                case 3:
+                    usr.modifica_user();
+                    break;
+                case 4:
+                    usr.modifica_pass();
+                    break;
+                case 5:
+                    ctrl.main(G);
+                    break;
+                case 6:
+                    ctrlusuaris.consultar(G);
+                    break;
+                case 7:
+                    bool = true;
+                    break;
             }
+        }
+        //sc.close();
+        
     }
 }

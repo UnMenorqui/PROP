@@ -37,28 +37,28 @@ public class Main {
         System.out.println();
         System.out.println();
         
-        System.out.println("Si vol entrar com a convidat, marqui 1.");
         
-        System.out.println("Si ja disposa d'un compte, marqui 2.");
-        
-        System.out.println("Si és un administrador, marqui 3.");
-        
-        System.out.println("Si vol registrar-se, marqui 4.");
-        
-        System.out.println("Si vol sortir de l'aplicació, marqui 5.");
         
         Scanner sc = new Scanner(System.in);
         
         boolean bool = false;
         boolean primer = false;
         while(!bool) {
+            System.out.println("Si vol entrar com a convidat, marqui 1.");
+        
+            System.out.println("Si ja disposa d'un compte, marqui 2.");
+        
+            System.out.println("Si és un administrador, marqui 3.");
+        
+            System.out.println("Si vol registrar-se, marqui 4.");
+        
+            System.out.println("Si vol sortir de l'aplicació, marqui 5.");
                 if(primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
                     System.out.println("Torna a entrar la operació a fer:");
                 } else primer = true;
-                int id = 5;
-                if (sc.hasNext()) id = sc.nextInt();
+                int id = sc.nextInt();
                 switch(id) {
                 case 1:
                     DriverConvidat uc = new DriverConvidat();
