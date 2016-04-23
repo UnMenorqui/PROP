@@ -62,25 +62,34 @@ public class PerfilAutor extends Perfil {
         System.out.println("Conferencies més rellevants d'aquest autor:");
         for (int i = 0; i < conferencies.size(); ++i) {
             String aux = conferencies.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_conf > conferencies.size()) {
+            System.out.println("No hi ha tantes conferencies per la quantitat desitjada");
         }
         System.out.println("");
         System.out.println("Articles més rellevants d'aquest autor:");
         for (int i = 0; i < articles.size(); ++i) {
             String aux = articles.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_articles > articles.size()) {
+            System.out.println("No hi ha tants articles per la quantitat desitjada");
         }
         System.out.println("");
         System.out.println("Termes més rellevants d'aquest autor:");
         for (int i = 0; i < termes.size(); ++i) {
             String aux = termes.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
         }
         System.out.println("");
         System.out.println("Co-Autors més rellevants d'aquest autor:");
         for (int i = 0; i < co_autors.size(); ++i) {
             String aux = co_autors.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_coautors > co_autors.size()) {
+            System.out.println("No hi ha tants co-autors per la quantitat desitjada");
         }
         termes.clear();
         conferencies.clear();

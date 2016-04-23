@@ -5,13 +5,11 @@
  */
 package capaDomini.Perfils;
 
-import capaDomini.Graf.Graf_PageRank;
-import java.util.Scanner;
-
 /**
  *
  * @author marc_
  */
+
 public class Perfil {
     
     protected String nom; // nom de l'entitat (article,autor,conferencia,terme)

@@ -57,19 +57,30 @@ public class PerfilArticle extends Perfil {
         System.out.println("Conferencies més rellevants d'aquest article:");
         for (int i = 0; i < conferencies.size(); ++i) {
             String aux = conferencies.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_conf > conferencies.size()) {
+            System.out.println();
+            System.out.println("No hi ha tantes conferencies per la quantitat desitjada");
+            System.out.println();
         }
         System.out.println("");
         System.out.println("Autors més rellevants d'aquest article:");
         for (int i = 0; i < autors.size(); ++i) {
             String aux = autors.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_autors > autors.size()) {
+            System.out.println("No hi ha tants autors per la quantitat desitjada");
         }
         System.out.println("");
         System.out.println("Termes més rellevants d'aquest article:");
         for (int i = 0; i < termes.size(); ++i) {
             String aux = termes.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_termes > termes.size()) {
+            System.out.println("No hi ha tants termes per la quantitat desitjada");
         }
         autors.clear();
         conferencies.clear();
