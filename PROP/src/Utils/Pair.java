@@ -46,10 +46,6 @@ public class Pair implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        Pair p2 = (Pair)o;
-        if (this.first == p2.first) return 0;
-        else return this.first < p2.first ? 1 : -1;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
 }

@@ -18,13 +18,11 @@ import java.util.Scanner;
 public class CtrlPerfil {
     
     public void main (Graf_PageRank G) throws IOException {
-        Perfil perfil = new Perfil();
         System.out.println("Per a la creació d'un perfil, determina el tipus:");
         System.out.println("Marca 1 si vols un perfil d'autor");
         System.out.println("Marca 2 si vols un perfil d'una conferencia");
         System.out.println("Marca 3 si vols un perfil d'un article");
-        System.out.println("Marca 4 si vols un perfil d'un terme");
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in)); 
+        System.out.println("Marca 4 si vols un perfil d'un terme"); 
         Scanner sc = new Scanner(System.in);
         int marca;
         boolean bool = false;
@@ -44,7 +42,8 @@ public class CtrlPerfil {
             switch(marca) {
                 case 1:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    p_autor.set_name(bf.readLine());
+                    sc.nextLine();
+                    p_autor.set_name(sc.nextLine());
                     System.out.println("Introdueix la quantitat de conferencies:");
                     p_autor.set_quantitat_conf(sc.nextInt());
                     System.out.println("Introdueix la quantitat de termes:");
@@ -57,7 +56,8 @@ public class CtrlPerfil {
                     break;
                 case 2: 
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    p_conf.set_name(bf.readLine());
+                    sc.nextLine();
+                    p_conf.set_name(sc.nextLine());
                     System.out.println("Introdueix la quantitat d'autors:");
                     p_conf.set_quantitat_autors(sc.nextInt());
                     System.out.println("Introdueix la quantitat de termes:");
@@ -68,7 +68,8 @@ public class CtrlPerfil {
                     break;
                 case 3:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    p_article.set_name(bf.readLine());
+                    sc.nextLine();
+                    p_article.set_name(sc.nextLine());
                     System.out.println("Introdueix la quantitat de conferencies:");
                     p_article.set_quantitat_conf(sc.nextInt());
                     System.out.println("Introdueix la quantitat d'autors:");
@@ -79,7 +80,8 @@ public class CtrlPerfil {
                     break;
                 case 4:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
-                    p_terme.set_name(bf.readLine());
+                    sc.nextLine();
+                    p_terme.set_name(sc.nextLine());
                     System.out.println("Introdueix la quantitat de conferencies:");
                     p_terme.set_quantitat_conf(sc.nextInt());
                     System.out.println("Introdueix la quantitat de articles:");
@@ -93,7 +95,6 @@ public class CtrlPerfil {
                     break;
             } 
         }
-        bf.close();
         sc.close();
     }
 }

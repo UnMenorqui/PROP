@@ -52,6 +52,8 @@ public class PerfilArticle extends Perfil {
         cs.obtenir_autors(autors,nom,quantitat_autors,G);
         cs.obtenir_termes(termes,nom,quantitat_termes,G);
         cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
+        System.out.println();
+        System.out.println();
         System.out.println(nom);
         System.out.println();
         System.out.println("Conferencies més rellevants d'aquest article:");

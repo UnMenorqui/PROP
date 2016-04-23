@@ -58,6 +58,14 @@ public class DriverGraf {
         return id;
     }
     
+    public void eliminarNode(String nomNode) {
+        int id = getID(nomNode);
+        for(int i = 0; i < size(); ++i) {
+            matriu[id][i] = -1;
+            matriu[i][id] = -1;
+        }
+    }
+    
     public int getID(String nom) {
         int id;
         switch(nom) {

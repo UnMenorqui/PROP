@@ -279,47 +279,6 @@ public class Consulta {
                 }
                 Articles.clear();
                 break;
-                
-            default:
-		for(int j = 0; j < size; j++) {
-			if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                            Articles.add(new Pair(j,mat[j][j]));
-			}
-		}
-                Collections.sort(Articles, new Comparator() {
-			@Override 
-			public int compare(Object o1, Object o2) {
-				Pair a = (Pair) o1;
-				Pair b = (Pair) o2;
-				return new Integer(a.GetS()).compareTo(b.GetS());
-			}
-		});
-                
-                for (int i=0; i<Articles.size(); i++) {
-                    int identificador = Articles.get(i).GetF();
-                    for (int j=0; j<size; ++j) {
-                        if (mat[identificador][j] >= 0 && identificador != j && j != id && G.getTipusNode(j).equals("Autor")) {
-                            auxTermes.add(new Pair(j,mat[j][j]));
-                        }  
-                    }
-                }
-                Collections.sort(auxTermes, new Comparator() {
-                    @Override
-                    public int compare(Object o1, Object o2) {
-                        Pair a = (Pair)o1;
-                        Pair b = (Pair)o2;
-                        return new Integer(a.GetS()).compareTo(b.GetS());
-                    }
-                });
-                if (quantitat > auxTermes.size()) {
-                    for (int i= 0; i<auxTermes.size(); i++) 
-                        termes.add(G.getNom(auxTermes.get(i).GetF()));
-                }
-                else {
-                    for (int i= 0; i<quantitat; i++) 
-                        termes.add(G.getNom(auxTermes.get(i).GetF()));
-                }
-                break;
         }
         auxTermes.clear();
         Articles.clear();
