@@ -1,6 +1,7 @@
 package capaDomini.Usuaris;
 
 
+import capaDomini.Perfils.CtrlPerfil;
 import java.util.Scanner;
 
 /**
@@ -19,22 +20,17 @@ public class CtrlAdministrador {
             System.out.println("Si vols consultar tots els usuaris de la BD marca 1.");
             //ja esta a Administrador
             
-            System.out.println("Si vols modificar el nom de l'usuari marca 2.");
+            System.out.println("Si vols modificar el nom d'un usuari marca 2.");
             //ja esta a UsuariNormal
             
-            System.out.println("Si vols consultar la contrasenya marca 3.");
-            //ja esta a Usuari Normal
-            
-            System.out.println("Si vols modificar la contrasenya marca 4.");
-            //ja esta a UsuariNormal
-            
-            System.out.println("Si vols guardar un nou usari marca 5.");
-            
-            
-            System.out.println("Si vols borrar un usuari marca 6.");
+            System.out.println("Si vols borrar un usuari marca 3.");
             //ja esta a Administrador
             
-            System.out.println("Si vols acabar marca 7.");
+            System.out.println("Si vols acabar marca 4.");
+            
+            System.out.println("Si vols fer una consulta marca 5.");
+            
+            System.out.println("Si vols acabar marca 6.");
             
             String user;
             String pass = null;
@@ -64,41 +60,6 @@ public class CtrlAdministrador {
                         }
                         break;
                     case 3:
-                        System.out.println("Entra el teu username:");
-                        user = sc.next();
-                        String contr = ctrl.consultar_password(user);
-                        if (contr.equals("")) {
-                            System.out.println("Usuari incorrecte");
-                        } else {
-                            System.out.println("La teva contrasenya és: "+contr);
-                        }
-                        break;
-                    case 4:
-                        System.out.println("Entra el teu username: ");
-                        user = sc.next();
-                        System.out.println("Escriu la contrasenya de l'usuari");
-                        pass = sc.next();
-                        System.out.println("Escriu la nova contrasenya:");
-                        String new_pass = sc.next();
-                        if (ctrl.modificar_password(user,pass,new_pass)) {
-                            System.out.println("Contrasenya modificada correctament");
-                        }
-                        else {
-                            System.out.println("Usuari i/o contrasenya incorrecte");
-                        }
-                        break;
-                    case 5:
-                        System.out.println("Entra el nom de l'usuari:");
-                        user = sc.next();
-                        System.out.println("Entra la contrasenya: ");
-                        pass = sc.next();
-                        if (ctrl.GuardarUsuari(user,pass)) {
-                            System.out.println("Usuari afegit correctament");
-                        } else {
-                            System.out.println("Usuari ja existent");
-                        }
-                        break;
-                    case 6:
                         System.out.println("Entra el nom de l'usuari: ");
                         user = sc.next();
                         System.out.println("Escriu la contrasenya de l'usuari");
@@ -109,8 +70,15 @@ public class CtrlAdministrador {
                             System.out.println("Usuari i/o contrasenya incorrecte");
                         }
                         break;
-                    case 7:
+                    case 4:
                         bool = true;
+                        break;
+                        
+                    case 5:
+                        CtrlPerfil ctrls = new CtrlPerfil();
+                        ctrls.main();
+                        break;
+                    case 6:
                         break;
                 }
             }

@@ -7,30 +7,32 @@ package capaDomini;
 
 import java.util.ArrayList;
 import Utils.*;
+
 /**
  *
  * @author rogia
  */
 public class Historial {
+
     private ArrayList<Apunts> LlistaConsultes = new ArrayList();
-    
+
     public Historial() {
         loadHistorial();
     }
-    
+
     public Boolean afegirCerca() {
         return true;
     }
-    
-    public ArrayList<Apunts> consultar() {       
+
+    public ArrayList<Apunts> consultar() {
         return Utils.cloneArrayList(LlistaConsultes);
     }
-    
+
     public void esborrar() {
         LlistaConsultes = new ArrayList();
     }
-    
+
     private void loadHistorial() {
-        
+
     }
 }

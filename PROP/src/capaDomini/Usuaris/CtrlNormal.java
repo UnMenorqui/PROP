@@ -5,6 +5,7 @@
  */
 package capaDomini.Usuaris;
 
+import capaDomini.Perfils.CtrlPerfil;
 import java.util.Scanner;
 
 /**
@@ -31,6 +32,8 @@ public class CtrlNormal {
             System.out.println("Si vols consultar la contrasenya marca 2.");
             System.out.println("Si vols modificar el nom de l'usuari marca 3.");
             System.out.println("Si vols modificar la contrasenya marca 4.");
+            System.out.println("Si vols fer una consulta marca 5.");
+            System.out.println("Si vols acabar marca 6.");
                 if(!primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
@@ -50,6 +53,11 @@ public class CtrlNormal {
                         break;
                     case 4:
                         usr.modifica_pass();
+                    case 5:
+                        CtrlPerfil ctrl = new CtrlPerfil();
+                        ctrl.main();
+                        break;
+                    case 6:
                         break;
                 }
             }
