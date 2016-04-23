@@ -54,8 +54,9 @@ public class Consulta {
                 }
             });
             for (int i=0; i<articles.size(); ++i) {
-                for (int j=0; j<size; ++i) {
-                    if (mat[i][j] >= 0 && i != j && G.getTipusNode(j).equals("Autor")) {
+                int identificador = articles.get(i).GetF();
+                for (int j=0; j<size; ++j) {
+                    if (mat[identificador][j] >= 0 && identificador != j && j != id && G.getTipusNode(j).equals("Autor")) {
                         Pair o = new Pair(j,mat[j][j]);
                         autors1.add(o);
                     }  
@@ -90,8 +91,9 @@ public class Consulta {
                 }
             });
             for (int i=0; i<articles.size(); ++i) {
-                for (int j=0; j<size; ++i) {
-                    if (mat[i][j] >= 0 && i != j && G.getTipusNode(j).equals("Autor")) {
+                int identificador = articles.get(i).GetF();
+                for (int j=0; j<size; ++j) {
+                    if (mat[identificador][j] >= 0 && identificador != j && G.getTipusNode(j).equals("Autor")) {
                         Pair o = new Pair(j,mat[j][j]);
                         autors1.add(o);
                     }  
@@ -126,8 +128,9 @@ public class Consulta {
             });
             
             for (int i=0; i<articles.size(); ++i) {
-                for (int j=0; j<size; ++i) {
-                    if (mat[i][j] >= 0 && i != j && G.getTipusNode(j).equals("Autor")) {
+                int identificador = articles.get(i).GetF();
+                for (int j=0; j<size; ++j) {
+                    if (mat[identificador][j] >= 0 && identificador != j && G.getTipusNode(j).equals("Autor")) {
                         Pair o = new Pair(j,mat[j][j]);
                         autors1.add(o);
                     }  

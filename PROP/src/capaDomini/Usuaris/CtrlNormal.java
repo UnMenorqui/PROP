@@ -5,7 +5,10 @@
  */
 package capaDomini.Usuaris;
 
+import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.CtrlPerfil;
+import capaDomini.consulta.Historial;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -13,27 +16,20 @@ import java.util.Scanner;
  * @author Toni
  */
 public class CtrlNormal {
-    public void main(String user, String pass) {
+    public void main(String user, String pass, Graf_PageRank G) throws IOException {
         boolean bool= false;
         boolean primer = true;
         Scanner sc = new Scanner(System.in);
-        
         System.out.println("Login correcte.");
-        
-        
-        
-        
         UsuariNormal usr = new UsuariNormal(user,pass);
-        
-        
-        
         while(!bool) {
             System.out.println("Si vols consultar l'usuari marca 1.");
             System.out.println("Si vols consultar la contrasenya marca 2.");
             System.out.println("Si vols modificar el nom de l'usuari marca 3.");
             System.out.println("Si vols modificar la contrasenya marca 4.");
             System.out.println("Si vols fer una consulta marca 5.");
-            System.out.println("Si vols acabar marca 6.");
+            System.out.println("Si vols consultar l'historial de consultes marca 6.");
+            System.out.println("Si vols acabar marca 7.");
                 if(!primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
@@ -55,9 +51,13 @@ public class CtrlNormal {
                         usr.modifica_pass();
                     case 5:
                         CtrlPerfil ctrl = new CtrlPerfil();
-                        ctrl.main();
+                        ctrl.main(G);
                         break;
                     case 6:
+                        Historial hist = new Historial();
+                        hist.consultar();
+                        break;
+                    case 7:
                         break;
                 }
             }

@@ -50,7 +50,6 @@ public class Main {
         
         boolean bool = false;
         boolean primer = false;
-        boolean acabat = false;
         while(!bool) {
                 if(primer) {
                     System.out.println("Operació realitzada.");
@@ -74,7 +73,7 @@ public class Main {
                     System.out.println();
                     if(ctrl.ExisteixUsuari_contrasenya(user,pass)) {
                         CtrlNormal norm = new CtrlNormal();
-                        norm.main(user,pass);
+                        norm.main(user,pass,gf);
                     }
                     else System.out.println("Usuari o contrasenya incorrecta");
                     break;
@@ -87,7 +86,7 @@ public class Main {
                         pass = sc.next();
                         if (pass.equals(admin_pass)) {
                             CtrlAdministrador admin = new CtrlAdministrador();
-                            admin.main();
+                            admin.main(gf);
                         }
                         else System.out.print("Clau mestre incorrecta.");
                     }

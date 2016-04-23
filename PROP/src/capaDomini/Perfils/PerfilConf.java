@@ -9,7 +9,6 @@ package capaDomini.Perfils;
 import capaDomini.consulta.Consulta;
 import capaDomini.Graf.Graf_PageRank;
 import static capaDomini.Perfils.Perfil.nom;
-import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -73,6 +72,10 @@ public class PerfilConf extends Perfil {
             String aux = termes.get(i);
             System.out.println(aux);
         }
+        termes.clear();
+        articles.clear();
+        autors.clear();
+        
     }
     
 }
