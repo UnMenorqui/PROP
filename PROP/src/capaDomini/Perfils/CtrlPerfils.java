@@ -5,17 +5,20 @@
  */
 package capaDomini.Perfils;
 
+import capaDomini.Graf.Graf_PageRank;
+
 /**
  *
  * @author aleixabrieprat
  */
+
 public class CtrlPerfils {
     
     public CtrlPerfils() {
         
     }
     
-    public void crear_perfil_autor(String entitat, int articles, int co_autors, int termes, int conferencies)
+    public void crear_perfil_autor(String entitat, int articles, int co_autors, int termes, int conferencies, Graf_PageRank G)
     {
         PerfilAutor p_autor = new PerfilAutor();
         p_autor.set_name(entitat);
@@ -25,7 +28,7 @@ public class CtrlPerfils {
         p_autor.set_quantitat_conf(conferencies);
         p_autor.crear_perfil_autor(G);
     }
-    public void crear_perfil_terme(String entitat, int articles, int autors, int conferencies) 
+    public void crear_perfil_terme(String entitat, int articles, int autors, int conferencies, Graf_PageRank G) 
     {
         PerfilTerme p_terme = new PerfilTerme();
         p_terme.set_name(entitat);
@@ -34,7 +37,7 @@ public class CtrlPerfils {
         p_terme.set_quantitat_conf(conferencies);
         p_terme.crear_perfil_terme(G);
     }
-    public void crear_perfil_conferencia(String entitat, int articles, int autors, int termes) 
+    public void crear_perfil_conferencia(String entitat, int articles, int autors, int termes, Graf_PageRank G) 
     {
         PerfilConf p_conf = new PerfilConf();
         p_conf.set_name(entitat);
@@ -44,16 +47,13 @@ public class CtrlPerfils {
         p_conf.crear_perfil_conf(G);
         
     }
-    public void crear_perfil_article(String entitat, int autors, int termes, int conferencies) 
+    public void crear_perfil_article(String entitat, int autors, int termes, int conferencies, Graf_PageRank G) 
     {
         PerfilArticle p_art = new PerfilArticle();
         p_art.set_name(entitat);
         p_art.set_quantitat_autors(autors);
         p_art.set_quantitat_conf(conferencies);
         p_art.set_quantitat_termes(termes);
-        p_art.crear_perfil_articles(G);
-    }
-    
-    
-    
+        p_art.crear_perfil_article(G);
+    }  
 }

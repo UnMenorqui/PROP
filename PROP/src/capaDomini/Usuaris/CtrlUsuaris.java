@@ -18,13 +18,14 @@ import capaPersistencia.CtrlDadesUsuari;
 
 public class CtrlUsuaris {
     
-    private static CtrlDadesUsuari du;
+    private CtrlDadesUsuari du;
     private CtrlHistorial hist;
     private UsuariNormal un = new UsuariNormal();
     private CtrlGraf CG = new CtrlGraf();
     
     public CtrlUsuaris() {
         du = new CtrlDadesUsuari();
+        un = new UsuariNormal();
     }
     
     public String consultar_username() {

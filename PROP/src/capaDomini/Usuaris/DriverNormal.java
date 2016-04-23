@@ -19,6 +19,7 @@ public class DriverNormal {
         boolean bool= false;
         boolean primer = true;
         CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
+        DriverPerfil ctrl = new DriverPerfil();
         Scanner sc = new Scanner(System.in);
         System.out.println("Login correcte.");
         UsuariNormal usr = new UsuariNormal(user,pass);
@@ -34,13 +35,13 @@ public class DriverNormal {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
                     System.out.println("Torna a entrar la operació a fer:");
-                } else primer = false;
+                } 
+                else primer = false;
                 int prova = sc.nextInt();
                 switch(prova) {
                     case 1:
                         ctrlusuaris.consultar_username();
                         break;
-                        
                     case 2:
                         usr.consultar_password();
                         break;
@@ -49,9 +50,14 @@ public class DriverNormal {
                         break;
                     case 4:
                         usr.modifica_pass();
+                        break;
                     case 5:
+<<<<<<< Updated upstream
                         DriverPerfil ctrl = new DriverPerfil();
                         ctrl.main();
+=======
+                        ctrl.main(G);
+>>>>>>> Stashed changes
                         break;
                     case 6:
                         ctrlusuaris.consultar(G);

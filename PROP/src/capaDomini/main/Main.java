@@ -57,9 +57,9 @@ public class Main {
                     System.out.println("---------------------");
                     System.out.println("Torna a entrar la operació a fer:");
                 } else primer = true;
-                int id = sc.nextInt();
+                int id = 5;
+                if (sc.hasNext()) id = sc.nextInt();
                 switch(id) {
-                
                 case 1:
                     DriverConvidat uc = new DriverConvidat();
                     uc.main(gf);

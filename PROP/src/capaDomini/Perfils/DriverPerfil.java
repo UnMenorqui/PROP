@@ -17,13 +17,15 @@ import java.util.Scanner;
  */
 public class DriverPerfil {
     
-    public void main () throws IOException {
+    public void main (Graf_PageRank G) throws IOException {
         System.out.println("Per a la creació d'un perfil, determina el tipus:");
         System.out.println("Marca 1 si vols un perfil d'autor");
         System.out.println("Marca 2 si vols un perfil d'una conferencia");
         System.out.println("Marca 3 si vols un perfil d'un article");
         System.out.println("Marca 4 si vols un perfil d'un terme"); 
+        System.out.println("Marca 5 si vols surtir de la consulta");
         Scanner sc = new Scanner(System.in);
+        CtrlPerfils ctrl = new CtrlPerfils();
         int marca;
         boolean bool = false;
         boolean primer = false;
@@ -32,6 +34,7 @@ public class DriverPerfil {
                 primer = true;
             }
             else {
+                System.out.println();
                 System.out.println("Torna a introduir el tipus:");
             }
             marca = sc.nextInt();
@@ -53,7 +56,7 @@ public class DriverPerfil {
                     q_articles = sc.nextInt();
                     System.out.println("Introdueix la quantitat de co-autors:");
                     q_autors = sc.nextInt();
-                    //Passar a controlador
+                    ctrl.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies, G);
                     break;
                 case 2: 
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
@@ -65,7 +68,7 @@ public class DriverPerfil {
                     q_termes = sc.nextInt();
                     System.out.println("Introdueix la quantitat d'articles:");
                     q_articles = sc.nextInt();
-                    //Passar a controlador
+                    ctrl.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes, G);
                     break;
                 case 3:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
@@ -77,7 +80,7 @@ public class DriverPerfil {
                     q_autors = sc.nextInt();
                     System.out.println("Introdueix la quantitat de termes:");
                     q_termes = sc.nextInt();
-                    //Passar a controlador
+                    ctrl.crear_perfil_article(nom, q_autors, q_termes, q_conferencies, G);
                     break;
                 case 4:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
@@ -89,12 +92,12 @@ public class DriverPerfil {
                     q_articles = sc.nextInt();
                     System.out.println("Introdueix la quantitat d'autors:");
                     q_autors = sc.nextInt();
-                    //Passar a controlador
+                    ctrl.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies, G);
                     break;
                 case 5:
                     bool = true;
                     break;
-            } 
+            }
         }
         sc.close();
     }
