@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package capaPresentacio;
+package capaDomini;
 
 /**
  *
  * @author toni_
  */
-public class prova {
+
+public class UsuariConvidat {
     
+    public void consulta() {
+    }  
 }

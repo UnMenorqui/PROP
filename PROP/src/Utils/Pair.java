@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package capaPresentacio;
+package Utils;
 
 /**
  *
- * @author toni_
+ * @author aleixabrieprat
  */
-public class prova {
+public class Pair {
     
 }
