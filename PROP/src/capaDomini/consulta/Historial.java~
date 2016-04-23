@@ -23,9 +23,8 @@ public class Historial {
         loadHistorial();
     }
 
-    public void afegirCerca(Apunts cerca) {
-        LlistaConsultes.add(cerca);
-        saveHistorial();
+    public Boolean afegirCerca() {
+        return true;
     }
 
     public void consultar(Graf_PageRank G) {

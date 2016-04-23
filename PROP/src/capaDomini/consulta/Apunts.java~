@@ -23,16 +23,4 @@ public class Apunts {
 	id = i;
 	tipus = t;
     }
-
-    public String getNom() {
-	String r = (String) nom.clone();
-	return r;
-    }
-    public int getID() {
-	return id;
-    }
-    public String getTipus() {
-	String r = (String) nom.clone();
-	return r;
-    }
 }
