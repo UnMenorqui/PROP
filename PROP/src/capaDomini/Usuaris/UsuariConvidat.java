@@ -14,6 +14,7 @@ public class UsuariConvidat {
     Post:   Aquesta funció utilitzarà la classe CONSULTA, que conté
             el codi principal d'aquesta funció.
     */
-    public void consulta() {     
+    public void consulta() {    
+        System.out.println("Consulta feta.");
     }  
 }
