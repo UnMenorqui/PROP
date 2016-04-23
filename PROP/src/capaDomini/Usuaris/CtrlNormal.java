@@ -62,7 +62,6 @@ public class CtrlNormal {
                         break;
                     case 6:
                         Historial hist = new Historial();
-                        hist.consultar();
                         break;
                     case 7:
                         break;
