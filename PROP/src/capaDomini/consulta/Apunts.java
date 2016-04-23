@@ -5,9 +5,6 @@
  */
 package capaDomini.consulta;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author rogia
@@ -25,14 +22,14 @@ public class Apunts {
     }
 
     public String getNom() {
-	String r = (String) nom.clone();
+	String r = nom;
 	return r;
     }
     public int getID() {
 	return id;
     }
     public String getTipus() {
-	String r = (String) nom.clone();
+	String r = nom;
 	return r;
     }
 }
