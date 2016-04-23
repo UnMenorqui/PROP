@@ -5,31 +5,35 @@
  */
 package capaDomini.consulta;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author rogia
  */
 public class Apunts {
     
-    String nom;
-    int id;
-    String tipus;
+    Consulta consulta;
+    /*
+    public Apunts(Consulta c) {
+        try {
+            Consulta n = new Consulta();
+            n = (Consulta) c.clone();
+            consulta = n;
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(Apunts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
-    public Apunts(String n, int i, String t) {
-        nom = n;
-	id = i;
-	tipus = t;
+    public Consulta getConsulta() {
+        Consulta n = new Consulta();
+        try {
+          //  n = (Consulta) consulta.clone();
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(Apunts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
     }
-
-    public String getNom() {
-	String r = nom;
-	return r;
-    }
-    public int getID() {
-	return id;
-    }
-    public String getTipus() {
-	String r = nom;
-	return r;
-    }
+    */
 }

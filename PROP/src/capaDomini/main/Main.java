@@ -10,6 +10,7 @@ import capaDomini.Usuaris.CtrlNormal;
 import capaDomini.Usuaris.CtrlUsuaris;
 import capaDomini.Usuaris.CtrlAdministrador;
 import capaDomini.Graf.Graf_PageRank;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Scanner;
 public class Main {
     
     
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         
         Graf_PageRank gf = new Graf_PageRank();
         
@@ -73,7 +74,7 @@ public class Main {
                     System.out.println();
                     if(ctrl.ExisteixUsuari_contrasenya(user,pass)) {
                         CtrlNormal norm = new CtrlNormal();
-                        norm.main(user,pass);
+                        norm.main(user,pass,gf);
                     }
                     else System.out.println("Usuari o contrasenya incorrecta");
                     break;
@@ -86,7 +87,7 @@ public class Main {
                         pass = sc.next();
                         if (pass.equals(admin_pass)) {
                             CtrlAdministrador admin = new CtrlAdministrador();
-                            admin.main();
+                            admin.main(gf);
                         }
                         else System.out.print("Clau mestre incorrecta.");
                     }

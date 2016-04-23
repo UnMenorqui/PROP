@@ -19,9 +19,11 @@ public class PerfilAutor extends Perfil {
     static ArrayList<String> termes = new ArrayList<>();
     static ArrayList<String> conferencies = new ArrayList<>();
     static ArrayList<String> articles = new ArrayList<>();
+    static ArrayList<String> co_autors = new ArrayList<>();
     static int quantitat_termes;
     static int quantitat_conf;
     static int quantitat_articles;
+    static int quantitat_coautors;
     
     
     public int get_quantitat_termes() {
@@ -45,49 +47,54 @@ public class PerfilAutor extends Perfil {
     public void set_quantitat_articles(int q_articles) {
         quantitat_articles = q_articles;
     }
-    
-    public ArrayList<String> articles_importants() {
-        // obtenir_articles(articles,nom,quantitat_articles);
-        return articles;
-    }
-    
-    public ArrayList<String> conferencies_importants() {
-        // obtenir_conferencies(conferencies,nom,quantitat_conf);
-        return conferencies;
-    }
-    
-    public ArrayList<String> termes_importants() {
-        // obtenir_termes(termes,nom,quantitat_termes);
-        return termes;
+    public void set_quantitat_autors(int q_coautors) {
+        quantitat_coautors = q_coautors;
     }
     
     public void crear_perfil_autor(Graf_PageRank G) {
         Consulta cs = new Consulta();
-        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
-        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
-        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
-        articles_importants();
-        conferencies_importants();
-        termes_importants();
+        cs.obtenir_articles(articles,nom,quantitat_articles,G);
+        cs.obtenir_termes(termes,nom,quantitat_termes,G);
+        cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
+        cs.obtenir_autors(co_autors,nom,quantitat_coautors,G);
         System.out.println(nom);
         System.out.println("");
         System.out.println("Conferencies més rellevants d'aquest autor:");
         for (int i = 0; i < conferencies.size(); ++i) {
             String aux = conferencies.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_conf > conferencies.size()) {
+            System.out.println("No hi ha tantes conferencies per la quantitat desitjada");
         }
         System.out.println("");
         System.out.println("Articles més rellevants d'aquest autor:");
         for (int i = 0; i < articles.size(); ++i) {
             String aux = articles.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_articles > articles.size()) {
+            System.out.println("No hi ha tants articles per la quantitat desitjada");
         }
         System.out.println("");
         System.out.println("Termes més rellevants d'aquest autor:");
         for (int i = 0; i < termes.size(); ++i) {
             String aux = termes.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
         }
+        System.out.println("");
+        System.out.println("Co-Autors més rellevants d'aquest autor:");
+        for (int i = 0; i < co_autors.size(); ++i) {
+            String aux = co_autors.get(i);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_coautors > co_autors.size()) {
+            System.out.println("No hi ha tants co-autors per la quantitat desitjada");
+        }
+        termes.clear();
+        conferencies.clear();
+        articles.clear();
+        co_autors.clear();
     }
     
 }

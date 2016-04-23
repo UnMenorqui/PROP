@@ -17,60 +17,74 @@ import capaDomini.consulta.Consulta;
  */
 public class PerfilArticle extends Perfil {
     
-    public static ArrayList<String> termes = new ArrayList<>();
-    public static ArrayList<String> conferencies = new ArrayList<>();
-    public static ArrayList<String> autors = new ArrayList<>();
-    public static int quantitat_termes;
-    public static int quantitat_conf;
-    public static int quantitat_autors;
+    public ArrayList<String> termes = new ArrayList<>();
+    public ArrayList<String> conferencies = new ArrayList<>();
+    public ArrayList<String> autors = new ArrayList<>();
+    public int quantitat_termes;
+    public int quantitat_conf;
+    public int quantitat_autors;
     
     
-    public static int get_quantitat_termes() {
+    public int get_quantitat_termes() {
         return quantitat_termes;
     }
     
-    public static void set_quantitat_termes(int q_terme) {
+    public void set_quantitat_termes(int q_terme) {
         quantitat_termes = q_terme;
     }
     
-    public static int get_quantitat_conf() {
+    public int get_quantitat_conf() {
         return quantitat_conf;
     }
-    public static void set_quantitat_conf(int q_conferencia) {
+    public void set_quantitat_conf(int q_conferencia) {
         quantitat_conf = q_conferencia;
     }
     
-    public static int get_quantitat_autors() {
+    public int get_quantitat_autors() {
         return quantitat_autors;
     }
-    public static void set_quantitat_autors(int q_autor) {
+    public void set_quantitat_autors(int q_autor) {
         quantitat_autors = q_autor;
     }
     
-    public static void crear_perfil_article(Graf_PageRank G) {
+    public void crear_perfil_article(Graf_PageRank G) {
         Consulta cs = new Consulta();
         cs.obtenir_autors(autors,nom,quantitat_autors,G);
-        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
-        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
+        cs.obtenir_termes(termes,nom,quantitat_termes,G);
+        cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
         System.out.println(nom);
         System.out.println();
         System.out.println("Conferencies més rellevants d'aquest article:");
         for (int i = 0; i < conferencies.size(); ++i) {
             String aux = conferencies.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_conf > conferencies.size()) {
+            System.out.println();
+            System.out.println("No hi ha tantes conferencies per la quantitat desitjada");
+            System.out.println();
         }
         System.out.println("");
         System.out.println("Autors més rellevants d'aquest article:");
         for (int i = 0; i < autors.size(); ++i) {
             String aux = autors.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
+        }
+        if (quantitat_autors > autors.size()) {
+            System.out.println("No hi ha tants autors per la quantitat desitjada");
         }
         System.out.println("");
         System.out.println("Termes més rellevants d'aquest article:");
         for (int i = 0; i < termes.size(); ++i) {
             String aux = termes.get(i);
-            System.out.println(aux);
+            System.out.println("\t- "+aux);
         }
+        if (quantitat_termes > termes.size()) {
+            System.out.println("No hi ha tants termes per la quantitat desitjada");
+        }
+        autors.clear();
+        conferencies.clear();
+        termes.clear();
     }
     
 }

@@ -13,7 +13,10 @@ package Utils;
 public class Pair implements Comparable {
     private int first;
     private int second;
+<<<<<<< HEAD
 
+=======
+>>>>>>> aaaaaaaaaaa
     
    public Pair() {
        first = 0;
