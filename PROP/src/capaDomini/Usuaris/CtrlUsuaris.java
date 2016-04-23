@@ -1,5 +1,8 @@
   package capaDomini.Usuaris;
 
+import capaDomini.Graf.Graf_PageRank;
+import capaDomini.consulta.Apunts;
+import capaDomini.consulta.CtrlHistorial;
 import capaPersistencia.CtrlDadesUsuari;
 
 /**
@@ -15,9 +18,15 @@ import capaPersistencia.CtrlDadesUsuari;
 public class CtrlUsuaris {
     
     private static CtrlDadesUsuari du;
+    private CtrlHistorial hist;
+    private UsuariNormal un = new UsuariNormal();
     
     public CtrlUsuaris() {
         du = new CtrlDadesUsuari();
+    }
+    
+    public String consultar_username() {
+        return un.consultar_username();
     }
     
     public Boolean modificar_usuari(String username, String password, String nou_user) {
@@ -64,10 +73,19 @@ public class CtrlUsuaris {
         du.consultaUsuarisBD();
     }
     
-    public String consultar_password(String username) {
-        if (ExisteixUsuari(username)) {
-            return du.consultar_password(username);
-        }
-        return "";
+    public String consultar_password() {
+            return du.consultar_password();
+    }
+    
+    public void afegirCerca(Apunts cerca) {
+        hist.afegirCerca(cerca);
+    }
+    
+    public void consultar(Graf_PageRank G) {
+        hist.consultar(G);
+    }
+
+    public void esborrar(int n) {
+        hist.esborrar(n);
     }
 }

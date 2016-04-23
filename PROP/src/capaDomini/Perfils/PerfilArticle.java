@@ -7,7 +7,6 @@ package capaDomini.Perfils;
 
 
 import capaDomini.Graf.Graf_PageRank;
-import java.util.List;
 import java.util.ArrayList;
 import capaDomini.consulta.Consulta;
 

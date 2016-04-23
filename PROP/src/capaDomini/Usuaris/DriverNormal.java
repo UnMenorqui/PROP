@@ -7,7 +7,6 @@ package capaDomini.Usuaris;
 
 import capaDomini.Graf.Graf_PageRank;
 import capaDomini.Perfils.DriverPerfil;
-import capaDomini.consulta.Historial;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -19,6 +18,7 @@ public class DriverNormal {
     public void main(String user, String pass, Graf_PageRank G) throws IOException {
         boolean bool= false;
         boolean primer = true;
+        CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
         Scanner sc = new Scanner(System.in);
         System.out.println("Login correcte.");
         UsuariNormal usr = new UsuariNormal(user,pass);
@@ -38,7 +38,7 @@ public class DriverNormal {
                 int prova = sc.nextInt();
                 switch(prova) {
                     case 1:
-                        user = usr.consultar_username();
+                        ctrlusuaris.consultar_username();
                         break;
                         
                     case 2:
@@ -54,9 +54,10 @@ public class DriverNormal {
                         ctrl.main(G);
                         break;
                     case 6:
-                        Historial hist = new Historial();
+                        ctrlusuaris.consultar(G);
                         break;
                     case 7:
+                        bool = true;
                         break;
                 }
             }

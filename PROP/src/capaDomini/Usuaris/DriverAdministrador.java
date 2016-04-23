@@ -33,9 +33,7 @@ public class DriverAdministrador {
             
             System.out.println("Si vols consultar l'historial de consultes marca 5.");
             
-            System.out.println("Si vols consultar l'historial de consultes marca 6.");
-            
-            System.out.println("Si vols acabar marca 7.");
+            System.out.println("Si vols acabar marca 6.");
             
             String user;
             String pass = null;
@@ -81,13 +79,10 @@ public class DriverAdministrador {
                         ctrls.main(G);
                         break;
                     case 5:
+                        ctrlusuaris.consultar(G);
                         break;
                         
                     case 6:
-                        //Crida a escriure historial
-                        break;
-                        
-                    case 7:
                         bool = true;
                         break;
                 }
