@@ -6,8 +6,8 @@
 package capaDomini.Perfils;
 
 
-import capaDomini.Consulta;
 import capaDomini.Graf.Graf_PageRank;
+import capaDomini.consulta.Consulta;
 import java.util.ArrayList;
 
 /**

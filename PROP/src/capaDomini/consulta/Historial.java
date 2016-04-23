@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package capaDomini;
+package capaDomini.consulta;
 
+import capaDomini.consulta.Apunts;
 import java.util.ArrayList;
 import Utils.*;
 
