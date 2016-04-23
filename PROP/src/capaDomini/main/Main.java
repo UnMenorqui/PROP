@@ -45,56 +45,66 @@ public class Main {
         
         Scanner sc = new Scanner(System.in);
         int id = sc.nextInt();
-        switch(id) {
-            case 1:
-                CtrlConvidat uc = null;
-                uc.main();
-                break;
-            case 2:
-                String user = null, pass = null;     
-                System.out.print("Entra el nom d'usuari: ");
-                user = sc.next();
-                System.out.println();
-                System.out.print("Entra la contrasenya: ");
-                pass = sc.next();
-                System.out.println();
-                if(ctrl.ExisteixUsuari_contrasenya(user,pass)) {
-                    CtrlNormal norm = new CtrlNormal();
-                    norm.main(user,pass);
-                }
-                else System.out.println("Usuari o contrasenya incorrecta");
-                break;
-                
-            case 3:
-                System.out.print("Entra l'usuari Administrador: ");
-                user = sc.next();
-                if (user.equals(usr_admin)) { 
-                    System.out.print("Entra la clau mestre: ");
-                    pass = sc.next();
-                    if (pass.equals(admin_pass)) {
-                        CtrlAdministrador admin = new CtrlAdministrador();
-                        admin.main();
-                    }
-                    else System.out.print("Clau mestre incorrecta.");
-                }
-                else System.out.print("Usuari Administrador incorrecte.");
-                break;
-                
-            case 4:
-                System.out.print("Entra el nou usuari: ");
-                user = sc.next();
-                if(!ctrl.ExisteixUsuari(user)) {
+        boolean bool = false;
+        boolean primer = true;
+        
+        while(!bool) {
+                if(!primer) {
+                    System.out.println("Operació realitzada.");
+                    System.out.println("---------------------");
+                    System.out.println("Torna a entrar la operació a fer:");
+                } else primer = false;
+            switch(id) {
+                case 1:
+                    CtrlConvidat uc = null;
+                    uc.main();
+                    break;
+                case 2:
+                    String user = null, pass = null;     
+                    System.out.print("Entra el nom d'usuari: ");
+                    user = sc.next();
+                    System.out.println();
                     System.out.print("Entra la contrasenya: ");
                     pass = sc.next();
-                    ctrl.GuardarUsuari(user, pass);
-                }
-                else System.out.print("Usuari existent.");
-                break;
-                
-            case 5:
-                System.out.print("Gràcies per utilitzar l'aplicaió, fins aviat!");
-                break;
-                
+                    System.out.println();
+                    if(ctrl.ExisteixUsuari_contrasenya(user,pass)) {
+                        CtrlNormal norm = new CtrlNormal();
+                        norm.main(user,pass);
+                    }
+                    else System.out.println("Usuari o contrasenya incorrecta");
+                    break;
+
+                case 3:
+                    System.out.print("Entra l'usuari Administrador: ");
+                    user = sc.next();
+                    if (user.equals(usr_admin)) { 
+                        System.out.print("Entra la clau mestre: ");
+                        pass = sc.next();
+                        if (pass.equals(admin_pass)) {
+                            CtrlAdministrador admin = new CtrlAdministrador();
+                            admin.main();
+                        }
+                        else System.out.print("Clau mestre incorrecta.");
+                    }
+                    else System.out.print("Usuari Administrador incorrecte.");
+                    break;
+
+                case 4:
+                    System.out.print("Entra el nou usuari: ");
+                    user = sc.next();
+                    if(!ctrl.ExisteixUsuari(user)) {
+                        System.out.print("Entra la contrasenya: ");
+                        pass = sc.next();
+                        ctrl.GuardarUsuari(user, pass);
+                    }
+                    else System.out.print("Usuari existent.");
+                    break;
+
+                case 5:
+                    System.out.print("Gràcies per utilitzar l'aplicaió, fins aviat!");
+                    break;
+
+            }
         }
     }
     
