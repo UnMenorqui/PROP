@@ -6,6 +6,8 @@
 package capaDomini.Perfils;
 
 
+import capaDomini.consulta.Consulta;
+import capaDomini.Graf.Graf_PageRank;
 import static capaDomini.Perfils.Perfil.nom;
 import java.util.List;
 import java.util.ArrayList;
@@ -46,25 +48,12 @@ public class PerfilConf extends Perfil {
         quantitat_autors = q_autor;
     }
     
-    public static ArrayList<String> articles_importants() {
-        // obtenir_articles(articles,nom,quantitat_articles);
-        return articles;
-    }
     
-    public static ArrayList<String> autors_importants() {
-        // obtenir_autors(autors,nom,quantitat_autors);
-        return autors;
-    }
-    
-    public static ArrayList<String> termes_importants() {
-        // obtenir_termes(termes,nom,quantitat_termes);
-        return termes;
-    }
-    
-    public static void crear_perfil_conf() {
-        articles_importants();
-        autors_importants();
-        termes_importants();
+    public static void crear_perfil_conf(Graf_PageRank G) {
+        Consulta cs = new Consulta();
+        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
+        cs.obtenir_autors(autors,nom,quantitat_autors,G);
+        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
         System.out.println(nom);
         System.out.println("");
         System.out.println("Autors més rellevants d'aquesta conferencia:");

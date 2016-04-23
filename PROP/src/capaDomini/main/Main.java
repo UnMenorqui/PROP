@@ -9,6 +9,7 @@ import capaDomini.Usuaris.CtrlConvidat;
 import capaDomini.Usuaris.CtrlNormal;
 import capaDomini.Usuaris.CtrlUsuaris;
 import capaDomini.Usuaris.CtrlAdministrador;
+import capaDomini.Graf.Graf_PageRank;
 import java.util.Scanner;
 
 /**
@@ -20,6 +21,8 @@ public class Main {
     
     
     public static void main(String args[]) {
+        
+        Graf_PageRank gf = new Graf_PageRank();
         
         String usr_admin = "Administrador";
         String admin_pass = "1234";
@@ -59,7 +62,7 @@ public class Main {
                 
                 case 1:
                     CtrlConvidat uc = new CtrlConvidat();
-                    uc.main();
+                    uc.main(gf);
                     break;
                 case 2:
                     String user = null, pass = null;     

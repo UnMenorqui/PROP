@@ -5,6 +5,7 @@
  */
 package capaDomini.Perfils;
 
+import capaDomini.Graf.Graf_PageRank;
 import java.util.Scanner;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Scanner;
  */
 public class CtrlPerfil {
     
-    public void main () {
+    public void main (Graf_PageRank G) {
         Perfil perfil = new Perfil();
         System.out.println("Per a la creació d'un perfil, determina el tipus:");
         System.out.println("Marca 1 si vols un perfil d'autor");
@@ -52,7 +53,7 @@ public class CtrlPerfil {
                     System.out.println("Introdueix la quantitat d'articles:");
                     num = sc.nextInt();
                     p_autor.quantitat_articles = num;
-                    p_autor.creacio_perfil(marca,entitat);
+                    p_autor.creacio_perfil(marca,entitat,G);
                     break;
                 case 2: 
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
@@ -66,7 +67,7 @@ public class CtrlPerfil {
                     System.out.println("Introdueix la quantitat d'articles:");
                     num = sc.nextInt();
                     p_conf.quantitat_articles = num;
-                    p_conf.creacio_perfil(marca,entitat);
+                    p_conf.creacio_perfil(marca,entitat,G);
                     break;
                 case 3:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
@@ -80,7 +81,7 @@ public class CtrlPerfil {
                     System.out.println("Introdueix la quantitat de termes:");
                     num = sc.nextInt();
                     p_article.quantitat_termes = num;
-                    p_article.creacio_perfil(marca,entitat);
+                    p_article.creacio_perfil(marca,entitat,G);
                     break;
                 case 4:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
@@ -94,7 +95,7 @@ public class CtrlPerfil {
                     System.out.println("Introdueix la quantitat d'autors:");
                     num = sc.nextInt();
                     p_terme.quantitat_autors = num;
-                    p_terme.creacio_perfil(marca,entitat);
+                    p_terme.creacio_perfil(marca,entitat,G);
                     break;
                 case 5:
                     bool = true;

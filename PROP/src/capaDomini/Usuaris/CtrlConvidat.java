@@ -6,14 +6,16 @@
 package capaDomini.Usuaris;
 
 import capaDomini.Perfils.CtrlPerfil;
+import capaDomini.Graf.Graf_PageRank;
 
 /**
  *
  * @author Toni
  */
+
 public class CtrlConvidat {
-    public void main() {
+    public void main(Graf_PageRank G) {
         CtrlPerfil ctrl = new CtrlPerfil();
-        ctrl.main();
+        ctrl.main(G);
     }
 }

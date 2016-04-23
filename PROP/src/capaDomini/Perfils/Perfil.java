@@ -5,6 +5,7 @@
  */
 package capaDomini.Perfils;
 
+import capaDomini.Graf.Graf_PageRank;
 import java.util.Scanner;
 
 /**
@@ -28,22 +29,22 @@ public class Perfil {
         return nom;
     }
     
-    public void creacio_perfil(int marca, String entitat) {
+    public void creacio_perfil(int marca, String entitat, Graf_PageRank G) {
         nom = entitat;
         PerfilAutor perfilautor = new PerfilAutor();
         Scanner sc = new Scanner(System.in);
         switch(marca) {
             case 1: 
-                perfilautor.crear_perfil_autor();
+                perfilautor.crear_perfil_autor(G);
                 break;
             case 2: 
-                PerfilConf.crear_perfil_conf();
+                PerfilConf.crear_perfil_conf(G);
                 break;
             case 3: 
-                PerfilArticle.crear_perfil_article();
+                PerfilArticle.crear_perfil_article(G);
                 break;
             case 4: 
-                PerfilTerme.crear_perfil_terme();
+                PerfilTerme.crear_perfil_terme(G);
                 break;
         }
     }

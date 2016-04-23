@@ -6,7 +6,8 @@
 package capaDomini.Perfils;
 
 
-import java.util.List;
+import capaDomini.Consulta;
+import capaDomini.Graf.Graf_PageRank;
 import java.util.ArrayList;
 
 /**
@@ -60,7 +61,11 @@ public class PerfilAutor extends Perfil {
         return termes;
     }
     
-    public void crear_perfil_autor() {
+    public void crear_perfil_autor(Graf_PageRank G) {
+        Consulta cs = new Consulta();
+        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
+        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
+        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
         articles_importants();
         conferencies_importants();
         termes_importants();

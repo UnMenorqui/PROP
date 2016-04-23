@@ -6,10 +6,10 @@
 package capaDomini.Perfils;
 
 
+import capaDomini.consulta.Consulta;
+import capaDomini.Graf.Graf_PageRank;
 import static capaDomini.Perfils.Perfil.nom;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 /**
  *
@@ -46,26 +46,12 @@ public class PerfilTerme extends Perfil {
     public static void set_quantitat_autors(int q_autor) {
         quantitat_autors = q_autor;
     }
-    public static ArrayList<String> articles_importants() {
-        
-        // obtenir_articles(articles,nom,quantitat_articles);
-        return articles;
-    }
     
-    public static ArrayList<String> conferencies_importants() {
-        // obtenir_conferencies(conferencies,nom,quantitat_conf);
-        return conferencies;
-    }
-    
-    public static ArrayList<String> autors_importants() {
-        // obtenir_autors(autors,nom,quantitat_autors);
-        return autors;
-    }
-    
-    public static void crear_perfil_terme() {
-        articles_importants();
-        conferencies_importants();
-        autors_importants();
+    public static void crear_perfil_terme(Graf_PageRank G) {
+        Consulta cs = new Consulta();
+        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
+        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
+        cs.obtenir_autors(autors,nom,quantitat_autors,G);
         System.out.println(nom);
         System.out.println("");
         System.out.println("Conferencies més rellevants d'aquest terme:");
