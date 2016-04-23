@@ -23,7 +23,8 @@ public class DriverPerfil {
         System.out.println("Marca 2 si vols un perfil d'una conferencia");
         System.out.println("Marca 3 si vols un perfil d'un article");
         System.out.println("Marca 4 si vols un perfil d'un terme"); 
-        System.out.println("Marca 5 si vols surtir de la consulta");
+        System.out.println("Marca 5 si vols un perfil general"); 
+        System.out.println("Marca 6 si vols surtir de la consulta");
         Scanner sc = new Scanner(System.in);
         CtrlPerfils ctrl = new CtrlPerfils();
         int marca;
@@ -95,6 +96,55 @@ public class DriverPerfil {
                     ctrl.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies, G);
                     break;
                 case 5:
+                    System.out.println("Introdueix l'entitat que desitjes cercar:");
+                    sc.nextLine();
+                    nom = sc.nextLine();
+                    String tipus = G.getTipusNode(G.getID(nom));
+                    switch(tipus) {
+                        case "Autor":
+                            System.out.println("Introdueix la quantitat de conferencies:");
+                            q_conferencies = sc.nextInt();
+                            System.out.println("Introdueix la quantitat de termes:");
+                            q_termes = sc.nextInt();
+                            System.out.println("Introdueix la quantitat d'articles:");
+                            q_articles = sc.nextInt();
+                            System.out.println("Introdueix la quantitat de co-autors:");
+                            q_autors = sc.nextInt();
+                            ctrl.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies, G);
+                            break;
+                        
+                        case "Conferencia":
+                            System.out.println("Introdueix la quantitat d'autors:");
+                            q_autors = sc.nextInt();
+                            System.out.println("Introdueix la quantitat de termes:");
+                            q_termes = sc.nextInt();
+                            System.out.println("Introdueix la quantitat d'articles:");
+                            q_articles = sc.nextInt();
+                            ctrl.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes, G);
+                            break;
+                            
+                        case "Article":
+                            System.out.println("Introdueix la quantitat de conferencies:");
+                            q_conferencies = sc.nextInt();
+                            System.out.println("Introdueix la quantitat d'autors:");
+                            q_autors = sc.nextInt();
+                            System.out.println("Introdueix la quantitat de termes:");
+                            q_termes = sc.nextInt();
+                            ctrl.crear_perfil_article(nom, q_autors, q_termes, q_conferencies, G);
+                            break;
+                            
+                        default:
+                            System.out.println("Introdueix la quantitat de conferencies:");
+                            q_conferencies = sc.nextInt();
+                            System.out.println("Introdueix la quantitat de articles:");
+                            q_articles = sc.nextInt();
+                            System.out.println("Introdueix la quantitat d'autors:");
+                            q_autors = sc.nextInt();
+                            ctrl.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies, G);
+                            break;
+                    }
+                    break;
+                case 6:
                     bool = true;
                     break;
             }
