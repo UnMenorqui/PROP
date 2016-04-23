@@ -52,12 +52,7 @@ public class DriverNormal {
                         usr.modifica_pass();
                         break;
                     case 5:
-<<<<<<< Updated upstream
-                        DriverPerfil ctrl = new DriverPerfil();
-                        ctrl.main();
-=======
                         ctrl.main(G);
->>>>>>> Stashed changes
                         break;
                     case 6:
                         ctrlusuaris.consultar(G);

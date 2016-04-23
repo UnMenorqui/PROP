@@ -86,7 +86,7 @@ public class DriverAdministrador {
                         
                     case 4:
                         DriverPerfil ctrls = new DriverPerfil();
-                        ctrls.main();
+                        ctrls.main(G);
                         break;
                     
                     case 5:
