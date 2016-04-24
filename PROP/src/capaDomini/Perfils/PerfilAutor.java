@@ -59,57 +59,61 @@ public class PerfilAutor extends Perfil {
         cs.obtenir_termes(termes,nom,quantitat_termes,G);
         cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
         cs.obtenir_autors(co_autors,nom,quantitat_coautors,G);
-        System.out.println(nom);
-        System.out.println("");
-        System.out.println("Conferencies més rellevants d'aquest autor:");
-        for (int i = 0; i < conferencies.size(); ++i) {
-            String aux = conferencies.get(i);
-            System.out.println("\t- "+aux);
-        }
-        if (quantitat_conf > conferencies.size()) {
-            System.out.println("No hi ha tantes conferencies per la quantitat desitjada");
-        }
-        System.out.println("");
-        System.out.println("Articles més rellevants d'aquest autor:");
-        for (int i = 0; i < articles.size(); ++i) {
-            String aux = articles.get(i);
-            System.out.println("\t- "+aux);
-        }
-        if (quantitat_articles > articles.size()) {
-            System.out.println("No hi ha tants articles per la quantitat desitjada");
-        }
-        System.out.println("");
-        System.out.println("Termes més rellevants d'aquest autor:");
-        for (int i = 0; i < termes.size(); ++i) {
-            String aux = termes.get(i);
-            System.out.println("\t- "+aux);
-        }
-        System.out.println("");
-        System.out.println("Co-Autors més rellevants d'aquest autor:");
-        for (int i = 0; i < co_autors.size(); ++i) {
-            String aux = co_autors.get(i);
-            System.out.println("\t- "+aux);
-        }
-        if (quantitat_coautors > co_autors.size()) {
-            System.out.println("No hi ha tants co-autors per la quantitat desitjada");
-        }
-        if (usuari) {
-            System.out.println("Vols Guardar la Consulta?(S/N)");
-            Scanner sc = new Scanner(System.in); 
-            String sino = sc.next();
-            switch(sino) {
-                case "S":
-                    CtrlHistorial hist = new CtrlHistorial();
-                    hist.afegirCerca(nom,G.getID(nom),G.getTipusNode(G.getID(nom)));
-                    
-                    
+        if(articles.size()+termes.size()+conferencies.size()+co_autors.size() == 0) {
+            System.out.println("No s'ha trobat cap autor amb aquest nom.");
+        } else {
+            System.out.println(nom);
+            System.out.println("");
+            System.out.println("Conferencies més rellevants d'aquest autor:");
+            for (int i = 0; i < conferencies.size(); ++i) {
+                String aux = conferencies.get(i);
+                System.out.println("\t- "+aux);
             }
-            
+            if (quantitat_conf > conferencies.size()) {
+                System.out.println("No hi ha tantes conferencies per la quantitat desitjada");
+            }
+            System.out.println("");
+            System.out.println("Articles més rellevants d'aquest autor:");
+            for (int i = 0; i < articles.size(); ++i) {
+                String aux = articles.get(i);
+                System.out.println("\t- "+aux);
+            }
+            if (quantitat_articles > articles.size()) {
+                System.out.println("No hi ha tants articles per la quantitat desitjada");
+            }
+            System.out.println("");
+            System.out.println("Termes més rellevants d'aquest autor:");
+            for (int i = 0; i < termes.size(); ++i) {
+                String aux = termes.get(i);
+                System.out.println("\t- "+aux);
+            }
+            System.out.println("");
+            System.out.println("Co-Autors més rellevants d'aquest autor:");
+            for (int i = 0; i < co_autors.size(); ++i) {
+                String aux = co_autors.get(i);
+                System.out.println("\t- "+aux);
+            }
+            if (quantitat_coautors > co_autors.size()) {
+                System.out.println("No hi ha tants co-autors per la quantitat desitjada");
+            }
+            if (usuari) {
+                System.out.println("Vols Guardar la Consulta?(S/N)");
+                Scanner sc = new Scanner(System.in); 
+                String sino = sc.next();
+                switch(sino) {
+                    case "S":
+                        CtrlHistorial hist = new CtrlHistorial();
+                        hist.afegirCerca(nom,G.getID(nom),G.getTipusNode(G.getID(nom)));
+
+
+                }
+
+            }
+            termes.clear();
+            conferencies.clear();
+            articles.clear();
+            co_autors.clear();
         }
-        termes.clear();
-        conferencies.clear();
-        articles.clear();
-        co_autors.clear();
     }
     
 }
