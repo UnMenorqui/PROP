@@ -28,7 +28,7 @@ public class DriverHistorial {
                     consultar(G);
                     break;
                 case 2: 
-                    System.out.println("Escriu la teva consulta (nom\\n id\\n tipus):");
+                    System.out.println("Entra les dades de la consulta a guardar:");
                     Apunts consulta = llegirConsulta(sc);
                     historial.afegirCerca(consulta);
                     break;
@@ -51,9 +51,12 @@ public class DriverHistorial {
     }
     
     private static Apunts llegirConsulta(Scanner sc) {
+        System.out.println("Nom de l'entitat:");
         sc.nextLine();
         String nom = sc.nextLine();
+        System.out.println("ID del node:");
         int id = sc.nextInt();
+        System.out.println("Tipus del node (Autor, Conferencia, Article, Terme)");
         sc.nextLine();
         String tipus = sc.nextLine();
         return new Apunts(nom, id, tipus);

@@ -34,8 +34,10 @@ public class Historial {
     }
 
     public void esborrar(int n) {
-        LlistaConsultes.remove(n);
-        saveHistorial();
+        if(n >= 0 && n < LlistaConsultes.size()) {
+            LlistaConsultes.remove(n);
+            saveHistorial();
+        }
     }
     
     private void loadHistorial() {
