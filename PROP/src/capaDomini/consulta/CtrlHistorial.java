@@ -19,6 +19,10 @@ public class CtrlHistorial {
         hist.afegirCerca(cerca);
     }
     
+    public int size() {
+        return hist.size();
+    }
+    
     public ArrayList<Apunts> getList() {
         return hist.getList();
     }

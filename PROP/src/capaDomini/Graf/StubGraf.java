@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class StubGraf {
     
     
-    private int numTotalNode;
+    private int numTotalNode = 12;
     
     private int numTotalAresta;
     //ultim id donat a un node
@@ -46,7 +46,7 @@ public class StubGraf {
         ++numFinalAresta;
     }
     
-    public int matriu[][] = new int[13][13]; 
+    public int matriu[][] = new int[40][40]; 
     
     public StubGraf() {
         for (int i = 0; i < 13; ++i) {
@@ -211,11 +211,12 @@ public class StubGraf {
     }
     
     public void afegirNode(String tipus,String nom) {
-        Node n = new Node(numFinalNode,nom,tipus);
-        ++numFinalNode;
-        nodes.add(n);
+        ++numTotalNode;
+        for (int i=0; i<numTotalNode; ++i) {
+            matriu[numTotalNode][i] = -1;
+            matriu[i][numTotalNode] = -1;
+        }   
     }
-    
     
     public void eliminarNode(String nomNode) {
         int id = getID(nomNode);

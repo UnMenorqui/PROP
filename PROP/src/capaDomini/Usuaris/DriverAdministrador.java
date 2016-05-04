@@ -35,7 +35,7 @@ public class DriverAdministrador {
             //ja esta a Administrador
             
             System.out.println("Si vols fer una consulta marca 4.");
-            
+            /*
             System.out.println("Si vols afegir un Node marca 5.");
             
             System.out.println("Si vols afegir una Aresta marca 6.");
@@ -43,10 +43,10 @@ public class DriverAdministrador {
             System.out.println("Si vols eliminar un Node marca 7.");
             
             System.out.println("Si vols eliminar una Aresta marca 8.");
+            */
+            System.out.println("Si vols consultar l'historial de consultes marca 5.");
             
-            System.out.println("Si vols consultar l'historial de consultes marca 9.");
-            
-            System.out.println("Si vols acabar marca 10.");
+            System.out.println("Si vols acabar marca 6.");
                 if(!primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
@@ -86,7 +86,7 @@ public class DriverAdministrador {
                         DriverPerfil ctrls = new DriverPerfil();
                         ctrls.main(G,true);
                         break;
-                    
+                    /*
                     case 5:
                         System.out.println("Entra el Tipus del Node: ");
                         tipus = sc.nextLine();
@@ -110,11 +110,12 @@ public class DriverAdministrador {
                         System.out.println("Entra el nom del Node2: ");
                         node2 = sc.nextLine();
                         CG.eliminarAresta(node1,node2);
-                    case 9:
+                            */
+                    case 5:
                         ctrlusuaris.consultar(G);
                         break;
                         
-                    case 10:
+                    case 6:
                         bool = true;
                         break;
                 }

@@ -22,17 +22,12 @@ public class DriverHistorial {
         escriure_opcions();
         Scanner sc = new Scanner(System.in);
         opcio = sc.nextInt();
-        while(opcio != 4) {
+        while(opcio != 3) {
             switch(opcio) {
-                case 1: 
+                case 1:
                     consultar(G);
                     break;
                 case 2: 
-                    System.out.println("Entra les dades de la consulta a guardar:");
-                    Apunts consulta = llegirConsulta(sc);
-                    historial.afegirCerca(consulta);
-                    break;
-                case 3: 
                     System.out.println("Escriu l'índex de la consulta que vols esborrar:");
                     int i = sc.nextInt();
                     historial.esborrar(historial.size()-i);
@@ -45,22 +40,10 @@ public class DriverHistorial {
     private static void escriure_opcions() {
         System.out.println("Tria una opció:");
         System.out.println("1. Consultar historial");
-        System.out.println("2. Afegir cerca");
-        System.out.println("3. Esborrar cerca");
-        System.out.println("4. Exit");
+        System.out.println("2. Esborrar cerca");
+        System.out.println("3. Exit");
     }
     
-    private static Apunts llegirConsulta(Scanner sc) {
-        System.out.println("Nom de l'entitat:");
-        sc.nextLine();
-        String nom = sc.nextLine();
-        System.out.println("ID del node:");
-        int id = sc.nextInt();
-        System.out.println("Tipus del node (Autor, Conferencia, Article, Terme)");
-        sc.nextLine();
-        String tipus = sc.nextLine();
-        return new Apunts(nom, id, tipus);
-    }
     
     public void consultar(Graf_PageRank G) {
         CtrlHistorial ctrl = new CtrlHistorial();
@@ -74,9 +57,9 @@ public class DriverHistorial {
                 System.out.println(aux.getNom());
 	}
 	System.out.print("\n");
-	System.out.println("Selecciona un número de cerca o -1 per sortir");
+	System.out.println("Selecciona un número de cerca, o qualsevol altre número per sortir.");
         int n = sc.nextInt();
-	while(n != -1) {
+	while(n != -1 && n < ctrl.size()) {
             CtrlPerfils ctrlper = new CtrlPerfils();
             Apunts a = LlistaConsultes.get(n-1);
             int q_conferencies,q_termes,q_articles,q_autors;

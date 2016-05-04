@@ -5,8 +5,6 @@
  */
 package capaDomini.Graf;
 
-import java.util.Scanner;
-
 /**
  *
  * @author Toni

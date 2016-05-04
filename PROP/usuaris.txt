@@ -1,5 +1,0 @@
-1		David Hogg
-2		Gadu Agam
-3		Hiroshi Kawasaki
-4		Katsushi Ikeuchi
-5		James Davis

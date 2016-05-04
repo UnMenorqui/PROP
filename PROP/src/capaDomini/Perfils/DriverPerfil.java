@@ -47,51 +47,71 @@ public class DriverPerfil {
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
                     sc.nextLine();
                     nom = sc.nextLine();
-                    System.out.println("Introdueix la quantitat de conferencies:");
-                    q_conferencies = sc.nextInt();
-                    System.out.println("Introdueix la quantitat de termes:");
-                    q_termes = sc.nextInt();
-                    System.out.println("Introdueix la quantitat d'articles:");
-                    q_articles = sc.nextInt();
-                    System.out.println("Introdueix la quantitat de co-autors:");
-                    q_autors = sc.nextInt();
-                    ctrl.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies, G, usuaris);
+                    if (G.getTipusNode(G.getID(nom)).equals("Autor")) {
+                        System.out.println("Introdueix la quantitat de conferencies:");
+                        q_conferencies = sc.nextInt();
+                        System.out.println("Introdueix la quantitat de termes:");
+                        q_termes = sc.nextInt();
+                        System.out.println("Introdueix la quantitat d'articles:");
+                        q_articles = sc.nextInt();
+                        System.out.println("Introdueix la quantitat de co-autors:");
+                        q_autors = sc.nextInt();
+                        ctrl.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies, G, usuaris);
+                    }
+                    else {
+                        System.out.println("L'entitat cercada no es un autor.");
+                    }
                     break;
                 case 2: 
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
                     sc.nextLine();
                     nom = sc.nextLine();
-                    System.out.println("Introdueix la quantitat d'autors:");
-                    q_autors = sc.nextInt();
-                    System.out.println("Introdueix la quantitat de termes:");
-                    q_termes = sc.nextInt();
-                    System.out.println("Introdueix la quantitat d'articles:");
-                    q_articles = sc.nextInt();
-                    ctrl.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes, G, usuaris);
+                    if (G.getTipusNode(G.getID(nom)).equals("Conferencia")) {
+                        System.out.println("Introdueix la quantitat d'autors:");
+                        q_autors = sc.nextInt();
+                        System.out.println("Introdueix la quantitat de termes:");
+                        q_termes = sc.nextInt();
+                        System.out.println("Introdueix la quantitat d'articles:");
+                        q_articles = sc.nextInt();
+                        ctrl.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes, G, usuaris);
+                    }
+                    else {
+                        System.out.println("L'entitat cercada no es una conferencia.");
+                    }
                     break;
                 case 3:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
                     sc.nextLine();
                     nom = sc.nextLine();
-                    System.out.println("Introdueix la quantitat de conferencies:");
-                    q_conferencies = sc.nextInt();
-                    System.out.println("Introdueix la quantitat d'autors:");
-                    q_autors = sc.nextInt();
-                    System.out.println("Introdueix la quantitat de termes:");
-                    q_termes = sc.nextInt();
-                    ctrl.crear_perfil_article(nom, q_autors, q_termes, q_conferencies, G, usuaris);
+                    if (G.getTipusNode(G.getID(nom)).equals("Article")) {
+                        System.out.println("Introdueix la quantitat de conferencies:");
+                        q_conferencies = sc.nextInt();
+                        System.out.println("Introdueix la quantitat d'autors:");
+                        q_autors = sc.nextInt();
+                        System.out.println("Introdueix la quantitat de termes:");
+                        q_termes = sc.nextInt();
+                        ctrl.crear_perfil_article(nom, q_autors, q_termes, q_conferencies, G, usuaris);
+                    }
+                    else {
+                        System.out.println("L'entitat cercada no es un article.");
+                    }
                     break;
                 case 4:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
                     sc.nextLine();
                     nom = sc.nextLine();
-                    System.out.println("Introdueix la quantitat de conferencies:");
-                    q_conferencies = sc.nextInt();
-                    System.out.println("Introdueix la quantitat de articles:");
-                    q_articles = sc.nextInt();
-                    System.out.println("Introdueix la quantitat d'autors:");
-                    q_autors = sc.nextInt();
-                    ctrl.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies, G, usuaris);
+                    if (G.getTipusNode(G.getID(nom)).equals("Terme")) {
+                        System.out.println("Introdueix la quantitat de conferencies:");
+                        q_conferencies = sc.nextInt();
+                        System.out.println("Introdueix la quantitat de articles:");
+                        q_articles = sc.nextInt();
+                        System.out.println("Introdueix la quantitat d'autors:");
+                        q_autors = sc.nextInt();
+                        ctrl.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies, G, usuaris);
+                    }
+                    else {
+                        System.out.println("L'entitat cercada no es un terme.");
+                    }
                     break;
                 case 5:
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
