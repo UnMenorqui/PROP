@@ -17,9 +17,7 @@ public class prop {
     
     
     public static void main(String args[]) throws IOException {
-        
         Graf_PageRank gf = new Graf_PageRank();
-        
         String usr_admin = "Administrador";
         String admin_pass = "1234";
         CtrlUsuaris ctrl = new CtrlUsuaris();

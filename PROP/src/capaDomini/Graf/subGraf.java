@@ -16,13 +16,18 @@ public class subGraf extends Graf
     private int numarticles = 0;
     private int numautors = 0;
     private int numconf = 0;
-    private int numtermes = 0;
     
     
     
     public subGraf() {
         
     }
+    
+    /*
+    public void load() {
+        
+    }
+    */
     
     public subGraf(ArrayList<Node> paper, ArrayList<Node> autor, ArrayList<Node> terme, ArrayList<Node> conf, ArrayList<Aresta> pc, ArrayList<Aresta> pa, ArrayList<Aresta> pt) 
     {
@@ -32,7 +37,6 @@ public class subGraf extends Graf
        nodes = new ArrayList<>();
        numarticles = paper.size();
        numautors = autor.size();
-       numtermes = terme.size();
        numconf = conf.size();
        int i = 0;
        while (i < paper.size()) nodes.add(paper.get(i++));
