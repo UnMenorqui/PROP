@@ -9,21 +9,21 @@ package capaDomini.Graf;
  *
  * @author marc.capdevila.canadell
  */
-public class Node{
+public class Node {
 
       int id;
       float valor;
       String nom;
       String tipus;
       
-      public Node (){
+    public Node (){
           id = 0;
           valor = 0;
           nom = null;
           tipus = null;
-      }
+    }
       
-      public Node(int id, String nom, String tipus) {
+    public Node(int id, String nom, String tipus) {
         this.id = id;
         this.valor = 0;
         this.nom = nom;

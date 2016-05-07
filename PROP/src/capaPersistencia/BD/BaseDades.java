@@ -1,6 +1,6 @@
 package capaPersistencia.BD;
 
-import capaDomini.Graf.*; ////?????????
+import capaDomini.Graf.*; 
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -26,7 +26,7 @@ public class BaseDades extends DataBase {
         this.datPaperAuthor = new ArrayList<>();
         this.datPaperTerm = new ArrayList<>();
     }
-    /*
+    
     private void loadPaper() {
         String path = route + "\\paper.txt";
         readFile(path, datPaper, "Paper");
@@ -46,26 +46,23 @@ public class BaseDades extends DataBase {
         String path = route + "\\conf.txt";
         readFile(path, datConference,"Conf");
     }
-    */
-
-    private void loadArestaPaperConference(int id_aresta) {
+    
+    private void loadArestaPaperConference() {
         String path = route + "\\paper_conf.txt";
-        String tipus = "Conference";
-        readFileAresta(path, datPaperConference, id_aresta, tipus);
+        readFileAresta(path, datPaperConference);
     }
 
-    private void loadArestaPaperAuthor(int id_aresta) {
+    private void loadArestaPaperAuthor() {
         String path = route + "\\paper_author.txt";
-        String tipus = "Author";
-        readFileAresta(path, datPaperAuthor, id_aresta, tipus);
+        readFileAresta(path, datPaperAuthor);
     }
 
-    private void loadArestaPaperTerm(int id_aresta) {
+    private void loadArestaPaperTerm() {
         String path = route + "\\paper_term.txt";
-        String tipus = "Term";
-        readFileAresta(path, datPaperTerm, id_aresta, tipus);
+        readFileAresta(path, datPaperTerm);
     }
 
+    // No crec que fagi falta
     private Node busqueda_node_id(int id, String tipus){
         //busca un node en les llistes internes
         int i = 0;
@@ -101,19 +98,30 @@ public class BaseDades extends DataBase {
         return null;
     }
 
-    private void readFileAresta(String r, ArrayList<Aresta> aL, int id_aresta, String tipus) {
+    private void readFileAresta(String r, ArrayList<Aresta> aL) {
         //Llegeix un fitxer de relacions de l'enunciat
         try {
             FileReader file = new FileReader(r);
             BufferedReader reader = new BufferedReader(file);
-
-            String par1 = "";
-            String par2 = "";
+            
+            int cont = 1;
             int id1 = 0;
             int id2 = 0;
 
             String line = reader.readLine();
             while (line != null) {
+                int i = 0;
+                while (line.charAt(i) != '\t') i++;
+                id1 = Integer.parseInt(line.substring(0, i));
+                id2 = Integer.parseInt(line.substring(i+1,line.length()));
+                aL.add(new Aresta(cont,id1,id2));
+                ++cont;
+                line = reader.readLine();
+            }
+        }
+        catch (FileNotFoundException e) {} 
+        catch (IOException e) {}
+                /*
                 if (line != null) {
                     int i = 0;
                     while (line.charAt(i) != '\t') i++;
@@ -127,41 +135,47 @@ public class BaseDades extends DataBase {
                 line = reader.readLine();
                 ++id_aresta;
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        */
     }
 
-    /*public Graf load(){
-        //llegeix tots els fitxers i crea el graph
+    
+    //Falta per fer
+    public subGraf load(){
         loadAuthor();
         loadConference();
         loadPaper();
         loadTerm();
-        int id_aresta = 0;
-        loadArestaPaperConference(id_aresta);
-        loadArestaPaperAuthor(id_aresta);
-        loadArestaPaperTerm(id_aresta);
-
-        return new Graf(datPaper,datAuthor,datTerm,datConference,datPaperConference,datPaperAuthor,datPaperTerm);
-    }*/
+        loadArestaPaperConference();
+        loadArestaPaperAuthor();
+        loadArestaPaperTerm();
+        return new subGraf(datPaper,datAuthor,datTerm,datConference,datPaperConference,datPaperAuthor,datPaperTerm);
+    }
 
     public void safe(Graf g) {
         //Escriu la informació del graph als fitxers
     }
 
-    /*
     private void readFile(String r, ArrayList<Node> aL, String tipo) {
         //llegeix els fitxers dels nodes
         try {
             FileReader file = new FileReader(r);
             BufferedReader reader = new BufferedReader(file);
-
-            String par1 = "";
-            String par2 = "";
-
+            
+            int id = 0;
+            String nom = "";
+            String linea = "";
+            
+            while ((linea = reader.readLine()) != null) {
+                int i = 0;
+                while (linea.charAt(i) != '\t') ++i;
+                id = Integer.parseInt(linea.substring(0,i));
+                nom = linea.substring(i+1,linea.length());
+                aL.add(new Node(id,nom,tipo));
+            }
+        }
+        catch (FileNotFoundException e) {} 
+        catch (IOException e) {}
+        /*
             String line = reader.readLine();
             while (line != null) {
                 if (line != null) {
@@ -180,10 +194,6 @@ public class BaseDades extends DataBase {
                 }
                 line = reader.readLine();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
+            */
+    }       
 }
