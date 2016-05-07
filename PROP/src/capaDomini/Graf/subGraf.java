@@ -12,13 +12,28 @@ import java.util.*;
  */
 public class subGraf extends Graf 
 {
+    //ultim article de la matriu d'adjacencies.
+    private int numarticles = 0;
+    private int numautors = 0;
+    private int numconf = 0;
+    private int numtermes = 0;
+    
+    
+    
+    public subGraf() {
+        
+    }
     
     public subGraf(ArrayList<Node> paper, ArrayList<Node> autor, ArrayList<Node> terme, ArrayList<Node> conf, ArrayList<Aresta> pc, ArrayList<Aresta> pa, ArrayList<Aresta> pt) 
     {
        numTotalNode = paper.size() + autor.size() + terme.size() + conf.size();
        numTotalAresta = pc.size() + pt.size() + pa.size();
-       arestes = new ArrayList<Aresta>();
-       nodes = new ArrayList<Node>();
+       arestes = new ArrayList<>();
+       nodes = new ArrayList<>();
+       numarticles = paper.size();
+       numautors = autor.size();
+       numtermes = terme.size();
+       numconf = conf.size();
        int i = 0;
        while (i < paper.size()) nodes.add(paper.get(i++));
        i = 0;
@@ -39,6 +54,18 @@ public class subGraf extends Graf
        iniAdjAC();
        iniAdjAT();
        iniAdjCT();
+    }
+    
+    public int getnumAutors() {
+        return numautors-1;
+    }
+    
+    public int getnumArticles() {
+        return numarticles-1;
+    }
+    
+    public int getnumConf() {
+        return numconf-1;
     }
     
 }

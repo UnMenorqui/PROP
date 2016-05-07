@@ -47,7 +47,7 @@ public class DriverPerfil {
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
                     sc.nextLine();
                     nom = sc.nextLine();
-                    if (G.getTipusNode(G.getID(nom)).equals("Autor")) {
+                    if (G.getTipusNode(G.GetID(nom)).equals("Autor")) {
                         System.out.println("Introdueix la quantitat de conferencies:");
                         q_conferencies = sc.nextInt();
                         System.out.println("Introdueix la quantitat de termes:");
@@ -66,7 +66,7 @@ public class DriverPerfil {
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
                     sc.nextLine();
                     nom = sc.nextLine();
-                    if (G.getTipusNode(G.getID(nom)).equals("Conferencia")) {
+                    if (G.getTipusNode(G.GetID(nom)).equals("Conferencia")) {
                         System.out.println("Introdueix la quantitat d'autors:");
                         q_autors = sc.nextInt();
                         System.out.println("Introdueix la quantitat de termes:");
@@ -83,7 +83,7 @@ public class DriverPerfil {
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
                     sc.nextLine();
                     nom = sc.nextLine();
-                    if (G.getTipusNode(G.getID(nom)).equals("Article")) {
+                    if (G.getTipusNode(G.GetID(nom)).equals("Article")) {
                         System.out.println("Introdueix la quantitat de conferencies:");
                         q_conferencies = sc.nextInt();
                         System.out.println("Introdueix la quantitat d'autors:");
@@ -100,7 +100,7 @@ public class DriverPerfil {
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
                     sc.nextLine();
                     nom = sc.nextLine();
-                    if (G.getTipusNode(G.getID(nom)).equals("Terme")) {
+                    if (G.getTipusNode(G.GetID(nom)).equals("Terme")) {
                         System.out.println("Introdueix la quantitat de conferencies:");
                         q_conferencies = sc.nextInt();
                         System.out.println("Introdueix la quantitat de articles:");
@@ -117,7 +117,7 @@ public class DriverPerfil {
                     System.out.println("Introdueix l'entitat que desitjes cercar:");
                     sc.nextLine();
                     nom = sc.nextLine();
-                    String tipus = G.getTipusNode(G.getID(nom));
+                    String tipus = G.getTipusNode(G.GetID(nom));
                     switch(tipus) {
                         case "Autor":
                             System.out.println("Introdueix la quantitat de conferencies:");
@@ -167,7 +167,5 @@ public class DriverPerfil {
                     break;
             }
         }
-        //sc.close();
-        
     }
 }

@@ -15,9 +15,8 @@ import java.util.*;
 public class Graf {
     
     protected int numTotalNode;
-    
     protected int numTotalAresta;
-    
+  
     //ultim id donat a un node
     protected int numFinalNode;
     
@@ -25,7 +24,6 @@ public class Graf {
     protected int numFinalAresta;
     
     protected ArrayList<Aresta> arestes;
-    
     protected ArrayList<Node> nodes;
     
     //estructuraQueConteElGraf;
@@ -41,7 +39,6 @@ public class Graf {
         nodes = new ArrayList<Node>();
         adj = new int[numTotalNode][numTotalNode]; 
         initMadj();
-        
     };
     
     public Graf(ArrayList<Aresta> arestes, ArrayList<Node> nodes) {
@@ -234,7 +231,6 @@ public class Graf {
         return nodes.get(id).getTipus();
     }
     
-    //mirarse aquesta funcio
     public int getIdAresta(int node1, int node2) {
         return adj[node1][node2];
     }

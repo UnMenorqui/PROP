@@ -41,18 +41,21 @@ public class Aresta {
     //Post: retorna un id del node2 que relaciona l'aresta
     
         return node2;
-    }    
+    } 
+    
     public float getValor(){
     //Pre: True
     //Post: retorna els valor que se li ha assignat a l'aresta
         return valor;
     }
+    
     public void setValor(float val){
     //Pre: True
     //Post: Canvia el valor de l'aresta per val
     
         this.valor = val;
     }
+    
     public boolean compararAresta(int idNode1, int idNode2){
     //Pre: True
     //Post: compara el id1 i el id2 i retorna true si son iguals, sino, retorna false

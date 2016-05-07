@@ -93,7 +93,7 @@ public class PerfilArticle extends Perfil {
                 switch(sino) {
                     case "S":
                         CtrlHistorial hist = new CtrlHistorial();
-                        hist.afegirCerca(nom,G.getID(nom),G.getTipusNode(G.getID(nom)));
+                        hist.afegirCerca(nom,G.GetID(nom),G.getTipusNode(G.GetID(nom)));
 
 
                 }

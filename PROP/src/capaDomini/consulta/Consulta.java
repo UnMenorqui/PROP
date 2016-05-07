@@ -14,10 +14,10 @@ import java.util.Comparator;
 public class Consulta {
     
     public void obtenir_autors(ArrayList<String> autors, String nom, int quantitat, Graf_PageRank G) {
-        int id = G.getID(nom);
+        int id = G.GetID(nom);
         if(id >= 0) {
             int size = G.size();
-            int[][] mat = G.getMadj();
+            int[][] mat = G.GetMadj();
             ArrayList<Pair> autors1 = new ArrayList<>();
             ArrayList<Pair> articles = new ArrayList<>();
             String tipus = G.getTipusNode(id);
@@ -39,7 +39,7 @@ public class Consulta {
                     });
                     if (quantitat > autors1.size()) quantitat = autors1.size();
                     for (int i= 0; i<quantitat; i++) {
-                        autors.add(G.getNom(autors1.get(i).GetF()));
+                        autors.add(G.getNomNode(autors1.get(i).GetF()));
                     }
                     break;
 
@@ -77,11 +77,11 @@ public class Consulta {
                     });
                     if (quantitat > autors1.size()) {
                         for (int i= 0; i<autors1.size(); i++)
-                        autors.add(G.getNom(autors1.get(i).GetF()));
+                        autors.add(G.getNomNode(autors1.get(i).GetF()));
                     }
                     else {
                         for (int i= 0; i<quantitat; i++) 
-                            autors.add(G.getNom(autors1.get(i).GetF()));
+                            autors.add(G.getNomNode(autors1.get(i).GetF()));
                     }
                     break;
 
@@ -118,11 +118,11 @@ public class Consulta {
                     });
                     if (quantitat > autors1.size()) {
                         for (int i=0; i<autors1.size(); i++) 
-                            autors.add(G.getNom(autors1.get(i).GetF()));
+                            autors.add(G.getNomNode(autors1.get(i).GetF()));
                     } 
                     else {
                         for (int i=0; i<quantitat; i++) 
-                            autors.add(G.getNom(autors1.get(i).GetF()));    
+                            autors.add(G.getNomNode(autors1.get(i).GetF()));    
                     }
                     break;
 
@@ -160,11 +160,11 @@ public class Consulta {
                     });
                     if (quantitat > autors1.size()) {
                         for (int i= 0; i<autors1.size(); i++) 
-                            autors.add(G.getNom(autors1.get(i).GetF()));
+                            autors.add(G.getNomNode(autors1.get(i).GetF()));
                     } 
                     else {
                         for (int i= 0; i<quantitat; i++) 
-                            autors.add(G.getNom(autors1.get(i).GetF()));
+                            autors.add(G.getNomNode(autors1.get(i).GetF()));
                     }
                     break;    
             }
@@ -174,10 +174,10 @@ public class Consulta {
     }
     
     public void obtenir_termes(ArrayList<String> termes, String nom, int quantitat, Graf_PageRank G) {
-	int id = G.getID(nom);
+	int id = G.GetID(nom);
         if(id >= 0) {
             int size = G.size();
-            int[][] mat = G.getMadj();
+            int[][] mat = G.GetMadj();
             ArrayList<Pair> auxTermes = new ArrayList<>();
             ArrayList<Pair> Articles = new ArrayList<>();
             String tipus = G.getTipusNode(id);
@@ -198,7 +198,7 @@ public class Consulta {
                     });
                     if (quantitat > auxTermes.size()) quantitat = auxTermes.size();
                     for(int i = 0; i < quantitat; i++) {
-                            termes.add(G.getNom(auxTermes.get(i).GetF()));
+                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
                     }
                     break;
 
@@ -234,11 +234,11 @@ public class Consulta {
                     });
                     if (quantitat > auxTermes.size()) {
                         for (int i= 0; i<auxTermes.size(); i++) 
-                            termes.add(G.getNom(auxTermes.get(i).GetF()));
+                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
                     }
                     else {
                         for (int i= 0; i<quantitat; i++) 
-                            termes.add(G.getNom(auxTermes.get(i).GetF()));
+                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
                     }
                     break;
 
@@ -274,11 +274,11 @@ public class Consulta {
                     });
                     if (quantitat > auxTermes.size()) {
                         for (int i= 0; i<auxTermes.size(); i++) 
-                            termes.add(G.getNom(auxTermes.get(i).GetF()));
+                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
                     }
                     else {
                         for (int i= 0; i<quantitat; i++) 
-                            termes.add(G.getNom(auxTermes.get(i).GetF()));
+                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
                     }
                     Articles.clear();
                     break;
@@ -316,11 +316,11 @@ public class Consulta {
                     });
                     if (quantitat > auxTermes.size()) {
                         for (int i= 0; i<auxTermes.size(); i++) 
-                            termes.add(G.getNom(auxTermes.get(i).GetF()));
+                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
                     }
                     else {
                         for (int i= 0; i<quantitat; i++) 
-                            termes.add(G.getNom(auxTermes.get(i).GetF()));
+                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
                     }
                     break;
             }
@@ -330,10 +330,10 @@ public class Consulta {
     }
     
     public void obtenir_conferencies(ArrayList<String> conferencies, String nom, int quantitat, Graf_PageRank G) {
-    	int id = G.getID(nom);
+    	int id = G.GetID(nom);
         if(id >= 0) {
             int size = G.size();
-            int[][] mat = G.getMadj();
+            int[][] mat = G.GetMadj();
             ArrayList<Pair> auxConferencies = new ArrayList<>();
             ArrayList<Pair> Articles = new ArrayList<>();
             String tipus = G.getTipusNode(id);
@@ -354,11 +354,11 @@ public class Consulta {
                     });
                     if (quantitat > auxConferencies.size()) {
                         for(int i = 0; i < auxConferencies.size(); i++) 
-                            conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
+                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
                     }
                     else {
                         for(int i = 0; i < quantitat; i++) 
-                            conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
+                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
                     }
                     break;
 
@@ -394,11 +394,11 @@ public class Consulta {
                     });
                     if (quantitat > auxConferencies.size()) {
                         for(int i = 0; i < auxConferencies.size(); i++) 
-                            conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
+                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
                     }
                     else {
                         for(int i = 0; i < quantitat; i++) 
-                            conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
+                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
                     }
                     break;
 
@@ -434,11 +434,11 @@ public class Consulta {
                     });
                     if (quantitat > auxConferencies.size()) {
                         for(int i = 0; i < auxConferencies.size(); i++) 
-                            conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
+                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
                     }
                     else {
                         for(int i = 0; i < quantitat; i++) 
-                            conferencies.add(G.getNom(auxConferencies.get(i).GetF()));
+                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
                     }
                     break;
             }
@@ -448,9 +448,9 @@ public class Consulta {
     }
     
     public void obtenir_articles(ArrayList<String> articles, String nom, int quantitat, Graf_PageRank G) {
-	int id = G.getID(nom);
+	int id = G.GetID(nom);
         if(id >= 0) {
-            int[][] mat = G.getMadj();
+            int[][] mat = G.GetMadj();
             ArrayList<Pair> auxArticles = new ArrayList<>();
             String tipus = G.getTipusNode(id);
             switch(tipus) {
@@ -470,11 +470,11 @@ public class Consulta {
                     });
                     if (quantitat > auxArticles.size()) {
                         for(int i = 0; i < auxArticles.size(); i++) 
-                            articles.add(G.getNom(auxArticles.get(i).GetF()));
+                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
                     }
                     else {
                         for(int i = 0; i < quantitat; i++) 
-                            articles.add(G.getNom(auxArticles.get(i).GetF()));
+                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
                     }
                     break;
 
@@ -494,11 +494,11 @@ public class Consulta {
                     });
                     if (quantitat > auxArticles.size()) {
                         for(int i = 0; i < auxArticles.size(); i++) 
-                            articles.add(G.getNom(auxArticles.get(i).GetF()));
+                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
                     }
                     else {
                         for(int i = 0; i < quantitat; i++) 
-                            articles.add(G.getNom(auxArticles.get(i).GetF()));
+                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
                     }
                     break;
 
@@ -518,11 +518,11 @@ public class Consulta {
                     });
                     if (quantitat > auxArticles.size()) {
                         for(int i = 0; i < auxArticles.size(); i++) 
-                            articles.add(G.getNom(auxArticles.get(i).GetF()));
+                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
                     }
                     else {
                         for(int i = 0; i < quantitat; i++) 
-                            articles.add(G.getNom(auxArticles.get(i).GetF()));
+                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
                     }
                     break;      
             }
