@@ -12,23 +12,23 @@ package capaDomini.Graf;
 public class CtrlGraf {
     private Graf_PageRank SG = new Graf_PageRank();
     
-    public int getID(String nom) {
+    public short getID(String nom) {
         return SG.GetID(nom);
     }
     
-    public String getNom(int id) {
+    public String getNom(short id) {
         return SG.getNomNode(id);
     }
     
-    public int[][] getMadj() {
+    public short[][] getMadj() {
         return SG.GetMadj();
     }
     
-    public int size() {
+    public short size() {
         return SG.size();
     }
     
-    public String getTipusNode(int id) {
+    public String getTipusNode(short id) {
         return SG.getTipusNode(id);
     }
     

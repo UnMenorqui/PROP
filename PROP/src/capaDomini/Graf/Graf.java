@@ -18,20 +18,20 @@ public class Graf {
     protected int numTotalAresta;
   
     //ultim id donat a un node
-    protected int numFinalNode;
+    protected short numFinalNode;
     
     //ultim id donat a una aresta
-    protected int numFinalAresta;
+    protected short numFinalAresta;
     
     protected ArrayList<Aresta> arestes;
     protected ArrayList<Node> nodes;
     
-    protected int numarticles = 0;
-    protected int numautors = 0;
-    protected int numconf = 0;
+    protected short numarticles = 0;
+    protected short numautors = 0;
+    protected short numconf = 0;
     
     //estructuraQueConteElGraf;
-    protected int[][] adj;
+    protected short[][] adj;
     
     //funcions
     public Graf() {
@@ -41,19 +41,19 @@ public class Graf {
         numTotalAresta = 100; //Testing
         arestes = new ArrayList<Aresta>();
         nodes = new ArrayList<Node>();
-        adj = new int[numTotalNode][numTotalNode]; 
+        adj = new short[numTotalNode][numTotalNode]; 
         initMadj();
     };
     
     public Graf(ArrayList<Aresta> arestes, ArrayList<Node> nodes) {
 
-        numFinalNode = nodes.size();
-        numFinalAresta = arestes.size(); 
+        numFinalNode = (short) nodes.size();
+        numFinalAresta =(short) arestes.size(); 
         numTotalNode = nodes.size() + 500;
         numTotalAresta = arestes.size()+ 500;
         this.arestes = arestes; 
         this.nodes = nodes;
-        adj = new int[numTotalNode][numTotalNode]; 
+        adj = new short[numTotalNode][numTotalNode]; 
         initMadj();
         iniAdj();
         iniAdjAC();
@@ -63,14 +63,14 @@ public class Graf {
     
     //S'utilitzarà una matriu d'adjacencia per implementar el graf 
     protected void initMadj() {
-        for(int i = 0; i < numarticles; ++i) {
-            for (int j = 0; j < numTotalNode-numarticles; ++j) {
+        for(short i = 0; i < numarticles; ++i) {
+            for (short j = 0; j < numTotalNode-numarticles; ++j) {
                 adj[i][j] = -1;
             }
         }
     }
     
-    protected void aA(int idNode1, int idNode2) {
+    protected void aA(short idNode1, short idNode2) {
         Aresta a = new Aresta(numFinalAresta,idNode1,idNode2);
         arestes.add(a);
         adj[idNode1][idNode2] = numFinalAresta;
@@ -78,25 +78,25 @@ public class Graf {
     }
     
     protected void iniAdj() {
-        int i;
+        short i;
         for (i=0; i<numFinalAresta; ++i) {
-            int tmp1=arestes.get(i).getNode1();
-            int tmp2=arestes.get(i).getNode2();
-            int tmp3=arestes.get(i).getId();
+            short tmp1=arestes.get(i).getNode1();
+            short tmp2=arestes.get(i).getNode2();
+            short tmp3=arestes.get(i).getId();
             adj[tmp1][tmp2]=tmp3;
         }
     } 
     
     
     protected void iniAdjAC(){
-        int i;
+        short i;
         for (i=0; i<numFinalNode; ++i) {
             if(nodes.get(i).getTipus().equals("Autor")) {
-                int j;
+                short j;
                 for (j=0; j<numFinalNode; ++j) {
                     if(adj[i][j]>-1) {
                         if(nodes.get(j).getTipus().equals("Paper")) {
-                            int k;
+                            short k;
                             for(k=0; k<numFinalNode; ++k) {
                                 if(nodes.get(k).getTipus().equals("Conferencia")) {
                                     afegirAresta(nodes.get(i).getNom(), nodes.get(k).getNom());
@@ -112,14 +112,14 @@ public class Graf {
     }
     
     protected void iniAdjAT(){
-        int i;
+        short i;
         for (i=0; i<numFinalNode; ++i) {
             if(nodes.get(i).getTipus().equals("Autor")) {
-                int j;
+                short j;
                 for (j=0; j<numFinalNode; ++j) {
                     if(adj[i][j]>-1) {
                         if(nodes.get(j).getTipus().equals("Paper")) {
-                            int k;
+                            short k;
                             for(k=0; k<numFinalNode; ++k) {
                                 if(nodes.get(k).getTipus().equals("Term")) {
                                     afegirAresta(nodes.get(i).getNom(), nodes.get(k).getNom());
@@ -136,14 +136,14 @@ public class Graf {
     }
     
     protected void iniAdjCT(){
-        int i;
+        short i;
         for (i=0; i<numFinalNode; ++i) {
             if(nodes.get(i).getTipus().equals("Conferencia")) {
-                int j;
+                short j;
                 for (j=0; j<numFinalNode; ++j) {
                     if(adj[i][j]>-1) {
                         if(nodes.get(j).getTipus().equals("Paper")) {
-                            int k;
+                            short k;
                             for(k=0; k<numFinalNode; ++k) {
                                 if(nodes.get(k).getTipus().equals("Term")) {
                                     afegirAresta(nodes.get(i).getNom(), nodes.get(k).getNom());
@@ -158,7 +158,7 @@ public class Graf {
         }
     }
     
-    protected boolean existeixNode(int id) {
+    protected boolean existeixNode(short id) {
         if (id > numFinalNode || id < 0) return false;
         else {
             if (nodes.get(id) != null) return true;
@@ -166,7 +166,7 @@ public class Graf {
         return false;
     }
 
-    protected boolean existeixAresta(int id) {
+    protected boolean existeixAresta(short id) {
         if (id > numFinalAresta || id < 0) return false;
         else {
             if (arestes.get(id) != null) return true;
@@ -181,18 +181,18 @@ public class Graf {
     }
     
     public void eliminarNode(String nomNode) {
-        int id = GetID(nomNode);
+        short id = GetID(nomNode);
         if(id == -1) System.out.println("Aquest node no existeix");
         else { 
             nodes.remove(id);
-            for(int i = 0; i < adj.length; ++i) {
+            for(short i = 0; i < adj.length; ++i) {
                 adj[id][i] = -1;
             }
         }
     }
     
     public void eliminarAresta(String nom1, String nom2) {
-        int node1, node2;
+        short node1, node2;
         node1 = GetID(nom1);
         node2 = GetID(nom2);
         if(node1 == -1) System.out.println("El primer node no existeix");
@@ -204,11 +204,11 @@ public class Graf {
         }
     }
     
-    public int GetVNsize() {
+    public short GetVNsize() {
         return numFinalNode;
     }
     
-    public int GetVAsize() {
+    public short GetVAsize() {
         return numFinalAresta;
     }
     
@@ -220,62 +220,62 @@ public class Graf {
         return arestes;
     }
     
-    public int[][] GetMadj() {
+    public short[][] GetMadj() {
         return adj;
     }
     
-    public int size() {
+    public short size() {
         return numFinalNode;
     }
     
-    public String getTipus(int id) {
+    public String getTipus(short id) {
         return nodes.get(id).getTipus();
     }
     
-    public int getIdAresta(int node1, int node2) {
+    public short getIdAresta(short node1, short node2) {
         return adj[node1][node2];
     }
     
-    public float getValorNode(int id) {
+    public float getValorNode(short id) {
         return nodes.get(id).getValor();
     }
     
-    public String getTipusNode(int id) {
+    public String getTipusNode(short id) {
         return nodes.get(id).getTipus();
     }
     
-    public String getNomNode(int id) {
+    public String getNomNode(short id) {
         return nodes.get(id).getNom();
     }
     
-    public float getValorAresta(int id) {
+    public float getValorAresta(short id) {
         return arestes.get(id).getValor();
     }
     
-    public int GetID(String nom) {
-        for (int i = 0; i < nodes.size(); ++i) {
+    public short GetID(String nom) {
+        for (short i = 0; i < nodes.size(); ++i) {
             if (nodes.get(i).getNom().equals(nom)) return nodes.get(i).getId();
         }
         return -1;
     }
     
-    public void ModNode(int id, float valor) {
+    public void ModNode(short id, float valor) {
         nodes.get(id).setValor(valor);
     }
     
-    public void modAresta(int id, float valor) {
+    public void modAresta(short id, float valor) {
         arestes.get(id).setValor(valor);
     }
     
     //mirar funcio
     public void afegirAresta(String nom1, String nom2) {
-        int a = this.GetID(nom1);
-        int b = this.GetID(nom2);
+        short a = this.GetID(nom1);
+        short b = this.GetID(nom2);
         this.aA(a,b);
     }
     
     public void PrintNodes() {
-        for(int i = 0; i < nodes.size(); ++i) {
+        for(short i = 0; i < nodes.size(); ++i) {
             if(nodes.get(i) != null) {
                 nodes.get(i).PrintNode();
             }
@@ -283,7 +283,7 @@ public class Graf {
     }
     
     public void PrintArestes() {
-        for(int i = 0; i < arestes.size(); ++i) {
+        for(short i = 0; i < arestes.size(); ++i) {
             if(arestes.get(i) != null) {
                 arestes.get(i).PrintarAresta();
             }

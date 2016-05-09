@@ -37,10 +37,10 @@ public class subGraf extends Graf
        bd.load(paper,autor,terme,conf,pc,pa,pt);
        arestes = new ArrayList<>();
        nodes = new ArrayList<>();
-       numarticles = paper.size();
-       numautors = autor.size();
-       numconf = conf.size();
-       int i = 0;
+       numarticles = (short) paper.size();
+       numautors = (short) autor.size();
+       numconf = (short) conf.size();
+       short i = 0;
        while (i < paper.size()) nodes.add(paper.get(i++));
        i = 0;
        while (i < autor.size()) nodes.add(autor.get(i++));
@@ -54,23 +54,23 @@ public class subGraf extends Graf
        while (i < pa.size()) arestes.add(pa.get(i++));
        i = 0;
        while (i < pt.size()) arestes.add(pt.get(i++));
-       numTotalNode = nodes.size()-1;
-       numTotalAresta = arestes.size()-1;
-       adj = new int[numarticles][numTotalNode-numarticles]; 
+       numTotalNode = (short) nodes.size();
+       numTotalAresta = (short) arestes.size()-1;
+       adj = new short[numTotalNode][numTotalNode]; 
        initMadj();
        iniAdj();
     }
     
-    public int getnumAutors() {
-        return numautors-1;
+    public short getnumAutors() {
+        return (short) (numautors-1);
     }
     
-    public int getnumArticles() {
-        return numarticles-1;
+    public short getnumArticles() {
+        return (short) (numarticles-1);
     }
     
-    public int getnumConf() {
-        return numconf-1;
+    public short getnumConf() {
+        return (short) (numconf-1);
     }
     
 }

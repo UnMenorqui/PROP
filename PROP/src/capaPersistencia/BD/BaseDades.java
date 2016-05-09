@@ -91,16 +91,16 @@ public class BaseDades extends DataBase {
             FileReader file = new FileReader(r);
             BufferedReader reader = new BufferedReader(file);
             
-            int cont = 1;
-            int id1 = 0;
-            int id2 = 0;
+            short cont = 1;
+            short id1 = 0;
+            short id2 = 0;
 
             String line = reader.readLine();
             while (line != null) {
                 int i = 0;
                 while (line.charAt(i) != '\t') i++;
-                id1 = Integer.parseInt(line.substring(0, i));
-                id2 = Integer.parseInt(line.substring(i+1,line.length()));
+                id1 =  (short) Integer.parseInt(line.substring(0, i));
+                id2 = (short) Integer.parseInt(line.substring(i+1,line.length()));
                 aL.add(new Aresta(cont,id1,id2));
                 ++cont;
                 line = reader.readLine();
@@ -133,14 +133,14 @@ public class BaseDades extends DataBase {
             FileReader file = new FileReader(r);
             BufferedReader reader = new BufferedReader(file);
             
-            int id = 0;
+            short id = 0;
             String nom = "";
             String linea = "";
             
             while ((linea = reader.readLine()) != null) {
                 int i = 0;
                 while (linea.charAt(i) != '\t') ++i;
-                id = Integer.parseInt(linea.substring(0,i));
+                id = (short) Integer.parseInt(linea.substring(0,i));
                 nom = linea.substring(i+1,linea.length());
                 aL.add(new Node(id,nom,tipo));
             }

@@ -22,30 +22,30 @@ public class PerfilTerme extends Perfil {
     static ArrayList<String> autors = new ArrayList<>();
     static ArrayList<String> conferencies = new ArrayList<>();
     static ArrayList<String> articles = new ArrayList<>();
-    static int quantitat_autors;
-    static int quantitat_conf;
-    static int quantitat_articles;
+    static short quantitat_autors;
+    static short quantitat_conf;
+    static short quantitat_articles;
     
     
-    public int get_quantitat_articles() {
+    public short get_quantitat_articles() {
         return quantitat_articles;
     }
     
-    public void set_quantitat_articles(int q_articles) {
+    public void set_quantitat_articles(short q_articles) {
         quantitat_articles = q_articles;
     }
     
-    public int get_quantitat_conf() {
+    public short get_quantitat_conf() {
         return quantitat_conf;
     }
-    public void set_quantitat_conf(int q_conferencia) {
+    public void set_quantitat_conf(short q_conferencia) {
         quantitat_conf = q_conferencia;
     }
     
-    public int get_quantitat_autors() {
+    public short get_quantitat_autors() {
         return quantitat_autors;
     }
-    public void set_quantitat_autors(int q_autor) {
+    public void set_quantitat_autors(short q_autor) {
         quantitat_autors = q_autor;
     }
     
@@ -60,7 +60,7 @@ public class PerfilTerme extends Perfil {
             System.out.println(nom);
             System.out.println("");
             System.out.println("Conferencies més rellevants d'aquest terme:");
-            for (int i = 0; i < conferencies.size(); ++i) {
+            for (short i = 0; i < conferencies.size(); ++i) {
                 String aux = conferencies.get(i);
                 System.out.println("\t- "+aux);
             }
@@ -69,7 +69,7 @@ public class PerfilTerme extends Perfil {
             }
             System.out.println("");
             System.out.println("Articles més rellevants d'aquest terme:");
-            for (int i = 0; i < articles.size(); ++i) {
+            for (short i = 0; i < articles.size(); ++i) {
                 String aux = articles.get(i);
                 System.out.println("\t- "+aux);
             }
@@ -78,7 +78,7 @@ public class PerfilTerme extends Perfil {
             }
             System.out.println("");
             System.out.println("Autors més rellevants d'aquest terme:");
-            for (int i = 0; i < autors.size(); ++i) {
+            for (short i = 0; i < autors.size(); ++i) {
                 String aux = autors.get(i);
                 System.out.println("\t- "+aux);
             }

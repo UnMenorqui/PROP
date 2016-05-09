@@ -25,7 +25,7 @@ public class Graf_PageRank extends subGraf {
     }
     
     private void pagerank() {
-        for (int i=0; i<=num_Article; ++i) {
+        for (short i=0; i<=num_Article; ++i) {
             int prob = 0;
             if (getTipusNode(i).equals("Autor") || getTipusNode(i).equals("Conferencia")) {
                 for (int j=0; j<size(); ++j) {
@@ -33,10 +33,10 @@ public class Graf_PageRank extends subGraf {
                         prob += prob_Article/getNumAdj(j);
                     }
                 }
-                adj[i][i] = (100-d)+d*prob;
+                adj[i][i] = (short) ((100-d)+d*prob);
             }
             else if (getTipusNode(i).equals("Article")) {
-                for (int j=0; j<size(); ++j) {
+                for (short j=0; j<size(); ++j) {
                     if (adj[i][j] >= 0 && i!=j) {
                         if (getTipusNode(j).equals("Autor")) {
                             prob += prob_Autor/getNumAdj(j);
@@ -45,10 +45,10 @@ public class Graf_PageRank extends subGraf {
                         }
                     }
                 }
-                adj[i][i] = (100-d)+d*prob;
+                adj[i][i] = (short) ((100-d)+d*prob);
             }
             else if (getTipusNode(i).equals("Terme")) {
-                adj[i][i] = getNumAdj(i);
+                adj[i][i] = (short)getNumAdj(i);
             }
         }
     }

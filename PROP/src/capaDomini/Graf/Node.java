@@ -11,7 +11,7 @@ package capaDomini.Graf;
  */
 public class Node {
 
-      int id;
+      short id;
       float valor;
       String nom;
       String tipus;
@@ -23,14 +23,14 @@ public class Node {
           tipus = null;
     }
       
-    public Node(int id, String nom, String tipus) {
+    public Node(short id, String nom, String tipus) {
         this.id = id;
         this.valor = 0;
         this.nom = nom;
         this.tipus = tipus;
     }
 
-    public void setId(int id) {
+    public void setId(short id) {
         this.id = id;
     }
     
@@ -42,7 +42,7 @@ public class Node {
         this.tipus = tipus;
     }
       
-      public int getId(){
+      public short getId(){
       //Pre:True
       //Post: Retorna el id del node que crida la funcio.
         return id; 
