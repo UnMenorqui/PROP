@@ -26,6 +26,10 @@ public class Graf {
     protected ArrayList<Aresta> arestes;
     protected ArrayList<Node> nodes;
     
+    protected int numarticles = 0;
+    protected int numautors = 0;
+    protected int numconf = 0;
+    
     //estructuraQueConteElGraf;
     protected int[][] adj;
     
@@ -59,8 +63,8 @@ public class Graf {
     
     //S'utilitzarà una matriu d'adjacencia per implementar el graf 
     protected void initMadj() {
-        for(int i = 0; i < numTotalNode; ++i) {
-            for (int j = 0; j < numTotalNode; ++j) {
+        for(int i = 0; i < numarticles; ++i) {
+            for (int j = 0; j < numTotalNode-numarticles; ++j) {
                 adj[i][j] = -1;
             }
         }
@@ -70,7 +74,6 @@ public class Graf {
         Aresta a = new Aresta(numFinalAresta,idNode1,idNode2);
         arestes.add(a);
         adj[idNode1][idNode2] = numFinalAresta;
-        adj[idNode2][idNode1] = numFinalAresta;
         ++numFinalAresta;
     }
     
@@ -81,9 +84,9 @@ public class Graf {
             int tmp2=arestes.get(i).getNode2();
             int tmp3=arestes.get(i).getId();
             adj[tmp1][tmp2]=tmp3;
-            adj[tmp2][tmp1]=tmp3;
         }
     } 
+    
     
     protected void iniAdjAC(){
         int i;
@@ -184,7 +187,6 @@ public class Graf {
             nodes.remove(id);
             for(int i = 0; i < adj.length; ++i) {
                 adj[id][i] = -1;
-                adj[i][id] = -1;
             }
         }
     }
@@ -199,7 +201,6 @@ public class Graf {
             //mirarse com eliminar aresta
             arestes.remove(adj[node1][node2]);
             adj[node1][node2] = -1;
-            adj[node2][node1] = -1;
         }
     }
     

@@ -9,61 +9,48 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class BaseDades extends DataBase {
-    private ArrayList<Node> datPaper;
-    private ArrayList<Node> datAuthor;
-    private ArrayList<Node> datTerm;
-    private ArrayList<Node> datConference;
-    private ArrayList<Aresta> datPaperConference;
-    private ArrayList<Aresta> datPaperAuthor;
-    private ArrayList<Aresta> datPaperTerm;
-
+    
     public BaseDades() {
-        this.datPaper = new ArrayList<>();
-        this.datAuthor = new ArrayList<>();
-        this.datTerm = new ArrayList<>();
-        this.datConference = new ArrayList<>();
-        this.datPaperConference = new ArrayList<>();
-        this.datPaperAuthor = new ArrayList<>();
-        this.datPaperTerm = new ArrayList<>();
+    
     }
     
-    private void loadPaper() {
-        String path = route + "\\paper.txt";
-        readFile(path, datPaper, "Paper");
+    private void loadPaper(ArrayList<Node> paper) {
+       
+        readFile("paper.txt", paper, "Paper");
     }
 
-    private void loadAuthor() {
-        String path = route + "\\author.txt";
-        readFile(path, datAuthor,"Author");
+    private void loadAuthor(ArrayList<Node> autor) {
+        
+        readFile("author.txt", autor,"Author");
     }
 
-    private void loadTerm() {
-        String path = route + "\\term.txt";
-        readFile(path, datTerm,"Term");
+    private void loadTerm(ArrayList<Node> terme) {
+        
+        readFile("term.txt", terme,"Term");
     }
 
-    private void loadConference() {
-        String path = route + "\\conf.txt";
-        readFile(path, datConference,"Conf");
+    private void loadConference(ArrayList<Node> conf) {
+        
+        readFile("conf.txt", conf,"Conf");
     }
     
-    private void loadArestaPaperConference() {
-        String path = route + "\\paper_conf.txt";
-        readFileAresta(path, datPaperConference);
+    private void loadArestaPaperConference(ArrayList<Aresta> pc) {
+        
+        readFileAresta("paper_conf.txt", pc);
     }
 
-    private void loadArestaPaperAuthor() {
-        String path = route + "\\paper_author.txt";
-        readFileAresta(path, datPaperAuthor);
+    private void loadArestaPaperAuthor(ArrayList<Aresta> pa) {
+    
+        readFileAresta("paper_author.txt", pa);
     }
 
-    private void loadArestaPaperTerm() {
-        String path = route + "\\paper_term.txt";
-        readFileAresta(path, datPaperTerm);
+    private void loadArestaPaperTerm(ArrayList<Aresta> pt) {
+     
+        readFileAresta("paper_term.txt", pt);
     }
 
     // No crec que fagi falta
-    private Node busqueda_node_id(int id, String tipus){
+    /*private Node busqueda_node_id(int id, String tipus){
         //busca un node en les llistes internes
         int i = 0;
         if (tipus.equals("Paper")) {
@@ -96,7 +83,7 @@ public class BaseDades extends DataBase {
         }
 
         return null;
-    }
+    }*/
 
     private void readFileAresta(String r, ArrayList<Aresta> aL) {
         //Llegeix un fitxer de relacions de l'enunciat
@@ -121,34 +108,19 @@ public class BaseDades extends DataBase {
         }
         catch (FileNotFoundException e) {} 
         catch (IOException e) {}
-                /*
-                if (line != null) {
-                    int i = 0;
-                    while (line.charAt(i) != '\t') i++;
-
-                    id1 = Integer.parseInt(line.substring(0, i));
-                    id2 = Integer.parseInt(line.substring(i + 1,line.length()));
-                    Node paperaresta = busqueda_node_id(id1, "Paper"); // porque esto
-                    Node altrearesta = busqueda_node_id(id2, tipus);
-                    //aL.add(new Aresta(id_aresta, 0, paperaresta, altrearesta)); // int int int int parameter
-                }
-                line = reader.readLine();
-                ++id_aresta;
-            }
-        */
     }
 
     
-    //Falta per fer
-    public subGraf load(){
-        loadAuthor();
-        loadConference();
-        loadPaper();
-        loadTerm();
-        loadArestaPaperConference();
-        loadArestaPaperAuthor();
-        loadArestaPaperTerm();
-        return new subGraf(datPaper,datAuthor,datTerm,datConference,datPaperConference,datPaperAuthor,datPaperTerm);
+    
+    public void load(ArrayList<Node> paper, ArrayList<Node> autor, ArrayList<Node> terme, ArrayList<Node> conf, ArrayList<Aresta> pc, ArrayList<Aresta> pa, ArrayList<Aresta> pt){
+        loadAuthor(autor);
+        loadConference(conf);
+        loadPaper(paper);
+        loadTerm(terme);
+        loadArestaPaperConference(pc);
+        loadArestaPaperAuthor(pa);
+        loadArestaPaperTerm(pt);
+       
     }
 
     public void safe(Graf g) {
@@ -175,25 +147,5 @@ public class BaseDades extends DataBase {
         }
         catch (FileNotFoundException e) {} 
         catch (IOException e) {}
-        /*
-            String line = reader.readLine();
-            while (line != null) {
-                if (line != null) {
-                    int i = 0;
-                    while (line.charAt(i) != '\t') i++;
-                    switch(tipo){
-                        case "Paper": aL.add(new NodePaper(Integer.parseInt(line.substring(0, i)),
-                                line.substring(i + 1, line.length()))); break;
-                        case "Author": aL.add(new NodeAuthor(Integer.parseInt(line.substring(0, i)),
-                                line.substring(i + 1, line.length()))); break;
-                        case "Conf": aL.add(new NodeConference(Integer.parseInt(line.substring(0, i)),
-                                line.substring(i + 1, line.length()))); break;
-                        case "Term": aL.add(new NodeTerm(Integer.parseInt(line.substring(0, i)),
-                                line.substring(i + 1, line.length()))); break;
-                    }
-                }
-                line = reader.readLine();
-            }
-            */
     }       
 }

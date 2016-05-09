@@ -18,7 +18,7 @@ import java.util.Scanner;
  * @author Toni
  */
 
-public class Main {
+public class PROP {
     
     
     public static void main(String args[]) throws IOException {

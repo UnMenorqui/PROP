@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package capaDomini.Graf;
+import capaPersistencia.BD.BaseDades;
 import java.util.*;
 
 /**
@@ -13,15 +14,10 @@ import java.util.*;
 public class subGraf extends Graf 
 {
     //ultim article de la matriu d'adjacencies.
-    private int numarticles = 0;
-    private int numautors = 0;
-    private int numconf = 0;
     
     
     
-    public subGraf() {
-        
-    }
+    
     
     /*
     public void load() {
@@ -29,10 +25,16 @@ public class subGraf extends Graf
     }
     */
     
-    public subGraf(ArrayList<Node> paper, ArrayList<Node> autor, ArrayList<Node> terme, ArrayList<Node> conf, ArrayList<Aresta> pc, ArrayList<Aresta> pa, ArrayList<Aresta> pt) 
-    {
-       numTotalNode = paper.size() + autor.size() + terme.size() + conf.size();
-       numTotalAresta = pc.size() + pt.size() + pa.size();
+    public subGraf() {
+       ArrayList<Node> paper = new ArrayList<>();
+       ArrayList<Node> autor = new ArrayList<>();
+       ArrayList<Node> terme = new ArrayList<>();
+       ArrayList<Node> conf = new ArrayList<>();
+       ArrayList<Aresta> pc = new ArrayList<>();
+       ArrayList<Aresta> pa = new ArrayList<>();
+       ArrayList<Aresta> pt = new ArrayList<>();
+       BaseDades bd = new BaseDades();
+       bd.load(paper,autor,terme,conf,pc,pa,pt);
        arestes = new ArrayList<>();
        nodes = new ArrayList<>();
        numarticles = paper.size();
@@ -52,12 +54,11 @@ public class subGraf extends Graf
        while (i < pa.size()) arestes.add(pa.get(i++));
        i = 0;
        while (i < pt.size()) arestes.add(pt.get(i++));
-       adj = new int[numTotalNode][numTotalNode]; 
+       numTotalNode = nodes.size()-1;
+       numTotalAresta = arestes.size()-1;
+       adj = new int[numarticles][numTotalNode-numarticles]; 
        initMadj();
        iniAdj();
-       iniAdjAC();
-       iniAdjAT();
-       iniAdjCT();
     }
     
     public int getnumAutors() {

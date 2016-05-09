@@ -1,3 +1,0 @@
-6		Some Philosophical Problems with Formal Learning Theory.
-7		Terminological Cycles in KL-ONE-based Knowledge Representation Languages.
-8		Integrating Description Logics and Action Formalisms: First Results.
