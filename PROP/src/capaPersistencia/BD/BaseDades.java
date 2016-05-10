@@ -49,41 +49,6 @@ public class BaseDades extends DataBase {
         readFileAresta("paper_term.txt", pt);
     }
 
-    // No crec que fagi falta
-    /*private Node busqueda_node_id(int id, String tipus){
-        //busca un node en les llistes internes
-        int i = 0;
-        if (tipus.equals("Paper")) {
-            while (i < datPaper.size() && datPaper.get(i).getId()!= id) {
-                ++i;
-            }
-            if(i == datPaper.size())return null;
-            return datPaper.get(i);
-        }
-        else if (tipus.equals("Conference")) {
-            while (i < datConference.size() && datConference.get(i).getId() != id) {
-                ++i;
-            }
-            if(i == datConference.size())return null;
-            return datConference.get(i);
-        }
-        else if (tipus.equals("Author")) {
-            while (i < datAuthor.size() && datAuthor.get(i).getId() != id) {
-                ++i;
-            }
-            if(i == datAuthor.size())return null;
-            return datAuthor.get(i);
-        }
-        else if (tipus.equals("Term")) {
-            while (i < datTerm.size() && datTerm.get(i).getId() != id) {
-                ++i;
-            }
-            if(i == datTerm.size())return null;
-            return datTerm.get(i);
-        }
-
-        return null;
-    }*/
 
     private void readFileAresta(String r, ArrayList<Aresta> aL) {
         //Llegeix un fitxer de relacions de l'enunciat
@@ -111,7 +76,6 @@ public class BaseDades extends DataBase {
     }
 
     
-    
     public void load(ArrayList<Node> paper, ArrayList<Node> autor, ArrayList<Node> terme, ArrayList<Node> conf, ArrayList<Aresta> pc, ArrayList<Aresta> pa, ArrayList<Aresta> pt){
         loadAuthor(autor);
         loadConference(conf);
@@ -120,7 +84,6 @@ public class BaseDades extends DataBase {
         loadArestaPaperConference(pc);
         loadArestaPaperAuthor(pa);
         loadArestaPaperTerm(pt);
-       
     }
 
     public void safe(Graf g) {
