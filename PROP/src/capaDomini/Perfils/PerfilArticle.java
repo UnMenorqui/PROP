@@ -6,7 +6,7 @@
 package capaDomini.Perfils;
 
 
-import capaDomini.Graf.Graf_PageRank;
+import capaDomini.Graf.Graf;
 import java.util.ArrayList;
 import capaDomini.consulta.Consulta;
 import capaDomini.consulta.CtrlHistorial;
@@ -21,45 +21,45 @@ public class PerfilArticle extends Perfil {
     public ArrayList<String> termes = new ArrayList<>();
     public ArrayList<String> conferencies = new ArrayList<>();
     public ArrayList<String> autors = new ArrayList<>();
-    public short quantitat_termes;
-    public short quantitat_conf;
-    public short quantitat_autors;
+    public int quantitat_termes;
+    public int quantitat_conf;
+    public int quantitat_autors;
     
     
-    public short get_quantitat_termes() {
+    public int get_quantitat_termes() {
         return quantitat_termes;
     }
     
-    public void set_quantitat_termes(short q_terme) {
+    public void set_quantitat_termes(int q_terme) {
         quantitat_termes = q_terme;
     }
     
-    public short get_quantitat_conf() {
+    public int get_quantitat_conf() {
         return quantitat_conf;
     }
-    public void set_quantitat_conf(short q_conferencia) {
+    public void set_quantitat_conf(int q_conferencia) {
         quantitat_conf = q_conferencia;
     }
     
-    public short get_quantitat_autors() {
+    public int get_quantitat_autors() {
         return quantitat_autors;
     }
-    public void set_quantitat_autors(short q_autor) {
+    public void set_quantitat_autors(int q_autor) {
         quantitat_autors = q_autor;
     }
     
-    public void crear_perfil_article(Graf_PageRank G, boolean usuari) {
+    public void crear_perfil_article(Graf G, boolean usuari) {
         Consulta cs = new Consulta();
-        cs.obtenir_autors(autors,nom,quantitat_autors,G);
-        cs.obtenir_termes(termes,nom,quantitat_termes,G);
-        cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
+        //cs.obtenir_autors(autors,nom,quantitat_autors,G);
+        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
+        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
         if(termes.size()+conferencies.size()+autors.size() == 0) {
             System.out.println("No s'ha trobat cap article amb aquest nom.");
         } else {
             System.out.println(nom);
             System.out.println();
             System.out.println("Conferencies més rellevants d'aquest article:");
-            for (short i = 0; i < conferencies.size(); ++i) {
+            for (int i = 0; i < conferencies.size(); ++i) {
                 String aux = conferencies.get(i);
                 System.out.println("\t- "+aux);
             }
@@ -70,7 +70,7 @@ public class PerfilArticle extends Perfil {
             }
             System.out.println("");
             System.out.println("Autors més rellevants d'aquest article:");
-            for (short i = 0; i < autors.size(); ++i) {
+            for (int i = 0; i < autors.size(); ++i) {
                 String aux = autors.get(i);
                 System.out.println("\t- "+aux);
             }
@@ -79,7 +79,7 @@ public class PerfilArticle extends Perfil {
             }
             System.out.println("");
             System.out.println("Termes més rellevants d'aquest article:");
-            for (short i = 0; i < termes.size(); ++i) {
+            for (int i = 0; i < termes.size(); ++i) {
                 String aux = termes.get(i);
                 System.out.println("\t- "+aux);
             }
@@ -93,7 +93,7 @@ public class PerfilArticle extends Perfil {
                 switch(sino) {
                     case "S":
                         CtrlHistorial hist = new CtrlHistorial();
-                        hist.afegirCerca(nom,G.GetID(nom),G.getTipusNode(G.GetID(nom)));
+                        hist.afegirCerca(nom,G.GetIDnode(nom),G.getTipusNode(G.GetIDnode(nom)));
 
 
                 }

@@ -11,36 +11,36 @@ package Utils;
  */
 
 public class Pair implements Comparable {
-    private short first;
-    private short second;
+    private int first;
+    private int second;
     
    public Pair() {
        first = 0;
        second = 0;
    }
    
-   public Pair (short first, short second) {
+   public Pair (int first, int second) {
        this.first = first;
        this.second = second;
    }
-   public void SetF(short first) {
+   public void SetF(int first) {
        this.first = first;
    }
    
-   public void SetS(short second) {
+   public void SetS(int second) {
        this.second = second;
    }
    
-   public void SetP(short first, short second) {
+   public void SetP(int first, int second) {
        this.first = first;
        this.second = second;
    }
    
-   public short GetF() {
+   public int GetF() {
        return first;
    }
    
-   public short GetS() {
+   public int GetS() {
        return second;
    }
 

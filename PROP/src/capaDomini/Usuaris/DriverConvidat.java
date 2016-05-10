@@ -6,7 +6,7 @@
 package capaDomini.Usuaris;
 
 import capaDomini.Perfils.DriverPerfil;
-import capaDomini.Graf.Graf_PageRank;
+import capaDomini.Graf.Graf;
 import java.io.IOException;
 
 /**
@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 
 public class DriverConvidat {
-    public void main(Graf_PageRank G) throws IOException {
+    public void main(Graf G) throws IOException {
         DriverPerfil ctrl = new DriverPerfil();
         ctrl.main(G,false);
     }

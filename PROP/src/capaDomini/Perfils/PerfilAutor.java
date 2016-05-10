@@ -6,7 +6,7 @@
 package capaDomini.Perfils;
 
 
-import capaDomini.Graf.Graf_PageRank;
+import capaDomini.Graf.Graf;
 import capaDomini.consulta.Consulta;
 import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
@@ -22,50 +22,50 @@ public class PerfilAutor extends Perfil {
     static ArrayList<String> conferencies = new ArrayList<>();
     static ArrayList<String> articles = new ArrayList<>();
     static ArrayList<String> co_autors = new ArrayList<>();
-    static short quantitat_termes;
-    static short quantitat_conf;
-    static short quantitat_articles;
-    static short quantitat_coautors;
+    static int quantitat_termes;
+    static int quantitat_conf;
+    static int quantitat_articles;
+    static int quantitat_coautors;
     
     
-    public short get_quantitat_termes() {
+    public int get_quantitat_termes() {
         return quantitat_termes;
     }
     
-    public void set_quantitat_termes(short q_terme) {
+    public void set_quantitat_termes(int q_terme) {
         quantitat_termes = q_terme;
     }
     
-    public short get_quantitat_conf() {
+    public int get_quantitat_conf() {
         return quantitat_conf;
     }
-    public void set_quantitat_conf(short q_conferencia) {
+    public void set_quantitat_conf(int q_conferencia) {
         quantitat_conf = q_conferencia;
     }
     
-    public short get_quantitat_articles() {
+    public int get_quantitat_articles() {
         return quantitat_articles;
     }
-    public void set_quantitat_articles(short q_articles) {
+    public void set_quantitat_articles(int q_articles) {
         quantitat_articles = q_articles;
     }
-    public void set_quantitat_autors(short q_coautors) {
+    public void set_quantitat_autors(int q_coautors) {
         quantitat_coautors = q_coautors;
     }
     
-    public void crear_perfil_autor(Graf_PageRank G, boolean usuari) {
+    public void crear_perfil_autor(Graf G, boolean usuari) {
         Consulta cs = new Consulta();
-        cs.obtenir_articles(articles,nom,quantitat_articles,G);
-        cs.obtenir_termes(termes,nom,quantitat_termes,G);
-        cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
-        cs.obtenir_autors(co_autors,nom,quantitat_coautors,G);
+        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
+        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
+        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
+        //cs.obtenir_autors(co_autors,nom,quantitat_coautors,G);
         if(articles.size()+termes.size()+conferencies.size()+co_autors.size() == 0) {
             System.out.println("No s'ha trobat cap autor amb aquest nom.");
         } else {
             System.out.println(nom);
             System.out.println("");
             System.out.println("Conferencies més rellevants d'aquest autor:");
-            for (short i = 0; i < conferencies.size(); ++i) {
+            for (int i = 0; i < conferencies.size(); ++i) {
                 String aux = conferencies.get(i);
                 System.out.println("\t- "+aux);
             }
@@ -74,7 +74,7 @@ public class PerfilAutor extends Perfil {
             }
             System.out.println("");
             System.out.println("Articles més rellevants d'aquest autor:");
-            for (short i = 0; i < articles.size(); ++i) {
+            for (int i = 0; i < articles.size(); ++i) {
                 String aux = articles.get(i);
                 System.out.println("\t- "+aux);
             }
@@ -83,13 +83,13 @@ public class PerfilAutor extends Perfil {
             }
             System.out.println("");
             System.out.println("Termes més rellevants d'aquest autor:");
-            for (short i = 0; i < termes.size(); ++i) {
+            for (int i = 0; i < termes.size(); ++i) {
                 String aux = termes.get(i);
                 System.out.println("\t- "+aux);
             }
             System.out.println("");
             System.out.println("Co-Autors més rellevants d'aquest autor:");
-            for (short i = 0; i < co_autors.size(); ++i) {
+            for (int i = 0; i < co_autors.size(); ++i) {
                 String aux = co_autors.get(i);
                 System.out.println("\t- "+aux);
             }
@@ -103,7 +103,7 @@ public class PerfilAutor extends Perfil {
                 switch(sino) {
                     case "S":
                         CtrlHistorial hist = new CtrlHistorial();
-                        hist.afegirCerca(nom,G.GetID(nom),G.getTipusNode(G.GetID(nom)));
+                        hist.afegirCerca(nom,G.GetIDnode(nom),G.getTipusNode(G.GetIDnode(nom)));
 
 
                 }

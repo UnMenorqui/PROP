@@ -1,12 +1,13 @@
-package prop;
 
+
+import capaDomini.Graf.Graf;
+import capaDomini.Graf.Node;
 import capaDomini.Usuaris.DriverConvidat;
 import capaDomini.Usuaris.DriverNormal;
 import capaDomini.Usuaris.CtrlUsuaris;
 import capaDomini.Usuaris.DriverAdministrador;
-import capaDomini.Graf.Graf_PageRank;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  *
@@ -17,7 +18,11 @@ public class prop {
     
     
     public static void main(String args[]) throws IOException {
-        Graf_PageRank gf = new Graf_PageRank();
+        Graf gf = new Graf();
+        ArrayList<Node> nodes = gf.GetVN();
+        for (int i=0; i<nodes.size(); ++i) {
+            System.out.println(nodes.get(i).getValor());
+        }
         String usr_admin = "Administrador";
         String admin_pass = "1234";
         CtrlUsuaris ctrl = new CtrlUsuaris();

@@ -1,20 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package capaDomini.Graf;
+
 
 /**
  *
- * @author marc.capdevila.canadell
+ * @author 
  */
-public class Node {
 
-      short id;
-      float valor;
-      String nom;
-      String tipus;
+public class Node {
+    int id;
+    double valor;
+    String nom;
+    String tipus;
       
     public Node (){
           id = 0;
@@ -23,14 +19,14 @@ public class Node {
           tipus = null;
     }
       
-    public Node(short id, String nom, String tipus) {
+    public Node(int id, String nom, String tipus) {
         this.id = id;
         this.valor = 0;
         this.nom = nom;
         this.tipus = tipus;
     }
 
-    public void setId(short id) {
+    public void setId(int id) {
         this.id = id;
     }
     
@@ -41,32 +37,28 @@ public class Node {
     public void setTipus(String tipus) {
         this.tipus = tipus;
     }
-      
-      public short getId(){
-      //Pre:True
-      //Post: Retorna el id del node que crida la funcio.
-        return id; 
-      }
-      
-      public String getNom() {
-          return nom;
-      }
-      
-      public String getTipus() {
-          return tipus;
-      }
-      
-      public void PrintNode() {
-          System.out.println("El node amb id: " + id + " te per nom: " + nom + " el seu tipus es: " + tipus + " i el seu valor es " + valor);
-      }
-
-    public void setValor(float valor) {
+    
+    public void setValor(double valor) {
         this.valor = valor;
     }
-
-    public float getValor() {
-        return valor;
+      
+    public int getId(){
+      return id; 
+    }
+      
+    public String getNom() {
+        return nom;
+    }
+      
+    public String getTipus() {
+        return tipus;
     }
 
-      
+    public double getValor() {
+        return valor;
+    }  
+    
+    public void PrintNode() {
+        System.out.println("El node amb id: " + id + " te per nom: " + nom + " el seu tipus es: " + tipus + " i el seu valor es " + valor);
+    }
 }

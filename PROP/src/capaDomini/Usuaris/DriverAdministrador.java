@@ -2,7 +2,7 @@ package capaDomini.Usuaris;
 
 
 import capaDomini.Graf.CtrlGraf;
-import capaDomini.Graf.Graf_PageRank;
+import capaDomini.Graf.Graf;
 import capaDomini.Perfils.DriverPerfil;
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class DriverAdministrador {
  
-    public void main (Graf_PageRank G) {
+    public void main (Graf G) {
             Boolean bool = false;
             Boolean primer = true;
             CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
@@ -22,7 +22,7 @@ public class DriverAdministrador {
             
             String user;
             String pass = null;
-            String nom,tipus,node1,node2;
+            //String nom,tipus,node1,node2;
             CtrlUsuaris ctrl = new CtrlUsuaris();
             while(!bool) {
                 System.out.println("Si vols consultar tots els usuaris de la BD marca 1.");
@@ -120,6 +120,5 @@ public class DriverAdministrador {
                         break;
                 }
             }
-        }
-        //System.out.println(); 
+        } 
     }   
