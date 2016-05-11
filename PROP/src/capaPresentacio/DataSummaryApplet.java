@@ -5,7 +5,6 @@
  */
 package capaPresentacio;
 
-
 import netscape.javascript.JSObject;
 import java.applet.Applet;
 import netscape.javascript.*; // add plugin.jar to classpath during compilation
