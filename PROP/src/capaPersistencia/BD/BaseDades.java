@@ -80,18 +80,16 @@ public class BaseDades extends DataBase {
             FileReader file = new FileReader(r);
             BufferedReader reader = new BufferedReader(file);
             
-            short cont = 1;
-            short id1 = 0;
-            short id2 = 0;
+            int id1 = 0;
+            int id2 = 0;
 
             String line = reader.readLine();
             while (line != null) {
                 int i = 0;
                 while (line.charAt(i) != '\t') i++;
-                id1 =  (short) Integer.parseInt(line.substring(0, i));
-                id2 = (short) Integer.parseInt(line.substring(i+1,line.length()));
-                aL.add(new Aresta(cont,id1,id2));
-                ++cont;
+                id1 =  Integer.parseInt(line.substring(0, i));
+                id2 = Integer.parseInt(line.substring(i+1,line.length()));
+                aL.add(new Aresta(id1,id2));
                 line = reader.readLine();
             }
         }

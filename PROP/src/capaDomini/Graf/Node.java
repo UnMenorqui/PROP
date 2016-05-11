@@ -1,5 +1,6 @@
 package capaDomini.Graf;
 
+import java.util.*;
 
 /**
  *
@@ -8,15 +9,17 @@ package capaDomini.Graf;
 
 public class Node {
     int id;
-    double valor;
     String nom;
     String tipus;
+    double valor;
+    ArrayList<String> nodesadjacents;
       
     public Node (){
           id = 0;
           valor = 0;
           nom = null;
           tipus = null;
+          nodesadjacents = new ArrayList<>();
     }
       
     public Node(int id, String nom, String tipus) {
@@ -24,6 +27,7 @@ public class Node {
         this.valor = 0;
         this.nom = nom;
         this.tipus = tipus;
+        nodesadjacents = new ArrayList<>();
     }
 
     public void setId(int id) {
@@ -58,7 +62,23 @@ public class Node {
         return valor;
     }  
     
-    public void PrintNode() {
-        System.out.println("El node amb id: " + id + " te per nom: " + nom + " el seu tipus es: " + tipus + " i el seu valor es " + valor);
+    public void afegirnodeadjacent(String nom) {
+        nodesadjacents.add(nom);
+    }
+    
+    public void esborrarnodeadjacent(String nom) {
+        for (int i=0; i<nodesadjacents.size(); ++i) {
+            if (nodesadjacents.get(i).equals(nom)) {
+                nodesadjacents.remove(i);
+            }
+        }
+    }
+    
+    public int getsize() {
+        return nodesadjacents.size();
+    }
+    
+    public ArrayList<String> getnodesadjacents() {
+        return nodesadjacents;
     }
 }

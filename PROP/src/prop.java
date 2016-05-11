@@ -19,10 +19,6 @@ public class prop {
     
     public static void main(String args[]) throws IOException {
         Graf gf = new Graf();
-        ArrayList<Node> nodes = gf.GetVN();
-        for (int i=0; i<nodes.size(); ++i) {
-            System.out.println(nodes.get(i).getValor());
-        }
         String usr_admin = "Administrador";
         String admin_pass = "1234";
         CtrlUsuaris ctrl = new CtrlUsuaris();

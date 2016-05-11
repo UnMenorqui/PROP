@@ -16,12 +16,12 @@ public class CtrlGraf {
         return SG.GetIDnode(nom);
     }
     
-    public String getNom(int id) {
-        return SG.getNomNode(id);
+    public String getNom(int id, String tipus) {
+        return SG.getNomNode(id,tipus);
     }
     
-    public String getTipusNode(int id) {
-        return SG.getTipusNode(id);
+    public String getTipusNode(int id, String nom) {
+        return SG.getTipusNode(id,nom);
     }
     
     public void afegirNode(String tipus,String nom) {
