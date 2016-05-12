@@ -395,6 +395,7 @@ public class Graf {
             }
             paper.get(i).setValor((1-d)+(d*prob));
         }
+        System.out.println("Articles acabats");
         for (int i=0; i<conf.size(); ++i) {
             nodesadjacents = conf.get(i).getnodesadjacents();
             prob = 0;
@@ -404,6 +405,7 @@ public class Graf {
             }
             conf.get(i).setValor((1-d)+(d*prob));
         }
+        System.out.println("Conferencies acabats");
         for (int i=0; i<autor.size(); ++i) {
             nodesadjacents = autor.get(i).getnodesadjacents();
             prob = 0;
@@ -413,9 +415,11 @@ public class Graf {
             }
             autor.get(i).setValor((1-d)+(d*prob));
         }
+        System.out.println("Autors acabats");
         for (int i=0; i<terme.size(); ++i) {
             id1 = terme.get(i).getId();
-            terme.get(i).setValor(getNumAdj(id1,nodesadjacents.get(i)));
+            nodesadjacents = terme.get(i).getnodesadjacents();
+            terme.get(i).setValor(getNumAdj(id1,terme.get(i).getNom()));
         }
     }
     
