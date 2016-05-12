@@ -1,7 +1,6 @@
 
 
 import capaDomini.Graf.Graf;
-import capaDomini.Graf.Node;
 import capaDomini.Usuaris.DriverConvidat;
 import capaDomini.Usuaris.DriverNormal;
 import capaDomini.Usuaris.CtrlUsuaris;

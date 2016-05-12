@@ -1,5 +1,6 @@
 package capaDomini.Graf;
 
+import Utils.PairString;
 import java.util.*;
 
 /**
@@ -12,7 +13,7 @@ public class Node {
     String nom;
     String tipus;
     double valor;
-    ArrayList<String> nodesadjacents;
+    ArrayList<PairString> nodesadjacents;
       
     public Node (){
           id = 0;
@@ -62,8 +63,9 @@ public class Node {
         return valor;
     }  
     
-    public void afegirnodeadjacent(String nom) {
-        nodesadjacents.add(nom);
+    public void afegirnodeadjacent(int nom, String tipus) {
+        PairString pa = new PairString(nom,tipus);
+        nodesadjacents.add(pa);
     }
     
     public void esborrarnodeadjacent(String nom) {
@@ -78,7 +80,15 @@ public class Node {
         return nodesadjacents.size();
     }
     
-    public ArrayList<String> getnodesadjacents() {
+    public ArrayList<PairString> getnodesadjacents() {
         return nodesadjacents;
+    }
+    
+    public int nodeiessimFirst(int i) {
+        return nodesadjacents.get(i).GetF();
+    }
+    
+    public String nodeiessimSecond(int i) {
+        return nodesadjacents.get(i).GetS();
     }
 }

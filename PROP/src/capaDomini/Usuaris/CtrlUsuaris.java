@@ -21,7 +21,6 @@ public class CtrlUsuaris {
     private CtrlDadesUsuari du;
     private CtrlHistorial hist;
     private UsuariNormal un = new UsuariNormal();
-    private CtrlGraf CG = new CtrlGraf();
     
     public CtrlUsuaris() {
         du = new CtrlDadesUsuari();
@@ -88,21 +87,21 @@ public class CtrlUsuaris {
     public void esborrar(int n) {
         hist.esborrar(n);
     }
-    public void afegirNode(String tipus,String nom) {
+    public void afegirNode(String tipus,String nom, Graf CG) {
         CG.afegirNode(tipus, nom);
     }
     
     
-    public void eliminarNode(String nomNode) {
-        CG.eliminarNode(nomNode);
+    public void eliminarNode(String nomNode, String tipus, Graf CG) {
+        CG.eliminarNode(nomNode,tipus);
     }
     
-    public void eliminarAresta(String nom1, String nom2) {
-        CG.eliminarAresta(nom1, nom2);
+    public void eliminarAresta(String nom1, String nom2, String tipus, Graf CG) {
+        CG.eliminarAresta(nom1, nom2, tipus);
     }
     
-    public void afegirAresta(String nom1, String nom2) {
-        CG.afegirAresta(nom1, nom2);
+    public void afegirAresta(String nom1, String nom2, String tipus, Graf CG) {
+        CG.afegirAresta(nom1, nom2, tipus);
     }
     
     
