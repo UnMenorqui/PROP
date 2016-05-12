@@ -1,10 +1,10 @@
   package capaDomini.Usuaris;
 
-import capaDomini.Graf.CtrlGraf;
 import capaDomini.Graf.Graf;
 import capaDomini.consulta.CtrlHistorial;
 import capaDomini.consulta.DriverHistorial;
 import capaPersistencia.CtrlDadesUsuari;
+
 
 /**
  * @author toni_
@@ -21,6 +21,7 @@ public class CtrlUsuaris {
     private CtrlDadesUsuari du;
     private CtrlHistorial hist;
     private UsuariNormal un = new UsuariNormal();
+
     
     public CtrlUsuaris() {
         du = new CtrlDadesUsuari();
@@ -87,6 +88,7 @@ public class CtrlUsuaris {
     public void esborrar(int n) {
         hist.esborrar(n);
     }
+    
     public void afegirNode(String tipus,String nom, Graf CG) {
         CG.afegirNode(tipus, nom);
     }
@@ -103,6 +105,4 @@ public class CtrlUsuaris {
     public void afegirAresta(String nom1, String nom2, String tipus, Graf CG) {
         CG.afegirAresta(nom1, nom2, tipus);
     }
-    
-    
 }
