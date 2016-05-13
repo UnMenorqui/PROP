@@ -5,7 +5,10 @@
  */
 
 package capaDomini.Graf;
+import Utils.PairString;
+import capaPersistencia.BD.BaseDades;
 import java.util.*;
+
 
 /**
  *
@@ -14,279 +17,444 @@ import java.util.*;
 
 public class Graf {
     
-    protected int numTotalNode;
-    protected int numTotalAresta;
-  
-    //ultim id donat a un node
-    protected int numFinalNode;
+    //arraylist amb els nodes autor del graf
+    protected ArrayList<Node> autor;
     
-    //ultim id donat a una aresta
-    protected int numFinalAresta;
+    //arraylist amb els nodes conferencia del graf
+    protected ArrayList<Node> conf;
     
-    protected ArrayList<Aresta> arestes;
-    protected ArrayList<Node> nodes;
+    //arraylist amb els nodes articles del graf
+    protected ArrayList<Node> paper;
     
-    protected int numarticles = 0;
-    protected int numautors = 0;
-    protected int numconf = 0;
+    //arraylist amb els nodes terme del graf
+    protected ArrayList<Node> terme;
     
-    //estructuraQueConteElGraf;
-    protected int[][] adj;
+    //arraylist amb les arestes article-conferencia del graf
+    protected ArrayList<Aresta> pc;
     
-    //funcions
+    //arraylist amb les arestes article-autor del graf
+    protected ArrayList<Aresta> pa;
+    
+    //arraylist amb les arestes article-terme del graf
+    protected ArrayList<Aresta> pt;
+    
+    private Boolean actualitzar = false;    //en cas de canvi posar a true;
+    
+    int idnou = 500000;
+    
+    
     public Graf() {
-        numFinalNode = 0;
-        numFinalAresta = 0;
-        numTotalNode = 100; //Testing
-        numTotalAresta = 100; //Testing
-        arestes = new ArrayList<Aresta>();
-        nodes = new ArrayList<Node>();
-        adj = new int[numTotalNode][numTotalNode]; 
-        initMadj();
+       BaseDades bd = new BaseDades();
+       paper = new ArrayList<>();
+       autor = new ArrayList<>();
+       conf = new ArrayList<>();
+       terme = new ArrayList<>();
+       pc = new ArrayList<>();
+       pa = new ArrayList<>();
+       pt = new ArrayList<>();
+       bd.load(paper,autor,terme,conf,pc,pa,pt);
+       for (int i=0; i<pc.size(); ++i) {
+           int node1 = pc.get(i).getNode1();
+           int node2 = pc.get(i).getNode2();
+           int id = getidArrayint(node1,"Article");
+           int id2 = getidArrayint(node2,"Conferencia");
+           paper.get(id).afegirnodeadjacent(node2,"Conferencia");
+           conf.get(id2).afegirnodeadjacent(node1,"Article");
+       }
+       for (int i=0; i<pa.size(); ++i) {
+           int node1 = pa.get(i).getNode1();
+           int node2 = pa.get(i).getNode2();
+           int id = getidArrayint(node1,"Article");
+           int id2 = getidArrayint(node2,"Autor");
+           paper.get(id).afegirnodeadjacent(node2,"Autor");
+           autor.get(id2).afegirnodeadjacent(node1,"Article");
+       }
+       for (int i=0; i<pt.size(); ++i) {
+           int node1 = pt.get(i).getNode1();
+           int node2 = pt.get(i).getNode2();
+           int id = getidArrayint(node1,"Article");
+           int id2 = getidArrayint(node2,"Terme");
+           paper.get(id).afegirnodeadjacent(node2,"Terme");
+           terme.get(id2).afegirnodeadjacent(node1,"Article");
+       }
+       pagerank();
     };
-    
-    public Graf(ArrayList<Aresta> arestes, ArrayList<Node> nodes) {
 
-        numFinalNode = nodes.size();
-        numFinalAresta = arestes.size(); 
-        numTotalNode = nodes.size() + 500;
-        numTotalAresta = arestes.size()+ 500;
-        this.arestes = arestes; 
-        this.nodes = nodes;
-        adj = new int[numTotalNode][numTotalNode]; 
-        initMadj();
-        iniAdj();
-        iniAdjAC();
-        iniAdjAT();
-        iniAdjCT();
-    };
-    
-    //S'utilitzarà una matriu d'adjacencia per implementar el graf 
-    protected void initMadj() {
-        for(int i = 0; i < numarticles; ++i) {
-            for (int j = 0; j < numTotalNode-numarticles; ++j) {
-                adj[i][j] = -1;
-            }
-        }
+    public void afegirAresta(String nom1, String nom2, String tipus) {
+        int id = getidArrayString(nom1,"Article");
+        int id1 = getidArrayString(nom2,tipus);
+        int Node1 = GetIDnode(id,"Article");
+        int Node2 = GetIDnode(id1,tipus);
+        Aresta a = new Aresta(Node1,Node2);
+        if (tipus.equals("Autor")) pa.add(a);
+        else if (tipus.equals("Conferencia")) pc.add(a);
+        else pt.add(a);
+        actualitzar = true;
     }
     
-    protected void aA(int idNode1, int idNode2) {
-        Aresta a = new Aresta(numFinalAresta,idNode1,idNode2);
-        arestes.add(a);
-        adj[idNode1][idNode2] = numFinalAresta;
-        ++numFinalAresta;
-    }
-    
-    protected void iniAdj() {
-        int i;
-        for (i=0; i<numFinalAresta; ++i) {
-            int tmp1=arestes.get(i).getNode1();
-            int tmp2=arestes.get(i).getNode2();
-            int tmp3=arestes.get(i).getId();
-            adj[tmp1][tmp2]=tmp3;
-        }
-    } 
-    
-    
-    protected void iniAdjAC(){
-        int i;
-        for (i=0; i<numFinalNode; ++i) {
-            if(nodes.get(i).getTipus().equals("Autor")) {
-                int j;
-                for (j=0; j<numFinalNode; ++j) {
-                    if(adj[i][j]>-1) {
-                        if(nodes.get(j).getTipus().equals("Paper")) {
-                            int k;
-                            for(k=0; k<numFinalNode; ++k) {
-                                if(nodes.get(k).getTipus().equals("Conferencia")) {
-                                    afegirAresta(nodes.get(i).getNom(), nodes.get(k).getNom());
-                                }
-                            }
-
+    public void eliminarAresta(String nom1, String nom2, String tipus) {
+        int id, id1, node1, node2;
+        id = getidArrayString(nom1,"Article");
+        id1 = getidArrayString(nom2,tipus);
+        node1 = GetIDnode(id,"Article");
+        node2 = GetIDnode(id1,tipus);
+        switch (tipus) {
+            case "Autor":
+                for (int i=0; i<pa.size(); ++i) {
+                    if (pa.get(i).getNode1() == node1) {
+                        if (pa.get(i).getNode2() == node2) {
+                            pa.remove(i);
                         }
-
                     }
                 }
-            }
-        }
-    }
-    
-    protected void iniAdjAT(){
-        int i;
-        for (i=0; i<numFinalNode; ++i) {
-            if(nodes.get(i).getTipus().equals("Autor")) {
-                int j;
-                for (j=0; j<numFinalNode; ++j) {
-                    if(adj[i][j]>-1) {
-                        if(nodes.get(j).getTipus().equals("Paper")) {
-                            int k;
-                            for(k=0; k<numFinalNode; ++k) {
-                                if(nodes.get(k).getTipus().equals("Term")) {
-                                    afegirAresta(nodes.get(i).getNom(), nodes.get(k).getNom());
-                                }
-                            }
+                break;
 
+            case "Conferencia":
+                for (int i=0; i<pc.size(); ++i) {
+                    if (pc.get(i).getNode1() == node1) {
+                        if (pc.get(i).getNode2() == node2) {
+                            pc.remove(i);
                         }
-
                     }
                 }
-            }
+                break;
 
-        }
-    }
-    
-    protected void iniAdjCT(){
-        int i;
-        for (i=0; i<numFinalNode; ++i) {
-            if(nodes.get(i).getTipus().equals("Conferencia")) {
-                int j;
-                for (j=0; j<numFinalNode; ++j) {
-                    if(adj[i][j]>-1) {
-                        if(nodes.get(j).getTipus().equals("Paper")) {
-                            int k;
-                            for(k=0; k<numFinalNode; ++k) {
-                                if(nodes.get(k).getTipus().equals("Term")) {
-                                    afegirAresta(nodes.get(i).getNom(), nodes.get(k).getNom());
-                                }
-                            }
-
+            case "Terme":
+                for (int i=0; i<pt.size(); ++i) {
+                    if (pt.get(i).getNode1() == node1) {
+                        if (pt.get(i).getNode2() == node2) {
+                            pt.remove(i);
                         }
-
                     }
                 }
-            }
+                break;
         }
-    }
-    
-    protected boolean existeixNode(int id) {
-        if (id > numFinalNode || id < 0) return false;
-        else {
-            if (nodes.get(id) != null) return true;
-        }
-        return false;
+        actualitzar = true;
     }
 
-    protected boolean existeixAresta(int id) {
-        if (id > numFinalAresta || id < 0) return false;
-        else {
-            if (arestes.get(id) != null) return true;
-        }
-        return false;
-    }
-    
     public void afegirNode(String tipus,String nom) {
-        Node n = new Node(numFinalNode,nom,tipus);
-        ++numFinalNode;
-        nodes.add(n);
+        Node n = new Node(idnou,nom,tipus);
+        ++idnou;
+        switch (tipus) {
+            case "Autor":
+                autor.add(n);
+                break;
+            case "Conferencia":
+                conf.add(n);
+                break;
+            case "Article":
+                paper.add(n);
+                break;
+            case "Terme":
+                terme.add(n);
+                break;
+        }
+        actualitzar = true;
     }
     
-    public void eliminarNode(String nomNode) {
-        int id = GetID(nomNode);
+    public void eliminarNode(String nom, String tipus) {
+        int id = getidArrayString(nom,tipus);
+        int node = GetIDnode(id,tipus);
         if(id == -1) System.out.println("Aquest node no existeix");
         else { 
-            nodes.remove(id);
-            for(int i = 0; i < adj.length; ++i) {
-                adj[id][i] = -1;
+            switch (tipus) {
+                case "Autor":
+                    for (int i=0; i<autor.size(); ++i) {
+                        if (autor.get(i).getId() == node) autor.remove(i);
+                    } 
+                    for (int i = 0; i<pa.size(); ++i) {
+                        if (pa.get(i).getNode2() == node) pa.remove(i);
+                    }  
+                    break;
+                case "Conferencia":
+                    for (int i=0; i<conf.size(); ++i) {
+                        if (conf.get(i).getId() == node) conf.remove(i);
+                    }  
+                    for (int i = 0; i<pc.size(); ++i) {
+                        if (pc.get(i).getNode2() == node) pc.remove(i);
+                    }   
+                    break;
+                case "Article":
+                    for (int i=0; i<paper.size(); ++i) {
+                        if (paper.get(i).getId() == node) paper.remove(i);
+                    }  
+                    for (int i = 0; i<pa.size(); ++i) {
+                        if (pa.get(i).getNode1() == node) pa.remove(i);
+                    }  
+                    for (int i = 0; i<pt.size(); ++i) {
+                        if (pt.get(i).getNode1() == node) pt.remove(i);
+                    }
+                    for (int i = 0; i<pc.size(); ++i) {
+                        if (pc.get(i).getNode1() == node) pc.remove(i);
+                    }
+                    break;
+                case "Terme":
+                    for (int i=0; i<terme.size(); ++i) {
+                        if (terme.get(i).getId() == node) terme.remove(i);
+                    }
+                    for (int i = 0; i<pt.size(); ++i) {
+                        if (pt.get(i).getNode2() == node) pt.remove(i);
+                    }   
+                    break;
+            }
+            actualitzar = true;
+        }
+    }
+    
+    public double getValorNode(int id, String nom) {
+        String tipus = getTipusNode(id,nom);
+        double valor = 0;
+        switch(tipus) {
+            case "Autor":
+                for (int i =0; i<autor.size();++i) {
+                    if (autor.get(i).getId() == id) {
+                        valor = autor.get(i).getValor();
+                    }
+                }
+                break;
+            case "Conferencia":
+                for (int i =0; i<conf.size();++i) {
+                    if (conf.get(i).getId() == id) {
+                        valor = conf.get(i).getValor();
+                    }
+                }
+                break;
+            case "Article":
+                for (int i =0; i<paper.size();++i) {
+                    if (paper.get(i).getId() == id) {
+                        valor = paper.get(i).getValor();
+                    }
+                }
+                break;
+            case "Terme":
+                for (int i =0; i<terme.size();++i) {
+                    if (terme.get(i).getId() == id) {
+                        valor = terme.get(i).getValor();
+                    }
+                }
+                break;
+        }
+        return valor;
+    }
+    
+    public String getTipusNode(int id, String nom) {
+        String tipus = "";
+        Boolean acabat = false;
+        for (int i=0; i<paper.size() && !acabat; ++i) {
+            if (paper.get(i).getId() == id) {
+                if (paper.get(i).getNom().equals(nom)) {
+                    tipus = paper.get(i).getTipus();
+                    acabat = true;
+                }
             }
         }
-    }
-    
-    public void eliminarAresta(String nom1, String nom2) {
-        int node1, node2;
-        node1 = GetID(nom1);
-        node2 = GetID(nom2);
-        if(node1 == -1) System.out.println("El primer node no existeix");
-        else if (node2 == -1) System.out.println("El segon node no existeix");
-        else {
-            //mirarse com eliminar aresta
-            arestes.remove(adj[node1][node2]);
-            adj[node1][node2] = -1;
+        for (int i=0; i<conf.size() && !acabat; ++i) {
+            if (conf.get(i).getId() == id) {
+                if (conf.get(i).getNom().equals(nom)) {
+                    tipus = conf.get(i).getTipus();
+                    acabat = true;
+                }
+            }
         }
+        for (int i=0; i<autor.size() && !acabat; ++i) {
+            if (autor.get(i).getId() == id) {
+                if (autor.get(i).getNom().equals(nom)) {
+                    tipus = autor.get(i).getTipus();
+                    acabat = true;
+                }
+            }
+        }
+        for (int i=0; i<terme.size() && !acabat; ++i) {
+            if (terme.get(i).getId() == id) {
+                if (terme.get(i).getNom().equals(nom)) {
+                    tipus = terme.get(i).getTipus();
+                    acabat = true;
+                }
+            }
+        }
+        return tipus;
     }
     
-    public int GetVNsize() {
-        return numFinalNode;
+    public String getNomNode(int id, String tipus) {
+        switch (tipus) {
+            case "Autor":
+                return autor.get(id).getNom();
+            case "Conferencia":
+                return conf.get(id).getNom();
+            case "Article":
+                return paper.get(id).getNom();
+            case "Terme":
+                return terme.get(id).getNom();
+        }
+        return "";
     }
     
-    public int GetVAsize() {
-        return numFinalAresta;
-    }
-    
-    public ArrayList<Node> GetVN() {
-        return nodes;
-    }
-    
-    public ArrayList<Aresta> GetVA() {
-        return arestes;
-    }
-    
-    public int[][] GetMadj() {
-        return adj;
-    }
-    
-    public int size() {
-        return numFinalNode;
-    }
-    
-    public String getTipus(int id) {
-        return nodes.get(id).getTipus();
-    }
-    
-    public int getIdAresta(int node1, int node2) {
-        return adj[node1][node2];
-    }
-    
-    public float getValorNode(int id) {
-        return nodes.get(id).getValor();
-    }
-    
-    public String getTipusNode(int id) {
-        return nodes.get(id).getTipus();
-    }
-    
-    public String getNomNode(int id) {
-        return nodes.get(id).getNom();
-    }
-    
-    public float getValorAresta(int id) {
-        return arestes.get(id).getValor();
-    }
-    
-    public int GetID(String nom) {
-        for (int i = 0; i < nodes.size(); ++i) {
-            if (nodes.get(i).getNom().equals(nom)) return nodes.get(i).getId();
+    private int GetIDnode(int id, String tipus) {
+        switch (tipus) {
+            case "Autor":
+                return autor.get(id).getId();
+            case "Conferencia":
+                return conf.get(id).getId();
+            case "Article":
+                return paper.get(id).getId();
+            case "Terme":
+                return terme.get(id).getId();
         }
         return -1;
     }
     
-    public void ModNode(int id, float valor) {
-        nodes.get(id).setValor(valor);
-    }
-    
-    public void modAresta(int id, float valor) {
-        arestes.get(id).setValor(valor);
-    }
-    
-    //mirar funcio
-    public void afegirAresta(String nom1, String nom2) {
-        int a = this.GetID(nom1);
-        int b = this.GetID(nom2);
-        this.aA(a,b);
-    }
-    
-    public void PrintNodes() {
-        for(int i = 0; i < nodes.size(); ++i) {
-            if(nodes.get(i) != null) {
-                nodes.get(i).PrintNode();
+    private void pagerank() {
+        double prob_Autor = 0.2;
+        double prob_Conf = 0.3;
+        double prob_Article = 0.1;
+        double d = 0.85;
+        int id = 0;
+        double prob;
+        for (int i=0; i<paper.size(); ++i) {
+            prob = 0;
+            for (int j=0; j<paper.get(i).getsize(); ++j) {
+                int node = paper.get(i).nodeiessimFirst(j);
+                String tipus = paper.get(i).nodeiessimSecond(j);
+                id = getidArrayint(node,tipus);
+                switch (tipus) {
+                    case "Autor":
+                        prob += prob_Autor/getNumAdj(id,tipus);
+                        break;
+                    case "Conferencia":
+                        prob += prob_Conf/getNumAdj(id,tipus);
+                        break;
+                }
             }
-        } 
-    }
-    
-    public void PrintArestes() {
-        for(int i = 0; i < arestes.size(); ++i) {
-            if(arestes.get(i) != null) {
-                arestes.get(i).PrintarAresta();
-            }
+            paper.get(i).setValor((1-d)+(d*prob));
         }
+        for (int i=0; i<conf.size(); ++i) {
+            prob = 0;
+            for (int j=0; j<conf.get(i).getsize(); ++j) {
+                int node = conf.get(i).nodeiessimFirst(j);
+                String tipus = conf.get(i).nodeiessimSecond(j);
+                id = getidArrayint(node,tipus);
+                prob += prob_Article/getNumAdj(id,tipus);
+            }
+            conf.get(i).setValor((1-d)+(d*prob));
+        }
+        for (int i=0; i<autor.size(); ++i) {
+            prob = 0;
+            for (int j=0; j<autor.get(i).getsize(); ++j) {
+                int node = autor.get(i).nodeiessimFirst(j);
+                String tipus = autor.get(i).nodeiessimSecond(j);
+                id = getidArrayint(node,tipus);
+                prob += prob_Article/getNumAdj(id,tipus);
+            }
+            autor.get(i).setValor((1-d)+(d*prob));
+        }
+        for (int i=0; i<terme.size(); ++i) {
+            terme.get(i).setValor(getNumAdj(i,"Terme"));
+        }
+    }
+    
+    public int getidArrayint(int id, String tipus) {
+        int idArray = 0;
+        Boolean acabat = false;
+        switch (tipus) {
+            case "Article":
+                acabat = false;
+                for (int i=0; i<paper.size() && !acabat; ++i) {
+                    if (paper.get(i).getId() == id) {
+                        idArray = i;
+                        acabat = true;
+                    }
+                }
+                break;
+            case "Autor":
+                acabat = false;
+                for (int i=0; i<autor.size() && !acabat; ++i) {
+                    if (autor.get(i).getId() == id) {
+                        idArray = i;
+                        acabat = true;
+                    }
+                }
+                break;
+            case "Conferencia":
+                acabat = false;
+                for (int i=0; i<conf.size() && !acabat; ++i) {
+                    if (conf.get(i).getId() == id) {
+                        idArray = i;
+                        acabat = true;
+                    }
+                }
+                break;
+            case "Terme":
+                acabat = false;
+                for (int i=0; i<terme.size() && !acabat; ++i) {
+                    if (terme.get(i).getId() == id) {
+                        idArray = i;
+                        acabat = true;
+                    }
+                }
+                break;
+        }
+        return idArray;
+    }
+    
+    public int getidArrayString(String nom, String tipus) {
+        int idArray = 0;
+        Boolean acabat = false;
+        switch (tipus) {
+            case "Article":
+                acabat = false;
+                for (int i=0; i<paper.size() && !acabat; ++i) {
+                    if (paper.get(i).getNom().equals(nom)) {
+                        idArray = i;
+                        acabat = true;
+                    }
+                }
+                break;
+            case "Autor":
+                acabat = false;
+                for (int i=0; i<autor.size() && !acabat; ++i) {
+                    if (autor.get(i).getNom().equals(nom)) {
+                        idArray = i;
+                        acabat = true;
+                    }
+                }
+                break;
+            case "Conferencia":
+                acabat = false;
+                for (int i=0; i<conf.size() && !acabat; ++i) {
+                    if (conf.get(i).getNom().equals(nom)) {
+                        idArray = i;
+                        acabat = true;
+                    }
+                }
+                break;
+            case "Terme":
+                acabat = false;
+                for (int i=0; i<terme.size() && !acabat; ++i) {
+                    if (terme.get(i).getNom().equals(nom)) {
+                        idArray = i;
+                        acabat = true;
+                    }
+                }
+                break;
+        }
+        return idArray;
+    }
+    
+    private double getNumAdj(int id, String tipus) {
+        switch (tipus) {
+            case "Autor":
+                return autor.get(id).getsize();
+            case "Conferencia":
+                return conf.get(id).getsize();
+            case "Article":
+                return paper.get(id).getsize();
+            case "Terme":
+                return terme.get(id).getsize();
+        }
+        return -1;
+    }
+    
+    public Boolean actualitzar() {
+        return actualitzar;
     }
 }

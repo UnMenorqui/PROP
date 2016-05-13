@@ -7,7 +7,7 @@ package capaDomini.Perfils;
 
 
 import capaDomini.consulta.Consulta;
-import capaDomini.Graf.Graf_PageRank;
+import capaDomini.Graf.Graf;
 import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -49,11 +49,11 @@ public class PerfilConf extends Perfil {
     }
     
     
-    public void crear_perfil_conf(Graf_PageRank G, boolean usuaris) {
+    public void crear_perfil_conf(Graf G, boolean usuaris) {
         Consulta cs = new Consulta();
-        cs.obtenir_articles(articles,nom,quantitat_articles,G);
-        cs.obtenir_autors(autors,nom,quantitat_autors,G);
-        cs.obtenir_termes(termes,nom,quantitat_termes,G);
+        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
+        //cs.obtenir_autors(autors,nom,quantitat_autors,G);
+        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
         if(articles.size()+termes.size()+autors.size() == 0) {
             System.out.println("No s'ha trobat cap conferència amb aquest nom.");
         } else {
@@ -92,7 +92,7 @@ public class PerfilConf extends Perfil {
                 switch(sino) {
                     case "S":
                         CtrlHistorial hist = new CtrlHistorial();
-                        hist.afegirCerca(nom,G.GetID(nom),G.getTipusNode(G.GetID(nom)));
+                        //hist.afegirCerca(nom,G.GetIDnode(nom),G.getTipusNode(G.GetIDnode(nom),nom));
 
 
                 }

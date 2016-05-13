@@ -5,7 +5,7 @@
  */
 package capaDomini.consulta;
 
-import capaDomini.Graf.Graf_PageRank;
+import capaDomini.Graf.Graf;
 import capaDomini.Perfils.CtrlPerfils;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,8 +15,9 @@ import java.util.Scanner;
  * @author rogia
  */
 public class DriverHistorial {
+    
     public void main () {
-        Graf_PageRank G = new Graf_PageRank();
+        Graf G = new Graf();
         Historial historial = new Historial();
         int opcio;
         escriure_opcions();
@@ -44,8 +45,7 @@ public class DriverHistorial {
         System.out.println("3. Exit");
     }
     
-    
-    public void consultar(Graf_PageRank G) {
+    public void consultar(Graf G) {
         CtrlHistorial ctrl = new CtrlHistorial();
         ArrayList<Apunts> LlistaConsultes = ctrl.getList();
 	Scanner sc = new Scanner(System.in);

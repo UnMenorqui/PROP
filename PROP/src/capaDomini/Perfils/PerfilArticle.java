@@ -6,7 +6,7 @@
 package capaDomini.Perfils;
 
 
-import capaDomini.Graf.Graf_PageRank;
+import capaDomini.Graf.Graf;
 import java.util.ArrayList;
 import capaDomini.consulta.Consulta;
 import capaDomini.consulta.CtrlHistorial;
@@ -48,11 +48,11 @@ public class PerfilArticle extends Perfil {
         quantitat_autors = q_autor;
     }
     
-    public void crear_perfil_article(Graf_PageRank G, boolean usuari) {
+    public void crear_perfil_article(Graf G, boolean usuari) {
         Consulta cs = new Consulta();
-        cs.obtenir_autors(autors,nom,quantitat_autors,G);
-        cs.obtenir_termes(termes,nom,quantitat_termes,G);
-        cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
+        //cs.obtenir_autors(autors,nom,quantitat_autors,G);
+        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
+        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
         if(termes.size()+conferencies.size()+autors.size() == 0) {
             System.out.println("No s'ha trobat cap article amb aquest nom.");
         } else {
@@ -93,7 +93,7 @@ public class PerfilArticle extends Perfil {
                 switch(sino) {
                     case "S":
                         CtrlHistorial hist = new CtrlHistorial();
-                        hist.afegirCerca(nom,G.GetID(nom),G.getTipusNode(G.GetID(nom)));
+                        //hist.afegirCerca(nom,G.GetIDnode(nom),G.getTipusNode(G.GetIDnode(nom),nom));
 
 
                 }

@@ -6,7 +6,7 @@
 package capaDomini.Perfils;
 
 
-import capaDomini.Graf.Graf_PageRank;
+import capaDomini.Graf.Graf;
 import capaDomini.consulta.Consulta;
 import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
@@ -53,12 +53,12 @@ public class PerfilAutor extends Perfil {
         quantitat_coautors = q_coautors;
     }
     
-    public void crear_perfil_autor(Graf_PageRank G, boolean usuari) {
+    public void crear_perfil_autor(Graf G, boolean usuari) {
         Consulta cs = new Consulta();
-        cs.obtenir_articles(articles,nom,quantitat_articles,G);
-        cs.obtenir_termes(termes,nom,quantitat_termes,G);
-        cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
-        cs.obtenir_autors(co_autors,nom,quantitat_coautors,G);
+        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
+        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
+        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
+        //cs.obtenir_autors(co_autors,nom,quantitat_coautors,G);
         if(articles.size()+termes.size()+conferencies.size()+co_autors.size() == 0) {
             System.out.println("No s'ha trobat cap autor amb aquest nom.");
         } else {
@@ -103,7 +103,7 @@ public class PerfilAutor extends Perfil {
                 switch(sino) {
                     case "S":
                         CtrlHistorial hist = new CtrlHistorial();
-                        hist.afegirCerca(nom,G.GetID(nom),G.getTipusNode(G.GetID(nom)));
+                        //hist.afegirCerca(nom,G.GetIDnode(nom),G.getTipusNode(G.GetIDnode(nom),nom));
 
 
                 }

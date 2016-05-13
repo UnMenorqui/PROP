@@ -10,42 +10,21 @@ package capaDomini.Graf;
  * @author Toni
  */
 public class CtrlGraf {
-    private Graf_PageRank SG = new Graf_PageRank();
-    
-    public int getID(String nom) {
-        return SG.GetID(nom);
-    }
-    
-    public String getNom(int id) {
-        return SG.getNomNode(id);
-    }
-    
-    public int[][] getMadj() {
-        return SG.GetMadj();
-    }
-    
-    public int size() {
-        return SG.size();
-    }
-    
-    public String getTipusNode(int id) {
-        return SG.getTipusNode(id);
-    }
+    private Graf SG = new Graf();
     
     public void afegirNode(String tipus,String nom) {
         SG.afegirNode(tipus, nom);
     }
     
-    
-    public void eliminarNode(String nomNode) {
-        SG.eliminarNode(nomNode);
+    public void eliminarNode(String nomNode, String tipus) {
+        SG.eliminarNode(nomNode, tipus);
     }
     
-    public void eliminarAresta(String nom1, String nom2) {
-        SG.eliminarAresta(nom1, nom2);
+    public void eliminarAresta(String nom1, String nom2, String tipus) {
+        SG.eliminarAresta(nom1, nom2, tipus);
     }
     
-    public void afegirAresta(String nom1, String nom2) {
-        SG.afegirAresta(nom1, nom2);
+    public void afegirAresta(String nom1, String nom2, String tipus) {
+        SG.afegirAresta(nom1, nom2, tipus);
     }
 }

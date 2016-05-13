@@ -1,6 +1,6 @@
 package capaDomini.consulta;
 
-import capaDomini.Graf.Graf_PageRank;
+import capaDomini.Graf.Graf;
 import Utils.Pair;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +13,8 @@ import java.util.Comparator;
 
 public class Consulta {
     
-    public void obtenir_autors(ArrayList<String> autors, String nom, int quantitat, Graf_PageRank G) {
+    /*
+    public void obtenir_autors(ArrayList<String> autors, String nom, int quantitat, Graf G) {
         int id = G.GetID(nom);
         if(id >= 0) {
             int size = G.size();
@@ -173,7 +174,7 @@ public class Consulta {
         }
     }
     
-    public void obtenir_termes(ArrayList<String> termes, String nom, int quantitat, Graf_PageRank G) {
+    public void obtenir_termes(ArrayList<String> termes, String nom, int quantitat, Graf G) {
 	int id = G.GetID(nom);
         if(id >= 0) {
             int size = G.size();
@@ -329,7 +330,7 @@ public class Consulta {
         }
     }
     
-    public void obtenir_conferencies(ArrayList<String> conferencies, String nom, int quantitat, Graf_PageRank G) {
+    public void obtenir_conferencies(ArrayList<String> conferencies, String nom, int quantitat, Graf G) {
     	int id = G.GetID(nom);
         if(id >= 0) {
             int size = G.size();
@@ -447,7 +448,7 @@ public class Consulta {
         }
     }
     
-    public void obtenir_articles(ArrayList<String> articles, String nom, int quantitat, Graf_PageRank G) {
+    public void obtenir_articles(ArrayList<String> articles, String nom, int quantitat, Graf G) {
 	int id = G.GetID(nom);
         if(id >= 0) {
             int[][] mat = G.GetMadj();
@@ -529,4 +530,5 @@ public class Consulta {
             auxArticles.clear();        
         }
     }
+    */
 }
