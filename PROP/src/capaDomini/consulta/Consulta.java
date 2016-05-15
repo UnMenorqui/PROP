@@ -1,10 +1,12 @@
 package capaDomini.consulta;
 
-import capaDomini.Graf.Graf;
 import Utils.Pair;
+import capaDomini.Graf.Graf;
+import capaDomini.Graf.Node;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
 
 /**
  *
@@ -13,522 +15,267 @@ import java.util.Comparator;
 
 public class Consulta {
     
-    /*
-    public void obtenir_autors(ArrayList<String> autors, String nom, int quantitat, Graf G) {
-        int id = G.GetID(nom);
-        if(id >= 0) {
-            int size = G.size();
-            int[][] mat = G.GetMadj();
-            ArrayList<Pair> autors1 = new ArrayList<>();
-            ArrayList<Pair> articles = new ArrayList<>();
-            String tipus = G.getTipusNode(id);
-            switch(tipus) {
-                case "Article":
-                    for (int j=0; j<size; j++) {
-                        if (mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Autor")) {
-                            Pair o = new Pair(j,mat[j][j]);
-                            autors1.add(o);
-                        }
+    public void obtenir_autors(ArrayList<String> autors, ArrayList<String> articles, String nom, String tipus, int quantitat, Graf G) {
+        ArrayList<Pair> autors1 = new ArrayList<>();
+        int id;
+        Node node;
+        String nomt;
+        double valor;
+        Pair p;
+        switch (tipus) {
+            case "Article":
+                id = G.getidArrayString(nom,tipus);
+                node = G.getNodeIessim(id, tipus);
+                for (int i=0; i<node.getsize(); ++i) {
+                    if (node.nodeiessimSecond(i).equals("Autor")) {
+                        id = G.getidArrayint(node.nodeiessimFirst(i), "Autor");
+                        nomt = G.getNomNode(id, "Autor");
+                        valor = G.getValorNode(id, "Autor");
+                        p = new Pair(nomt,valor);
+                        autors1.add(p);
                     }
-                    Collections.sort(autors1, new Comparator() {
+                }
+                Collections.sort(autors1, new Comparator() {
                         @Override
                         public int compare(Object o1, Object o2) {
                             Pair a = (Pair)o1;
                             Pair b = (Pair)o2;
-                            return new Integer(a.GetS()).compareTo(b.GetS());
-                        }
-                    });
-                    if (quantitat > autors1.size()) quantitat = autors1.size();
-                    for (int i= 0; i<quantitat; i++) {
-                        autors.add(G.getNomNode(autors1.get(i).GetF()));
-                    }
-                    break;
-
-                case "Autor":
-                    for (int j=0; j<size; j++) {
-                        if (mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                            Pair o = new Pair(j,mat[j][j]);
-                            articles.add(o);
-                        }
-                    }
-                    Collections.sort(articles, new Comparator() {
-                        @Override
-                        public int compare(Object o1, Object o2) {
-                            Pair a = (Pair)o1;
-                            Pair b = (Pair)o2;
-                            return new Integer(a.GetS()).compareTo(b.GetS());
+                            return new Double(a.GetS()).compareTo(b.GetS());
                         }   
                     });
-                    for (int i=0; i<articles.size(); i++) {
-                        int identificador = articles.get(i).GetF();
-                        for (int j=0; j<size; j++) {
-                            if (mat[identificador][j] >= 0 && identificador != j && j != id && G.getTipusNode(j).equals("Autor")) {
-                                Pair o = new Pair(j,mat[j][j]);
-                                autors1.add(o);
-                            }  
+                
+                if (autors1.size() > quantitat) {
+                    for (int i=0; i<quantitat; ++i) {
+                        autors.add(autors1.get(i).GetF());
+                    }
+                } else {
+                    for (int i=0; i<autors1.size(); ++i) {
+                        autors.add(autors1.get(i).GetF());
+                    }
+                }
+                break;
+                
+            default:
+                for (int i=0; i<articles.size(); ++i) {
+                    node = G.getNodeIessim(G.getidArrayString(articles.get(i), "Article"), "Article");
+                    for (int j = 0; j<node.getsize(); ++j) {
+                        if (node.nodeiessimSecond(j).equals("Autor")) {
+                            id = G.getidArrayint(node.nodeiessimFirst(j), "Autor");
+                            nomt = G.getNomNode(id, "Autor");
+                            if (!nom.equals(nomt)) {
+                                valor = G.getValorNode(id, "Autor");
+                                p = new Pair(nomt,valor);
+                                autors1.add(p); 
+                            }
                         }
                     }
-                    Collections.sort(autors1, new Comparator() {
+                }
+                Collections.sort(autors1, new Comparator() {
                         @Override
                         public int compare(Object o1, Object o2) {
                             Pair a = (Pair)o1;
                             Pair b = (Pair)o2;
-                            return new Integer(a.GetS()).compareTo(b.GetS());
-                        }
+                            return new Double(a.GetS()).compareTo(b.GetS());
+                        }   
                     });
-                    if (quantitat > autors1.size()) {
-                        for (int i= 0; i<autors1.size(); i++)
-                        autors.add(G.getNomNode(autors1.get(i).GetF()));
+                if (autors1.size() > quantitat) {
+                    for (int i=0; i<quantitat; ++i) {
+                        autors.add(autors1.get(i).GetF());
                     }
-                    else {
-                        for (int i= 0; i<quantitat; i++) 
-                            autors.add(G.getNomNode(autors1.get(i).GetF()));
+                } else {
+                    for (int i=0; i<autors1.size(); ++i) {
+                        autors.add(autors1.get(i).GetF());
                     }
-                    break;
-
-                case "Conferencia":
-                    for (int j=0; j<size; j++) {
-                        if (mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                            articles.add(new Pair(j,mat[j][j]));
-                        }
-                    }
-                    Collections.sort(articles, new Comparator() {
-                        @Override
-                        public int compare(Object o1, Object o2) {
-                            Pair a = (Pair)o1;
-                            Pair b = (Pair)o2;
-                            return new Integer(a.GetS()).compareTo(b.GetS());
-                        }
-                    });
-                    for (int i=0; i<articles.size(); i++) {
-                        int identificador = articles.get(i).GetF();
-                        for (int j=0; j<size; j++) {
-                            if (mat[identificador][j] >= 0 && identificador != j && G.getTipusNode(j).equals("Autor")) {
-                                Pair o = new Pair(j,mat[j][j]);
-                                autors1.add(o);
-                            }  
-                        }
-                    }
-                    Collections.sort(autors1, new Comparator() {
-                        @Override
-                        public int compare(Object o1, Object o2) {
-                            Pair a = (Pair)o1;
-                            Pair b = (Pair)o2;
-                            return new Integer(a.GetS()).compareTo(b.GetS());
-                        }
-                    });
-                    if (quantitat > autors1.size()) {
-                        for (int i=0; i<autors1.size(); i++) 
-                            autors.add(G.getNomNode(autors1.get(i).GetF()));
-                    } 
-                    else {
-                        for (int i=0; i<quantitat; i++) 
-                            autors.add(G.getNomNode(autors1.get(i).GetF()));    
-                    }
-                    break;
-
-                default:
-                    for (int j=0; j<size; j++) {
-                        if (mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                            articles.add(new Pair(j,mat[j][j]));
-                        }
-                    }
-                    Collections.sort(articles, new Comparator() {
-                        @Override
-                        public int compare(Object o1, Object o2) {
-                            Pair a = (Pair)o1;
-                            Pair b = (Pair)o2;
-                            return new Integer(a.GetS()).compareTo(b.GetS());
-                        }
-                    });
-
-                    for (int i=0; i<articles.size(); i++) {
-                        int identificador = articles.get(i).GetF();
-                        for (int j=0; j<size; j++) {
-                            if (mat[identificador][j] >= 0 && identificador != j && G.getTipusNode(j).equals("Autor")) {
-                                autors1.add(new Pair(j,mat[j][j]));
-                            }  
-                        }
-                    }
-
-                    Collections.sort(autors1, new Comparator() {
-                        @Override
-                        public int compare(Object o1, Object o2) {
-                            Pair a = (Pair)o1;
-                            Pair b = (Pair)o2;
-                            return new Integer(a.GetS()).compareTo(b.GetS());
-                        }
-                    });
-                    if (quantitat > autors1.size()) {
-                        for (int i= 0; i<autors1.size(); i++) 
-                            autors.add(G.getNomNode(autors1.get(i).GetF()));
-                    } 
-                    else {
-                        for (int i= 0; i<quantitat; i++) 
-                            autors.add(G.getNomNode(autors1.get(i).GetF()));
-                    }
-                    break;    
-            }
-            articles.clear();
-            autors1.clear();
-        }
+                }
+                break;
+        } 
+        autors1.clear();
     }
     
-    public void obtenir_termes(ArrayList<String> termes, String nom, int quantitat, Graf G) {
-	int id = G.GetID(nom);
-        if(id >= 0) {
-            int size = G.size();
-            int[][] mat = G.GetMadj();
-            ArrayList<Pair> auxTermes = new ArrayList<>();
-            ArrayList<Pair> Articles = new ArrayList<>();
-            String tipus = G.getTipusNode(id);
-            switch(tipus) {
-                case "Article":
-                    for(int j = 0; j<size; j++) {
-                            if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Terme")) {
-                                    auxTermes.add(new Pair(j, mat[j][j]));
-                            }
+    public void obtenir_termes(ArrayList<String> termes, ArrayList<String> articles, String nom, String tipus, int quantitat, Graf G) {
+        ArrayList<Pair> termes1 = new ArrayList<>();
+        int id;
+        Node node;
+        String nomt;
+        double valor;
+        Pair p;
+        switch (tipus) {
+            case "Article":
+                id = G.getidArrayString(nom,tipus);
+                node = G.getNodeIessim(id, tipus);
+                for (int i=0; i<node.getsize(); ++i) {
+                    if (node.nodeiessimSecond(i).equals("Terme")) {
+                        id = G.getidArrayint(node.nodeiessimFirst(i), "Terme");
+                        nomt = G.getNomNode(id, "Terme");
+                        valor = G.getValorNode(id, "Terme");
+                        p = new Pair(nomt,valor);
+                        termes1.add(p);
                     }
-                    Collections.sort(auxTermes, new Comparator() {
-                            @Override
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }	
-                    });
-                    if (quantitat > auxTermes.size()) quantitat = auxTermes.size();
-                    for(int i = 0; i < quantitat; i++) {
-                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
-                    }
-                    break;
-
-                case "Autor":
-                    for(int j = 0; j < size; j++) {
-                            if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                                    Articles.add(new Pair(j, mat[j][j]));
-                            }
-                    }
-                    Collections.sort(Articles, new Comparator() {
-                            @Override
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }
-                    });
-                    for (int i=0; i<Articles.size(); i++) {
-                        int identificador = Articles.get(i).GetF();
-                        for (int j=0; j<size; j++) {
-                            if(mat[identificador][j] >= 0 && identificador != j && G.getTipusNode(j).equals("Terme")) {
-                                    auxTermes.add(new Pair(j, mat[j][j]));
-                            }
-                        }
-                    }
-                    Collections.sort(auxTermes, new Comparator() {
-                            @Override
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }
-                    });
-                    if (quantitat > auxTermes.size()) {
-                        for (int i= 0; i<auxTermes.size(); i++) 
-                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
-                    }
-                    else {
-                        for (int i= 0; i<quantitat; i++) 
-                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
-                    }
-                    break;
-
-                case "Conferencia":
-                    for(int j = 0; j < size; j++) {
-                            if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                                Articles.add(new Pair(j,mat[j][j]));
-                            }
-                    }
-                    Collections.sort(Articles, new Comparator() {
-                            @Override 
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }
-                    });
-                    for (int i=0; i<Articles.size(); i++) {
-                        int identificador = Articles.get(i).GetF();
-                        for (int j=0; j<size; j++) {
-                            if (mat[identificador][j] >= 0 && identificador!=j && G.getTipusNode(j).equals("Terme")) {
-                                auxTermes.add(new Pair(j,mat[j][j]));
-                            }  
-                        }
-                    }
-                    Collections.sort(auxTermes, new Comparator() {
+                }
+                Collections.sort(termes1, new Comparator() {
                         @Override
                         public int compare(Object o1, Object o2) {
                             Pair a = (Pair)o1;
                             Pair b = (Pair)o2;
-                            return new Integer(a.GetS()).compareTo(b.GetS());
-                        }
+                            return new Double(a.GetS()).compareTo(b.GetS());
+                        }   
                     });
-                    if (quantitat > auxTermes.size()) {
-                        for (int i= 0; i<auxTermes.size(); i++) 
-                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
+                
+                if (termes1.size() > quantitat) {
+                    for (int i=0; i<quantitat; ++i) {
+                        termes.add(termes1.get(i).GetF());
                     }
-                    else {
-                        for (int i= 0; i<quantitat; i++) 
-                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
+                } else {
+                    for (int i=0; i<termes1.size(); ++i) {
+                        termes.add(termes1.get(i).GetF());
                     }
-                    Articles.clear();
-                    break;
+                }
+                break;
 
-                default:
-                    for(int j = 0; j < size; j++) {
-                            if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                                Articles.add(new Pair(j,mat[j][j]));
-                            }
-                    }
-                    Collections.sort(Articles, new Comparator() {
-                            @Override 
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }
-                    });
-
-                    for (int i=0; i<Articles.size(); i++) {
-                        int identificador = Articles.get(i).GetF();
-                        for (int j=0; j<size; ++j) {
-                            if (mat[identificador][j] >= 0 && identificador != j && j != id && G.getTipusNode(j).equals("Autor")) {
-                                auxTermes.add(new Pair(j,mat[j][j]));
-                            }  
+            default:
+                for (int i=0; i<articles.size(); ++i) {
+                    node = G.getNodeIessim(G.getidArrayString(articles.get(i), "Article"), "Article");
+                    for (int j = 0; j<node.getsize(); ++j) {
+                        if (node.nodeiessimSecond(j).equals("Terme")) {
+                            id = G.getidArrayint(node.nodeiessimFirst(j), "Terme");
+                            nomt = G.getNomNode(id, "Terme");
+                            valor = G.getValorNode(id, "Terme");
+                            p = new Pair(nomt,valor);
+                            termes1.add(p); 
                         }
                     }
-                    Collections.sort(auxTermes, new Comparator() {
+                }
+                Collections.sort(termes1, new Comparator() {
                         @Override
                         public int compare(Object o1, Object o2) {
                             Pair a = (Pair)o1;
                             Pair b = (Pair)o2;
-                            return new Integer(a.GetS()).compareTo(b.GetS());
-                        }
+                            return new Double(a.GetS()).compareTo(b.GetS());
+                        }   
                     });
-                    if (quantitat > auxTermes.size()) {
-                        for (int i= 0; i<auxTermes.size(); i++) 
-                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
+                if (termes1.size() > quantitat) {
+                    for (int i=0; i<quantitat; ++i) {
+                        termes.add(termes1.get(i).GetF());
                     }
-                    else {
-                        for (int i= 0; i<quantitat; i++) 
-                            termes.add(G.getNomNode(auxTermes.get(i).GetF()));
+                } else {
+                    for (int i=0; i<termes1.size(); ++i) {
+                        termes.add(termes1.get(i).GetF());
                     }
-                    break;
-            }
-            auxTermes.clear();
-            Articles.clear();
+                }
+                break;
+              
+                
+            
         }
+	termes1.clear();
     }
     
-    public void obtenir_conferencies(ArrayList<String> conferencies, String nom, int quantitat, Graf G) {
-    	int id = G.GetID(nom);
-        if(id >= 0) {
-            int size = G.size();
-            int[][] mat = G.GetMadj();
-            ArrayList<Pair> auxConferencies = new ArrayList<>();
-            ArrayList<Pair> Articles = new ArrayList<>();
-            String tipus = G.getTipusNode(id);
-            switch(tipus) {
-                case "Article":
-                    for(int j = 0; j < size; j++) {
-                            if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Conferencia")) {
-                                    auxConferencies.add(new Pair(j, mat[j][j]));
-                            }
+    public void obtenir_conferencies(ArrayList<String> conferencies, ArrayList<String> articles, String nom, String tipus, int quantitat, Graf G) {
+        ArrayList<Pair> conferencies1 = new ArrayList<>();
+        int id;
+        Node node;
+        String nomt;
+        double valor;
+        Pair p;
+        switch (tipus) {   
+            case "Article":
+                id = G.getidArrayString(nom,tipus);
+                node = G.getNodeIessim(id, tipus);
+                for (int i=0; i<node.getsize(); ++i) {
+                    if (node.nodeiessimSecond(i).equals("Conferencia")) {
+                        id = G.getidArrayint(node.nodeiessimFirst(i), "Conferencia");
+                        nomt = G.getNomNode(id, "Conferencia");
+                        valor = G.getValorNode(id, "Conferencia");
+                        p = new Pair(nomt,valor);
+                        conferencies1.add(p);
                     }
-                    Collections.sort(auxConferencies, new Comparator() {
-                            @Override
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }	
+                }
+                Collections.sort(conferencies1, new Comparator() {
+                        @Override
+                        public int compare(Object o1, Object o2) {
+                            Pair a = (Pair)o1;
+                            Pair b = (Pair)o2;
+                            return new Double(a.GetS()).compareTo(b.GetS());
+                        }   
                     });
-                    if (quantitat > auxConferencies.size()) {
-                        for(int i = 0; i < auxConferencies.size(); i++) 
-                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
+                
+                if (conferencies1.size() > quantitat) {
+                    for (int i=0; i<quantitat; ++i) {
+                        conferencies.add(conferencies1.get(i).GetF());
                     }
-                    else {
-                        for(int i = 0; i < quantitat; i++) 
-                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
+                } else {
+                    for (int i=0; i<conferencies1.size(); ++i) {
+                        conferencies.add(conferencies1.get(i).GetF());
                     }
-                    break;
-
-                case "Autor":
-                    for(int j = 0; j < size; j++) {
-                            if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                                    Articles.add(new Pair(j, mat[j][j]));
-                            }
-                    }
-                    Collections.sort(Articles, new Comparator() {
-                            @Override
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }
-                    });
-                    for (int i=0; i<Articles.size(); i++) {
-                        int identificador = Articles.get(i).GetF();
-                        for(int j=0; j<size; j++) {
-                            if (mat[identificador][j] >= 0 && identificador!=j && G.getTipusNode(j).equals("Conferencia")) {
-                                auxConferencies.add(new Pair(j,mat[j][j]));
-                            }
+                }
+                break;
+                
+            default:
+                for (int i=0; i<articles.size(); ++i) {
+                    node = G.getNodeIessim(G.getidArrayString(articles.get(i), "Article"), "Article");
+                    for (int j = 0; j<node.getsize(); ++j) {
+                        if (node.nodeiessimSecond(j).equals("Conferencia")) {
+                            id = G.getidArrayint(node.nodeiessimFirst(j), "Conferencia");
+                            nomt = G.getNomNode(id, "Conferencia");
+                            valor = G.getValorNode(id, "Conferencia");
+                            p = new Pair(nomt,valor);
+                            conferencies1.add(p); 
                         }
                     }
-                    Collections.sort(auxConferencies, new Comparator() {
-                            @Override
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }
+                }
+                Collections.sort(conferencies1, new Comparator() {
+                        @Override
+                        public int compare(Object o1, Object o2) {
+                            Pair a = (Pair)o1;
+                            Pair b = (Pair)o2;
+                            return new Double(a.GetS()).compareTo(b.GetS());
+                        }   
                     });
-                    if (quantitat > auxConferencies.size()) {
-                        for(int i = 0; i < auxConferencies.size(); i++) 
-                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
+                if (conferencies1.size() > quantitat) {
+                    for (int i=0; i<quantitat; ++i) {
+                        conferencies.add(conferencies1.get(i).GetF());
                     }
-                    else {
-                        for(int i = 0; i < quantitat; i++) 
-                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
+                } else {
+                    for (int i=0; i<conferencies1.size(); ++i) {
+                        conferencies.add(conferencies1.get(i).GetF());
                     }
-                    break;
-
-                default:
-                    for(int j = 0; j < size; j++) {
-                            if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                                    Articles.add(new Pair(j, mat[j][j]));
-                            }
-                    }
-                    Collections.sort(Articles, new Comparator() {
-                            @Override 
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }
-                    });
-                    for (int i=0; i<Articles.size(); i++) {
-                        int identificador = Articles.get(i).GetF();
-                        for(int j=0; j<size; j++) {
-                            if (mat[identificador][j] >= 0 && identificador!=j && G.getTipusNode(j).equals("Conferencia")) {
-                                auxConferencies.add(new Pair(j,mat[j][j]));
-                            }
-                        }
-                    }
-                    Collections.sort(auxConferencies, new Comparator() {
-                            @Override
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }
-                    });
-                    if (quantitat > auxConferencies.size()) {
-                        for(int i = 0; i < auxConferencies.size(); i++) 
-                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
-                    }
-                    else {
-                        for(int i = 0; i < quantitat; i++) 
-                            conferencies.add(G.getNomNode(auxConferencies.get(i).GetF()));
-                    }
-                    break;
-            }
-            Articles.clear();
-            auxConferencies.clear();
-        }
+                }
+                break;
+        } 
+        conferencies1.clear();
     }
     
-    public void obtenir_articles(ArrayList<String> articles, String nom, int quantitat, Graf G) {
-	int id = G.GetID(nom);
-        if(id >= 0) {
-            int[][] mat = G.GetMadj();
-            ArrayList<Pair> auxArticles = new ArrayList<>();
-            String tipus = G.getTipusNode(id);
-            switch(tipus) {
-                case "Conferencia":
-                    for(int j = 0; j < G.size(); j++) {
-                            if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                                    auxArticles.add(new Pair(j, mat[j][j]));
-                            }
-                    }
-                    Collections.sort(auxArticles, new Comparator() {
-                            @Override
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }	
-                    });
-                    if (quantitat > auxArticles.size()) {
-                        for(int i = 0; i < auxArticles.size(); i++) 
-                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
-                    }
-                    else {
-                        for(int i = 0; i < quantitat; i++) 
-                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
-                    }
-                    break;
-
-                case "Autor":
-                    for(int j = 0; j < G.size(); j++) {
-                            if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                                    auxArticles.add(new Pair(j, mat[j][j]));
-                            }
-                    }
-                    Collections.sort(auxArticles, new Comparator() {
-                            @Override
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }
-                    });
-                    if (quantitat > auxArticles.size()) {
-                        for(int i = 0; i < auxArticles.size(); i++) 
-                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
-                    }
-                    else {
-                        for(int i = 0; i < quantitat; i++) 
-                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
-                    }
-                    break;
-
-                default:
-                    for(int j = 0; j < G.size(); j++) {
-                            if(mat[id][j] >= 0 && id != j && G.getTipusNode(j).equals("Article")) {
-                                    auxArticles.add(new Pair(j, mat[j][j]));
-                            }
-                    }
-                    Collections.sort(auxArticles, new Comparator() {
-                            @Override 
-                            public int compare(Object o1, Object o2) {
-                                    Pair a = (Pair) o1;
-                                    Pair b = (Pair) o2;
-                                    return new Integer(a.GetS()).compareTo(b.GetS());
-                            }
-                    });
-                    if (quantitat > auxArticles.size()) {
-                        for(int i = 0; i < auxArticles.size(); i++) 
-                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
-                    }
-                    else {
-                        for(int i = 0; i < quantitat; i++) 
-                            articles.add(G.getNomNode(auxArticles.get(i).GetF()));
-                    }
-                    break;      
+    public void obtenir_articles(ArrayList<String> articles, String nom, String tipus, int quantitat, Graf G) {
+        ArrayList<Pair> articles1 = new ArrayList<>();
+        int id = G.getidArrayString(nom,tipus);
+        Node node = G.getNodeIessim(id, tipus);
+        
+        for (int i=0; i<node.getsize(); ++i) {
+            if (node.nodeiessimSecond(i).equals("Article")) {
+                int id1 = G.getidArrayint(node.nodeiessimFirst(i), "Article");
+                String nomt = G.getNomNode(id1, "Article");
+                double valor = G.getValorNode(id1, "Article");
+                Pair p = new Pair(nomt,valor);
+                articles1.add(p);
             }
-            auxArticles.clear();        
         }
+        Collections.sort(articles1, new Comparator() {
+                @Override
+                public int compare(Object o1, Object o2) {
+                    Pair a = (Pair)o1;
+                    Pair b = (Pair)o2;
+                    return new Double(a.GetS()).compareTo(b.GetS());
+                }   
+            });
+        if (articles1.size() > quantitat) {
+            for (int i=0; i<quantitat; ++i) {
+                articles.add(articles1.get(i).GetF());
+            }
+        } else {
+            for (int i=0; i<articles1.size(); ++i) {
+                articles.add(articles1.get(i).GetF());
+            }
+        }  
+        articles1.clear();
     }
-    */
 }

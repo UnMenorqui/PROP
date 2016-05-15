@@ -16,6 +16,7 @@ import java.util.Scanner;
  *
  * @author marc_
  */
+
 public class PerfilAutor extends Perfil {
     
     static ArrayList<String> termes = new ArrayList<>();
@@ -55,10 +56,10 @@ public class PerfilAutor extends Perfil {
     
     public void crear_perfil_autor(Graf G, boolean usuari) {
         Consulta cs = new Consulta();
-        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
-        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
-        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
-        //cs.obtenir_autors(co_autors,nom,quantitat_coautors,G);
+        cs.obtenir_articles(articles,nom,"Autor",quantitat_articles,G);
+        cs.obtenir_termes(termes,articles,nom,"Autor",quantitat_termes,G);
+        cs.obtenir_conferencies(conferencies,articles,nom,"Autor",quantitat_conf,G);
+        cs.obtenir_autors(co_autors,articles,nom,"Autor",quantitat_coautors,G);
         if(articles.size()+termes.size()+conferencies.size()+co_autors.size() == 0) {
             System.out.println("No s'ha trobat cap autor amb aquest nom.");
         } else {
@@ -103,7 +104,7 @@ public class PerfilAutor extends Perfil {
                 switch(sino) {
                     case "S":
                         CtrlHistorial hist = new CtrlHistorial();
-                        //hist.afegirCerca(nom,G.GetIDnode(nom),G.getTipusNode(G.GetIDnode(nom),nom));
+                        hist.afegirCerca(nom,G.GetIDnode(G.getidArrayString(nom, "Autor"),"Autor"),"Autor");
 
 
                 }

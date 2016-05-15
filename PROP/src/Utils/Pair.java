@@ -11,36 +11,36 @@ package Utils;
  */
 
 public class Pair implements Comparable {
-    private int first;
-    private int second;
+    private String first;
+    private double second;
     
    public Pair() {
-       first = 0;
+       first = "";
        second = 0;
    }
    
-   public Pair (int first, int second) {
+   public Pair (String first, double second) {
        this.first = first;
        this.second = second;
    }
-   public void SetF(int first) {
+   public void SetF(String first) {
        this.first = first;
    }
    
-   public void SetS(int second) {
+   public void SetS(double second) {
        this.second = second;
    }
    
-   public void SetP(int first, int second) {
+   public void SetP(String first, double second) {
        this.first = first;
        this.second = second;
    }
    
-   public int GetF() {
+   public String GetF() {
        return first;
    }
    
-   public int GetS() {
+   public double GetS() {
        return second;
    }
 
@@ -48,7 +48,7 @@ public class Pair implements Comparable {
     public int compareTo(Object o) {
         Pair p2 = (Pair)o;
         if (this.first == p2.first) return 0;
-        else return this.first < p2.first ? 1 : -1;
+        else return this.second < p2.second ? 1 : -1;
     }
 
 
