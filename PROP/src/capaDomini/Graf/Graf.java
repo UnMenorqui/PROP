@@ -289,7 +289,7 @@ public class Graf {
         return "";
     }
     
-    private int GetIDnode(int id, String tipus) {
+    public int GetIDnode(int id, String tipus) {
         switch (tipus) {
             case "Autor":
                 return autor.get(id).getId();
@@ -454,7 +454,43 @@ public class Graf {
         return -1;
     }
     
+    public Node getNodeIessim(int id, String tipus) {
+        switch (tipus) {
+            case "Autor":
+                return autor.get(id);
+            case "Conferencia":
+                return conf.get(id);
+            case "Article":
+                return paper.get(id);
+            case "Terme":
+                return terme.get(id);
+        }
+        return null;
+    }
+    
     public Boolean actualitzar() {
         return actualitzar;
+    }
+    
+    public Boolean existeixnode(String nom, String tipus) {
+        switch(tipus) {
+            case "Autor":
+                for (int i=0; i<autor.size(); ++i) {
+                    if (autor.get(i).getNom().equals(nom)) return true;
+                }
+            case "Article":
+                for (int i=0; i<paper.size(); ++i) {
+                    if (paper.get(i).getNom().equals(nom)) return true;
+                }
+            case "Conferencia":
+                for (int i=0; i<conf.size(); ++i) {
+                    if (conf.get(i).getNom().equals(nom)) return true;
+                }
+            case "Terme":
+                for (int i=0; i<terme.size(); ++i) {
+                    if (terme.get(i).getNom().equals(nom)) return true;
+                }
+        }
+        return false;
     }
 }

@@ -5,7 +5,7 @@
  */
 package capaDomini.Usuaris;
 
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.Perfils.DriverPerfil;
 import java.io.IOException;
 import java.util.Scanner;
@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @author Toni
  */
 public class DriverNormal {
-    public void main(String user, String pass, Graf G) throws IOException {
+    public void main(String user, String pass, CtrlGraf G) throws IOException {
         boolean bool= false;
         boolean primer = true;
         CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
@@ -30,7 +30,7 @@ public class DriverNormal {
             System.out.println("Si vols modificar la contrasenya marca 4.");
             System.out.println("Si vols fer una consulta marca 5.");
             System.out.println("Si vols consultar l'historial de consultes marca 6.");
-            System.out.println("Si vols acabar marca 7.");
+            System.out.println("Si vols acabar marca un altre número.");
             if(!primer) {
                 System.out.println("Operació realitzada.");
                 System.out.println("---------------------");
@@ -57,7 +57,7 @@ public class DriverNormal {
                 case 6:
                     ctrlusuaris.consultar(G);
                     break;
-                case 7:
+                default:
                     bool = true;
                     break;
             }

@@ -5,7 +5,7 @@
  */
 package capaDomini.consulta;
 
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.Perfils.CtrlPerfils;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,14 +16,13 @@ import java.util.Scanner;
  */
 public class DriverHistorial {
     
-    public void main () {
-        Graf G = new Graf();
+    public void main (CtrlGraf G) {
         Historial historial = new Historial();
         int opcio;
         escriure_opcions();
         Scanner sc = new Scanner(System.in);
         opcio = sc.nextInt();
-        while(opcio != 3) {
+        while (opcio == 1 || opcio == 2) {
             switch(opcio) {
                 case 1:
                     consultar(G);
@@ -40,12 +39,12 @@ public class DriverHistorial {
     
     private static void escriure_opcions() {
         System.out.println("Tria una opció:");
-        System.out.println("1. Consultar historial");
-        System.out.println("2. Esborrar cerca");
-        System.out.println("3. Exit");
+        System.out.println("Si vols consultar historial marca 1.");
+        System.out.println("Si vols esborrar una consulta de l'historial marca 2.");
+        System.out.println("Si vols sortir marca un altre número");
     }
     
-    public void consultar(Graf G) {
+    public void consultar(CtrlGraf G) {
         CtrlHistorial ctrl = new CtrlHistorial();
         ArrayList<Apunts> LlistaConsultes = ctrl.getList();
 	Scanner sc = new Scanner(System.in);

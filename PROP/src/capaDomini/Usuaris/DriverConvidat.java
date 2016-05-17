@@ -5,8 +5,8 @@
  */
 package capaDomini.Usuaris;
 
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.Perfils.DriverPerfil;
-import capaDomini.Graf.Graf;
 import java.io.IOException;
 
 /**
@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 
 public class DriverConvidat {
-    public void main(Graf G) throws IOException {
+    public void main(CtrlGraf G) throws IOException {
         DriverPerfil ctrl = new DriverPerfil();
         ctrl.main(G,false);
     }

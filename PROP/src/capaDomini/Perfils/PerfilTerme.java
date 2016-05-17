@@ -8,7 +8,7 @@ package capaDomini.Perfils;
 
 
 import capaDomini.consulta.Consulta;
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -49,11 +49,11 @@ public class PerfilTerme extends Perfil {
         quantitat_autors = q_autor;
     }
     
-    public void crear_perfil_terme(Graf G, boolean usuari) {
+    public void crear_perfil_terme(CtrlGraf G, boolean usuari) {
         Consulta cs = new Consulta();
-        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
-        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
-        //cs.obtenir_autors(autors,nom,quantitat_autors,G);
+        cs.obtenir_articles(articles,nom,"Terme",quantitat_articles,G);
+        cs.obtenir_conferencies(conferencies,articles,nom,"Terme",quantitat_conf,G);
+        cs.obtenir_autors(autors,articles,nom,"Terme",quantitat_autors,G);
         if(articles.size()+conferencies.size()+autors.size() == 0) {
             System.out.println("No s'ha trobat cap terme amb aquest nom.");
         } else {
@@ -92,16 +92,14 @@ public class PerfilTerme extends Perfil {
                 switch(sino) {
                     case "S":
                         CtrlHistorial hist = new CtrlHistorial();
-                        //hist.afegirCerca(nom,G.GetIDnode(nom),G.getTipusNode(G.GetIDnode(nom),nom));
-
-
+                        hist.afegirCerca(nom,G.GetIDnode(G.getidArrayString(nom, "Terme"),"Terme"),"Terme");
+                    default:
+                        break;
                 }
-
             }
             articles.clear();
             conferencies.clear();
             autors.clear();
         }
-    }
-    
+    } 
 }

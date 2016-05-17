@@ -6,7 +6,7 @@
 package capaDomini.Perfils;
 
 
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.consulta.Consulta;
 import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ import java.util.Scanner;
  *
  * @author marc_
  */
+
 public class PerfilAutor extends Perfil {
     
     static ArrayList<String> termes = new ArrayList<>();
@@ -53,12 +54,12 @@ public class PerfilAutor extends Perfil {
         quantitat_coautors = q_coautors;
     }
     
-    public void crear_perfil_autor(Graf G, boolean usuari) {
+    public void crear_perfil_autor(CtrlGraf G, boolean usuari) {
         Consulta cs = new Consulta();
-        //cs.obtenir_articles(articles,nom,quantitat_articles,G);
-        //cs.obtenir_termes(termes,nom,quantitat_termes,G);
-        //cs.obtenir_conferencies(conferencies,nom,quantitat_conf,G);
-        //cs.obtenir_autors(co_autors,nom,quantitat_coautors,G);
+        cs.obtenir_articles(articles,nom,"Autor",quantitat_articles,G);
+        cs.obtenir_termes(termes,articles,nom,"Autor",quantitat_termes,G);
+        cs.obtenir_conferencies(conferencies,articles,nom,"Autor",quantitat_conf,G);
+        cs.obtenir_autors(co_autors,articles,nom,"Autor",quantitat_coautors,G);
         if(articles.size()+termes.size()+conferencies.size()+co_autors.size() == 0) {
             System.out.println("No s'ha trobat cap autor amb aquest nom.");
         } else {
@@ -87,6 +88,9 @@ public class PerfilAutor extends Perfil {
                 String aux = termes.get(i);
                 System.out.println("\t- "+aux);
             }
+            if (quantitat_termes > termes.size()) {
+                System.out.println("No hi ha tants termes per la quantitat desitjada");
+            }
             System.out.println("");
             System.out.println("Co-Autors més rellevants d'aquest autor:");
             for (int i = 0; i < co_autors.size(); ++i) {
@@ -103,7 +107,7 @@ public class PerfilAutor extends Perfil {
                 switch(sino) {
                     case "S":
                         CtrlHistorial hist = new CtrlHistorial();
-                        //hist.afegirCerca(nom,G.GetIDnode(nom),G.getTipusNode(G.GetIDnode(nom),nom));
+                        hist.afegirCerca(nom,G.GetIDnode(G.getidArrayString(nom, "Autor"),"Autor"),"Autor");
 
 
                 }

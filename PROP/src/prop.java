@@ -1,6 +1,6 @@
 
 
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.Usuaris.DriverConvidat;
 import capaDomini.Usuaris.DriverNormal;
 import capaDomini.Usuaris.CtrlUsuaris;
@@ -17,7 +17,7 @@ public class prop {
     
     
     public static void main(String args[]) throws IOException {
-        Graf gf = new Graf();
+        CtrlGraf gf = new CtrlGraf();
         String usr_admin = "Administrador";
         String admin_pass = "1234";
         CtrlUsuaris ctrl = new CtrlUsuaris();
@@ -45,7 +45,7 @@ public class prop {
         
             System.out.println("Si vol registrar-se, marqui 4.");
         
-            System.out.println("Si vol sortir de l'aplicació, marqui 5.");
+            System.out.println("Si vol sortir de l'aplicació, marqui un altre número.");
                 if(primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
@@ -80,7 +80,7 @@ public class prop {
                         pass = sc.next();
                         if (pass.equals(admin_pass)) {
                             DriverAdministrador admin = new DriverAdministrador();
-                            admin.main(gf);
+                            admin.main(gf,ctrl);
                         }
                         else System.out.print("Clau mestre incorrecta.");
                     }
@@ -98,7 +98,7 @@ public class prop {
                     else System.out.print("Usuari existent.");
                     break;
 
-                case 5:
+                default:
                     System.out.println("Gràcies per utilitzar l'aplicació, fins aviat!");
                     bool = true;
                     break;

@@ -12,6 +12,34 @@ package capaDomini.Graf;
 public class CtrlGraf {
     private Graf SG = new Graf();
     
+    public int getidArrayString(String nom,String tipus) {
+        return SG.getidArrayString(nom, tipus);
+    }
+    
+    public Node getNodeIessim(int id, String tipus) {
+        return SG.getNodeIessim(id, tipus);
+    }
+    
+    public int getidArrayint(int id, String tipus) {
+        return SG.getidArrayint(id, tipus);
+    }
+    
+    public String getNomNode(int id, String tipus) {
+        return SG.getNomNode(id, tipus);
+    }
+    
+    public double getValorNode(int id, String tipus) {
+        return SG.getValorNode(id, tipus);
+    }
+    
+    public int GetIDnode(int id, String tipus) {
+        return SG.GetIDnode(id, tipus);
+    }
+    
+    public boolean existeixnode(String nom, String tipus) {
+        return SG.existeixnode(nom, tipus);
+    }
+    
     public void afegirNode(String tipus,String nom) {
         SG.afegirNode(tipus, nom);
     }
