@@ -100,58 +100,15 @@ $(document).ready(function() {
 	 	}, 1000);
  	 });
 
+ 	 $("#search").bind("enterKey",function(e) {
+ 	 	consulta();
+ 	 });
+ 	 $("#search").keyup(function(e) {
+ 	 	if(e.keyCode == 13) {
+ 	 		$(this).trigger("enterKey");
+ 	 	}
+ 	 });
+
  	 $('.modal-trigger').leanModal();
-
-	  noUiSlider.create(document.getElementById("rangeAutors"), {
-	   start: [1, 5],
-	   connect: true,
-	   step: 1,
-	   range: {
-	     'min': 0,
-	     'max': 20
-	   },
-	   format: wNumb({
-	     decimals: 0
-	   })
-	  });
-
-	  noUiSlider.create(document.getElementById("rangeConferencies"), {
-	   start: [1, 5],
-	   connect: true,
-	   step: 1,
-	   range: {
-	     'min': 0,
-	     'max': 20
-	   },
-	   format: wNumb({
-	     decimals: 0
-	   })
-	  });
-
-	  noUiSlider.create(document.getElementById("rangeArticles"), {
-	   start: [1, 5],
-	   connect: true,
-	   step: 1,
-	   range: {
-	     'min': 0,
-	     'max': 20
-	   },
-	   format: wNumb({
-	     decimals: 0
-	   })
-	  });
-
-	  noUiSlider.create(document.getElementById("rangeTermes"), {
-	   start: [1, 5],
-	   connect: true,
-	   step: 1,
-	   range: {
-	     'min': 0,
-	     'max': 20
-	   },
-	   format: wNumb({
-	     decimals: 0
-	   })
-	  });
 
  });
