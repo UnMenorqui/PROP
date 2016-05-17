@@ -39,4 +39,12 @@ public class JavaObject {
         }
         return false;
     }
+    
+    public boolean CanviarUsername(String username, String password, String new_username) {
+        return cp.modificar_usuari(username, password, new_username);
+    }
+    
+    public boolean CanviarPassword(String username, String password, String new_password) {
+        return cp.modificar_password(username, password, new_password);
+    }
 }

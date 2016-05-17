@@ -139,17 +139,15 @@
             </nav>
             <nav class= "indigo darken-3" style="box-shadow: none;">
                 <div class="nav-wrapper">
-                    <form>
                         <div class="input-field">
                             <input id="search" type="search" required>
                                 <label for="search"><i class="material-icons">search</i></label>
-                                </div>
-                    </form>
+                        </div>
                 </div>
             </nav>
             <div class="row">
                 <div class="input-field col s6">
-                    <select id = "tipus_cerca">
+                    <select>
                         <option value="0" selected>Cerca general</option>
                         <option value="1">Cercar autors</option>
                         <option value="2">Cercar articles</option>
@@ -205,10 +203,10 @@
           <h4>Configura les teves dades</h4>
           <br />
           <div class="input-field col s6">
-              <input id="formAccout_newUsername" type="text" class="validate" value="Roger">
-              <label for="formAccout_newUsername">Nou nom d'usuari</label>
+              <input id="formAccount_newUsername" type="text" class="validate">
+              <label for="formAccount_newUsername">Nou nom d'usuari</label>
           </div>
-          <button class="btn waves-effect waves-light" type="button" id="loginform_submit" name="action" style="width: 100%; margin-top: 20px;">CANVIAR NOM D'USUARI
+          <button class="btn waves-effect waves-light" type="button" id="username_submit" name="action" style="width: 100%; margin-top: 20px;">CANVIAR NOM D'USUARI
                     </button>
                     <br />
                     <br /><br />
@@ -221,7 +219,7 @@
               <input id="formAccount_newPassword2" type="password" class="validate">
               <label for="formAccount_newPassword2">Nova contrasenya</label>
             </div>
-            <button class="btn waves-effect waves-light" type="button" id="loginform_submit" name="action" style="width: 100%; margin-top: 20px;">CANVIAR CONTRASENYA
+            <button class="btn waves-effect waves-light" type="button" id="password_submit" name="action" style="width: 100%; margin-top: 20px;">CANVIAR CONTRASENYA
                     </button>
           </div>
         </div>

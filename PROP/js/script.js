@@ -1,5 +1,6 @@
  var vHistorial = false;
  var username = "";
+ var password = "";
  var isAdmin = false;
 
  function afterLoading() {
@@ -27,20 +28,6 @@
 
  }
 
- function consulta() {
- 	switch($("#tipus_cerca").val()) {
- 		case "0":
-
- 		case "1":
-
- 		case "2":
-
- 		case "3":
-
- 		case "4":
- 	}
- }
-
 $(document).ready(function() {
 	setTimeout(carrega,500);
 
@@ -59,6 +46,9 @@ $(document).ready(function() {
  	 $("#loginform_submit").on("click", function(e) {
  	 	if (window.java.ExisteixUsuari_contrasenya($("#loginform_user").val(),$("#loginform_pass").val())) {
  	 		username = $("#loginform_user").val();
+ 	 		password = $("#loginform_pass").val();
+ 	 		$("#formAccount_newUsername").val(username);
+ 	 		Materialize.updateTextFields();
  	 		Materialize.toast('Accedint al teu compte...', 2000);
 	 		$("#logo_container").fadeOut(1000);
 	 		$("#logo_container h3").fadeOut(1000);
@@ -73,7 +63,10 @@ $(document).ready(function() {
  	 $("#adminform_submit").on("click", function(e) {
  	 	if ($("#adminform_user").val() == "Administrador" && $("#adminform_pass").val() == "1234") {
  	 		username = $("#adminform_user").val();
+ 	 		password = $("#adminform_pass").val();
  	 		isAdmin = true;
+ 	 		$("#formAccount_newUsername").val(username);
+ 	 		Materialize.updateTextFields();
  	 		Materialize.toast('Accedint al teu compte...', 2000);
 	 		$("#logo_container").fadeOut(1000);
 	 		$("#logo_container h3").fadeOut(1000);
@@ -103,6 +96,7 @@ $(document).ready(function() {
  	 });
  	 $("#tancabutton").on("click",function(e) {
  	 	username = "";
+ 	 	password = "";
  	 	isAdmin = false;
  	 	$("#opcions_admin").css({ "display": "none" });
  	 	$("#homepage").fadeOut(1000);
@@ -112,6 +106,25 @@ $(document).ready(function() {
 	 		$("#logo_container img").fadeIn(1000);
 	 		$("#signin").fadeIn(1000); 
 	 	}, 1000);
+ 	 });
+ 	 $("#username_submit").on("click", function(e) {
+ 	 	if(window.java.CanviarUsername(username, password, $("#formAccount_newUsername").val())) {
+ 	 		username = $("#formAccount_newUsername").val();
+ 	 		$("#modalConfigurarCompte").closeModal();
+ 	 		$("#nomusuariContainer").text(username);
+ 	 		Materialize.toast("Nom d'usuari canviat correctament!", 2000);
+ 	 	} else {
+ 	 		Materialize.toast("Ja existeix un usuari amb aquest nom. Prova-ho amb un de diferent.", 2000);
+ 	 	}
+ 	 });
+ 	 $("#password_submit").on("click", function(e) {
+ 	 	if(window.java.CanviarPassword(username, $("#formAccount_newPassword").val(), $("#formAccount_newPassword2").val())) {
+ 	 		password = $("#formAccount_newPassword2").val();
+ 	 		$("#modalConfigurarCompte").closeModal();
+ 	 		Materialize.toast("Contrasenya canviada correctament!", 2000);
+ 	 	} else {
+ 	 		Materialize.toast("La contrasenya actual no és correcta. Torna-ho a provar.", 2000);
+ 	 	}
  	 });
 
  	 $("#search").bind("enterKey",function(e) {
@@ -124,5 +137,4 @@ $(document).ready(function() {
  	 });
 
  	 $('.modal-trigger').leanModal();
-
  });

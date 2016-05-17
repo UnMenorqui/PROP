@@ -43,7 +43,7 @@ public class CtrlPresentacio {
     
     public Boolean modificar_usuari(String username, String password, String nou_user) {
         if (ExisteixUsuari_contrasenya(username,password)) {
-            cu.modificar_usuari(username,nou_user,password);
+            cu.modificar_usuari(username,password,nou_user);
             return true;
         }
         return false;
