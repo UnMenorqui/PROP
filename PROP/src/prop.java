@@ -45,7 +45,7 @@ public class prop {
         
             System.out.println("Si vol registrar-se, marqui 4.");
         
-            System.out.println("Si vol sortir de l'aplicació, marqui 5.");
+            System.out.println("Si vol sortir de l'aplicació, marqui un altre número.");
                 if(primer) {
                     System.out.println("Operació realitzada.");
                     System.out.println("---------------------");
@@ -98,7 +98,7 @@ public class prop {
                     else System.out.print("Usuari existent.");
                     break;
 
-                case 5:
+                default:
                     System.out.println("Gràcies per utilitzar l'aplicació, fins aviat!");
                     bool = true;
                     break;

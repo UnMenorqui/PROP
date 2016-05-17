@@ -30,7 +30,7 @@ public class DriverNormal {
             System.out.println("Si vols modificar la contrasenya marca 4.");
             System.out.println("Si vols fer una consulta marca 5.");
             System.out.println("Si vols consultar l'historial de consultes marca 6.");
-            System.out.println("Si vols acabar marca 7.");
+            System.out.println("Si vols acabar marca un altre número.");
             if(!primer) {
                 System.out.println("Operació realitzada.");
                 System.out.println("---------------------");
@@ -57,7 +57,7 @@ public class DriverNormal {
                 case 6:
                     ctrlusuaris.consultar(G);
                     break;
-                case 7:
+                default:
                     bool = true;
                     break;
             }

@@ -22,7 +22,7 @@ public class DriverHistorial {
         escriure_opcions();
         Scanner sc = new Scanner(System.in);
         opcio = sc.nextInt();
-        while(opcio != 3) {
+        while (opcio == 1 || opcio == 2) {
             switch(opcio) {
                 case 1:
                     consultar(G);
@@ -39,9 +39,9 @@ public class DriverHistorial {
     
     private static void escriure_opcions() {
         System.out.println("Tria una opció:");
-        System.out.println("1. Consultar historial");
-        System.out.println("2. Esborrar cerca");
-        System.out.println("3. Exit");
+        System.out.println("Si vols consultar historial marca 1.");
+        System.out.println("Si vols esborrar una consulta de l'historial marca 2.");
+        System.out.println("Si vols sortir marca un altre número");
     }
     
     public void consultar(CtrlGraf G) {

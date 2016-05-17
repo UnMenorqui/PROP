@@ -28,7 +28,7 @@ public class DriverPerfil {
             System.out.println("Marca 3 si vols un perfil d'un article");
             System.out.println("Marca 4 si vols un perfil d'un terme"); 
             System.out.println("Marca 5 si vols un perfil general");
-            System.out.println("Marca 6 si vols surtir de consulta");
+            System.out.println("Marca un altre número si vols surtir de consulta");
             if (!primer) {
                 primer = true;
             }
@@ -170,7 +170,7 @@ public class DriverPerfil {
                             break;
                     }
                     break;
-                case 6:
+                default:
                     bool = true;
                     break;
             }

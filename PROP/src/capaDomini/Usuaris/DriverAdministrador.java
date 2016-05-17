@@ -39,7 +39,7 @@ public class DriverAdministrador {
 
                 System.out.println("Si vols consultar l'historial de consultes marca 9.");
 
-                System.out.println("Si vols acabar marca 10.");
+                System.out.println("Si vols acabar marca un altre número.");
                 
                 if(!primer) {
                     System.out.println("Operació realitzada.");
@@ -114,7 +114,7 @@ public class DriverAdministrador {
                         U.consultar(CG);
                         break;
                         
-                    case 10:
+                    default:
                         bool = true;
                         break;
                 }
