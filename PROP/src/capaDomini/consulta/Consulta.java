@@ -22,6 +22,7 @@ public class Consulta {
         String nomt;
         double valor;
         Pair p;
+        Boolean repetit;
         switch (tipus) {
             case "Article":
                 id = G.getidArrayString(nom,tipus);
@@ -32,7 +33,13 @@ public class Consulta {
                         nomt = G.getNomNode(id, "Autor");
                         valor = G.getValorNode(id, "Autor");
                         p = new Pair(nomt,valor);
-                        autors1.add(p);
+                        repetit = false;
+                        for (int j = 0; j < autors1.size() && !repetit; ++j) {
+                            if (autors1.get(j).GetF().equals(nomt)) {
+                               repetit = true;
+                            }
+                        }
+                        if (!repetit) autors1.add(p);
                     }
                 }
                 Collections.sort(autors1, new Comparator() {
@@ -65,7 +72,13 @@ public class Consulta {
                             if (!nom.equals(nomt)) {
                                 valor = G.getValorNode(id, "Autor");
                                 p = new Pair(nomt,valor);
-                                autors1.add(p); 
+                                repetit = false;
+                                for (int k = 0; k < autors1.size() && !repetit; ++k) {
+                                    if (autors1.get(k).GetF().equals(nomt)) {
+                                        repetit = true;
+                                    }
+                                }
+                                if (!repetit) autors1.add(p); 
                             }
                         }
                     }
@@ -99,6 +112,7 @@ public class Consulta {
         String nomt;
         double valor;
         Pair p;
+        Boolean repetit;
         switch (tipus) {
             case "Article":
                 id = G.getidArrayString(nom,tipus);
@@ -109,7 +123,13 @@ public class Consulta {
                         nomt = G.getNomNode(id, "Terme");
                         valor = G.getValorNode(id, "Terme");
                         p = new Pair(nomt,valor);
-                        termes1.add(p);
+                        repetit = false;
+                        for (int j = 0; j < termes1.size() && !repetit; ++j) {
+                            if (termes1.get(j).GetF().equals(nomt)) {
+                               repetit = true;
+                            }
+                        }
+                        if (!repetit) termes1.add(p);
                     }
                 }
                 Collections.sort(termes1, new Comparator() {
@@ -141,7 +161,13 @@ public class Consulta {
                             nomt = G.getNomNode(id, "Terme");
                             valor = G.getValorNode(id, "Terme");
                             p = new Pair(nomt,valor);
-                            termes1.add(p); 
+                            repetit = false;
+                            for (int k = 0; k < termes1.size() && !repetit; ++k) {
+                                if (termes1.get(k).GetF().equals(nomt)) {
+                                   repetit = true;
+                                }
+                            }
+                            if (!repetit) termes1.add(p);
                         }
                     }
                 }
@@ -177,6 +203,7 @@ public class Consulta {
         String nomt;
         double valor;
         Pair p;
+        Boolean repetit;
         switch (tipus) {   
             case "Article":
                 id = G.getidArrayString(nom,tipus);
@@ -187,7 +214,13 @@ public class Consulta {
                         nomt = G.getNomNode(id, "Conferencia");
                         valor = G.getValorNode(id, "Conferencia");
                         p = new Pair(nomt,valor);
-                        conferencies1.add(p);
+                        repetit = false;
+                        for (int j = 0; j < conferencies1.size() && !repetit; ++j) {
+                            if (conferencies1.get(j).GetF().equals(nomt)) {
+                               repetit = true;
+                            }
+                        }
+                        if (!repetit) conferencies1.add(p);
                     }
                 }
                 Collections.sort(conferencies1, new Comparator() {
@@ -219,7 +252,13 @@ public class Consulta {
                             nomt = G.getNomNode(id, "Conferencia");
                             valor = G.getValorNode(id, "Conferencia");
                             p = new Pair(nomt,valor);
-                            conferencies1.add(p); 
+                            repetit = false;
+                            for (int k = 0; k < conferencies1.size() && !repetit; ++k) {
+                                if (conferencies1.get(k).GetF().equals(nomt)) {
+                                   repetit = true;
+                                }
+                            }
+                            if (!repetit) conferencies1.add(p);
                         }
                     }
                 }
@@ -249,14 +288,20 @@ public class Consulta {
         ArrayList<Pair> articles1 = new ArrayList<>();
         int id = G.getidArrayString(nom,tipus);
         Node node = G.getNodeIessim(id, tipus);
-        
+        Boolean repetit;
         for (int i=0; i<node.getsize(); ++i) {
             if (node.nodeiessimSecond(i).equals("Article")) {
                 int id1 = G.getidArrayint(node.nodeiessimFirst(i), "Article");
                 String nomt = G.getNomNode(id1, "Article");
                 double valor = G.getValorNode(id1, "Article");
                 Pair p = new Pair(nomt,valor);
-                articles1.add(p);
+                repetit = false;
+                for (int j = 0; j < articles1.size() && !repetit; ++j) {
+                    if (articles1.get(j).GetF().equals(nomt)) {
+                       repetit = true;
+                    }
+                }
+                if (!repetit) articles1.add(p);
             }
         }
         Collections.sort(articles1, new Comparator() {
