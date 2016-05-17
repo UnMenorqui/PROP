@@ -27,6 +27,20 @@
 
  }
 
+ function consulta() {
+ 	switch($("#tipus_cerca").val()) {
+ 		case "0":
+
+ 		case "1":
+
+ 		case "2":
+
+ 		case "3":
+
+ 		case "4":
+ 	}
+ }
+
 $(document).ready(function() {
 	setTimeout(carrega,500);
 
