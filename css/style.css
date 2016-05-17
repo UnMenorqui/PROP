@@ -1,0 +1,22 @@
+body {
+	font-size: 16px;
+}
+
+.centered {
+	text-align: center;
+}
+
+#historial:after {
+  content: '';
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 10px 10px 10px 10px;
+  border-color: transparent transparent #c62828 transparent;  
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
+  position: absolute;
+  top: -20px;
+  left: 450px;
+}
