@@ -1,6 +1,6 @@
   package capaDomini.Usuaris;
 
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.consulta.CtrlHistorial;
 import capaDomini.consulta.DriverHistorial;
 import capaPersistencia.CtrlDadesUsuari;
@@ -80,29 +80,29 @@ public class CtrlUsuaris {
             return du.consultar_password(username);
     }
     
-    public void consultar(Graf G) {
+    public void consultar(CtrlGraf G) {
         DriverHistorial dr = new DriverHistorial();
-        dr.main();
+        dr.main(G);
     }
 
     public void esborrar(int n) {
         hist.esborrar(n);
     }
     
-    public void afegirNode(String tipus,String nom, Graf CG) {
+    public void afegirNode(String tipus,String nom, CtrlGraf CG) {
         CG.afegirNode(tipus, nom);
     }
     
     
-    public void eliminarNode(String nomNode, String tipus, Graf CG) {
+    public void eliminarNode(String nomNode, String tipus, CtrlGraf CG) {
         CG.eliminarNode(nomNode,tipus);
     }
     
-    public void eliminarAresta(String nom1, String nom2, String tipus, Graf CG) {
+    public void eliminarAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
         CG.eliminarAresta(nom1, nom2, tipus);
     }
     
-    public void afegirAresta(String nom1, String nom2, String tipus, Graf CG) {
+    public void afegirAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
         CG.afegirAresta(nom1, nom2, tipus);
     }
 }

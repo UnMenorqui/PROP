@@ -5,7 +5,7 @@
  */
 package capaDomini.Perfils;
 
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import java.util.Scanner;
 
 /**
@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class DriverPerfil {
     
 
-    public void main (Graf G, boolean usuaris) {
+    public void main (CtrlGraf G, boolean usuaris) {
         Scanner sc = new Scanner(System.in);
         CtrlPerfils ctrl = new CtrlPerfils();
         int marca;

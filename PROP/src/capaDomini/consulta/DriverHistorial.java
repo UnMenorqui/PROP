@@ -5,7 +5,7 @@
  */
 package capaDomini.consulta;
 
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.Perfils.CtrlPerfils;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,8 +16,7 @@ import java.util.Scanner;
  */
 public class DriverHistorial {
     
-    public void main () {
-        Graf G = new Graf();
+    public void main (CtrlGraf G) {
         Historial historial = new Historial();
         int opcio;
         escriure_opcions();
@@ -45,7 +44,7 @@ public class DriverHistorial {
         System.out.println("3. Exit");
     }
     
-    public void consultar(Graf G) {
+    public void consultar(CtrlGraf G) {
         CtrlHistorial ctrl = new CtrlHistorial();
         ArrayList<Apunts> LlistaConsultes = ctrl.getList();
 	Scanner sc = new Scanner(System.in);

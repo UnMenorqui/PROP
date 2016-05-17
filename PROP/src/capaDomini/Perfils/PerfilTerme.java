@@ -8,7 +8,7 @@ package capaDomini.Perfils;
 
 
 import capaDomini.consulta.Consulta;
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -49,7 +49,7 @@ public class PerfilTerme extends Perfil {
         quantitat_autors = q_autor;
     }
     
-    public void crear_perfil_terme(Graf G, boolean usuari) {
+    public void crear_perfil_terme(CtrlGraf G, boolean usuari) {
         Consulta cs = new Consulta();
         cs.obtenir_articles(articles,nom,"Terme",quantitat_articles,G);
         cs.obtenir_conferencies(conferencies,articles,nom,"Terme",quantitat_conf,G);

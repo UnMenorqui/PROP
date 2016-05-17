@@ -6,7 +6,7 @@
 package capaDomini.Perfils;
 
 
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.consulta.Consulta;
 import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class PerfilAutor extends Perfil {
         quantitat_coautors = q_coautors;
     }
     
-    public void crear_perfil_autor(Graf G, boolean usuari) {
+    public void crear_perfil_autor(CtrlGraf G, boolean usuari) {
         Consulta cs = new Consulta();
         cs.obtenir_articles(articles,nom,"Autor",quantitat_articles,G);
         cs.obtenir_termes(termes,articles,nom,"Autor",quantitat_termes,G);
@@ -87,6 +87,9 @@ public class PerfilAutor extends Perfil {
             for (int i = 0; i < termes.size(); ++i) {
                 String aux = termes.get(i);
                 System.out.println("\t- "+aux);
+            }
+            if (quantitat_termes > termes.size()) {
+                System.out.println("No hi ha tants termes per la quantitat desitjada");
             }
             System.out.println("");
             System.out.println("Co-Autors més rellevants d'aquest autor:");

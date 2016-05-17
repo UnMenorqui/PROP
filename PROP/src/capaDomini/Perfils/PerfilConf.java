@@ -7,7 +7,7 @@ package capaDomini.Perfils;
 
 
 import capaDomini.consulta.Consulta;
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -49,7 +49,7 @@ public class PerfilConf extends Perfil {
     }
     
     
-    public void crear_perfil_conf(Graf G, boolean usuaris) {
+    public void crear_perfil_conf(CtrlGraf G, boolean usuaris) {
         Consulta cs = new Consulta();
         cs.obtenir_articles(articles,nom,"Conferencia",quantitat_articles,G);
         cs.obtenir_autors(autors,articles,nom,"Conferencia",quantitat_autors,G);

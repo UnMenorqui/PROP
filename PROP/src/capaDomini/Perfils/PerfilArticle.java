@@ -6,7 +6,7 @@
 package capaDomini.Perfils;
 
 
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import java.util.ArrayList;
 import capaDomini.consulta.Consulta;
 import capaDomini.consulta.CtrlHistorial;
@@ -48,7 +48,7 @@ public class PerfilArticle extends Perfil {
         quantitat_autors = q_autor;
     }
     
-    public void crear_perfil_article(Graf G, boolean usuari) {
+    public void crear_perfil_article(CtrlGraf G, boolean usuari) {
         Consulta cs = new Consulta();
         ArrayList<String> articles = new ArrayList<>();
         cs.obtenir_autors(autors,articles,nom,"Article",quantitat_autors,G);

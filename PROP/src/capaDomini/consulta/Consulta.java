@@ -1,7 +1,7 @@
 package capaDomini.consulta;
 
 import Utils.Pair;
-import capaDomini.Graf.Graf;
+import capaDomini.Graf.CtrlGraf;
 import capaDomini.Graf.Node;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +15,7 @@ import java.util.Comparator;
 
 public class Consulta {
     
-    public void obtenir_autors(ArrayList<String> autors, ArrayList<String> articles, String nom, String tipus, int quantitat, Graf G) {
+    public void obtenir_autors(ArrayList<String> autors, ArrayList<String> articles, String nom, String tipus, int quantitat, CtrlGraf G) {
         ArrayList<Pair> autors1 = new ArrayList<>();
         int id;
         Node node;
@@ -105,7 +105,7 @@ public class Consulta {
         autors1.clear();
     }
     
-    public void obtenir_termes(ArrayList<String> termes, ArrayList<String> articles, String nom, String tipus, int quantitat, Graf G) {
+    public void obtenir_termes(ArrayList<String> termes, ArrayList<String> articles, String nom, String tipus, int quantitat, CtrlGraf G) {
         ArrayList<Pair> termes1 = new ArrayList<>();
         int id;
         Node node;
@@ -196,7 +196,7 @@ public class Consulta {
 	termes1.clear();
     }
     
-    public void obtenir_conferencies(ArrayList<String> conferencies, ArrayList<String> articles, String nom, String tipus, int quantitat, Graf G) {
+    public void obtenir_conferencies(ArrayList<String> conferencies, ArrayList<String> articles, String nom, String tipus, int quantitat, CtrlGraf G) {
         ArrayList<Pair> conferencies1 = new ArrayList<>();
         int id;
         Node node;
@@ -284,7 +284,7 @@ public class Consulta {
         conferencies1.clear();
     }
     
-    public void obtenir_articles(ArrayList<String> articles, String nom, String tipus, int quantitat, Graf G) {
+    public void obtenir_articles(ArrayList<String> articles, String nom, String tipus, int quantitat, CtrlGraf G) {
         ArrayList<Pair> articles1 = new ArrayList<>();
         int id = G.getidArrayString(nom,tipus);
         Node node = G.getNodeIessim(id, tipus);
