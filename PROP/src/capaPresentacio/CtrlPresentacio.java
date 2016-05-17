@@ -23,6 +23,7 @@ import java.util.ArrayList;
  */
 public class CtrlPresentacio {
     
+    private CtrlGraf cg;
     
     // FUNCIONS CTRL DADES HISTORIAL
     public static void saveHistorial(ArrayList<Apunts> LlistaConsultes) {
@@ -90,7 +91,9 @@ public class CtrlPresentacio {
     
     
     // FUNCIONS CTRL GRAF
-    CtrlGraf cg = new CtrlGraf();
+    public void creaGraf() {
+        cg = new CtrlGraf();
+    }
     public int getidArrayString(String nom,String tipus) {
         return cg.getidArrayString(nom, tipus);
     }
@@ -178,7 +181,9 @@ public class CtrlPresentacio {
         p_art.set_quantitat_conf(conferencies);
         p_art.set_quantitat_termes(termes);
         p_art.crear_perfil_article(G,usuaris);
-    }  
+    }
+    
+    
 
     
     // FUNCIONS CTRL CONSULTA
