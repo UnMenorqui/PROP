@@ -1,3 +1,4 @@
+/*
 package capaPersistencia.BD;
 
 import java.io.*;
@@ -28,3 +29,4 @@ public abstract class DataBase {
     }
 
  }
+*/

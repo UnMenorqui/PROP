@@ -82,25 +82,33 @@ public class DriverAdministrador {
                         break;
                     case 5:
                         System.out.println("Entra el Tipus del Node: ");
+                        sc.nextLine();
                         tipus = sc.nextLine();
                         System.out.println("Entra el nom del Node: ");
                         nom = sc.nextLine();
-                        CG.afegirNode(tipus, nom);
+                        if (CG.afegirNode(tipus, nom)) System.out.println("Node ja existent");
+                        else System.out.println("Node Afegit");
+                        break;
                     case 6:
                         System.out.println("Entra el nom del Node1: ");
+                        sc.nextLine();
                         node1 = sc.nextLine();
                         System.out.println("Entra el nom del Node2: ");
                         node2 = sc.nextLine();
                         System.out.println("Entra el tipus del Node2: ");
                         tipus = sc.nextLine();
-                        CG.afegirAresta(node1, node2,tipus);
-                        
+                        if (CG.afegirAresta(node1, node2,tipus)) System.out.println("Aresta NO Afegida");
+                        else System.out.println("Aresta Afegida");
+                        break;
                     case 7:
                         System.out.println("Entra el nom del Node1: ");
+                        sc.nextLine();
                         node1 = sc.nextLine();
-                        System.out.println("Entra el tipus del Node2: ");
+                        System.out.println("Entra el tipus del Node1: ");
                         tipus = sc.nextLine();
-                        CG.eliminarNode(node1,tipus);
+                        if (CG.eliminarNode(node1,tipus)) System.out.println("Node no existent");
+                        else System.out.println("Node eliminat");
+                        break;
                     case 8:
                         System.out.println("Entra el nom del Node1: ");
                         node1 = sc.nextLine();
@@ -108,8 +116,9 @@ public class DriverAdministrador {
                         node2 = sc.nextLine();
                         System.out.println("Entra el tipus del Node2: ");
                         tipus = sc.nextLine();
-                        CG.eliminarAresta(node1,node2,tipus);
-                          
+                        if (CG.eliminarAresta(node1,node2,tipus)) System.out.println("Aresta NO Eliminada");
+                        else System.out.println("Aresta Eliminada");
+                        break; 
                     case 9:
                         U.consultar(CG);
                         break;

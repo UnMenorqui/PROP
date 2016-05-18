@@ -2,11 +2,9 @@ package capaPersistencia.BD;
 
 import capaDomini.Graf.*; 
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+
 
 public class BaseDades extends DataBase {
     
@@ -97,7 +95,91 @@ public class BaseDades extends DataBase {
         catch (IOException e) {}
     }
     
-    public void safe(Graf g) {
-        //Escriu la informació del graph als fitxers
+    public void save(ArrayList<Node> autor, ArrayList<Node> conf,ArrayList<Node> paper,ArrayList<Node> terme, ArrayList<Aresta> pa, ArrayList<Aresta> pt, ArrayList<Aresta> pc)  {
+        save(autor,"author.txt");
+        save(conf,"conf.txt");
+        save(terme,"term.txt");
+        save(paper,"paper.txt");
+        savearesta(pa,"paper_author.txt");
+        savearesta(pt,"paper_term.txt");
+        savearesta(pc,"paper_conf.txt");
+    }
+    
+    private void save(ArrayList<Node> aL, String nomfitxer) {
+        PrintWriter pw = null;
+        try {
+            File inFile = new File(nomfitxer);
+            if (!inFile.isFile()) {
+              System.out.println("No existeix el ficher amb nom "+nomfitxer);
+            }
+            else {
+                //Eliminamos el fichero existente
+                inFile.delete();
+                File file = new File(nomfitxer);
+                pw = new PrintWriter(new FileWriter(file));
+
+                int id = 0;
+                String nom = "";
+                String line;
+                for(int i=0; i<aL.size(); ++i) {
+                    id = aL.get(i).getId();
+                    nom = aL.get(i).getNom();
+                    line = String.valueOf(id)+'\t'+nom;
+                    pw.println(line);
+                    pw.flush();
+                }
+            }
+          }
+          catch (FileNotFoundException ex) {}
+          catch (IOException ex) {}
+          finally{
+            // En el finally cerramos el fichero, para asegurarnos
+            // que se cierra tanto si todo va bien como si salta 
+            // una excepcion.
+            try{                  
+                if( null != pw ){   
+                    pw.close();     
+                  } 
+            }catch (Exception e2){}
+      }
+    }
+    
+    private void savearesta(ArrayList<Aresta> aL, String nomfitxer) {
+        PrintWriter pw = null;
+        try {
+            File inFile = new File(nomfitxer);
+            if (!inFile.isFile()) {
+              System.out.println("No existeix el ficher amb nom "+nomfitxer);
+            }
+            else {
+                //Eliminamos el fichero existente
+                inFile.delete();
+                File file = new File(nomfitxer);
+                pw = new PrintWriter(new FileWriter(file));
+
+                int id = 0;
+                int id1 = 0;
+                String line = "";
+                for(int i=0; i<aL.size(); ++i) {
+                    id = aL.get(i).getNode1();
+                    id1 = aL.get(i).getNode2();
+                    line = String.valueOf(id)+'\t'+String.valueOf(id1);
+                    pw.println(line);
+                    pw.flush();
+                }
+            }
+          }
+          catch (FileNotFoundException ex) {}
+          catch (IOException ex) {}
+          finally{
+            // En el finally cerramos el fichero, para asegurarnos
+            // que se cierra tanto si todo va bien como si salta 
+            // una excepcion.
+            try{                  
+                if( null != pw ){   
+                    pw.close();     
+                  } 
+            }catch (Exception e2){}
+      }
     }
 }

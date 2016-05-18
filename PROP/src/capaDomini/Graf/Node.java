@@ -25,9 +25,9 @@ public class Node {
       
     public Node(int id, String nom, String tipus) {
         this.id = id;
-        this.valor = 0;
         this.nom = nom;
         this.tipus = tipus;
+        this.valor = 0;
         nodesadjacents = new ArrayList<>();
     }
 

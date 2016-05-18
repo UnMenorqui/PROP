@@ -5,7 +5,6 @@
  */
 
 package capaDomini.Graf;
-import Utils.PairString;
 import capaPersistencia.BD.BaseDades;
 import java.util.*;
 
@@ -40,7 +39,10 @@ public class Graf {
     
     private Boolean actualitzar = false;    //en cas de canvi posar a true;
     
-    int idnou = 500000;
+    private int maxAutor;
+    private int maxConf;
+    private int maxTerme;
+    private int maxArticle;
     
     
     public Graf() {
@@ -52,7 +54,20 @@ public class Graf {
        pc = new ArrayList<>();
        pa = new ArrayList<>();
        pt = new ArrayList<>();
+       maxAutor = maxConf = maxTerme = maxArticle = 0;
        bd.load(paper,autor,terme,conf,pc,pa,pt);
+       for (int i=0; i<autor.size(); ++i) {
+           if (autor.get(i).getId() > maxAutor) maxAutor = autor.get(i).getId();
+       }
+       for (int i=0; i<paper.size(); ++i) {
+           if (paper.get(i).getId() > maxArticle) maxArticle = paper.get(i).getId();
+       }
+       for (int i=0; i<terme.size(); ++i) {
+           if (terme.get(i).getId() > maxTerme) maxTerme = terme.get(i).getId();
+       }
+       for (int i=0; i<conf.size(); ++i) {
+           if (conf.get(i).getId() > maxConf) maxConf = conf.get(i).getId();
+       }
        for (int i=0; i<pc.size(); ++i) {
            int node1 = pc.get(i).getNode1();
            int node2 = pc.get(i).getNode2();
@@ -80,30 +95,77 @@ public class Graf {
        pagerank();
     };
 
-    public void afegirAresta(String nom1, String nom2, String tipus) {
+    public boolean afegirAresta(String nom1, String nom2, String tipus) {
         int id = getidArrayString(nom1,"Article");
         int id1 = getidArrayString(nom2,tipus);
+        if (id == -1) return true;
+        if (id1 == -1) return true;
         int Node1 = GetIDnode(id,"Article");
         int Node2 = GetIDnode(id1,tipus);
-        Aresta a = new Aresta(Node1,Node2);
-        if (tipus.equals("Autor")) pa.add(a);
-        else if (tipus.equals("Conferencia")) pc.add(a);
-        else pt.add(a);
-        actualitzar = true;
+        Boolean existeix = false;
+        Aresta a;
+        switch (tipus) {
+            case "Autor":
+                for (int i=0; i<pa.size(); ++i) {
+                    if (pa.get(i).getNode1() == Node1) {
+                        if (pa.get(i).getNode2() == Node2) {
+                            existeix = true;
+                        }
+                    }
+                }
+                if (!existeix) {
+                    a = new Aresta(Node1,Node2);
+                    pa.add(a);
+                }
+                break;
+            case "Terme":
+                for (int i=0; i<pt.size(); ++i) {
+                    if (pt.get(i).getNode1() == Node1) {
+                        if (pt.get(i).getNode2() == Node2) {
+                            existeix = true;
+                        }
+                    }
+                }
+                if (!existeix) {
+                    a = new Aresta(Node1,Node2);
+                    pt.add(a);
+                }
+                break;
+            case "Conferencia":
+                for (int i=0; i<pc.size(); ++i) {
+                    if (pc.get(i).getNode1() == Node1) {
+                        if (pc.get(i).getNode2() == Node2) {
+                            existeix = true;
+                        }
+                    }
+                }
+                if (!existeix) {
+                    a = new Aresta(Node1,Node2);
+                    pc.add(a);
+                }
+                break;
+                
+        }
+        if (!existeix) actualitzar = true;
+        return existeix;
     }
     
-    public void eliminarAresta(String nom1, String nom2, String tipus) {
+    public boolean eliminarAresta(String nom1, String nom2, String tipus) {
         int id, id1, node1, node2;
         id = getidArrayString(nom1,"Article");
         id1 = getidArrayString(nom2,tipus);
+        if (id == -1) return true;
+        if (id1 == -1) return true;
         node1 = GetIDnode(id,"Article");
         node2 = GetIDnode(id1,tipus);
+        Boolean existeix = true;
         switch (tipus) {
             case "Autor":
                 for (int i=0; i<pa.size(); ++i) {
                     if (pa.get(i).getNode1() == node1) {
                         if (pa.get(i).getNode2() == node2) {
                             pa.remove(i);
+                            existeix = false;
                         }
                     }
                 }
@@ -114,6 +176,7 @@ public class Graf {
                     if (pc.get(i).getNode1() == node1) {
                         if (pc.get(i).getNode2() == node2) {
                             pc.remove(i);
+                            existeix = false;
                         }
                     }
                 }
@@ -124,43 +187,70 @@ public class Graf {
                     if (pt.get(i).getNode1() == node1) {
                         if (pt.get(i).getNode2() == node2) {
                             pt.remove(i);
+                            existeix = false;
                         }
                     }
                 }
                 break;
         }
-        actualitzar = true;
+        if (!existeix) actualitzar = true;
+        return existeix;
     }
 
-    public void afegirNode(String tipus,String nom) {
-        Node n = new Node(idnou,nom,tipus);
-        ++idnou;
+    public Boolean afegirNode(String tipus,String nom) {
+        Node n;
+        Boolean existeix = false;
         switch (tipus) {
             case "Autor":
-                autor.add(n);
+                for (int i=0; i<autor.size() && !existeix; ++i) {
+                    if (autor.get(i).getNom().equals(nom)) existeix = true;
+                }
+                if (!existeix) { 
+                    n = new Node(++maxAutor,nom,tipus);
+                    autor.add(n);
+                }
                 break;
             case "Conferencia":
-                conf.add(n);
+                for (int i=0; i<conf.size() && !existeix; ++i) {
+                    if (conf.get(i).getNom().equals(nom)) existeix = true;
+                }
+                if (!existeix) {
+                    n = new Node(++maxConf,nom,tipus);
+                    conf.add(n);
+                }
                 break;
             case "Article":
-                paper.add(n);
+                for (int i=0; i<paper.size() && !existeix; ++i) {
+                    if (paper.get(i).getNom().equals(nom)) existeix = true;
+                }
+                if (!existeix) {
+                    n = new Node(++maxArticle,nom,tipus);
+                    paper.add(n);
+                }
                 break;
             case "Terme":
-                terme.add(n);
+                for (int i=0; i<terme.size() && !existeix; ++i) {
+                    if (terme.get(i).getNom().equals(nom)) existeix = true;
+                }
+                if (!existeix) {
+                    n = new Node(++maxTerme,nom,tipus);
+                    terme.add(n);
+                }
                 break;
         }
-        actualitzar = true;
+        if (!existeix) actualitzar = true;
+        return existeix;
     }
     
-    public void eliminarNode(String nom, String tipus) {
+    public Boolean eliminarNode(String nom, String tipus) {
         int id = getidArrayString(nom,tipus);
-        int node = GetIDnode(id,tipus);
-        if(id == -1) System.out.println("Aquest node no existeix");
+        if(id == -1) return false;
         else { 
+            int node = GetIDnode(id,tipus);
             switch (tipus) {
                 case "Autor":
                     for (int i=0; i<autor.size(); ++i) {
-                        if (autor.get(i).getId() == node) autor.remove(i);
+                        if (autor.get(i).getId() == node)  autor.remove(i);
                     } 
                     for (int i = 0; i<pa.size(); ++i) {
                         if (pa.get(i).getNode2() == node) pa.remove(i);
@@ -198,6 +288,7 @@ public class Graf {
                     break;
             }
             actualitzar = true;
+            return true;
         }
     }
     
@@ -468,10 +559,6 @@ public class Graf {
         return null;
     }
     
-    public Boolean actualitzar() {
-        return actualitzar;
-    }
-    
     public Boolean existeixnode(String nom, String tipus) {
         switch(tipus) {
             case "Autor":
@@ -492,5 +579,14 @@ public class Graf {
                 }
         }
         return false;
+    }
+    
+    public Boolean getActualitzar() {
+        return actualitzar;
+    }
+    
+    public void actualitzar() {
+        BaseDades bd1 = new BaseDades();
+        bd1.save(autor,conf,paper,terme,pa,pc,pt);
     }
 }

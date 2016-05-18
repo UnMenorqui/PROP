@@ -170,15 +170,14 @@ public class DadesUsuari {
       }
 
     public static boolean borrarlinea(String user, String pass) {
-          BufferedReader br = null;
-          PrintWriter pw = null;
-          try {
-              File inFile = new File(nom_BD);
-
-              if (!inFile.isFile()) {
-                System.out.println("Parameter is not an existing file");
-                return false;
-              }
+        BufferedReader br = null;
+        PrintWriter pw = null;
+        try {
+            File inFile = new File(nom_BD);
+            if (!inFile.isFile()) {
+              System.out.println("Parameter is not an existing file");
+              return false;
+            }
 
             //Construct the new file that will later be renamed to the original filename. 
             File tempFile = new File(inFile.getAbsolutePath() + ".tmp");

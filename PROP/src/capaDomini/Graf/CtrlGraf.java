@@ -9,6 +9,7 @@ package capaDomini.Graf;
  *
  * @author Toni
  */
+
 public class CtrlGraf {
     private Graf SG = new Graf();
     
@@ -40,19 +41,27 @@ public class CtrlGraf {
         return SG.existeixnode(nom, tipus);
     }
     
-    public void afegirNode(String tipus,String nom) {
-        SG.afegirNode(tipus, nom);
+    public boolean afegirNode(String tipus,String nom) {
+        return SG.afegirNode(tipus, nom);
     }
     
-    public void eliminarNode(String nomNode, String tipus) {
-        SG.eliminarNode(nomNode, tipus);
+    public boolean eliminarNode(String nomNode, String tipus) {
+        return SG.eliminarNode(nomNode, tipus);
     }
     
-    public void eliminarAresta(String nom1, String nom2, String tipus) {
-        SG.eliminarAresta(nom1, nom2, tipus);
+    public boolean eliminarAresta(String nom1, String nom2, String tipus) {
+        return SG.eliminarAresta(nom1, nom2, tipus);
     }
     
-    public void afegirAresta(String nom1, String nom2, String tipus) {
-        SG.afegirAresta(nom1, nom2, tipus);
+    public boolean afegirAresta(String nom1, String nom2, String tipus) {
+        return SG.afegirAresta(nom1, nom2, tipus);
+    }
+    
+    public Boolean getActualitzar() {
+        return SG.getActualitzar();
+    }
+    
+    public void actualitzar() {
+        SG.actualitzar();
     }
 }
