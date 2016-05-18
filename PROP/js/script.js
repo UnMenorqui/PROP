@@ -55,7 +55,7 @@
  }
 
 $(document).ready(function() {
-	setTimeout(carrega,500);
+	setTimeout(carrega,1000);
 
     $('ul.tabs').tabs('select_tab', 'login');
 
@@ -108,6 +108,7 @@ $(document).ready(function() {
  	 	else Materialize.toast("Login Incorrecte",2000);
  	 });
  	 $("#historial_button").on("click", function(e) {
+ 	 	e.stopPropagation();
  	 	if(vHistorial) {
  	 		$("#historial").animate({
  	 			"height": "0px"
@@ -119,6 +120,17 @@ $(document).ready(function() {
  	 		});
  	 	}
  	 	vHistorial = !vHistorial;
+ 	 });
+ 	 $("html").click(function() {
+ 	 	if(vHistorial) {
+ 	 		$("#historial").animate({
+ 	 			"height": "0px"
+ 	 		}, 1000, function() { $("#historial").fadeOut(0); });
+ 	 		vHistorial = false;
+ 	 	}
+ 	 });
+ 	 $("#historial").click(function(e) {
+ 	 	e.stopPropagation();
  	 });
  	 $("#tancabutton").on("click",function(e) {
  	 	username = "";
