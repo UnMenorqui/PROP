@@ -28,6 +28,32 @@
 
  }
 
+ function consulta() {
+ 	var perfil = JSON.parse(window.java.consulta($("Tipus_Node").val(),$("#search").val(),$("#rangeAutors").val(),$("#rangeTermes").val(),$("#rangeConferencies").val(),$("#rangeArticles").val(),(username != "")));
+ 	var tipus = $("#Tipus_Node").val();
+ 	if (tipus == "General") {
+ 		if(window.java.existeixnode($("#search").val(),"Autor")) tipus = "Autor";
+ 		else if (window.java.existeixnode($("#search").val(),"Conferencia")) tipus = "Conferencia";
+ 		else if (window.java.existeixnode($("#search").val(),"Terme")) tipus = "Terme";
+ 		else if (window.java.existeixnode($("#search").val(),"Article")) tipus = "Article";
+ 	}
+ 	if (tipus == "Autor") {
+
+	}
+
+	if (tipus == "Article") {
+
+	}
+
+	if (tipus == "Conferencia") {
+
+	}
+
+	if (tipus == "Terme") {
+
+	}
+ }
+
 $(document).ready(function() {
 	setTimeout(carrega,500);
 

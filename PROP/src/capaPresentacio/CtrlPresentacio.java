@@ -91,8 +91,9 @@ public class CtrlPresentacio {
     
     
     // FUNCIONS CTRL GRAF
-    public void creaGraf() {
+    public CtrlGraf creaGraf() {
         cg = new CtrlGraf();
+        return cg;
     }
     public int getidArrayString(String nom,String tipus) {
         return cg.getidArrayString(nom, tipus);
