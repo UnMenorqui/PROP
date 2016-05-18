@@ -98,8 +98,8 @@ public class Graf {
     public boolean afegirAresta(String nom1, String nom2, String tipus) {
         int id = getidArrayString(nom1,"Article");
         int id1 = getidArrayString(nom2,tipus);
-        if (id == -1) return true;
-        if (id1 == -1) return true;
+        if (id == 0) return true;
+        if (id1 == 0) return true;
         int Node1 = GetIDnode(id,"Article");
         int Node2 = GetIDnode(id1,tipus);
         Boolean existeix = false;
@@ -154,8 +154,8 @@ public class Graf {
         int id, id1, node1, node2;
         id = getidArrayString(nom1,"Article");
         id1 = getidArrayString(nom2,tipus);
-        if (id == -1) return true;
-        if (id1 == -1) return true;
+        if (id == 0) return true;
+        if (id1 == 0) return true;
         node1 = GetIDnode(id,"Article");
         node2 = GetIDnode(id1,tipus);
         Boolean existeix = true;
@@ -244,7 +244,7 @@ public class Graf {
     
     public Boolean eliminarNode(String nom, String tipus) {
         int id = getidArrayString(nom,tipus);
-        if(id == -1) return false;
+        if(id == 0) return false;
         else { 
             int node = GetIDnode(id,tipus);
             switch (tipus) {

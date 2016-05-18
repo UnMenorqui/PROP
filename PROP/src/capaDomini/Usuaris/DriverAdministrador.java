@@ -30,10 +30,10 @@ public class DriverAdministrador {
                 System.out.println("Si vols fer una consulta marca 4.");
 
                 System.out.println("Si vols afegir un Node marca 5.");
+                
+                System.out.println("Si vols eliminar un Node marca 6.");
 
-                System.out.println("Si vols afegir una Aresta marca 6.");
-
-                System.out.println("Si vols eliminar un Node marca 7.");
+                System.out.println("Si vols afegir una Aresta marca 7.");
 
                 System.out.println("Si vols eliminar una Aresta marca 8.");
 
@@ -93,21 +93,21 @@ public class DriverAdministrador {
                         System.out.println("Entra el nom del Node1: ");
                         sc.nextLine();
                         node1 = sc.nextLine();
-                        System.out.println("Entra el nom del Node2: ");
-                        node2 = sc.nextLine();
-                        System.out.println("Entra el tipus del Node2: ");
+                        System.out.println("Entra el tipus del Node1: ");
                         tipus = sc.nextLine();
-                        if (CG.afegirAresta(node1, node2,tipus)) System.out.println("Aresta NO Afegida");
-                        else System.out.println("Aresta Afegida");
+                        if (CG.eliminarNode(node1, tipus)) System.out.println("Node no existent");
+                        else System.out.println("Node eliminat");
                         break;
                     case 7:
                         System.out.println("Entra el nom del Node1: ");
                         sc.nextLine();
                         node1 = sc.nextLine();
-                        System.out.println("Entra el tipus del Node1: ");
+                        System.out.println("Entra el nom del Node2: ");
+                        node2 = sc.nextLine();
+                        System.out.println("Entra el tipus del Node2: ");
                         tipus = sc.nextLine();
-                        if (CG.eliminarNode(node1,tipus)) System.out.println("Node no existent");
-                        else System.out.println("Node eliminat");
+                        if (CG.afegirAresta(node1, node2, tipus)) System.out.println("Aresta NO Afegida");
+                        else System.out.println("Aresta Afegida");
                         break;
                     case 8:
                         System.out.println("Entra el nom del Node1: ");

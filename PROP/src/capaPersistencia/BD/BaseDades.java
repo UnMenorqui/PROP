@@ -95,7 +95,7 @@ public class BaseDades extends DataBase {
         catch (IOException e) {}
     }
     
-    public void save(ArrayList<Node> autor, ArrayList<Node> conf,ArrayList<Node> paper,ArrayList<Node> terme, ArrayList<Aresta> pa, ArrayList<Aresta> pt, ArrayList<Aresta> pc)  {
+    public void save(ArrayList<Node> autor, ArrayList<Node> conf,ArrayList<Node> paper,ArrayList<Node> terme, ArrayList<Aresta> pa, ArrayList<Aresta> pc, ArrayList<Aresta> pt)  {
         save(autor,"author.txt");
         save(conf,"conf.txt");
         save(terme,"term.txt");
