@@ -18,7 +18,7 @@ public class prop {
     
     public static void main(String args[]) throws IOException {
         CtrlGraf gf = new CtrlGraf();
-        String usr_admin = "Administrador";
+        String usr_admin = "admin";
         String admin_pass = "1234";
         CtrlUsuaris ctrl = new CtrlUsuaris();
         
@@ -99,10 +99,22 @@ public class prop {
                     break;
 
                 default:
+                    if (gf.getActualitzar()) {
+                        System.out.println("S'han fet canvia al graf. Vols actualitzar la BD amb ells?: S/N");
+                        sc.nextLine();
+                        user = sc.nextLine();
+                        switch(user) {
+                            case "S":
+                                gf.actualitzar();
+                                break;
+                            default: 
+                                break;
+                        }
+                    }
                     System.out.println("Gràcies per utilitzar l'aplicació, fins aviat!");
                     bool = true;
                     break;
-
+                        
             }
         }
     }  

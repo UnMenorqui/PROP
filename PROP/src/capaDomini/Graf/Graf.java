@@ -154,11 +154,12 @@ public class Graf {
         int id, id1, node1, node2;
         id = getidArrayString(nom1,"Article");
         id1 = getidArrayString(nom2,tipus);
-        if (id == 0) return true;
-        if (id1 == 0) return true;
+        if (id == -1) return true;
+        if (id1 == -1) return true;
         node1 = GetIDnode(id,"Article");
         node2 = GetIDnode(id1,tipus);
         Boolean existeix = true;
+        Boolean primer,segon;
         switch (tipus) {
             case "Autor":
                 for (int i=0; i<pa.size(); ++i) {
@@ -169,6 +170,20 @@ public class Graf {
                         }
                     }
                 }
+                primer = false;
+                segon  = false;
+                if (!existeix) {
+                    for (int i=0; i<pa.size(); ++i) {
+                        if (pa.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                        if (pa.get(i).getNode2() == node2) {
+                            segon = true;
+                        }
+                    }
+                    if (!primer) eliminarNode(getNomNode(id,"Article"),"Article");
+                    if (!segon) eliminarNode(getNomNode(id,"Autor"),"Autor");
+                } 
                 break;
 
             case "Conferencia":
@@ -180,6 +195,20 @@ public class Graf {
                         }
                     }
                 }
+                primer = false;
+                segon  = false;
+                if (!existeix) {
+                    for (int i=0; i<pc.size(); ++i) {
+                        if (pc.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                        if (pc.get(i).getNode2() == node2) {
+                            segon = true;
+                        }
+                    }
+                    if (!primer) eliminarNode(getNomNode(id,"Article"),"Article");
+                    if (!segon) eliminarNode(getNomNode(id,"Conferencia"),"Conferencia");
+                }
                 break;
 
             case "Terme":
@@ -190,6 +219,20 @@ public class Graf {
                             existeix = false;
                         }
                     }
+                }
+                primer = false;
+                segon  = false;
+                if (!existeix) {
+                    for (int i=0; i<pt.size(); ++i) {
+                        if (pt.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                        if (pt.get(i).getNode2() == node2) {
+                            segon = true;
+                        }
+                    }
+                    if (!primer) eliminarNode(getNomNode(id,"Article"),"Article");
+                    if (!segon) eliminarNode(getNomNode(id,"Terme"),"Terme");
                 }
                 break;
         }
@@ -244,7 +287,7 @@ public class Graf {
     
     public Boolean eliminarNode(String nom, String tipus) {
         int id = getidArrayString(nom,tipus);
-        if(id == 0) return false;
+        if (id == -1) return true;
         else { 
             int node = GetIDnode(id,tipus);
             switch (tipus) {
@@ -258,8 +301,11 @@ public class Graf {
                     break;
                 case "Conferencia":
                     for (int i=0; i<conf.size(); ++i) {
-                        if (conf.get(i).getId() == node) conf.remove(i);
-                    }  
+                        if (conf.get(i).getId() == node){
+                            conf.remove(i);
+                            System.out.println("eliminat");
+                        }
+                     }  
                     for (int i = 0; i<pc.size(); ++i) {
                         if (pc.get(i).getNode2() == node) pc.remove(i);
                     }   
@@ -288,7 +334,7 @@ public class Graf {
                     break;
             }
             actualitzar = true;
-            return true;
+            return false;
         }
     }
     
@@ -488,7 +534,7 @@ public class Graf {
     }
     
     public int getidArrayString(String nom, String tipus) {
-        int idArray = 0;
+        int idArray = -1;
         Boolean acabat = false;
         switch (tipus) {
             case "Article":
