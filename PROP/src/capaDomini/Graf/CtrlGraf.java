@@ -41,19 +41,19 @@ public class CtrlGraf {
         return SG.existeixnode(nom, tipus);
     }
     
-    public boolean afegirNode(String tipus,String nom) {
+    public int afegirNode(String tipus,String nom) {
         return SG.afegirNode(tipus, nom);
     }
     
-    public boolean eliminarNode(String nomNode, String tipus) {
+    public int eliminarNode(String nomNode, String tipus) {
         return SG.eliminarNode(nomNode, tipus);
     }
     
-    public boolean eliminarAresta(String nom1, String nom2, String tipus) {
+    public int eliminarAresta(String nom1, String nom2, String tipus) {
         return SG.eliminarAresta(nom1, nom2, tipus);
     }
     
-    public boolean afegirAresta(String nom1, String nom2, String tipus) {
+    public int afegirAresta(String nom1, String nom2, String tipus) {
         return SG.afegirAresta(nom1, nom2, tipus);
     }
     

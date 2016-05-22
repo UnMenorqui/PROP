@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @author Toni
  */
 public class DriverNormal {
-    public void main(String user, String pass, CtrlGraf G) throws IOException {
+    public void main(String user, String pass, CtrlGraf G) {
         boolean bool= false;
         boolean primer = true;
         CtrlUsuaris ctrlusuaris = new CtrlUsuaris();

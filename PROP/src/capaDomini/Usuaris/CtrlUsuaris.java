@@ -20,35 +20,38 @@ public class CtrlUsuaris {
     
     private CtrlDadesUsuari du;
     private CtrlHistorial hist;
-    private UsuariNormal un = new UsuariNormal();
+    private UsuariNormal un;
 
     
     public CtrlUsuaris() {
         du = new CtrlDadesUsuari();
-        un = new UsuariNormal();
+        //un = new UsuariNormal();
     }
     
     public String consultar_username() {
         return un.consultar_username();
     }
     
-    public Boolean modificar_usuari(String username, String password, String nou_user) {
-        if (ExisteixUsuari_contrasenya(username,password)) {
-            du.modificar_usuari(username,nou_user,password);
-            return true;
+    public int modificar_usuari(String username, String password, String nou_user) {
+        if (ExisteixUsuari(nou_user)) return 3;
+        int id = ExisteixUsuari_contrasenya(username,password);
+        if (id == 2) {
+            du.modificar_usuari(username, nou_user, password);
+            return 2;
         }
-        return false;
+        return id;
     }
     
-    public Boolean modificar_password(String username, String password, String new_password) {
-        if (ExisteixUsuari_contrasenya(username, password)) {
+    public int modificar_password(String username, String password, String new_password) {
+        int id = ExisteixUsuari_contrasenya(username, password);
+        if (id == 2) {
             du.modificar_password(username, password, new_password);
-            return true;
+            return 2;
         }
-        return false;
+        return id;
     }
 
-    public Boolean ExisteixUsuari_contrasenya(String username, String password) {
+    public int ExisteixUsuari_contrasenya(String username, String password) {
         return du.ExisteixUsuari_contrasenya(username,password);
     }
     
@@ -56,20 +59,30 @@ public class CtrlUsuaris {
         return du.ExisteixUsuari(username);
     }
     
-    public Boolean borrarlinea(String username, String password) {
-        if (ExisteixUsuari_contrasenya(username, password)) {
-            du.borrarlinea(username, password);
-            return true;
+    public int borrarUsuari(String username, String password) {
+        int id = ExisteixUsuari_contrasenya(username, password);
+        if (id == 2) {
+            du.borrarUsuari(username, password);
+            return 2;
         }
-        return false;
+        return id;
     }
     
-    public boolean GuardarUsuari(String username, String password) {
-        if (!ExisteixUsuari_contrasenya(username, password)) {
-            du.GuardarUsuari(username, password);
-            return true;
+    public int borrarUsuariAdmin(String username) {
+        if (ExisteixUsuari(username)) {
+            du.borrarUsuariAdmin(username);
+            return 1;
         }
-        return false;
+        return 0;
+    }
+    
+    public int GuardarUsuari(String username, String password) {
+        int id = ExisteixUsuari_contrasenya(username, password);
+        if (id == 0) {
+            du.GuardarUsuari(username, password);
+            return 0;
+        }
+        return id;
     }
     
     public void consultaUsuarisBD() {

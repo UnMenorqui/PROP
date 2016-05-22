@@ -34,82 +34,80 @@ public class prop {
         boolean primer = false;
         while(!bool) {
             System.out.println("Si vol entrar com a convidat, marqui 1.");
-        
             System.out.println("Si ja disposa d'un compte, marqui 2.");
-        
             System.out.println("Si és un administrador, marqui 3.");
-        
             System.out.println("Si vol registrar-se, marqui 4.");
-        
             System.out.println("Si vol sortir de l'aplicació, marqui un altre número.");
-                if(primer) {
-                    System.out.println("Operació realitzada.");
-                    System.out.println("---------------------");
-                    System.out.println("Torna a entrar la operació a fer:");
-                } else primer = true;
-                int id = sc.nextInt();
-                switch(id) {
-                case 1:
-                    DriverConvidat uc = new DriverConvidat();
-                    uc.main(gf);
-                    break;
-                case 2:
-                    String user = null, pass = null;     
-                    System.out.print("Entra el nom d'usuari: ");
-                    user = sc.next();
-                    System.out.println();
+            if(primer) {
+                System.out.println("Operació realitzada.");
+                System.out.println("---------------------");
+                System.out.println("Torna a entrar la operació a fer:");
+            } 
+            else primer = true;
+            int id = sc.nextInt();
+            switch(id) {
+            case 1:
+                DriverConvidat uc = new DriverConvidat();
+                uc.main(gf);
+                break;
+            case 2:
+                String user = null, pass = null;     
+                System.out.print("Entra el nom d'usuari: ");
+                user = sc.next();
+                System.out.println();
+                System.out.print("Entra la contrasenya: ");
+                pass = sc.next();
+                System.out.println();
+                int k = ctrl.ExisteixUsuari_contrasenya(user,pass);
+                if (k == 0) System.out.println("Nom d'usuari INCORRECTE");
+                else if (k == 1) System.out.println("Contrasenya INCORRECTA");
+                else if (k == 2) {
+                    DriverNormal norm = new DriverNormal();
+                    norm.main(user,pass,gf);
+                }
+                break;
+
+            case 3:
+                System.out.print("Entra l'usuari Administrador: ");
+                user = sc.next();
+                if (user.equals(usr_admin)) { 
+                    System.out.print("Entra la clau mestre: ");
+                    pass = sc.next();
+                    if (pass.equals(admin_pass)) {
+                        DriverAdministrador admin = new DriverAdministrador();
+                        admin.main(gf,ctrl);
+                    }
+                    else System.out.print("Clau mestre incorrecta.");
+                }
+                else System.out.print("Usuari Administrador incorrecte.");
+                break;
+
+            case 4:
+                System.out.print("Entra el nou usuari: ");
+                user = sc.next();
+                if(!ctrl.ExisteixUsuari(user)) {
                     System.out.print("Entra la contrasenya: ");
                     pass = sc.next();
-                    System.out.println();
-                    if(ctrl.ExisteixUsuari_contrasenya(user,pass)) {
-                        DriverNormal norm = new DriverNormal();
-                        norm.main(user,pass,gf);
-                    }
-                    else System.out.println("Usuari o contrasenya incorrecta");
-                    break;
+                    ctrl.GuardarUsuari(user,pass);
+                }
+                else System.out.print("Usuari existent.");
+                break;
 
-                case 3:
-                    System.out.print("Entra l'usuari Administrador: ");
+            default:
+                if (gf.getActualitzar()) {
+                    System.out.println("S'han fet canvis en el graf. Vols actualitzar la bd? (S/N)");
                     user = sc.next();
-                    if (user.equals(usr_admin)) { 
-                        System.out.print("Entra la clau mestre: ");
-                        pass = sc.next();
-                        if (pass.equals(admin_pass)) {
-                            DriverAdministrador admin = new DriverAdministrador();
-                            admin.main(gf,ctrl);
-                        }
-                        else System.out.print("Clau mestre incorrecta.");
+                    switch (user) {
+                        case "S":
+                            gf.actualitzar();
+                            break;
+                        default:
+                            break;
                     }
-                    else System.out.print("Usuari Administrador incorrecte.");
-                    break;
-
-                case 4:
-                    System.out.print("Entra el nou usuari: ");
-                    user = sc.next();
-                    if(!ctrl.ExisteixUsuari(user)) {
-                        System.out.print("Entra la contrasenya: ");
-                        pass = sc.next();
-                        ctrl.GuardarUsuari(user, pass);
-                    }
-                    else System.out.print("Usuari existent.");
-                    break;
-
-                default:
-                    if (gf.getActualitzar()) {
-                        System.out.println("S'han fet canvis en el graf. Vols actualitzar la bd? (S/N)");
-                        user = sc.next();
-                        switch (user) {
-                            case "S":
-                                gf.actualitzar();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    System.out.println("Gràcies per utilitzar l'aplicació, fins aviat!");
-                    bool = true;
-                    break;
-
+                }
+                System.out.println("Gràcies per utilitzar l'aplicació, fins aviat!");
+                bool = true;
+                break;
             }
         }
     }
