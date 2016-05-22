@@ -1,5 +1,3 @@
-
-
 import capaDomini.Graf.CtrlGraf;
 import capaDomini.Usuaris.DriverConvidat;
 import capaDomini.Usuaris.DriverNormal;
@@ -31,9 +29,7 @@ public class prop {
         System.out.println();
         
         
-        
         Scanner sc = new Scanner(System.in);
-        
         boolean bool = false;
         boolean primer = false;
         while(!bool) {
@@ -99,11 +95,22 @@ public class prop {
                     break;
 
                 default:
+                    if (gf.getActualitzar()) {
+                        System.out.println("S'han fet canvis en el graf. Vols actualitzar la bd? (S/N)");
+                        user = sc.next();
+                        switch (user) {
+                            case "S":
+                                gf.actualitzar();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     System.out.println("Gràcies per utilitzar l'aplicació, fins aviat!");
                     bool = true;
                     break;
 
             }
         }
-    }  
+    }
 }
