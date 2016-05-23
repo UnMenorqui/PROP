@@ -8,10 +8,8 @@ package capaDomini.Perfils;
 
 import capaDomini.Graf.CtrlGraf;
 import capaDomini.consulta.Consulta;
-import capaDomini.consulta.CtrlHistorial;
 import com.google.gson.Gson;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *
@@ -132,8 +130,8 @@ public class PerfilAutor extends Perfil {
             ArrayList<ArrayList<String>> ret = new ArrayList<>(4);
             ret.add(articles);
             ret.add(conferencies);
-            ret.add(termes);
             ret.add(co_autors);
+            ret.add(termes);
             Gson gson = new Gson();
             json = gson.toJson(ret);
             articles.clear();

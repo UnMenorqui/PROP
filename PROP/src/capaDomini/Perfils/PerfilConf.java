@@ -109,9 +109,10 @@ public class PerfilConf extends Perfil {
 
             }
             ArrayList<ArrayList<String>> ret = new ArrayList<>(4);
-            ret.add(termes);
-            ret.add(autors);
             ret.add(articles);
+            ret.add(autors);
+            ret.add(termes);
+            
             Gson gson = new Gson();
             json = gson.toJson(ret);
             termes.clear();

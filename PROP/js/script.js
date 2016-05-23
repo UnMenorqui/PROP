@@ -24,12 +24,13 @@
  	if(window.java.CreaGraf()) {
  		afterLoading();
  	}
- 	else Materialize.toast("NO XUTA",2000);
+ 	else Materialize.toast("No es crea el Graf.",2000);
 
  }
 
  function consulta() {
-    var perfil = (window.java.consulta($("#Tipus_Node").val(),$("#search").val(),parseInt($("#rangeAutors").val()),parseInt($("#rangeTermes").val()),parseInt($("#rangeConferencies").val()),parseInt($("#rangeArticles").val()),(username != "")));
+ 	$("#collapsibleConsulta li").css({ "display": "none" });
+    var perfil = JSON.parse(window.java.consulta($("#Tipus_Node").val(),$("#search").val(),parseInt($("#rangeAutors").val()),parseInt($("#rangeTermes").val()),parseInt($("#rangeConferencies").val()),parseInt($("#rangeArticles").val()),(username != "")));
  	var tipus = $("#Tipus_Node").val();
  	if (tipus == "General") {
  		if(window.java.existeixnode($("#search").val(),"Autor")) tipus = "Autor";
@@ -37,24 +38,54 @@
  		else if (window.java.existeixnode($("#search").val(),"Terme")) tipus = "Terme";
  		else if (window.java.existeixnode($("#search").val(),"Article")) tipus = "Article";
  	}
- 	Materialize.toast("1",2000);
- 	$("#resultatConsulta").text(perfil);
- 	Materialize.toast("2",2000);
+ 	$("#collapsibleConsulta").html("");
+ 	if (perfil != "No s'ha trobat") {
+ 		setConsultaHistorial($("#search").val(),tipus);
+ 	}
  	if (tipus == "Autor") {
-
+ 		$("#collapsibleArticles").css({ "display" : "block" });
+ 		$("#collapsibleConferencies").css({ "display" : "block" });
+ 		$("#collapsibleCoautors").css({ "display" : "block" });
+ 		$("#collapsibleTermes").css({ "display" : "block" });
 	}
 
 	if (tipus == "Article") {
-
+ 		$("#collapsibleConferencies").css({ "display" : "block" });
+ 		$("#collapsibleAutors").css({ "display" : "block" });
+ 		$("#collapsibleTermes").css({ "display" : "block" });
 	}
 
 	if (tipus == "Conferencia") {
-
+		$("#collapsibleArticles").css({ "display" : "block" });
+ 		$("#collapsibleAutors").css({ "display" : "block" });
+ 		$("#collapsibleTermes").css({ "display" : "block" });
 	}
 
 	if (tipus == "Terme") {
-
+		$("#collapsibleArticles").css({ "display" : "block" });
+ 		$("#collapsibleConferencies").css({ "display" : "block" });
+ 		$("#collapsibleAutors").css({ "display" : "block" });
 	}
+
+	$("#collapsibleConsulta").collapsible({  accordion: false  });
+ }
+
+ function getHistorial() {
+     var hist = JSON.parse(window.java.historial_get());
+
+     $("#historial .collection").html("");
+     hist.forEach(function(elem, i) {
+     	$("#historial .collection").append("<li class='collection-item'>" + elem + "<a href='#!' class='secondary-content' onclick='borrarElementHistorial(" + i + ")'><i class='material-icons'>delete</i></a></li>");
+     });
+ }
+
+ function borrarElementHistorial(n) {
+     window.java.historial_remove(n);
+     getHistorial();
+ }
+
+ function setConsultaHistorial(nom, tipus) {
+     window.java.historial_set(nom, tipus);
  }
 
 $(document).ready(function() {
@@ -84,6 +115,8 @@ $(document).ready(function() {
 	 		$("#logo_container img").fadeOut(1000);
 	 		$("#signin").fadeOut(1000);
 	 		$('select').material_select();
+	 		$("#collapsibleConsulta li").css({ "display": "none" });
+	 		getHistorial();
 	 		setTimeout(function() { $("#homepage").fadeIn(1000); $("#nomusuariContainer").text(username); }, 1000);
  	 	}
  	 	else Materialize.toast("Login Incorrecte",2000);
@@ -99,6 +132,7 @@ $(document).ready(function() {
  		$("#signin").fadeOut(1000);
  		$('select').material_select();
  		$("#configurarCompteBtn").css({"display": "none"});
+ 		$("#collapsibleConsulta li").css({ "display": "none" });
  		setTimeout(function() { $("#homepage").fadeIn(1000); }, 1000);
  	 });
  	 $("#adminform_submit").on("click", function(e) {
@@ -114,6 +148,8 @@ $(document).ready(function() {
 	 		$("#logo_container img").fadeOut(1000);
 	 		$("#signin").fadeOut(1000);
 	 		$('select').material_select();
+	 		getHistorial();
+	 		$("#collapsibleConsulta li").css({ "display": "none" });
 	 		setTimeout(function() { 
 	 			$("#homepage").fadeIn(1000); 
 	 			$("#nomusuariContainer").text(username); 
@@ -185,6 +221,7 @@ $(document).ready(function() {
 
  	 $("#search").bind("enterKey",function(e) {
  	 	consulta();
+ 	 	getHistorial();
  	 });
  	 $("#search").keyup(function(e) {
  	 	if(e.keyCode == 13) {

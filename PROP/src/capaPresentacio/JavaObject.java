@@ -7,8 +7,12 @@ package capaPresentacio;
 
 import capaDomini.Graf.CtrlGraf;
 import capaDomini.Perfils.CtrlPerfils;
+import capaDomini.consulta.Apunts;
+import capaDomini.consulta.CtrlHistorial;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.Iterator;
+import org.testng.internal.collections.Pair;
 
 /**
  *
@@ -27,6 +31,7 @@ public class JavaObject {
     private ArrayList<String> autors = new ArrayList<>();
     private ArrayList<String> articles = new ArrayList<>();
     private ArrayList<String> co_autors = new ArrayList<>();
+    private CtrlHistorial ch = new CtrlHistorial();
     
     private String nom;
     CtrlPerfils ctrl = new CtrlPerfils();
@@ -94,29 +99,14 @@ public class JavaObject {
 
                     case "Conferencia":
                         json = ctrl.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes,CG, usuaris);
-                        ret = new ArrayList<> (3);
-                        ret.add(articles);
-                        ret.add(autors);
-                        ret.add(termes);
-                        json = gson.toJson(ret);
                         return json;
 
                     case "Article":
                         json = ctrl.crear_perfil_article(nom, q_autors, q_termes, q_conferencies,CG, usuaris);
-                        ret = new ArrayList<> (3);
-                        ret.add(autors);
-                        ret.add(termes);
-                        ret.add(conferencies);
-                        json = gson.toJson(ret);
                         return json;
 
                     case "Terme":
                         json = ctrl.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies,CG, usuaris);
-                        ret = new ArrayList<> (3);
-                        ret.add(articles);
-                        ret.add(autors);
-                        ret.add(conferencies);
-                        json = gson.toJson(ret);
                         return json;
 
                     default:
@@ -125,43 +115,47 @@ public class JavaObject {
                 
             case "Autor":
                         json = ctrl.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies,CG, usuaris);
-                        ret = new ArrayList<> (4);
-                        ret.add(co_autors);
-                        ret.add(articles);
-                        ret.add(conferencies);
-                        ret.add(termes);
-                        json = gson.toJson(ret);
                         return json;
 
             case "Conferencia":
                 json = ctrl.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes,CG, usuaris);
-                ret = new ArrayList<> (3);
-                ret.add(articles);
-                ret.add(autors);
-                ret.add(termes);
-                json = gson.toJson(ret);
                 return json;
 
             case "Article":
                 json = ctrl.crear_perfil_article(nom, q_autors, q_termes, q_conferencies,CG, usuaris);
-                ret = new ArrayList<> (3);
-                ret.add(autors);
-                ret.add(termes);
-                ret.add(conferencies);
-                json = gson.toJson(ret);
                 return json;
 
             case "Terme":
                 json = ctrl.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies,CG, usuaris);
-                ret = new ArrayList<> (3);
-                ret.add(articles);
-                ret.add(autors);
-                ret.add(conferencies);
-                json = gson.toJson(ret);
                 return json;
 
             default:
                 return out;
         }
+    }
+    
+    public void historial_set(String nom, String tipus) {
+        ch.afegirCerca(nom, 0, tipus);
+    }
+    
+    public String historial_get() {
+        Gson gson = new Gson();
+        ArrayList<Apunts> a = ch.getList();
+        ArrayList<String> b = new ArrayList<>();
+        Iterator<Apunts> i = a.iterator();
+        while(i.hasNext()) {
+            Apunts apunts = i.next();
+            String p = apunts.getNom();
+            b.add(p);
+        }
+        return gson.toJson(b);
+    }
+    
+    public int historial_size() {
+        return ch.size();
+    }
+    
+    public void historial_remove(int n) {
+        ch.esborrar(n);
     }
 }

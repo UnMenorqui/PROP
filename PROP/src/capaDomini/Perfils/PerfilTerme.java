@@ -111,9 +111,10 @@ public class PerfilTerme extends Perfil {
                 }*/
             }
             ArrayList<ArrayList<String>> ret = new ArrayList<>(4);
-            ret.add(autors);
-            ret.add(conferencies);
             ret.add(articles);
+            ret.add(conferencies);
+            ret.add(autors);
+            
             Gson gson = new Gson();
             json = gson.toJson(ret);
             autors.clear();
