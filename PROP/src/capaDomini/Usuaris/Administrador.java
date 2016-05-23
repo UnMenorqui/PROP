@@ -1,8 +1,4 @@
-/*
 package capaDomini.Usuaris;
-
-
-import java.util.Scanner;
 
 /**
  *
@@ -14,7 +10,7 @@ import java.util.Scanner;
  * i també el GRAF.
  */
 
-/*
+
 public class Administrador extends UsuariNormal {
     
     public static void consultaBD() {
@@ -22,38 +18,7 @@ public class Administrador extends UsuariNormal {
         ctrl.consultaUsuarisBD();
     }
     
-    public static void borra_user() {
-        CtrlUsuaris ctrl = new CtrlUsuaris();
-        System.out.println("Entra el nom de l'usuari: ");
-        Integer i;
-        String user,pass = null;
-        Scanner sc = new Scanner(System.in);
-        user = sc.next();
-        if (!ctrl.ExisteixUsuari(user)) {
-            System.out.println("L'usuari no existeix");
-        }
-        else {
-            boolean contrasenya = false;
-            i = 1;
-            while (i <= 3 && !contrasenya) {
-                System.out.println("Escriu la contrasenya de l'usuari");
-                pass = sc.next();
-                if (!ctrl.ExisteixUsuari_contrasenya(user,pass)) {
-                    System.out.println("Contrasenya incorrecta.");
-                    System.out.println("Et queden "+(3-i)+" intents");
-                }
-                else {
-                    System.out.println("Password correcta.");
-                    contrasenya = true;
-                }
-                ++i;
-            }
-            if (i > 3) {
-                System.out.println("Se t'han acabat tots els intents.");
-            }
-            if (contrasenya) ctrl.borrarlinea(user,pass);
-        }
-        sc.close();
+    public static void borra_user(String usuari) {
+        
     }
 }
-*/

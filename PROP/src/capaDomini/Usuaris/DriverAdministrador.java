@@ -25,11 +25,11 @@ public class DriverAdministrador {
                 System.out.println("Si vols modificar el nom d'un usuari marca 2.");
                 System.out.println("Si vols borrar algun usuari marca 3.");
                 System.out.println("Si vols fer una consulta marca 4.");
-                System.out.println("Si vols afegir un Node marca 5.");
-                System.out.println("Si vols eliminar un Node marca 6.");
-                System.out.println("Si vols afegir una Aresta marca 7.");
-                System.out.println("Si vols eliminar una Aresta marca 8.");
-                System.out.println("Si vols consultar l'historial de consultes marca 9.");
+                System.out.println("Si vols consultar l'historial de consultes marca 5.");
+                System.out.println("Si vols afegir un Node marca 6.");
+                System.out.println("Si vols eliminar un Node marca 7.");
+                System.out.println("Si vols afegir una Aresta marca 8.");
+                System.out.println("Si vols eliminar una Aresta marca 9.");
                 System.out.println("Si vols acabar marca un altre número.");
                 
                 if(!primer) {
@@ -68,7 +68,12 @@ public class DriverAdministrador {
                         DriverPerfil ctrls = new DriverPerfil();
                         ctrls.main(CG,true);
                         break;
+                        
                     case 5:
+                        U.consultar(CG);
+                        break;
+                        
+                    case 6:
                         System.out.println("Entra el Tipus del Node: ");
                         sc.nextLine();
                         tipus = sc.nextLine();
@@ -78,7 +83,7 @@ public class DriverAdministrador {
                         if (id == 0) System.out.println("Node ja existent");
                         else if (id == 1) System.out.println("Node afegit correctament");
                         break;
-                    case 6:
+                    case 7:
                         System.out.println("Entra el nom del Node1: ");
                         sc.nextLine();
                         node1 = sc.nextLine();
@@ -88,7 +93,7 @@ public class DriverAdministrador {
                         if (id == 0) System.out.println("Node NO existeix");
                         else if (id == 1) System.out.println("Node eliminat correctament");
                         break;
-                    case 7:
+                    case 8:
                         System.out.println("Entra el nom del Node1: ");
                         sc.nextLine();
                         node1 = sc.nextLine();
@@ -102,7 +107,7 @@ public class DriverAdministrador {
                         else if (id == 2) System.out.println("Aresta ja existent");
                         else if (id == 3) System.out.println("Aresta afegida correctament");
                         break;
-                    case 8:
+                    case 9:
                         System.out.println("Entra el nom del Node1: ");
                         node1 = sc.nextLine();
                         System.out.println("Entra el nom del Node2: ");
@@ -115,9 +120,6 @@ public class DriverAdministrador {
                         else if (id == 2) System.out.println("Aresta NO existent");
                         else if (id == 3) System.out.println("Aresta eliminada correctament");
                         break; 
-                    case 9:
-                        U.consultar(CG);
-                        break;
                         
                     default:
                         bool = true;

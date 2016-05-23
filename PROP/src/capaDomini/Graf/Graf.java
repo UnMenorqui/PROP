@@ -15,6 +15,7 @@ import java.util.*;
  */
 
 public class Graf {
+    CtrlGraf cg;
     
     //arraylist amb els nodes autor del graf
     protected ArrayList<Node> autor;
@@ -44,9 +45,17 @@ public class Graf {
     private int maxTerme;
     private int maxArticle;
     
+    private Boolean autoractualitzat = false;
+    private Boolean termeactualitzat = false;
+    private Boolean articleactualitzat = false;
+    private Boolean confactualitzat = false;
+    private Boolean paactualitzat = false;
+    private Boolean ptactualitzat = false;
+    private Boolean pcactualitzat = false;
+    
     
     public Graf() {
-       BaseDades bd = new BaseDades();
+       cg = new CtrlGraf();
        paper = new ArrayList<>();
        autor = new ArrayList<>();
        conf = new ArrayList<>();
@@ -55,7 +64,7 @@ public class Graf {
        pa = new ArrayList<>();
        pt = new ArrayList<>();
        maxAutor = maxConf = maxTerme = maxArticle = 0;
-       bd.load(paper,autor,terme,conf,pc,pa,pt);
+       cg.load(paper,autor,terme,conf,pc,pa,pt);
        for (int i=0; i<autor.size(); ++i) {
            if (autor.get(i).getId() > maxAutor) maxAutor = autor.get(i).getId();
        }
@@ -108,6 +117,7 @@ public class Graf {
                 if (!existeixAresta(id,Node2,tipus)) {
                     pa.add(new Aresta(Node1,Node2));
                     existeix = true;
+                    paactualitzat = true;
                 }
                 else return 2;
                 break;
@@ -115,6 +125,7 @@ public class Graf {
                 if (!existeixAresta(id,Node2,tipus)) {
                     pt.add(new Aresta(Node1,Node2));
                     existeix = true;
+                    ptactualitzat = true;
                 }
                 else return 2;
                 break;
@@ -122,6 +133,7 @@ public class Graf {
                 if (!existeixAresta(id,Node2,tipus)) {
                     pt.add(new Aresta(Node1,Node2));
                     existeix = true;
+                    pcactualitzat = true;
                 }
                 else return 2;
                 break;
@@ -148,6 +160,7 @@ public class Graf {
                         if (pa.get(i).getNode2() == node2) {
                             pa.remove(i);
                             existeix = true;
+                            paactualitzat = true;
                         }
                     }
                 }
@@ -160,7 +173,10 @@ public class Graf {
                             segon = true;
                         }
                     }
-                    if (!segon) eliminarNode(getNomNode(id1,"Autor"),"Autor");
+                    if (!segon) {
+                        eliminarNode(getNomNode(id1,"Autor"),"Autor");
+                        autoractualitzat = true;
+                    }
                     //Busca si el node1(article) te alguna altra aresta, si no es
                     //el cas, borra el node1
                     primer = false;
@@ -179,7 +195,10 @@ public class Graf {
                             primer = true;
                         }
                     }
-                    if (!primer) eliminarNode(getNomNode(id,"Article"),"Article");
+                    if (!primer)  {
+                        eliminarNode(getNomNode(id,"Article"),"Article");
+                        articleactualitzat = true;
+                    }
                 }
                 else return 2;
                 break;
@@ -202,7 +221,10 @@ public class Graf {
                             segon = true;
                         }
                     }
-                    if (!segon) eliminarNode(getNomNode(id1,"Conferencia"),"Conferencia");
+                    if (!segon) {
+                        eliminarNode(getNomNode(id1,"Conferencia"),"Conferencia");
+                        confactualitzat = true;
+                    }
                     //Busca si el node1(article) te alguna altra aresta, si no es
                     //el cas, borra el node1
                     primer = false;
@@ -221,7 +243,10 @@ public class Graf {
                             primer = true;
                         }
                     }
-                    if (!primer) eliminarNode(getNomNode(id,"Article"),"Article");
+                    if (!primer) {
+                        eliminarNode(getNomNode(id,"Article"),"Article");
+                        articleactualitzat = true;
+                    }
                 }
                 else return 2;
                 break;
@@ -232,6 +257,7 @@ public class Graf {
                         if (pt.get(i).getNode2() == node2) {
                             pt.remove(i);
                             existeix = true;
+                            ptactualitzat = true;
                         }
                     }
                 }
@@ -244,7 +270,10 @@ public class Graf {
                             segon = true;
                         }
                     }
-                    if (!segon) eliminarNode(getNomNode(id1,"Terme"),"Terme");
+                    if (!segon) {
+                        eliminarNode(getNomNode(id1,"Terme"),"Terme");
+                        termeactualitzat = true;
+                    }
                     //Busca si el node1(article) te alguna altra aresta, si no es
                     //el cas, borra el node1
                     primer = false;
@@ -263,7 +292,10 @@ public class Graf {
                             primer = true;
                         }
                     }
-                    if (!primer) eliminarNode(getNomNode(id,"Article"),"Article");
+                    if (!primer) {
+                        eliminarNode(getNomNode(id,"Article"),"Article");
+                        articleactualitzat = true;
+                    }
                 }
                 else return 2;
                 break;
@@ -287,15 +319,19 @@ public class Graf {
         switch (tipus) {
             case "Autor":
                 autor.add(new Node(++maxAutor,nom,tipus));
+                autoractualitzat = true;
                 break;
             case "Conferencia":
                 conf.add(new Node(++maxConf,nom,tipus));
+                confactualitzat = true;
                 break;
             case "Article":
                 paper.add(new Node(++maxArticle,nom,tipus));
+                articleactualitzat = true;
                 break;
             case "Terme":
                 terme.add(new Node(++maxTerme,nom,tipus));
+                termeactualitzat = true;
                 break;
         }
         actualitzar = true;
@@ -308,41 +344,55 @@ public class Graf {
         int node = GetIDnode(id,tipus);
         switch (tipus) {
             case "Autor":
-                for (int i=0; i<autor.size(); ++i) {
-                    if (autor.get(i).getId() == node)  autor.remove(i);
-                } 
+                autor.remove(id);
+                autoractualitzat = true;
                 for (int i = 0; i<pa.size(); ++i) {
-                    if (pa.get(i).getNode2() == node) pa.remove(i);
+                    if (pa.get(i).getNode2() == node) {
+                        pa.remove(i);
+                        paactualitzat = true;
+                    }
                 }  
                 break;
             case "Conferencia":
-                for (int i=0; i<conf.size(); ++i) {
-                    if (conf.get(i).getId() == node) conf.remove(i);
-                }  
+                conf.remove(id);
+                confactualitzat = true;
                 for (int i = 0; i<pc.size(); ++i) {
-                    if (pc.get(i).getNode2() == node) pc.remove(i);
+                    if (pc.get(i).getNode2() == node) {
+                        pc.remove(i);
+                        pcactualitzat = true;
+                    }
                 }   
                 break;
             case "Article":
-                for (int i=0; i<paper.size(); ++i) {
-                    if (paper.get(i).getId() == node) paper.remove(i);
-                }  
+                paper.remove(id);
+                articleactualitzat = true;
                 for (int i = 0; i<pa.size(); ++i) {
-                    if (pa.get(i).getNode1() == node) pa.remove(i);
+                    if (pa.get(i).getNode1() == node) {
+                        pa.remove(i);
+                        paactualitzat = true;
+                    }
                 }  
                 for (int i = 0; i<pt.size(); ++i) {
-                    if (pt.get(i).getNode1() == node) pt.remove(i);
+                    if (pt.get(i).getNode1() == node) {
+                        pt.remove(i);
+                        ptactualitzat = true;
+                    }
                 }
                 for (int i = 0; i<pc.size(); ++i) {
-                    if (pc.get(i).getNode1() == node) pc.remove(i);
+                    if (pc.get(i).getNode1() == node) {
+                        pc.remove(i);
+                        pcactualitzat = true;
+                    }
                 }
                 break;
             case "Terme":
-                for (int i=0; i<terme.size(); ++i) {
-                    if (terme.get(i).getId() == node) terme.remove(i);
-                }
+                terme.remove(id);
+                termeactualitzat = true;
                 for (int i = 0; i<pt.size(); ++i) {
-                    if (pt.get(i).getNode2() == node) pt.remove(i);
+                    if (pt.get(i).getNode2() == node) {
+                        pt.remove(i);
+                        ptactualitzat = true;
+                    }
                 }   
                 break;
         }
@@ -644,7 +694,12 @@ public class Graf {
     }
     
     public void actualitzar() {
-        BaseDades bd1 = new BaseDades();
-        bd1.save(autor,conf,paper,terme,pa,pc,pt);
+        if (autoractualitzat) cg.saveAutor(autor);
+        if (confactualitzat) cg.saveConf(conf);
+        if (termeactualitzat) cg.saveTerme(terme);
+        if (articleactualitzat) cg.saveArticle(paper);
+        if (paactualitzat) cg.savepa(pa);
+        if (ptactualitzat) cg.savept(pt);
+        if (pcactualitzat) cg.savepc(pc);
     }
 }
