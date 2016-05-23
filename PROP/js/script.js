@@ -29,7 +29,7 @@
  }
 
  function consulta() {
- 	var perfil = JSON.parse(window.java.consulta($("Tipus_Node").val(),$("#search").val(),$("#rangeAutors").val(),$("#rangeTermes").val(),$("#rangeConferencies").val(),$("#rangeArticles").val(),(username != "")));
+    var perfil = (window.java.consulta($("#Tipus_Node").val(),$("#search").val(),parseInt($("#rangeAutors").val()),parseInt($("#rangeTermes").val()),parseInt($("#rangeConferencies").val()),parseInt($("#rangeArticles").val()),(username != "")));
  	var tipus = $("#Tipus_Node").val();
  	if (tipus == "General") {
  		if(window.java.existeixnode($("#search").val(),"Autor")) tipus = "Autor";
@@ -37,6 +37,9 @@
  		else if (window.java.existeixnode($("#search").val(),"Terme")) tipus = "Terme";
  		else if (window.java.existeixnode($("#search").val(),"Article")) tipus = "Article";
  	}
+ 	Materialize.toast("1",2000);
+ 	$("#resultatConsulta").text(perfil);
+ 	Materialize.toast("2",2000);
  	if (tipus == "Autor") {
 
 	}
@@ -55,7 +58,7 @@
  }
 
 $(document).ready(function() {
-	setTimeout(carrega,1000);
+	setTimeout(carrega,100);
 
     $('ul.tabs').tabs('select_tab', 'login');
 
@@ -86,6 +89,18 @@ $(document).ready(function() {
  	 	else Materialize.toast("Login Incorrecte",2000);
 	 	
  	 });
+ 	 $("#guest_entry").on("click", function(e) {
+ 	 	$("#nomusuariContainer").text("Convidat");
+ 	 	Materialize.updateTextFields();
+ 	 	Materialize.toast('Accedint a l`aplicació...', 2000);
+ 	 	$("#logo_container").fadeOut(1000);
+ 		$("#logo_container h3").fadeOut(1000);
+ 		$("#logo_container img").fadeOut(1000);
+ 		$("#signin").fadeOut(1000);
+ 		$('select').material_select();
+ 		$("#configurarCompteBtn").css({"display": "none"});
+ 		setTimeout(function() { $("#homepage").fadeIn(1000); }, 1000);
+ 	 });
  	 $("#adminform_submit").on("click", function(e) {
  	 	if ($("#adminform_user").val() == "Administrador" && $("#adminform_pass").val() == "1234") {
  	 		username = $("#adminform_user").val();
@@ -109,17 +124,19 @@ $(document).ready(function() {
  	 });
  	 $("#historial_button").on("click", function(e) {
  	 	e.stopPropagation();
- 	 	if(vHistorial) {
- 	 		$("#historial").animate({
- 	 			"height": "0px"
- 	 		}, 1000, function() { $("#historial").fadeOut(0); });
- 	 	} else {
- 	 		$("#historial").fadeIn(0);
- 	 		$("#historial").animate({
- 	 			"height": "800px"
- 	 		});
- 	 	}
- 	 	vHistorial = !vHistorial;
+ 	 	if(username != "") {
+	 	 	if(vHistorial) {
+	 	 		$("#historial").animate({
+	 	 			"height": "0px"
+	 	 		}, 1000, function() { $("#historial").fadeOut(0); });
+	 	 	} else {
+	 	 		$("#historial").fadeIn(0);
+	 	 		$("#historial").animate({
+	 	 			"height": "800px"
+	 	 		});
+	 	 	}
+	 	 	vHistorial = !vHistorial;
+ 	 	} else Materialize.toast("Aquesta acció no està disponible en mode convidat.", 2000);
  	 });
  	 $("html").click(function() {
  	 	if(vHistorial) {
@@ -137,6 +154,7 @@ $(document).ready(function() {
  	 	password = "";
  	 	isAdmin = false;
  	 	$("#opcions_admin").css({ "display": "none" });
+ 	 	$("#configurarCompteBtn").css({"display": "block"});
  	 	$("#homepage").fadeOut(1000);
 	 	setTimeout(function() { 
 	 		$("#logo_container").fadeIn(1000);

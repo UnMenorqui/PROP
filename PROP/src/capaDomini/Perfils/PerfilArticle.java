@@ -7,9 +7,11 @@ package capaDomini.Perfils;
 
 
 import capaDomini.Graf.CtrlGraf;
+import static capaDomini.Perfils.PerfilAutor.articles;
 import java.util.ArrayList;
 import capaDomini.consulta.Consulta;
 import capaDomini.consulta.CtrlHistorial;
+import com.google.gson.Gson;
 import java.util.Scanner;
 
 /**
@@ -24,6 +26,16 @@ public class PerfilArticle extends Perfil {
     public int quantitat_termes;
     public int quantitat_conf;
     public int quantitat_autors;
+    
+    public ArrayList<String> get_termes() {
+        return termes;
+    }
+    public ArrayList<String> get_conferencies() {
+        return conferencies;
+    }
+    public ArrayList<String> get_autors() {
+        return autors;
+    }
     
     
     public int get_quantitat_termes() {
@@ -48,14 +60,15 @@ public class PerfilArticle extends Perfil {
         quantitat_autors = q_autor;
     }
     
-    public void crear_perfil_article(CtrlGraf G, boolean usuari) {
+    public String crear_perfil_article(CtrlGraf G, boolean usuari) {
         Consulta cs = new Consulta();
         ArrayList<String> articles = new ArrayList<>();
         cs.obtenir_autors(autors,articles,nom,"Article",quantitat_autors,G);
         cs.obtenir_termes(termes,articles,nom,"Article",quantitat_termes,G);
         cs.obtenir_conferencies(conferencies,articles,nom,"Article",quantitat_conf,G);
+        String json;
         if(termes.size()+conferencies.size()+autors.size() == 0) {
-            System.out.println("No s'ha trobat cap article amb aquest nom.");
+            json = ("No s'ha trobat cap article amb aquest nom.");
         } else {
             System.out.println(nom);
             System.out.println();
@@ -88,8 +101,8 @@ public class PerfilArticle extends Perfil {
                 System.out.println("No hi ha tants termes per la quantitat desitjada");
             }
             if (usuari) {
-                System.out.println("Vols Guardar la Consulta?(S/N)");
-                Scanner sc = new Scanner(System.in); 
+                /*System.out.println("Vols Guardar la Consulta?(S/N)");
+                Scanner sc = new Scanner(System.in);
                 String sino = sc.next();
                 switch(sino) {
                     case "S":
@@ -97,13 +110,21 @@ public class PerfilArticle extends Perfil {
                         hist.afegirCerca(nom,G.GetIDnode(G.getidArrayString(nom, "Article"),"Article"),"Article");
 
 
-                }
+                }*/
 
             }
-            autors.clear();
-            conferencies.clear();
+            ArrayList<ArrayList<String>> ret = new ArrayList<>(4);
+            ret.add(termes);
+            ret.add(conferencies);
+            ret.add(autors);
+            Gson gson = new Gson();
+            json = gson.toJson(ret);
             termes.clear();
+            conferencies.clear();
+            autors.clear();
+            
         }
+        return json;
     }
     
 }

@@ -16,7 +16,7 @@ import java.awt.*;
 import java.io.IOException;
 
 
-public class JavaSwingSample {
+public class PROP {
     public static void main(String[] args) throws IOException {
         Browser browser = new Browser();
         BrowserView view = new BrowserView(browser);

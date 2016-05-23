@@ -63,26 +63,34 @@ public class Consulta {
                 break;
                 
             default:
+                System.out.println("Estic dins co-autors");
                 for (int i=0; i<articles.size(); ++i) {
+                    System.out.println("Estic al primer for");
                     node = G.getNodeIessim(G.getidArrayString(articles.get(i), "Article"), "Article");
                     for (int j = 0; j<node.getsize(); ++j) {
+                        System.out.println("PEstic al segon for");
                         if (node.nodeiessimSecond(j).equals("Autor")) {
                             id = G.getidArrayint(node.nodeiessimFirst(j), "Autor");
                             nomt = G.getNomNode(id, "Autor");
                             if (!nom.equals(nomt)) {
+                                System.out.println("Estic al if del segon for");
                                 valor = G.getValorNode(id, "Autor");
                                 p = new Pair(nomt,valor);
                                 repetit = false;
                                 for (int k = 0; k < autors1.size() && !repetit; ++k) {
+                                    System.out.println("Estic al tercer for");
                                     if (autors1.get(k).GetF().equals(nomt)) {
                                         repetit = true;
                                     }
                                 }
+                                System.out.println("Tercer for superat");
                                 if (!repetit) autors1.add(p); 
                             }
                         }
                     }
+                    System.out.println("Segon for superat");
                 }
+                System.out.println("Primer for superat");
                 Collections.sort(autors1, new Comparator() {
                         @Override
                         public int compare(Object o1, Object o2) {
@@ -101,7 +109,8 @@ public class Consulta {
                     }
                 }
                 break;
-        } 
+        }
+        System.out.println("Execució acabada");
         autors1.clear();
     }
     

@@ -11,6 +11,7 @@ import capaDomini.Graf.CtrlGraf;
 import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
 import java.util.Scanner;
+import com.google.gson.Gson;
 
 /**
  *
@@ -25,6 +26,16 @@ public class PerfilConf extends Perfil {
     static int quantitat_autors;
     static int quantitat_articles;
     
+    
+    public ArrayList<String> get_termes() {
+        return termes;
+    }
+    public ArrayList<String> get_articles() {
+        return articles;
+    }
+    public ArrayList<String> get_autors() {
+        return autors;
+    }
     
     public int get_quantitat_termes() {
         return quantitat_termes;
@@ -49,13 +60,14 @@ public class PerfilConf extends Perfil {
     }
     
     
-    public void crear_perfil_conf(CtrlGraf G, boolean usuaris) {
+    public String crear_perfil_conf(CtrlGraf G, boolean usuaris) {
         Consulta cs = new Consulta();
         cs.obtenir_articles(articles,nom,"Conferencia",quantitat_articles,G);
         cs.obtenir_autors(autors,articles,nom,"Conferencia",quantitat_autors,G);
         cs.obtenir_termes(termes,articles,nom,"Conferencia",quantitat_termes,G);
+        String json;
         if(articles.size()+termes.size()+autors.size() == 0) {
-            System.out.println("No s'ha trobat cap conferència amb aquest nom.");
+            json = ("No s'ha trobat cap conferència amb aquest nom.");
         } else {
             System.out.println(nom);
             System.out.println("");
@@ -85,7 +97,7 @@ public class PerfilConf extends Perfil {
             if (quantitat_termes > termes.size()) {
                 System.out.println("No hi ha tants termes per la quantitat desitjada");
             }
-            if (usuaris) {
+            if (usuaris) {/*
                 System.out.println("Vols Guardar la Consulta?(S/N)");
                 Scanner sc = new Scanner(System.in); 
                 String sino = sc.next();
@@ -93,14 +105,21 @@ public class PerfilConf extends Perfil {
                     case "S":
                         CtrlHistorial hist = new CtrlHistorial();
                         hist.afegirCerca(nom,G.GetIDnode(G.getidArrayString(nom,"Conferencia"),"Conferencia"),"Conferencia");
-                }
+                }*/
 
             }
+            ArrayList<ArrayList<String>> ret = new ArrayList<>(4);
+            ret.add(termes);
+            ret.add(autors);
+            ret.add(articles);
+            Gson gson = new Gson();
+            json = gson.toJson(ret);
             termes.clear();
-            articles.clear();
             autors.clear();
+            articles.clear();
+            
         }
-        
+        return json;
     }
     
 }

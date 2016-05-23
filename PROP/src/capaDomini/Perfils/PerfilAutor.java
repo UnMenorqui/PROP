@@ -9,6 +9,7 @@ package capaDomini.Perfils;
 import capaDomini.Graf.CtrlGraf;
 import capaDomini.consulta.Consulta;
 import capaDomini.consulta.CtrlHistorial;
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,6 +29,19 @@ public class PerfilAutor extends Perfil {
     static int quantitat_articles;
     static int quantitat_coautors;
     
+    
+    public ArrayList<String> get_termes() {
+        return termes;
+    }
+    public ArrayList<String> get_conferencies() {
+        return conferencies;
+    }
+    public ArrayList<String> get_articles() {
+        return articles;
+    }
+    public ArrayList<String> get_co_autors() {
+        return co_autors;
+    }
     
     public int get_quantitat_termes() {
         return quantitat_termes;
@@ -54,15 +68,17 @@ public class PerfilAutor extends Perfil {
         quantitat_coautors = q_coautors;
     }
     
-    public void crear_perfil_autor(CtrlGraf G, boolean usuari) {
+    public String crear_perfil_autor(CtrlGraf G, boolean usuari) {
         Consulta cs = new Consulta();
         cs.obtenir_articles(articles,nom,"Autor",quantitat_articles,G);
         cs.obtenir_termes(termes,articles,nom,"Autor",quantitat_termes,G);
-        cs.obtenir_conferencies(conferencies,articles,nom,"Autor",quantitat_conf,G);
         cs.obtenir_autors(co_autors,articles,nom,"Autor",quantitat_coautors,G);
+        String json = null;
         if(articles.size()+termes.size()+conferencies.size()+co_autors.size() == 0) {
+            json = "No s'ha trobat cap autor amb aquest nom.";
             System.out.println("No s'ha trobat cap autor amb aquest nom.");
-        } else {
+        } 
+        else {
             System.out.println(nom);
             System.out.println("");
             System.out.println("Conferencies més rellevants d'aquest autor:");
@@ -100,7 +116,7 @@ public class PerfilAutor extends Perfil {
             if (quantitat_coautors > co_autors.size()) {
                 System.out.println("No hi ha tants co-autors per la quantitat desitjada");
             }
-            if (usuari) {
+            if (usuari) {/*
                 System.out.println("Vols Guardar la Consulta?(S/N)");
                 Scanner sc = new Scanner(System.in); 
                 String sino = sc.next();
@@ -110,14 +126,23 @@ public class PerfilAutor extends Perfil {
                         hist.afegirCerca(nom,G.GetIDnode(G.getidArrayString(nom, "Autor"),"Autor"),"Autor");
 
 
-                }
+                }*/
 
             }
-            termes.clear();
-            conferencies.clear();
+            ArrayList<ArrayList<String>> ret = new ArrayList<>(4);
+            ret.add(articles);
+            ret.add(conferencies);
+            ret.add(termes);
+            ret.add(co_autors);
+            Gson gson = new Gson();
+            json = gson.toJson(ret);
             articles.clear();
+            conferencies.clear();
+            termes.clear();
             co_autors.clear();
+            
         }
+        return json;
     }
     
 }
