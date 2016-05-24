@@ -17,7 +17,8 @@ import java.util.Scanner;
 public class DriverHistorial {
     
     public void main (CtrlGraf G) {
-        Historial historial = new Historial();
+        CtrlHistorial ctrl = new CtrlHistorial();
+        Historial historial = new Historial(ctrl);
         int opcio;
         escriure_opcions();
         Scanner sc = new Scanner(System.in);
@@ -30,7 +31,7 @@ public class DriverHistorial {
                 case 2: 
                     System.out.println("Escriu l'índex de la consulta que vols esborrar:");
                     int i = sc.nextInt();
-                    historial.esborrar(historial.size()-i);
+                    historial.esborrar(historial.size()-i,ctrl);
             }
             escriure_opcions();
             opcio = sc.nextInt();

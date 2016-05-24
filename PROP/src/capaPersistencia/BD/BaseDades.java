@@ -1,95 +1,74 @@
 package capaPersistencia.BD;
 
-import capaDomini.Graf.*; 
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
-public class BaseDades extends DataBase {
+
+public class BaseDades  {
     
     public BaseDades() {
     
     }
     
-    private void loadPaper(ArrayList<Node> paper) {
-        readFile("paper.txt", paper, "Paper");
+    protected static void load_paper(ArrayList<Integer> id, ArrayList<String> noms) {
+        readFile("paper.txt", id, noms, "Paper");
     }
 
-    private void loadAuthor(ArrayList<Node> autor) {
-        readFile("author.txt", autor,"Author");
+    protected static void load_autor(ArrayList<Integer> id, ArrayList<String> noms) {
+        readFile("author.txt", id, noms,"Autor");
     }
 
-    private void loadTerm(ArrayList<Node> terme) {
-        readFile("term.txt", terme,"Term");
-    }
-
-    private void loadConference(ArrayList<Node> conf) {
-        readFile("conf.txt", conf,"Conf");
+    protected static void load_conf(ArrayList<Integer> id, ArrayList<String> noms) {
+        readFile("conf.txt", id, noms, "Conferencia");
     }
     
-    private void loadArestaPaperConference(ArrayList<Aresta> pc) {
-        readFileAresta("paper_conf.txt", pc);
-    }
-
-    private void loadArestaPaperAuthor(ArrayList<Aresta> pa) {
-        readFileAresta("paper_author.txt", pa);
-    }
-
-    private void loadArestaPaperTerm(ArrayList<Aresta> pt) {
-        readFileAresta("paper_term.txt", pt);
+    protected static void load_terme(ArrayList<Integer> id, ArrayList<String> noms) {
+        readFile("term.txt", id, noms,"Terme");
     }
     
-    public void load(ArrayList<Node> paper, ArrayList<Node> autor, ArrayList<Node> terme, ArrayList<Node> conf, ArrayList<Aresta> pc, ArrayList<Aresta> pa, ArrayList<Aresta> pt){
-        loadAuthor(autor);
-        loadConference(conf);
-        loadPaper(paper);
-        loadTerm(terme);
-        loadArestaPaperConference(pc);
-        loadArestaPaperAuthor(pa);
-        loadArestaPaperTerm(pt);
+    protected static void load_pc(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        readFileAresta("paper_conf.txt", id, id1);
     }
 
-    private void readFile(String r, ArrayList<Node> aL, String tipo) {
+    protected static void load_pa(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        readFileAresta("paper_author.txt", id, id1);
+    }
+
+    protected static void load_pt(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        readFileAresta("paper_term.txt", id, id1);
+    }
+
+    private static void readFile(String r, ArrayList<Integer> id, ArrayList<String> noms, String tipo) {
         //llegeix els fitxers dels nodes
         try {
             FileReader file = new FileReader(r);
             BufferedReader reader = new BufferedReader(file);
             
-            int id = 0;
-            String nom = "";
             String linea = "";
-            
             while ((linea = reader.readLine()) != null) {
                 int i = 0;
                 while (linea.charAt(i) != '\t') ++i;
-                id = Integer.parseInt(linea.substring(0,i));
-                nom = linea.substring(i+1,linea.length());
-                aL.add(new Node(id,nom,tipo));
+                id.add(Integer.parseInt(linea.substring(0,i)));
+                noms.add(linea.substring(i+1,linea.length()));
+                
             }
         }
         catch (FileNotFoundException e) {} 
         catch (IOException e) {}
     }       
     
-    private void readFileAresta(String r, ArrayList<Aresta> aL) {
+    private static void readFileAresta(String r, ArrayList<Integer> id, ArrayList<Integer> id1) {
         //Llegeix un fitxer de relacions de l'enunciat
         try {
             FileReader file = new FileReader(r);
             BufferedReader reader = new BufferedReader(file);
             
-            int id1 = 0;
-            int id2 = 0;
-
             String line = reader.readLine();
             while (line != null) {
                 int i = 0;
                 while (line.charAt(i) != '\t') i++;
-                id1 =  Integer.parseInt(line.substring(0, i));
-                id2 = Integer.parseInt(line.substring(i+1,line.length()));
-                aL.add(new Aresta(id1,id2));
+                id.add(Integer.parseInt(line.substring(0, i)));
+                id1.add(Integer.parseInt(line.substring(i+1,line.length())));
                 line = reader.readLine();
             }
         }
@@ -97,7 +76,100 @@ public class BaseDades extends DataBase {
         catch (IOException e) {}
     }
     
-    public void safe(Graf g) {
-        //Escriu la informació del graph als fitxers
+    private static void save(ArrayList<Integer> id, ArrayList<String> noms, String nomfitxer) {
+        PrintWriter pw = null;
+        try {
+            File inFile = new File(nomfitxer);
+            if (!inFile.isFile()) {
+              System.out.println("No existeix el ficher amb nom "+nomfitxer);
+            }
+            else {
+                //Eliminamos el fichero existente
+                inFile.delete();
+                File file = new File(nomfitxer);
+                pw = new PrintWriter(new FileWriter(file));
+                String line;
+                for(int i=0; i<id.size(); ++i) {
+                    line = String.valueOf(id.get(i))+'\t'+noms.get(i);
+                    pw.println(line);
+                    pw.flush();
+                }
+            }
+          }
+          catch (FileNotFoundException ex) {}
+          catch (IOException ex) {}
+          finally{
+            // En el finally cerramos el fichero, para asegurarnos
+            // que se cierra tanto si todo va bien como si salta 
+            // una excepcion.
+            try{                  
+                if( null != pw ){   
+                    pw.close();     
+                  } 
+            }catch (Exception e2){}
+      }
+    }
+    
+    private static void savearesta(ArrayList<Integer> id, ArrayList<Integer> id1, String nomfitxer) {
+        PrintWriter pw = null;
+        try {
+            File inFile = new File(nomfitxer);
+            if (!inFile.isFile()) {
+              System.out.println("No existeix el ficher amb nom "+nomfitxer);
+            }
+            else {
+                //Eliminamos el fichero existente
+                inFile.delete();
+                File file = new File(nomfitxer);
+                pw = new PrintWriter(new FileWriter(file));
+                
+                String line = "";
+                for(int i=0; i<id.size(); ++i) {
+                    line = String.valueOf(id.get(i))+'\t'+String.valueOf(id1.get(i));
+                    pw.println(line);
+                    pw.flush();
+                }
+            }
+          }
+          catch (FileNotFoundException ex) {}
+          catch (IOException ex) {}
+          finally{
+            // En el finally cerramos el fichero, para asegurarnos
+            // que se cierra tanto si todo va bien como si salta 
+            // una excepcion.
+            try{                  
+                if( null != pw ){   
+                    pw.close();     
+                  } 
+            }catch (Exception e2){}
+      }
+    }
+    
+    protected static void saveAutor(ArrayList<Integer> id, ArrayList<String> noms) {
+        save(id,noms,"author.txt");
+    }
+    
+    protected static void saveConf(ArrayList<Integer> id, ArrayList<String> noms) {
+        save(id,noms,"conf.txt");
+    }
+    
+    protected static void saveArticle(ArrayList<Integer> id, ArrayList<String> noms) {
+        save(id,noms,"paper.txt");
+    }
+    
+    protected static void saveTerme(ArrayList<Integer> id, ArrayList<String> noms) {
+        save(id,noms,"term.txt");
+    }
+    
+    protected static void savepa(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        savearesta(id,id1,"paper_author.txt");
+    }
+    
+    protected static void savept(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        savearesta(id,id1,"paper_term.txt");
+    }
+    
+    protected static void savepc(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        savearesta(id,id1,"paper_conf.txt");
     }
 }

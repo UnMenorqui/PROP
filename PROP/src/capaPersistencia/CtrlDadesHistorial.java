@@ -13,11 +13,11 @@ import java.util.ArrayList;
  * @author rogia
  */
 public class CtrlDadesHistorial {
-    public static void saveHistorial(ArrayList<Apunts> LlistaConsultes) {
-        DadesHistorial.saveHistorial(LlistaConsultes);
+    public static void saveHistorial(String json) {
+        DadesHistorial.saveHistorial(json);
     }
     
-    public static ArrayList<Apunts> getHistorial() {
-        return DadesHistorial.getHistorial();
+    public static void getHistorial(String json) {
+        DadesHistorial.getHistorial(json);
     }
 }

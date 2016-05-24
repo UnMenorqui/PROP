@@ -5,6 +5,7 @@
  */
 package capaDomini.consulta;
 
+import capaPersistencia.CtrlDadesHistorial;
 import java.util.ArrayList;
 
 /**
@@ -12,11 +13,18 @@ import java.util.ArrayList;
  * @author Toni
  */
 public class CtrlHistorial {
-    private Historial hist = new Historial();
+    private Historial hist = new Historial(CtrlHistorial.this);
     
     public void afegirCerca(String nom, int id, String tipus) {
-        Apunts cerca = new Apunts(nom,id,tipus);
-        hist.afegirCerca(cerca);
+        hist.afegirCerca(id, nom, tipus, CtrlHistorial.this);
+    }
+    
+    public void save(String json) {
+        CtrlDadesHistorial.saveHistorial(json);
+    }
+    
+    public void getHistorial(String json) {
+        CtrlDadesHistorial.getHistorial(json);
     }
     
     public int size() {
@@ -28,6 +36,6 @@ public class CtrlHistorial {
     }
 
     public void esborrar(int n) {
-        hist.esborrar(n);
+        hist.esborrar(n,CtrlHistorial.this);
     }
 }

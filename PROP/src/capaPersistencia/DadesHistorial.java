@@ -23,41 +23,21 @@ public class DadesHistorial {
     
     private static final String path = "BDHistorial.json";
     
-    public static void saveHistorial(ArrayList<Apunts> LlistaConsultes) {
-        Gson gson = new Gson();
-        String json = gson.toJson(LlistaConsultes);
-        
+    public static void saveHistorial(String json) {        
         try (FileWriter writer = new FileWriter(path)) {
 		writer.write(json);
-
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
+	} catch (IOException e) {}
     }
     
-    private static Object fromJson(String jsonString, Type type) {
-        return new Gson().fromJson(jsonString, type);
-    }
-
-    
-    public static ArrayList<Apunts> getHistorial() {
-        Gson gson = new Gson();
-        
+    public static void getHistorial(String json) {      
 	try {
 
 		BufferedReader br = new BufferedReader(
 		new FileReader(path));
 
-		//convert the json string back to object
-                String jsonString = br.readLine();
-		ArrayList<Apunts> LlistaConsultes = (ArrayList<Apunts>) fromJson(jsonString,
-                    new TypeToken<ArrayList<Apunts>>() {
-                    }.getType());
-
-                return LlistaConsultes;
-
+                json = br.readLine();
+		
 	} catch (IOException e) {
-                return null;
 	}
     }
 }
