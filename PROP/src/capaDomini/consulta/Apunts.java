@@ -15,7 +15,7 @@ public class Apunts {
     int id;
     String tipus;
     
-    public Apunts(String n, int i, String t) {
+    public Apunts(int i, String n, String t) {
         nom = n;
 	id = i;
 	tipus = t;

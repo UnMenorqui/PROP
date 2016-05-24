@@ -23,52 +23,21 @@ public class DadesHistorial {
     
     private static final String path = "BDHistorial.json";
     
-    public static void saveHistorial(ArrayList<Integer> id, ArrayList<String> noms, ArrayList<String> tipus) {
-        Gson gson = new Gson();
-        String json = gson.toJson(id);
-        String json1 = gson.toJson(noms);
-        String json2 = gson.toJson(tipus);
-        
-        
+    public static void saveHistorial(String json) {        
         try (FileWriter writer = new FileWriter(path)) {
 		writer.write(json);
-                writer.write(json1);
-                writer.write(json2);
-
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
+	} catch (IOException e) {}
     }
     
-    private static Object fromJson(String jsonString, Type type) {
-        return new Gson().fromJson(jsonString, type);
-    }
-
-    
-    public static void getHistorial(ArrayList<Integer> id, ArrayList<String> noms, ArrayList<String> tipus) {
-        Gson gson = new Gson();
-        
+    public static void getHistorial(String json) {      
 	try {
 
-		BufferedReader br = new BufferedReader(new FileReader(path));
+		BufferedReader br = new BufferedReader(
+		new FileReader(path));
 
-		//convert the json string back to object
-                String jsonString = br.readLine();
-		id = (ArrayList<Integer>) fromJson(jsonString,
-                    new TypeToken<ArrayList<Integer>>() {
-                    }.getType());
-                jsonString =br.readLine();
-                noms = (ArrayList<String>) fromJson(jsonString,
-                    new TypeToken<ArrayList<String>>() {
-                    }.getType());
-                jsonString = br.readLine();
-                tipus = (ArrayList<String>) fromJson(jsonString,
-                    new TypeToken<ArrayList<String>>() {
-                    }.getType());
-                
-                
-                
-
-	} catch (IOException e) {}
+                json = br.readLine();
+		
+	} catch (IOException e) {
+	}
     }
 }

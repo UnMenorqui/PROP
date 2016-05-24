@@ -6,6 +6,9 @@
 package capaDomini.consulta;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -14,27 +17,25 @@ import java.util.ArrayList;
  */
 public class Historial {
 
-    private ArrayList<Apunts> LlistaConsultes = new ArrayList();
+    private ArrayList<Apunts> LlistaConsultes;
     
-    ArrayList<String> noms;
-    
-    ArrayList<Integer> id;
-    
-    ArrayList<String> tipus;
+    protected String json;
 
     public Historial(CtrlHistorial ctrl) {
-        noms = new ArrayList<>();
-        tipus = new ArrayList<>();
-        id = new ArrayList<>();
+        LlistaConsultes = new ArrayList<>();
         loadHistorial(ctrl);
     }
     
     public int size() {
         return LlistaConsultes.size();
     }
+    
+    private static Object fromJson(String jsonString, Type type) {
+        return new Gson().fromJson(jsonString, type);
+    }
 
-    public void afegirCerca(Apunts cerca, CtrlHistorial ctrl) {
-        LlistaConsultes.add(cerca);
+    public void afegirCerca(int id, String nom, String tipus, CtrlHistorial ctrl) {
+        LlistaConsultes.add(new Apunts(id,nom,tipus));
         saveHistorial(ctrl);
     }
     
@@ -50,7 +51,9 @@ public class Historial {
     }
     
     private void loadHistorial(CtrlHistorial ctrl) {
-        ctrl.getHistorial(id,noms,tipus);
+        ctrl.getHistorial(json);
+        LlistaConsultes = (ArrayList<Apunts>) fromJson(json,
+                    new TypeToken<ArrayList<Apunts>>() {}.getType());
         if(LlistaConsultes == null) {
             LlistaConsultes = new ArrayList<>();
             saveHistorial(ctrl);
@@ -58,14 +61,8 @@ public class Historial {
     }
     
     private void saveHistorial(CtrlHistorial ctrl) {
-        for (int i = 0; i < LlistaConsultes.size(); ++i) {
-            id.add(LlistaConsultes.get(i).getID());
-            noms.add(LlistaConsultes.get(i).getNom());
-            tipus.add(LlistaConsultes.get(i).getTipus());
-        }
-        ctrl.save(id,noms,tipus);
-        noms.clear();
-        tipus.clear();
-        id.clear();
+        Gson gson = new Gson();
+        json = gson.toJson(LlistaConsultes);
+        ctrl.save(json);
     }
 }

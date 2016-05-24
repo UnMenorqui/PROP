@@ -16,16 +16,15 @@ public class CtrlHistorial {
     private Historial hist = new Historial(CtrlHistorial.this);
     
     public void afegirCerca(String nom, int id, String tipus) {
-        Apunts cerca = new Apunts(nom,id,tipus);
-        hist.afegirCerca(cerca, CtrlHistorial.this);
+        hist.afegirCerca(id, nom, tipus, CtrlHistorial.this);
     }
     
-    public void save(ArrayList<Integer> id, ArrayList<String> noms, ArrayList<String> tipus) {
-        CtrlDadesHistorial.saveHistorial(id,noms,tipus);
+    public void save(String json) {
+        CtrlDadesHistorial.saveHistorial(json);
     }
     
-    public void getHistorial(ArrayList<Integer> id, ArrayList<String> noms, ArrayList<String> tipus) {
-        CtrlDadesHistorial.getHistorial(id,noms,tipus);
+    public void getHistorial(String json) {
+        CtrlDadesHistorial.getHistorial(json);
     }
     
     public int size() {
