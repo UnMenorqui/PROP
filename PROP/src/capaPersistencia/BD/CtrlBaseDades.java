@@ -5,8 +5,6 @@
  */
 package capaPersistencia.BD;
 
-import capaDomini.Graf.Aresta;
-import capaDomini.Graf.Node;
 import java.util.ArrayList;
 
 
@@ -37,32 +35,32 @@ public class CtrlBaseDades {
         BaseDades.load_pt(id,id1);
     }
     
-    public void saveAutor(ArrayList<Node> autor) {
-        BaseDades.saveAutor(autor);
+    public void saveAutor(ArrayList<Integer> id, ArrayList<String> noms) {
+        BaseDades.saveAutor(id,noms);
     }
     
-    public void saveConf(ArrayList<Node> conf) {
-        BaseDades.saveConf(conf);
+    public void saveConf(ArrayList<Integer> id, ArrayList<String> noms) {
+        BaseDades.saveConf(id,noms);
     }
     
-    public void saveArticle(ArrayList<Node> article) {
-        BaseDades.saveArticle(article);
+    public void saveArticle(ArrayList<Integer> id, ArrayList<String> noms) {
+        BaseDades.saveArticle(id,noms);
     }
     
-    public void saveTerme(ArrayList<Node> terme) {
-        BaseDades.saveTerme(terme);
+    public void saveTerme(ArrayList<Integer> id, ArrayList<String> noms) {
+        BaseDades.saveTerme(id,noms);
     }
     
-    public void savepa(ArrayList<Aresta> pa) {
-        BaseDades.savepa(pa);
+    public void savepa(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        BaseDades.savepa(id,id1);
     }
     
-    public void savept(ArrayList<Aresta> pt) {
-        BaseDades.savept(pt);
+    public void savept(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        BaseDades.savept(id,id1);
     }
     
-    public void savepc(ArrayList<Aresta> pc) {
-        BaseDades.savepc(pc);
+    public void savepc(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        BaseDades.savepc(id,id1);
     }
     
 }

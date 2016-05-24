@@ -23,12 +23,17 @@ public class DadesHistorial {
     
     private static final String path = "BDHistorial.json";
     
-    public static void saveHistorial(ArrayList<Apunts> LlistaConsultes) {
+    public static void saveHistorial(ArrayList<Integer> id, ArrayList<String> noms, ArrayList<String> tipus) {
         Gson gson = new Gson();
-        String json = gson.toJson(LlistaConsultes);
+        String json = gson.toJson(id);
+        String json1 = gson.toJson(noms);
+        String json2 = gson.toJson(tipus);
+        
         
         try (FileWriter writer = new FileWriter(path)) {
 		writer.write(json);
+                writer.write(json1);
+                writer.write(json2);
 
 	} catch (IOException e) {
 		e.printStackTrace();
@@ -40,24 +45,30 @@ public class DadesHistorial {
     }
 
     
-    public static ArrayList<Apunts> getHistorial() {
+    public static void getHistorial(ArrayList<Integer> id, ArrayList<String> noms, ArrayList<String> tipus) {
         Gson gson = new Gson();
         
 	try {
 
-		BufferedReader br = new BufferedReader(
-		new FileReader(path));
+		BufferedReader br = new BufferedReader(new FileReader(path));
 
 		//convert the json string back to object
                 String jsonString = br.readLine();
-		ArrayList<Apunts> LlistaConsultes = (ArrayList<Apunts>) fromJson(jsonString,
-                    new TypeToken<ArrayList<Apunts>>() {
+		id = (ArrayList<Integer>) fromJson(jsonString,
+                    new TypeToken<ArrayList<Integer>>() {
                     }.getType());
+                jsonString =br.readLine();
+                noms = (ArrayList<String>) fromJson(jsonString,
+                    new TypeToken<ArrayList<String>>() {
+                    }.getType());
+                jsonString = br.readLine();
+                tipus = (ArrayList<String>) fromJson(jsonString,
+                    new TypeToken<ArrayList<String>>() {
+                    }.getType());
+                
+                
+                
 
-                return LlistaConsultes;
-
-	} catch (IOException e) {
-                return null;
-	}
+	} catch (IOException e) {}
     }
 }

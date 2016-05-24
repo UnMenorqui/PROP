@@ -13,11 +13,11 @@ import java.util.ArrayList;
  * @author rogia
  */
 public class CtrlDadesHistorial {
-    public static void saveHistorial(ArrayList<Apunts> LlistaConsultes) {
-        DadesHistorial.saveHistorial(LlistaConsultes);
+    public static void saveHistorial(ArrayList<Integer> id, ArrayList<String> noms, ArrayList<String> tipus) {
+        DadesHistorial.saveHistorial(id,noms,tipus);
     }
     
-    public static ArrayList<Apunts> getHistorial() {
-        return DadesHistorial.getHistorial();
+    public static void getHistorial(ArrayList<Integer> id, ArrayList<String> noms, ArrayList<String> tipus) {
+        DadesHistorial.getHistorial(id, noms, tipus);
     }
 }

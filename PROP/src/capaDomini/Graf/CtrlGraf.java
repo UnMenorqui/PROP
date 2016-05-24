@@ -95,31 +95,31 @@ public class CtrlGraf {
         ctrl.load_pt(id,id1);
     }
     
-    public void saveAutor(ArrayList<Node> Autor) {
-        ctrl.saveAutor(Autor);
+    public void saveAutor(ArrayList<Integer> id, ArrayList<String> noms) {
+        ctrl.saveAutor(id,noms);
     }
     
-    public void saveConf(ArrayList<Node> conf) {
-        ctrl.saveConf(conf);
+    public void saveConf(ArrayList<Integer> id, ArrayList<String> noms) {
+        ctrl.saveConf(id,noms);
     }
     
-    public void saveTerme(ArrayList<Node> terme) {
-        ctrl.saveTerme(terme);
+    public void saveTerme(ArrayList<Integer> id, ArrayList<String> noms) {
+        ctrl.saveTerme(id,noms);
     }
     
-    public void saveArticle(ArrayList<Node> article) {
-        ctrl.saveArticle(article);
+    public void saveArticle(ArrayList<Integer> id, ArrayList<String> noms) {
+        ctrl.saveArticle(id,noms);
     }
     
-    public void savepa(ArrayList<Aresta> pa) {
-        ctrl.savepa(pa);
+    public void savepa(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        ctrl.savepa(id,id1);
     }
     
-    public void savept(ArrayList<Aresta> pt) {
-        ctrl.savept(pt);
+    public void savept(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        ctrl.savept(id,id1);
     }
     
-    public void savepc(ArrayList<Aresta> pc) {
-        ctrl.savepc(pc);
+    public void savepc(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        ctrl.savepc(id,id1);
     }
 }

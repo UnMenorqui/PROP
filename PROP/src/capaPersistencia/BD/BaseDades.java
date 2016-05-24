@@ -1,7 +1,5 @@
 package capaPersistencia.BD;
 
-import capaDomini.Graf.*; 
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -78,7 +76,7 @@ public class BaseDades  {
         catch (IOException e) {}
     }
     
-    private static void save(ArrayList<Node> aL, String nomfitxer) {
+    private static void save(ArrayList<Integer> id, ArrayList<String> noms, String nomfitxer) {
         PrintWriter pw = null;
         try {
             File inFile = new File(nomfitxer);
@@ -90,14 +88,9 @@ public class BaseDades  {
                 inFile.delete();
                 File file = new File(nomfitxer);
                 pw = new PrintWriter(new FileWriter(file));
-
-                int id = 0;
-                String nom = "";
                 String line;
-                for(int i=0; i<aL.size(); ++i) {
-                    id = aL.get(i).getId();
-                    nom = aL.get(i).getNom();
-                    line = String.valueOf(id)+'\t'+nom;
+                for(int i=0; i<id.size(); ++i) {
+                    line = String.valueOf(id.get(i))+'\t'+noms.get(i);
                     pw.println(line);
                     pw.flush();
                 }
@@ -117,7 +110,7 @@ public class BaseDades  {
       }
     }
     
-    private static void savearesta(ArrayList<Aresta> aL, String nomfitxer) {
+    private static void savearesta(ArrayList<Integer> id, ArrayList<Integer> id1, String nomfitxer) {
         PrintWriter pw = null;
         try {
             File inFile = new File(nomfitxer);
@@ -129,14 +122,10 @@ public class BaseDades  {
                 inFile.delete();
                 File file = new File(nomfitxer);
                 pw = new PrintWriter(new FileWriter(file));
-
-                int id = 0;
-                int id1 = 0;
+                
                 String line = "";
-                for(int i=0; i<aL.size(); ++i) {
-                    id = aL.get(i).getNode1();
-                    id1 = aL.get(i).getNode2();
-                    line = String.valueOf(id)+'\t'+String.valueOf(id1);
+                for(int i=0; i<id.size(); ++i) {
+                    line = String.valueOf(id.get(i))+'\t'+String.valueOf(id1.get(i));
                     pw.println(line);
                     pw.flush();
                 }
@@ -156,31 +145,31 @@ public class BaseDades  {
       }
     }
     
-    protected static void saveAutor(ArrayList<Node> autor) {
-        save(autor,"author.txt");
+    protected static void saveAutor(ArrayList<Integer> id, ArrayList<String> noms) {
+        save(id,noms,"author.txt");
     }
     
-    protected static void saveConf(ArrayList<Node> conf) {
-        save(conf,"conf.txt");
+    protected static void saveConf(ArrayList<Integer> id, ArrayList<String> noms) {
+        save(id,noms,"conf.txt");
     }
     
-    protected static void saveArticle(ArrayList<Node> article) {
-        save(article,"paper.txt");
+    protected static void saveArticle(ArrayList<Integer> id, ArrayList<String> noms) {
+        save(id,noms,"paper.txt");
     }
     
-    protected static void saveTerme(ArrayList<Node> terme) {
-        save(terme,"term.txt");
+    protected static void saveTerme(ArrayList<Integer> id, ArrayList<String> noms) {
+        save(id,noms,"term.txt");
     }
     
-    protected static void savepa(ArrayList<Aresta> pa) {
-        savearesta(pa,"paper_author.txt");
+    protected static void savepa(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        savearesta(id,id1,"paper_author.txt");
     }
     
-    protected static void savept(ArrayList<Aresta> pt) {
-        savearesta(pt,"paper_term.txt");
+    protected static void savept(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        savearesta(id,id1,"paper_term.txt");
     }
     
-    protected static void savepc(ArrayList<Aresta> pc) {
-        savearesta(pc,"paper_conf.txt");
+    protected static void savepc(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        savearesta(id,id1,"paper_conf.txt");
     }
 }

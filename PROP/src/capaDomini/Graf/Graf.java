@@ -732,12 +732,71 @@ public class Graf {
     }
     
     public void actualitzar() {
-        if (autoractualitzat) cg.saveAutor(autor);
-        if (confactualitzat) cg.saveConf(conf);
-        if (termeactualitzat) cg.saveTerme(terme);
-        if (articleactualitzat) cg.saveArticle(paper);
-        if (paactualitzat) cg.savepa(pa);
-        if (ptactualitzat) cg.savept(pt);
-        if (pcactualitzat) cg.savepc(pc);
+        if (autoractualitzat) {
+            for (int i = 0; i < autor.size(); ++i) {
+                id.add(autor.get(i).getId());
+                noms.add(autor.get(i).getNom());
+            }
+            cg.saveAutor(id,noms);
+            id.clear();
+            noms.clear();
+        }
+        if (confactualitzat) {
+            for (int i = 0; i < conf.size(); ++i) {
+                id.add(conf.get(i).getId());
+                noms.add(conf.get(i).getNom());
+            }
+            cg.saveConf(id,noms);
+            id.clear();
+            noms.clear();
+        }
+        if (termeactualitzat) {
+            for (int i = 0; i < terme.size(); ++i) {
+                id.add(terme.get(i).getId());
+                noms.add(terme.get(i).getNom());
+            }
+            cg.saveTerme(id,noms);
+            id.clear();
+            noms.clear();
+        }
+        if (articleactualitzat) {
+            for (int i = 0; i < paper.size(); ++i) {
+                id.add(paper.get(i).getId());
+                noms.add(paper.get(i).getNom());
+            }
+            cg.saveArticle(id,noms);
+            id.clear();
+            noms.clear();
+        }
+        if (paactualitzat) {
+            id1.clear();
+            for (int i = 0; i < pa.size(); ++i) {
+                id.add(pa.get(i).getNode1());
+                id1.add(pa.get(i).getNode2());
+            }
+            cg.savepa(id,id1);
+            id.clear();
+            id1.clear();
+        }
+        if (pcactualitzat) {
+            id1.clear();
+            for (int i = 0; i < pc.size(); ++i) {
+                id.add(pc.get(i).getNode1());
+                id1.add(pc.get(i).getNode2());
+            }
+            cg.savepc(id,id1);
+            id.clear();
+            id1.clear();
+        }
+        if (ptactualitzat) {
+            id1.clear();
+            for (int i = 0; i < pt.size(); ++i) {
+                id.add(pt.get(i).getNode1());
+                id1.add(pt.get(i).getNode2());
+            }
+            cg.savept(id,id1);
+            id.clear();
+            id1.clear();
+        }
     }
 }
