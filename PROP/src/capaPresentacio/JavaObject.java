@@ -12,7 +12,6 @@ import capaDomini.consulta.CtrlHistorial;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Iterator;
-import org.testng.internal.collections.Pair;
 
 /**
  *
