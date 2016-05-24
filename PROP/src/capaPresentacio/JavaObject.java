@@ -44,7 +44,7 @@ public class JavaObject {
         System.out.println(message);
     }
     
-    public Boolean ExisteixUsuari_contrasenya(String username, String password) {
+    public int ExisteixUsuari_contrasenya(String username, String password) {
         return cp.ExisteixUsuari_contrasenya(username,password);
     }
     
@@ -67,11 +67,11 @@ public class JavaObject {
         return false;
     }
     
-    public boolean CanviarUsername(String username, String password, String new_username) {
+    public int CanviarUsername(String username, String password, String new_username) {
         return cp.modificar_usuari(username, password, new_username);
     }
     
-    public boolean CanviarPassword(String username, String password, String new_password) {
+    public int CanviarPassword(String username, String password, String new_password) {
         return cp.modificar_password(username, password, new_password);
     }
     

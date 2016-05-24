@@ -12,10 +12,9 @@ import capaDomini.Perfils.PerfilArticle;
 import capaDomini.Perfils.PerfilAutor;
 import capaDomini.Perfils.PerfilConf;
 import capaDomini.Perfils.PerfilTerme;
-import capaDomini.consulta.Apunts;
 import capaPersistencia.CtrlDadesHistorial;
 import capaDomini.Usuaris.CtrlUsuaris;
-import java.util.ArrayList;
+import capaDomini.consulta.DriverHistorial;
 
 /**
  *
@@ -26,38 +25,43 @@ public class CtrlPresentacio {
     private CtrlGraf cg;
     
     // FUNCIONS CTRL DADES HISTORIAL
-    public static void saveHistorial(ArrayList<Apunts> LlistaConsultes) {
-        CtrlDadesHistorial.saveHistorial(LlistaConsultes);
+    public static void saveHistorial(String json) {
+        CtrlDadesHistorial.saveHistorial(json);
     }
-    public static ArrayList<Apunts> getHistorial() {
-        return CtrlDadesHistorial.getHistorial();
+    
+    public static void getHistorial(String json) {
+        CtrlDadesHistorial.getHistorial(json);
     }
     
     //FUNCIONS CTRL USUARIS
     
     CtrlUsuaris cu = new CtrlUsuaris();
     
+    
     public String consultar_username() {
         return cu.consultar_username();
     }
     
-    public Boolean modificar_usuari(String username, String password, String nou_user) {
-        if (ExisteixUsuari_contrasenya(username,password)) {
-            cu.modificar_usuari(username,password,nou_user);
-            return true;
+    public int modificar_usuari(String username, String password, String nou_user) {
+        if (ExisteixUsuari(nou_user)) return 3;
+        int id = ExisteixUsuari_contrasenya(username,password);
+        if (id == 2) {
+            cu.modificar_usuari(username, nou_user, password);
+            return 2;
         }
-        return false;
+        return id;
     }
     
-    public Boolean modificar_password(String username, String password, String new_password) {
-        if (ExisteixUsuari_contrasenya(username, password)) {
+    public int modificar_password(String username, String password, String new_password) {
+        int id = ExisteixUsuari_contrasenya(username, password);
+        if (id == 2) {
             cu.modificar_password(username, password, new_password);
-            return true;
+            return 2;
         }
-        return false;
+        return id;
     }
 
-    public Boolean ExisteixUsuari_contrasenya(String username, String password) {
+    public int ExisteixUsuari_contrasenya(String username, String password) {
         return cu.ExisteixUsuari_contrasenya(username,password);
     }
     
@@ -65,20 +69,30 @@ public class CtrlPresentacio {
         return cu.ExisteixUsuari(username);
     }
     
-    public Boolean borrarlinea(String username, String password) {
-        if (ExisteixUsuari_contrasenya(username, password)) {
-            cu.borrarlinea(username, password);
-            return true;
+    public int borrarUsuari(String username, String password) {
+        int id = ExisteixUsuari_contrasenya(username, password);
+        if (id == 2) {
+            cu.borrarUsuari(username, password);
+            return 2;
         }
-        return false;
+        return id;
     }
     
-    public boolean GuardarUsuari(String username, String password) {
-        if (!ExisteixUsuari_contrasenya(username, password)) {
-            cu.GuardarUsuari(username, password);
-            return true;
+    public int borrarUsuariAdmin(String username) {
+        if (ExisteixUsuari(username)) {
+            cu.borrarUsuariAdmin(username);
+            return 1;
         }
-        return false;
+        return 0;
+    }
+    
+    public int GuardarUsuari(String username, String password) {
+        int id = ExisteixUsuari_contrasenya(username, password);
+        if (id == 0) {
+            cu.GuardarUsuari(username, password);
+            return 0;
+        }
+        return id;
     }
     
     public void consultaUsuarisBD() {
@@ -87,6 +101,32 @@ public class CtrlPresentacio {
     
     public String consultar_password(String username) {
             return cu.consultar_password(username);
+    }
+    
+    public void consultar(CtrlGraf G) {
+        DriverHistorial dr = new DriverHistorial();
+        dr.main(G);
+    }
+
+    public void esborrar(int n) {
+        cu.esborrar(n);
+    }
+    
+    public void afegirNode(String tipus,String nom, CtrlGraf CG) {
+        CG.afegirNode(tipus, nom);
+    }
+    
+    
+    public void eliminarNode(String nomNode, String tipus, CtrlGraf CG) {
+        CG.eliminarNode(nomNode,tipus);
+    }
+    
+    public void eliminarAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
+        CG.eliminarAresta(nom1, nom2, tipus);
+    }
+    
+    public void afegirAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
+        CG.afegirAresta(nom1, nom2, tipus);
     }
     
     
