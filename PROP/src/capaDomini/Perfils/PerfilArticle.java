@@ -7,12 +7,9 @@ package capaDomini.Perfils;
 
 
 import capaDomini.Graf.CtrlGraf;
-import static capaDomini.Perfils.PerfilAutor.articles;
 import java.util.ArrayList;
 import capaDomini.consulta.Consulta;
-import capaDomini.consulta.CtrlHistorial;
 import com.google.gson.Gson;
-import java.util.Scanner;
 
 /**
  *

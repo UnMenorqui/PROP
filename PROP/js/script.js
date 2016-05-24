@@ -28,46 +28,145 @@
 
  }
 
+ function amagarCollapsible() {
+ 	$("#collapsibleArticles").fadeOut(0).removeClass("active");
+ 	$("#collapsibleArticles .collapsible-header").removeClass("active");
+ 	$("#collapsibleArticles .collapsible-body").css({ "display": "none" });
+ 	$("#collapsibleConferencies").fadeOut(0).removeClass("active");
+ 	$("#collapsibleConferencies .collapsible-header").removeClass("active");
+ 	$("#collapsibleConferencies .collapsible-body").css({ "display": "none" });
+ 	$("#collapsibleAutors").fadeOut(0).removeClass("active");
+ 	$("#collapsibleAutors .collapsible-header").removeClass("active");
+ 	$("#collapsibleAutors .collapsible-body").css({ "display": "none" });
+ 	$("#collapsibleCoautors").fadeOut(0).removeClass("active");
+ 	$("#collapsibleCoautors .collapsible-header").removeClass("active");
+ 	$("#collapsibleCoautors .collapsible-body").css({ "display": "none" });
+ 	$("#collapsibleTermes").fadeOut(0).removeClass("active");
+ 	$("#collapsibleTermes .collapsible-header").removeClass("active");
+ 	$("#collapsibleTermes .collapsible-body").css({ "display": "none" });
+ }
+
  function consulta() {
- 	$("#collapsibleConsulta li").css({ "display": "none" });
-    var perfil = JSON.parse(window.java.consulta($("#Tipus_Node").val(),$("#search").val(),parseInt($("#rangeAutors").val()),parseInt($("#rangeTermes").val()),parseInt($("#rangeConferencies").val()),parseInt($("#rangeArticles").val()),(username != "")));
- 	var tipus = $("#Tipus_Node").val();
- 	if (tipus == "General") {
- 		if(window.java.existeixnode($("#search").val(),"Autor")) tipus = "Autor";
- 		else if (window.java.existeixnode($("#search").val(),"Conferencia")) tipus = "Conferencia";
- 		else if (window.java.existeixnode($("#search").val(),"Terme")) tipus = "Terme";
- 		else if (window.java.existeixnode($("#search").val(),"Article")) tipus = "Article";
- 	}
- 	$("#collapsibleConsulta").html("");
- 	if (perfil != "No s'ha trobat") {
- 		setConsultaHistorial($("#search").val(),tipus);
- 	}
- 	if (tipus == "Autor") {
- 		$("#collapsibleArticles").css({ "display" : "block" });
- 		$("#collapsibleConferencies").css({ "display" : "block" });
- 		$("#collapsibleCoautors").css({ "display" : "block" });
- 		$("#collapsibleTermes").css({ "display" : "block" });
-	}
+ 	amagarCollapsible();
+	    var perfil = JSON.parse(window.java.consulta($("#Tipus_Node").val(),$("#search").val(),parseInt($("#rangeAutors").val()),parseInt($("#rangeTermes").val()),parseInt($("#rangeConferencies").val()),parseInt($("#rangeArticles").val()),(username != "")));
+	 	var tipus = $("#Tipus_Node").val();
+	 	if (tipus == "General") {
+	 		if(window.java.existeixnode($("#search").val(),"Autor")) tipus = "Autor";
+	 		else if (window.java.existeixnode($("#search").val(),"Conferencia")) tipus = "Conferencia";
+	 		else if (window.java.existeixnode($("#search").val(),"Terme")) tipus = "Terme";
+	 		else if (window.java.existeixnode($("#search").val(),"Article")) tipus = "Article";
+	 	}
+	 
+	 	if (perfil != "No s'ha trobat") {
+	 		setConsultaHistorial($("#search").val(),tipus);
+	 	}
+	 	if (tipus == "Autor") {
+	 		$("#collapsibleArticles").fadeIn(0);
+		 	$("#collapsibleConferencies").fadeIn(0);
+		 	$("#collapsibleCoautors").fadeIn(0);
+		 	$("#collapsibleTermes").fadeIn(0);
 
-	if (tipus == "Article") {
- 		$("#collapsibleConferencies").css({ "display" : "block" });
- 		$("#collapsibleAutors").css({ "display" : "block" });
- 		$("#collapsibleTermes").css({ "display" : "block" });
-	}
+		 	$("#collapsibleArticles .collapsible-body ul").html("");
+		 	for(article in perfil[0]) {
+		 		$("#collapsibleArticles .collapsible-body ul").append("<li>"+ perfil[0][article] +"</li>");
+		 	}
+		 	if (perfil[0].length == 0) {
+		 		$("#collapsibleArticles .collapsible-body ul").append("<li>"+ "No existeixen Articles per aquest autor." +"</li>");
+		 	}
 
-	if (tipus == "Conferencia") {
-		$("#collapsibleArticles").css({ "display" : "block" });
- 		$("#collapsibleAutors").css({ "display" : "block" });
- 		$("#collapsibleTermes").css({ "display" : "block" });
-	}
 
-	if (tipus == "Terme") {
-		$("#collapsibleArticles").css({ "display" : "block" });
- 		$("#collapsibleConferencies").css({ "display" : "block" });
- 		$("#collapsibleAutors").css({ "display" : "block" });
-	}
+		 	$("#collapsibleConferencies .collapsible-body ul").html("");
+		 	for(conf in perfil[1]) {
+		 		$("#collapsibleConferencies .collapsible-body ul").append("<li>"+ perfil[1][conf] +"</li>");
+		 	}
 
-	$("#collapsibleConsulta").collapsible({  accordion: false  });
+		 	if (perfil[1].length == 0) {
+		 		$("#collapsibleConferencies .collapsible-body ul").append("<li>"+ "No existeixen Conferències per aquest autor." +"</li>");
+		 	}
+
+
+		 	$("#collapsibleCoautors .collapsible-body ul").html("");
+		 	for(coautor in perfil[2]) {
+		 		$("#collapsibleCoautors .collapsible-body ul").append("<li>"+ perfil[2][coautor] +"</li>");
+		 	}
+
+
+		 	$("#collapsibleTermes .collapsible-body ul").html("");
+		 	for(terme in perfil[3]) {
+		 		$("#collapsibleTermes .collapsible-body ul").append("<li>"+ perfil[3][terme] +"</li>");
+		 	}
+		}
+
+		if (tipus == "Article") {
+		 	$("#collapsibleConferencies").fadeIn(0);
+		 	$("#collapsibleAutors").fadeIn(0);
+		 	$("#collapsibleTermes").fadeIn(0);
+
+
+		 	$("#collapsibleConferencies .collapsible-body ul").html("");
+		 	for(conf in perfil[0]) {
+		 		$("#collapsibleConferencies .collapsible-body ul").append("<li>"+ perfil[0][conf] +"</li>");
+		 	}
+
+
+		 	$("#collapsibleAutors .collapsible-body ul").html("");
+		 	for(autor in perfil[1]) {
+		 		$("#collapsibleAutors .collapsible-body ul").append("<li>"+ perfil[1][autor] +"</li>");
+		 	}
+
+
+		 	$("#collapsibleTermes .collapsible-body ul").html("");
+		 	for(terme in perfil[2]) {
+		 		$("#collapsibleTermes .collapsible-body ul").append("<li>"+ perfil[2][terme] +"</li>");
+		 	}
+
+		}
+
+		if (tipus == "Conferencia") {
+			$("#collapsibleArticles").fadeIn(0);
+		 	$("#collapsibleAutors").fadeIn(0);
+		 	$("#collapsibleTermes").fadeIn(0);
+
+			$("#collapsibleArticles .collapsible-body ul").html("");
+		 	for(article in perfil[0]) {
+		 		$("#collapsibleArticles .collapsible-body ul").append("<li>"+ perfil[0][article] +"</li>");
+		 	}
+
+
+		 	$("#collapsibleAutors .collapsible-body ul").html("");
+		 	for(autor in perfil[1]) {
+		 		$("#collapsibleAutors .collapsible-body ul").append("<li>"+ perfil[1][autor] +"</li>");
+		 	}
+
+
+		 	$("#collapsibleTermes .collapsible-body ul").html("");
+		 	for(terme in perfil[2]) {
+		 		$("#collapsibleTermes .collapsible-body ul").append("<li>"+ perfil[2][terme] +"</li>");
+		 	}
+		}
+
+		if (tipus == "Terme") {
+			$("#collapsibleArticles").fadeIn(0);
+		 	$("#collapsibleConferencies").fadeIn(0);
+		 	$("#collapsibleAutors").fadeIn(0);
+
+		 	$("#collapsibleArticles .collapsible-body ul").html("");
+		 	for(article in perfil[0]) {
+		 		$("#collapsibleArticles .collapsible-body ul").append("<li>"+ perfil[0][article] +"</li>");
+		 	}
+
+
+		 	$("#collapsibleConferencies .collapsible-body ul").html("");
+		 	for(conf in perfil[1]) {
+		 		$("#collapsibleConferencies .collapsible-body ul").append("<li>"+ perfil[1][conf] +"</li>");
+		 	}
+
+
+		 	$("#collapsibleAutors .collapsible-body ul").html("");
+		 	for(autor in perfil[2]) {
+		 		$("#collapsibleAutors .collapsible-body ul").append("<li>"+ perfil[2][autor] +"</li>");
+		 	}
+		}
  }
 
  function getHistorial() {
@@ -75,7 +174,7 @@
 
      $("#historial .collection").html("");
      hist.forEach(function(elem, i) {
-     	$("#historial .collection").append("<li class='collection-item'>" + elem + "<a href='#!' class='secondary-content' onclick='borrarElementHistorial(" + i + ")'><i class='material-icons'>delete</i></a></li>");
+     	$("#historial .collection").append("<li class='collection-item'><span>" + elem + "</span><a href='#!' class='secondary-content' onclick='borrarElementHistorial(" + i + ")'><i class='material-icons'>delete</i></a></li>");
      });
  }
 
@@ -92,6 +191,10 @@ $(document).ready(function() {
 	setTimeout(carrega,100);
 
     $('ul.tabs').tabs('select_tab', 'login');
+
+    $('.collapsible').collapsible({
+    	accordion : false
+    });
 
      $("#registerform_submit").on("click", function(e) {
      	if (window.java.Registrarse($("#registerform_user").val(),$("#registerform_pass").val(),$("#registerform_pass2").val())) {
@@ -115,7 +218,7 @@ $(document).ready(function() {
 	 		$("#logo_container img").fadeOut(1000);
 	 		$("#signin").fadeOut(1000);
 	 		$('select').material_select();
-	 		$("#collapsibleConsulta li").css({ "display": "none" });
+	 		amagarCollapsible();
 	 		getHistorial();
 	 		setTimeout(function() { $("#homepage").fadeIn(1000); $("#nomusuariContainer").text(username); }, 1000);
  	 	}
@@ -132,7 +235,7 @@ $(document).ready(function() {
  		$("#signin").fadeOut(1000);
  		$('select').material_select();
  		$("#configurarCompteBtn").css({"display": "none"});
- 		$("#collapsibleConsulta li").css({ "display": "none" });
+ 		amagarCollapsible();
  		setTimeout(function() { $("#homepage").fadeIn(1000); }, 1000);
  	 });
  	 $("#adminform_submit").on("click", function(e) {
@@ -149,7 +252,7 @@ $(document).ready(function() {
 	 		$("#signin").fadeOut(1000);
 	 		$('select').material_select();
 	 		getHistorial();
-	 		$("#collapsibleConsulta li").css({ "display": "none" });
+	 		amagarCollapsible();
 	 		setTimeout(function() { 
 	 			$("#homepage").fadeIn(1000); 
 	 			$("#nomusuariContainer").text(username); 
@@ -217,6 +320,13 @@ $(document).ready(function() {
  	 	} else {
  	 		Materialize.toast("La contrasenya actual no és correcta. Torna-ho a provar.", 2000);
  	 	}
+ 	 });
+ 	 $("#historial .collection-item").on("click", function(e) { Materialize.toast("adf",2000);
+ 	 	e.preventDefault();
+ 	 	var entitat = $("span", this).text();
+ 	 	$("#search").val(entitat);
+ 	 	$("#Tipus_Node").val("General")
+ 	 	consulta();
  	 });
 
  	 $("#search").bind("enterKey",function(e) {

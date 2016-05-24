@@ -46,7 +46,7 @@ public class CtrlPresentacio {
         if (ExisteixUsuari(nou_user)) return 3;
         int id = ExisteixUsuari_contrasenya(username,password);
         if (id == 2) {
-            cu.modificar_usuari(username, nou_user, password);
+            cu.modificar_usuari(username, password, nou_user);
             return 2;
         }
         return id;

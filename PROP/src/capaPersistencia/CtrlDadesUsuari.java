@@ -9,8 +9,8 @@ package capaPersistencia;
  */
 public class CtrlDadesUsuari {
     
-    public static Boolean modificar_usuari(String username,String nou_user, String password) {
-        return DadesUsuari.modificar_username(username,nou_user,password);
+    public static Boolean modificar_usuari(String username,String password, String nou_user) {
+        return DadesUsuari.modificar_username(username,password,nou_user);
     }
     
     public static Boolean modificar_password(String username, String password, String new_password) {

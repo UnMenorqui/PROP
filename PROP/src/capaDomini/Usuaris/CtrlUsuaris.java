@@ -36,7 +36,7 @@ public class CtrlUsuaris {
         if (ExisteixUsuari(nou_user)) return 3;
         int id = ExisteixUsuari_contrasenya(username,password);
         if (id == 2) {
-            du.modificar_usuari(username, nou_user, password);
+            du.modificar_usuari(username, password, nou_user);
             return 2;
         }
         return id;

@@ -156,7 +156,7 @@ public class DadesUsuari {
         return false;
       }
 
-    public static boolean modificar_username(String username, String nou_user, String password) {
+    public static boolean modificar_username(String username, String password, String nou_user) {
           //Es sap que l'usuari existeix a la BD i que el nou nom de l'usuari no està a la BD.
           borrarUsuari(username,password);
           GuardarUsuari(nou_user,password);
