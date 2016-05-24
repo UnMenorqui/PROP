@@ -121,48 +121,22 @@ public class DriverPerfil {
                     if (G.existeixnode(nom,"Conferencia")) tipus = "Conferencia";
                     else if (G.existeixnode(nom,"Autor")) tipus = "Autor";
                     else if (G.existeixnode(nom, "Terme")) tipus = "Terme";
-                    else if (G.existeixnode(nom, "Articles")) tipus = "Article";
+                    else if (G.existeixnode(nom, "Article")) tipus = "Article";
                     switch(tipus) {
                         case "Autor":
-                            System.out.println("Introdueix la quantitat de conferencies:");
-                            q_conferencies = sc.nextInt();
-                            System.out.println("Introdueix la quantitat de termes:");
-                            q_termes = sc.nextInt();
-                            System.out.println("Introdueix la quantitat d'articles:");
-                            q_articles = sc.nextInt();
-                            System.out.println("Introdueix la quantitat de co-autors:");
-                            q_autors = sc.nextInt();
-                            ctrl.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies, G, usuaris);
+                            ctrl.crear_perfil_autor(nom, 3, 3, 3, 3, G, usuaris);
                             break;
                         
                         case "Conferencia":
-                            System.out.println("Introdueix la quantitat d'autors:");
-                            q_autors = sc.nextInt();
-                            System.out.println("Introdueix la quantitat de termes:");
-                            q_termes = sc.nextInt();
-                            System.out.println("Introdueix la quantitat d'articles:");
-                            q_articles = sc.nextInt();
-                            ctrl.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes, G, usuaris);
+                            ctrl.crear_perfil_conferencia(nom, 3, 3, 3, G, usuaris);
                             break;
                             
                         case "Article":
-                            System.out.println("Introdueix la quantitat de conferencies:");
-                            q_conferencies = sc.nextInt();
-                            System.out.println("Introdueix la quantitat d'autors:");
-                            q_autors = sc.nextInt();
-                            System.out.println("Introdueix la quantitat de termes:");
-                            q_termes = sc.nextInt();
-                            ctrl.crear_perfil_article(nom, q_autors, q_termes, q_conferencies, G, usuaris);
+                            ctrl.crear_perfil_article(nom, 3, 3, 3, G, usuaris);
                             break;
                             
                         case "Terme":
-                            System.out.println("Introdueix la quantitat de conferencies:");
-                            q_conferencies = sc.nextInt();
-                            System.out.println("Introdueix la quantitat de articles:");
-                            q_articles = sc.nextInt();
-                            System.out.println("Introdueix la quantitat d'autors:");
-                            q_autors = sc.nextInt();
-                            ctrl.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies, G, usuaris);
+                            ctrl.crear_perfil_terme(nom, 3, 3, 3, G, usuaris);
                             break;
                             
                         default:

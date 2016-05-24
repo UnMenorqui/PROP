@@ -12,8 +12,29 @@ import java.util.ArrayList;
 
 public class CtrlBaseDades {
     
-    public void load(ArrayList<Node> paper, ArrayList<Node> autor, ArrayList<Node> terme, ArrayList<Node> conf, ArrayList<Aresta> pc, ArrayList<Aresta> pa, ArrayList<Aresta> pt) {
-        BaseDades.load(paper, autor, terme, conf, pc, pa, pt);
+    public void load_autor(ArrayList<Integer> id, ArrayList<String> noms) {
+        BaseDades.load_autor(id,noms);
+    }
+    public void load_conf(ArrayList<Integer> id, ArrayList<String> noms) {
+        BaseDades.load_conf(id,noms);
+    }
+    public void load_paper(ArrayList<Integer> id, ArrayList<String> noms) {
+        BaseDades.load_paper(id,noms);
+    }
+    public void load_terme(ArrayList<Integer> id, ArrayList<String> noms) {
+        BaseDades.load_terme(id,noms);
+    }
+    
+    public void load_pa(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        BaseDades.load_pa(id,id1);
+    }
+    
+    public void load_pc(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        BaseDades.load_pc(id,id1);
+    }
+    
+    public void load_pt(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        BaseDades.load_pt(id,id1);
     }
     
     public void saveAutor(ArrayList<Node> autor) {

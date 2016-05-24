@@ -12,72 +12,65 @@ public class BaseDades  {
     
     }
     
-    private static void loadPaper(ArrayList<Node> paper) {
-        readFile("paper.txt", paper, "Paper");
+    protected static void load_paper(ArrayList<Integer> id, ArrayList<String> noms) {
+        readFile("paper.txt", id, noms, "Paper");
     }
 
-    private static void loadAuthor(ArrayList<Node> autor) {
-        readFile("author.txt", autor,"Author");
+    protected static void load_autor(ArrayList<Integer> id, ArrayList<String> noms) {
+        readFile("author.txt", id, noms,"Autor");
     }
 
-    private static void loadTerm(ArrayList<Node> terme) {
-        readFile("term.txt", terme,"Term");
-    }
-
-    private static void loadConference(ArrayList<Node> conf) {
-        readFile("conf.txt", conf,"Conf");
+    protected static void load_conf(ArrayList<Integer> id, ArrayList<String> noms) {
+        readFile("conf.txt", id, noms, "Conferencia");
     }
     
-    private static void loadArestaPaperConference(ArrayList<Aresta> pc) {
-        readFileAresta("paper_conf.txt", pc);
+    protected static void load_terme(ArrayList<Integer> id, ArrayList<String> noms) {
+        readFile("term.txt", id, noms,"Terme");
+    }
+    
+    protected static void load_pc(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        readFileAresta("paper_conf.txt", id, id1);
     }
 
-    private static void loadArestaPaperAuthor(ArrayList<Aresta> pa) {
-        readFileAresta("paper_author.txt", pa);
+    protected static void load_pa(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        readFileAresta("paper_author.txt", id, id1);
     }
 
-    private static void loadArestaPaperTerm(ArrayList<Aresta> pt) {
-        readFileAresta("paper_term.txt", pt);
+    protected static void load_pt(ArrayList<Integer> id, ArrayList<Integer> id1) {
+        readFileAresta("paper_term.txt", id, id1);
     }
 
-    private static void readFile(String r, ArrayList<Node> aL, String tipo) {
+    private static void readFile(String r, ArrayList<Integer> id, ArrayList<String> noms, String tipo) {
         //llegeix els fitxers dels nodes
         try {
             FileReader file = new FileReader(r);
             BufferedReader reader = new BufferedReader(file);
             
-            int id = 0;
-            String nom = "";
             String linea = "";
-            
             while ((linea = reader.readLine()) != null) {
                 int i = 0;
                 while (linea.charAt(i) != '\t') ++i;
-                id = Integer.parseInt(linea.substring(0,i));
-                nom = linea.substring(i+1,linea.length());
-                aL.add(new Node(id,nom,tipo));
+                id.add(Integer.parseInt(linea.substring(0,i)));
+                noms.add(linea.substring(i+1,linea.length()));
+                
             }
         }
         catch (FileNotFoundException e) {} 
         catch (IOException e) {}
     }       
     
-    private static void readFileAresta(String r, ArrayList<Aresta> aL) {
+    private static void readFileAresta(String r, ArrayList<Integer> id, ArrayList<Integer> id1) {
         //Llegeix un fitxer de relacions de l'enunciat
         try {
             FileReader file = new FileReader(r);
             BufferedReader reader = new BufferedReader(file);
             
-            int id1 = 0;
-            int id2 = 0;
-
             String line = reader.readLine();
             while (line != null) {
                 int i = 0;
                 while (line.charAt(i) != '\t') i++;
-                id1 =  Integer.parseInt(line.substring(0, i));
-                id2 = Integer.parseInt(line.substring(i+1,line.length()));
-                aL.add(new Aresta(id1,id2));
+                id.add(Integer.parseInt(line.substring(0, i)));
+                id1.add(Integer.parseInt(line.substring(i+1,line.length())));
                 line = reader.readLine();
             }
         }
@@ -161,16 +154,6 @@ public class BaseDades  {
                   } 
             }catch (Exception e2){}
       }
-    }
-    
-    protected static void load(ArrayList<Node> paper, ArrayList<Node> autor, ArrayList<Node> terme, ArrayList<Node> conf, ArrayList<Aresta> pc, ArrayList<Aresta> pa, ArrayList<Aresta> pt){
-        loadAuthor(autor);
-        loadConference(conf);
-        loadPaper(paper);
-        loadTerm(terme);
-        loadArestaPaperConference(pc);
-        loadArestaPaperAuthor(pa);
-        loadArestaPaperTerm(pt);
     }
     
     protected static void saveAutor(ArrayList<Node> autor) {

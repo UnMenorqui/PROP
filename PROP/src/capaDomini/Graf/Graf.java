@@ -5,7 +5,6 @@
  */
 
 package capaDomini.Graf;
-import capaPersistencia.BD.BaseDades;
 import java.util.*;
 
 
@@ -53,9 +52,14 @@ public class Graf {
     private Boolean ptactualitzat = false;
     private Boolean pcactualitzat = false;
     
+    public ArrayList<Integer> id;
     
-    public Graf() {
-       cg = new CtrlGraf();
+    public ArrayList<String> noms;
+    
+    public ArrayList<Integer> id1;
+    
+    
+    public Graf(CtrlGraf cg) {
        paper = new ArrayList<>();
        autor = new ArrayList<>();
        conf = new ArrayList<>();
@@ -63,43 +67,72 @@ public class Graf {
        pc = new ArrayList<>();
        pa = new ArrayList<>();
        pt = new ArrayList<>();
+       id = new ArrayList<>();
+       id1 = new ArrayList<>();
+       noms = new ArrayList<>();
        maxAutor = maxConf = maxTerme = maxArticle = 0;
-       cg.load(paper,autor,terme,conf,pc,pa,pt);
-       for (int i=0; i<autor.size(); ++i) {
-           if (autor.get(i).getId() > maxAutor) maxAutor = autor.get(i).getId();
+       cg.load_autor(id,noms);
+       for (int i = 0; i < id.size(); ++i) {
+           autor.add(new Node(id.get(i),noms.get(i),"Autor"));
+           if (id.get(i) > maxAutor) maxAutor = id.get(i);
        }
-       for (int i=0; i<paper.size(); ++i) {
-           if (paper.get(i).getId() > maxArticle) maxArticle = paper.get(i).getId();
+       id.clear();
+       noms.clear();
+       cg.load_conf(id,noms);
+       for (int i = 0; i < id.size(); ++i) {
+           conf.add(new Node(id.get(i),noms.get(i),"Conferencia"));
+           if (id.get(i) > maxConf) maxConf = id.get(i);
        }
-       for (int i=0; i<terme.size(); ++i) {
-           if (terme.get(i).getId() > maxTerme) maxTerme = terme.get(i).getId();
+       id.clear();
+       noms.clear();
+       cg.load_paper(id,noms);
+       for (int i = 0; i < id.size(); ++i) {
+           paper.add(new Node(id.get(i),noms.get(i),"Article"));
+           if (id.get(i) > maxArticle) maxArticle = id.get(i);
        }
-       for (int i=0; i<conf.size(); ++i) {
-           if (conf.get(i).getId() > maxConf) maxConf = conf.get(i).getId();
+       id.clear();
+       noms.clear();
+       cg.load_terme(id,noms);
+       for (int i = 0; i < id.size(); ++i) {
+           terme.add(new Node(id.get(i),noms.get(i),"Terme"));
+           if (id.get(i) > maxTerme) maxTerme = id.get(i);
        }
-       for (int i=0; i<pc.size(); ++i) {
-           int node1 = pc.get(i).getNode1();
-           int node2 = pc.get(i).getNode2();
-           int id = getidArrayint(node1,"Article");
-           int id2 = getidArrayint(node2,"Conferencia");
-           paper.get(id).afegirnodeadjacent(node2,"Conferencia");
-           conf.get(id2).afegirnodeadjacent(node1,"Article");
+       int id2,id3,node1,node2;
+       id.clear();
+       id1.clear();
+       cg.load_pc(id,id1);
+       for (int i = 0; i < id.size(); ++i) {
+           pc.add(new Aresta(id.get(i),id1.get(i)));
+           node1 = id.get(i);
+           node2 = id1.get(i);
+           id2 = getidArrayint(node1,"Article");
+           id3 = getidArrayint(node2, "Conferencia");
+           paper.get(id2).afegirnodeadjacent(node2,"Conferencia");
+           conf.get(id3).afegirnodeadjacent(node1,"Article");
        }
-       for (int i=0; i<pa.size(); ++i) {
-           int node1 = pa.get(i).getNode1();
-           int node2 = pa.get(i).getNode2();
-           int id = getidArrayint(node1,"Article");
-           int id2 = getidArrayint(node2,"Autor");
-           paper.get(id).afegirnodeadjacent(node2,"Autor");
-           autor.get(id2).afegirnodeadjacent(node1,"Article");
+       id.clear();
+       id1.clear();
+       cg.load_pa(id,id1);
+       for (int i = 0; i < id.size(); ++i) {
+           pa.add(new Aresta(id.get(i),id1.get(i)));
+           node1 = id.get(i);
+           node2 = id1.get(i);
+           id2 = getidArrayint(node1,"Article");
+           id3 = getidArrayint(node2, "Autor");
+           paper.get(id2).afegirnodeadjacent(node2,"Autor");
+           autor.get(id3).afegirnodeadjacent(node1,"Article");
        }
-       for (int i=0; i<pt.size(); ++i) {
-           int node1 = pt.get(i).getNode1();
-           int node2 = pt.get(i).getNode2();
-           int id = getidArrayint(node1,"Article");
-           int id2 = getidArrayint(node2,"Terme");
-           paper.get(id).afegirnodeadjacent(node2,"Terme");
-           terme.get(id2).afegirnodeadjacent(node1,"Article");
+       id.clear();
+       id1.clear();
+       cg.load_pt(id,id1);
+       for (int i = 0; i < id.size(); ++i) {
+           pt.add(new Aresta(id.get(i),id1.get(i)));
+           node1 = id.get(i);
+           node2 = id1.get(i);
+           id2 = getidArrayint(node1,"Article");
+           id3 = getidArrayint(node2, "Terme");
+           paper.get(id2).afegirnodeadjacent(node2,"Terme");
+           terme.get(id3).afegirnodeadjacent(node1,"Article");
        }
        pagerank();
     };
@@ -400,6 +433,32 @@ public class Graf {
         return 1;
     }
     
+    public Boolean existeixnode(String nom, String tipus) {
+        switch(tipus) {
+            case "Autor":
+                for (int i=0; i<autor.size(); ++i) {
+                    if (autor.get(i).getNom().equals(nom)) return true;
+                }
+                break;
+            case "Article":
+                for (int i=0; i<paper.size(); ++i) {
+                    if (paper.get(i).getNom().equals(nom)) return true;
+                }
+                break;
+            case "Conferencia":
+                for (int i=0; i<conf.size(); ++i) {
+                    if (conf.get(i).getNom().equals(nom)) return true;
+                }
+                break;
+            case "Terme":
+                for (int i=0; i<terme.size(); ++i) {
+                    if (terme.get(i).getNom().equals(nom)) return true;
+                }
+                break;
+        }
+        return false;
+    }
+    
     public double getValorNode(int id, String nom) {
         String tipus = getTipusNode(id,nom);
         double valor = 0;
@@ -583,6 +642,7 @@ public class Graf {
                 }
                 break;
             case "Terme":
+                    
                 acabat = false;
                 for (int i=0; i<terme.size() && !acabat; ++i) {
                     if (terme.get(i).getId() == id) {
@@ -665,28 +725,6 @@ public class Graf {
                 return terme.get(id);
         }
         return null;
-    }
-    
-    public Boolean existeixnode(String nom, String tipus) {
-        switch(tipus) {
-            case "Autor":
-                for (int i=0; i<autor.size(); ++i) {
-                    if (autor.get(i).getNom().equals(nom)) return true;
-                }
-            case "Article":
-                for (int i=0; i<paper.size(); ++i) {
-                    if (paper.get(i).getNom().equals(nom)) return true;
-                }
-            case "Conferencia":
-                for (int i=0; i<conf.size(); ++i) {
-                    if (conf.get(i).getNom().equals(nom)) return true;
-                }
-            case "Terme":
-                for (int i=0; i<terme.size(); ++i) {
-                    if (terme.get(i).getNom().equals(nom)) return true;
-                }
-        }
-        return false;
     }
     
     public Boolean getActualitzar() {
