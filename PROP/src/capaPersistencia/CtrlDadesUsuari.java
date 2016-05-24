@@ -17,19 +17,25 @@ public class CtrlDadesUsuari {
         return DadesUsuari.modificar_password(username, password, new_password);
     }
     
-    public Boolean ExisteixUsuari_contrasenya(String username, String password) {
+    public int ExisteixUsuari_contrasenya(String username, String password) {
         return DadesUsuari.ExisteixUsuari_contrasenya(username,password);
     }
     
     public Boolean ExisteixUsuari(String username) {
         return DadesUsuari.ExisteixUsuari(username);
     }
-    public Boolean borrarlinea(String username, String password) {
-        return DadesUsuari.borrarlinea(username, password);
+    
+    public Boolean borrarUsuari(String username, String password) {
+        return DadesUsuari.borrarUsuari(username, password);
     }
+    public void borrarUsuariAdmin(String username) {
+        DadesUsuari.borrarUsuariAdmin(username);
+    }
+    
     public void GuardarUsuari(String username, String password) {
         DadesUsuari.GuardarUsuari(username, password);
     }
+    
     public void consultaUsuarisBD() {
         DadesUsuari.consultaUsuarisBD();
     }

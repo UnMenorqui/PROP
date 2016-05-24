@@ -79,7 +79,7 @@ public class DadesUsuari {
         return null;
     }
     
-    public static Boolean ExisteixUsuari_contrasenya(String username, String password) {
+    public static int ExisteixUsuari_contrasenya(String username, String password) {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -100,8 +100,9 @@ public class DadesUsuari {
                 if (username.equals(aux)) {
                     i = i+2;
                     aux = linea.substring(i,linea.length());
-                    if (password.equals(aux)) return true;
-                }
+                    if (password.equals(aux)) return 2;     //User/Contrasenya existeix
+                    else return 1;                          //Contrasenya incorrecta
+                }                           
             }
         }
         catch(Exception e){}
@@ -116,7 +117,7 @@ public class DadesUsuari {
             }
             catch (Exception e2){}
         }
-        return false;
+        return 0;       //No existeix usuari
     }
     
     public static Boolean ExisteixUsuari(String username) {
@@ -157,19 +158,19 @@ public class DadesUsuari {
 
     public static boolean modificar_username(String username, String nou_user, String password) {
           //Es sap que l'usuari existeix a la BD i que el nou nom de l'usuari no està a la BD.
-          borrarlinea(username,password);
+          borrarUsuari(username,password);
           GuardarUsuari(nou_user,password);
           return true;
       }
 
     public static boolean modificar_password(String username,String password, String new_password) {
           //Es sap que l'usuari existeix a la BD
-          borrarlinea(username,password);
+          borrarUsuari(username,password);
           GuardarUsuari(username,new_password);
           return true;
       }
 
-    public static boolean borrarlinea(String user, String pass) {
+    public static boolean borrarUsuari(String user, String pass) {
         BufferedReader br = null;
         PrintWriter pw = null;
         try {
@@ -220,6 +221,11 @@ public class DadesUsuari {
           }
           return true;
     } 
+    
+    public static void borrarUsuariAdmin(String user) {
+        String pass = consultar_password(user);
+        borrarUsuari(user,pass);
+    }
     
     public static void consultaUsuarisBD() {
         File archivo = null;

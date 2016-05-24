@@ -15,6 +15,7 @@ import java.util.*;
  */
 
 public class Graf {
+    CtrlGraf cg;
     
     //arraylist amb els nodes autor del graf
     protected ArrayList<Node> autor;
@@ -44,9 +45,17 @@ public class Graf {
     private int maxTerme;
     private int maxArticle;
     
+    private Boolean autoractualitzat = false;
+    private Boolean termeactualitzat = false;
+    private Boolean articleactualitzat = false;
+    private Boolean confactualitzat = false;
+    private Boolean paactualitzat = false;
+    private Boolean ptactualitzat = false;
+    private Boolean pcactualitzat = false;
+    
     
     public Graf() {
-       BaseDades bd = new BaseDades();
+       cg = new CtrlGraf();
        paper = new ArrayList<>();
        autor = new ArrayList<>();
        conf = new ArrayList<>();
@@ -55,7 +64,7 @@ public class Graf {
        pa = new ArrayList<>();
        pt = new ArrayList<>();
        maxAutor = maxConf = maxTerme = maxArticle = 0;
-       bd.load(paper,autor,terme,conf,pc,pa,pt);
+       cg.load(paper,autor,terme,conf,pc,pa,pt);
        for (int i=0; i<autor.size(); ++i) {
            if (autor.get(i).getId() > maxAutor) maxAutor = autor.get(i).getId();
        }
@@ -95,95 +104,103 @@ public class Graf {
        pagerank();
     };
 
-    public boolean afegirAresta(String nom1, String nom2, String tipus) {
+    public int afegirAresta(String nom1, String nom2, String tipus) {
         int id = getidArrayString(nom1,"Article");
         int id1 = getidArrayString(nom2,tipus);
-        if (id == 0) return true;
-        if (id1 == 0) return true;
+        if (id == -1) return 0;
+        if (id1 == -1) return 1;
         int Node1 = GetIDnode(id,"Article");
         int Node2 = GetIDnode(id1,tipus);
         Boolean existeix = false;
-        Aresta a;
         switch (tipus) {
             case "Autor":
-                for (int i=0; i<pa.size(); ++i) {
-                    if (pa.get(i).getNode1() == Node1) {
-                        if (pa.get(i).getNode2() == Node2) {
-                            existeix = true;
-                        }
-                    }
+                if (!existeixAresta(id,Node2,tipus)) {
+                    pa.add(new Aresta(Node1,Node2));
+                    existeix = true;
+                    paactualitzat = true;
                 }
-                if (!existeix) {
-                    a = new Aresta(Node1,Node2);
-                    pa.add(a);
-                }
+                else return 2;
                 break;
             case "Terme":
-                for (int i=0; i<pt.size(); ++i) {
-                    if (pt.get(i).getNode1() == Node1) {
-                        if (pt.get(i).getNode2() == Node2) {
-                            existeix = true;
-                        }
-                    }
+                if (!existeixAresta(id,Node2,tipus)) {
+                    pt.add(new Aresta(Node1,Node2));
+                    existeix = true;
+                    ptactualitzat = true;
                 }
-                if (!existeix) {
-                    a = new Aresta(Node1,Node2);
-                    pt.add(a);
-                }
+                else return 2;
                 break;
             case "Conferencia":
-                for (int i=0; i<pc.size(); ++i) {
-                    if (pc.get(i).getNode1() == Node1) {
-                        if (pc.get(i).getNode2() == Node2) {
-                            existeix = true;
-                        }
-                    }
+                if (!existeixAresta(id,Node2,tipus)) {
+                    pt.add(new Aresta(Node1,Node2));
+                    existeix = true;
+                    pcactualitzat = true;
                 }
-                if (!existeix) {
-                    a = new Aresta(Node1,Node2);
-                    pc.add(a);
-                }
+                else return 2;
                 break;
                 
         }
-        if (!existeix) actualitzar = true;
-        return existeix;
+        if (existeix) actualitzar = true;
+        return 3;
     }
     
-    public boolean eliminarAresta(String nom1, String nom2, String tipus) {
+    public int eliminarAresta(String nom1, String nom2, String tipus) {
         int id, id1, node1, node2;
         id = getidArrayString(nom1,"Article");
         id1 = getidArrayString(nom2,tipus);
-        if (id == -1) return true;
-        if (id1 == -1) return true;
+        if (id == -1) return 0;
+        if (id1 == -1) return 1;
         node1 = GetIDnode(id,"Article");
         node2 = GetIDnode(id1,tipus);
-        Boolean existeix = true;
-        Boolean primer,segon;
+        Boolean existeix = false;
+        Boolean primer, segon;
         switch (tipus) {
             case "Autor":
                 for (int i=0; i<pa.size(); ++i) {
                     if (pa.get(i).getNode1() == node1) {
                         if (pa.get(i).getNode2() == node2) {
                             pa.remove(i);
-                            existeix = false;
+                            existeix = true;
+                            paactualitzat = true;
                         }
                     }
                 }
-                primer = false;
-                segon  = false;
-                if (!existeix) {
-                    for (int i=0; i<pa.size(); ++i) {
-                        if (pa.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
+                if (existeix) {
+                    //Busca si el node2(autor) te alguna altra aresta, si no es
+                    //el cas, borra el node2
+                    segon = false;
+                    for (int i=0; i<pa.size() && !segon; ++i) {
                         if (pa.get(i).getNode2() == node2) {
                             segon = true;
                         }
                     }
-                    if (!primer) eliminarNode(getNomNode(id,"Article"),"Article");
-                    if (!segon) eliminarNode(getNomNode(id,"Autor"),"Autor");
-                } 
+                    if (!segon) {
+                        eliminarNode(getNomNode(id1,"Autor"),"Autor");
+                        autoractualitzat = true;
+                    }
+                    //Busca si el node1(article) te alguna altra aresta, si no es
+                    //el cas, borra el node1
+                    primer = false;
+                    for (int i=0; i<pa.size() && !primer; ++i) {
+                        if (pa.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                    }
+                    for (int i=0; i<pc.size() && !primer; ++i) {
+                        if (pc.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                    }
+                    for (int i=0; i<pt.size() && !primer; ++i) {
+                        if (pt.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                    }
+                    if (!primer)  {
+                        eliminarNode(getNomNode(id,"Article"),"Article");
+                        articleactualitzat = true;
+                    }
+                }
+                else return 2;
                 break;
 
             case "Conferencia":
@@ -191,24 +208,47 @@ public class Graf {
                     if (pc.get(i).getNode1() == node1) {
                         if (pc.get(i).getNode2() == node2) {
                             pc.remove(i);
-                            existeix = false;
+                            existeix = true;
                         }
                     }
                 }
-                primer = false;
-                segon  = false;
-                if (!existeix) {
-                    for (int i=0; i<pc.size(); ++i) {
-                        if (pc.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
+                if (existeix) {
+                    //Busca si el node2(conferencia) te alguna altra aresta, si no es
+                    //el cas, borra el node2
+                    segon = false;
+                    for (int i=0; i<pc.size() && !segon; ++i) {
                         if (pc.get(i).getNode2() == node2) {
                             segon = true;
                         }
                     }
-                    if (!primer) eliminarNode(getNomNode(id,"Article"),"Article");
-                    if (!segon) eliminarNode(getNomNode(id,"Conferencia"),"Conferencia");
+                    if (!segon) {
+                        eliminarNode(getNomNode(id1,"Conferencia"),"Conferencia");
+                        confactualitzat = true;
+                    }
+                    //Busca si el node1(article) te alguna altra aresta, si no es
+                    //el cas, borra el node1
+                    primer = false;
+                    for (int i=0; i<pa.size() && !primer; ++i) {
+                        if (pa.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                    }
+                    for (int i=0; i<pc.size() && !primer; ++i) {
+                        if (pc.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                    }
+                    for (int i=0; i<pt.size() && !primer; ++i) {
+                        if (pt.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                    }
+                    if (!primer) {
+                        eliminarNode(getNomNode(id,"Article"),"Article");
+                        articleactualitzat = true;
+                    }
                 }
+                else return 2;
                 break;
 
             case "Terme":
@@ -216,126 +256,148 @@ public class Graf {
                     if (pt.get(i).getNode1() == node1) {
                         if (pt.get(i).getNode2() == node2) {
                             pt.remove(i);
-                            existeix = false;
+                            existeix = true;
+                            ptactualitzat = true;
                         }
                     }
                 }
-                primer = false;
-                segon  = false;
-                if (!existeix) {
-                    for (int i=0; i<pt.size(); ++i) {
-                        if (pt.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
+                if (existeix) {
+                    //Busca si el node2(terme) te alguna altra aresta, si no es
+                    //el cas, borra el node2
+                    segon = false;
+                    for (int i=0; i<pt.size() && !segon; ++i) {
                         if (pt.get(i).getNode2() == node2) {
                             segon = true;
                         }
                     }
-                    if (!primer) eliminarNode(getNomNode(id,"Article"),"Article");
-                    if (!segon) eliminarNode(getNomNode(id,"Terme"),"Terme");
+                    if (!segon) {
+                        eliminarNode(getNomNode(id1,"Terme"),"Terme");
+                        termeactualitzat = true;
+                    }
+                    //Busca si el node1(article) te alguna altra aresta, si no es
+                    //el cas, borra el node1
+                    primer = false;
+                    for (int i=0; i<pa.size() && !primer; ++i) {
+                        if (pa.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                    }
+                    for (int i=0; i<pc.size() && !primer; ++i) {
+                        if (pc.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                    }
+                    for (int i=0; i<pt.size() && !primer; ++i) {
+                        if (pt.get(i).getNode1() == node1) {
+                            primer = true;
+                        }
+                    }
+                    if (!primer) {
+                        eliminarNode(getNomNode(id,"Article"),"Article");
+                        articleactualitzat = true;
+                    }
                 }
+                else return 2;
                 break;
         }
-        if (!existeix) actualitzar = true;
-        return existeix;
+        if (existeix) actualitzar = true;
+        return 3;
+    }
+    
+    public boolean existeixAresta(int id1, int node2, String tipus) {
+        Node n = getNodeIessim(id1,"Article");
+        for (int i=0; i<n.getsize();++i) {
+            if (n.nodeiessimFirst(i) == node2) return true;
+        }
+        return false;
     }
 
-    public Boolean afegirNode(String tipus,String nom) {
-        Node n;
-        Boolean existeix = false;
+    public int afegirNode(String nom,String tipus) {
+        int id;
+        id = getidArrayString(nom,tipus);
+        if (id != -1) return 0; 
         switch (tipus) {
             case "Autor":
-                for (int i=0; i<autor.size() && !existeix; ++i) {
-                    if (autor.get(i).getNom().equals(nom)) existeix = true;
-                }
-                if (!existeix) { 
-                    n = new Node(++maxAutor,nom,tipus);
-                    autor.add(n);
-                }
+                autor.add(new Node(++maxAutor,nom,tipus));
+                autoractualitzat = true;
                 break;
             case "Conferencia":
-                for (int i=0; i<conf.size() && !existeix; ++i) {
-                    if (conf.get(i).getNom().equals(nom)) existeix = true;
-                }
-                if (!existeix) {
-                    n = new Node(++maxConf,nom,tipus);
-                    conf.add(n);
-                }
+                conf.add(new Node(++maxConf,nom,tipus));
+                confactualitzat = true;
                 break;
             case "Article":
-                for (int i=0; i<paper.size() && !existeix; ++i) {
-                    if (paper.get(i).getNom().equals(nom)) existeix = true;
+                paper.add(new Node(++maxArticle,nom,tipus));
+                articleactualitzat = true;
+                break;
+            case "Terme":
+                terme.add(new Node(++maxTerme,nom,tipus));
+                termeactualitzat = true;
+                break;
+        }
+        actualitzar = true;
+        return 1;
+    }
+    
+    public int eliminarNode(String nom, String tipus) {
+        int id = getidArrayString(nom,tipus);
+        if(id == -1) return 0;
+        int node = GetIDnode(id,tipus);
+        switch (tipus) {
+            case "Autor":
+                autor.remove(id);
+                autoractualitzat = true;
+                for (int i = 0; i<pa.size(); ++i) {
+                    if (pa.get(i).getNode2() == node) {
+                        pa.remove(i);
+                        paactualitzat = true;
+                    }
+                }  
+                break;
+            case "Conferencia":
+                conf.remove(id);
+                confactualitzat = true;
+                for (int i = 0; i<pc.size(); ++i) {
+                    if (pc.get(i).getNode2() == node) {
+                        pc.remove(i);
+                        pcactualitzat = true;
+                    }
+                }   
+                break;
+            case "Article":
+                paper.remove(id);
+                articleactualitzat = true;
+                for (int i = 0; i<pa.size(); ++i) {
+                    if (pa.get(i).getNode1() == node) {
+                        pa.remove(i);
+                        paactualitzat = true;
+                    }
+                }  
+                for (int i = 0; i<pt.size(); ++i) {
+                    if (pt.get(i).getNode1() == node) {
+                        pt.remove(i);
+                        ptactualitzat = true;
+                    }
                 }
-                if (!existeix) {
-                    n = new Node(++maxArticle,nom,tipus);
-                    paper.add(n);
+                for (int i = 0; i<pc.size(); ++i) {
+                    if (pc.get(i).getNode1() == node) {
+                        pc.remove(i);
+                        pcactualitzat = true;
+                    }
                 }
                 break;
             case "Terme":
-                for (int i=0; i<terme.size() && !existeix; ++i) {
-                    if (terme.get(i).getNom().equals(nom)) existeix = true;
-                }
-                if (!existeix) {
-                    n = new Node(++maxTerme,nom,tipus);
-                    terme.add(n);
-                }
+                terme.remove(id);
+                termeactualitzat = true;
+                for (int i = 0; i<pt.size(); ++i) {
+                    if (pt.get(i).getNode2() == node) {
+                        pt.remove(i);
+                        ptactualitzat = true;
+                    }
+                }   
                 break;
         }
-        if (!existeix) actualitzar = true;
-        return existeix;
-    }
-    
-    public Boolean eliminarNode(String nom, String tipus) {
-        int id = getidArrayString(nom,tipus);
-        if (id == -1) return true;
-        else { 
-            int node = GetIDnode(id,tipus);
-            switch (tipus) {
-                case "Autor":
-                    for (int i=0; i<autor.size(); ++i) {
-                        if (autor.get(i).getId() == node)  autor.remove(i);
-                    } 
-                    for (int i = 0; i<pa.size(); ++i) {
-                        if (pa.get(i).getNode2() == node) pa.remove(i);
-                    }  
-                    break;
-                case "Conferencia":
-                    for (int i=0; i<conf.size(); ++i) {
-                        if (conf.get(i).getId() == node){
-                            conf.remove(i);
-                            System.out.println("eliminat");
-                        }
-                     }  
-                    for (int i = 0; i<pc.size(); ++i) {
-                        if (pc.get(i).getNode2() == node) pc.remove(i);
-                    }   
-                    break;
-                case "Article":
-                    for (int i=0; i<paper.size(); ++i) {
-                        if (paper.get(i).getId() == node) paper.remove(i);
-                    }  
-                    for (int i = 0; i<pa.size(); ++i) {
-                        if (pa.get(i).getNode1() == node) pa.remove(i);
-                    }  
-                    for (int i = 0; i<pt.size(); ++i) {
-                        if (pt.get(i).getNode1() == node) pt.remove(i);
-                    }
-                    for (int i = 0; i<pc.size(); ++i) {
-                        if (pc.get(i).getNode1() == node) pc.remove(i);
-                    }
-                    break;
-                case "Terme":
-                    for (int i=0; i<terme.size(); ++i) {
-                        if (terme.get(i).getId() == node) terme.remove(i);
-                    }
-                    for (int i = 0; i<pt.size(); ++i) {
-                        if (pt.get(i).getNode2() == node) pt.remove(i);
-                    }   
-                    break;
-            }
-            actualitzar = true;
-            return false;
-        }
+        actualitzar = true;
+        return 1;
     }
     
     public double getValorNode(int id, String nom) {
@@ -490,7 +552,7 @@ public class Graf {
     }
     
     public int getidArrayint(int id, String tipus) {
-        int idArray = 0;
+        int idArray = -1;
         Boolean acabat = false;
         switch (tipus) {
             case "Article":
@@ -632,7 +694,12 @@ public class Graf {
     }
     
     public void actualitzar() {
-        BaseDades bd1 = new BaseDades();
-        bd1.save(autor,conf,paper,terme,pa,pc,pt);
+        if (autoractualitzat) cg.saveAutor(autor);
+        if (confactualitzat) cg.saveConf(conf);
+        if (termeactualitzat) cg.saveTerme(terme);
+        if (articleactualitzat) cg.saveArticle(paper);
+        if (paactualitzat) cg.savepa(pa);
+        if (ptactualitzat) cg.savept(pt);
+        if (pcactualitzat) cg.savepc(pc);
     }
 }

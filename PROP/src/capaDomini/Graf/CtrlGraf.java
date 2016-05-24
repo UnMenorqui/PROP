@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package capaDomini.Graf;
+import capaPersistencia.BD.CtrlBaseDades;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,6 +14,8 @@ package capaDomini.Graf;
 
 public class CtrlGraf {
     private Graf SG = new Graf();
+    
+    CtrlBaseDades ctrl = new CtrlBaseDades();
     
     public int getidArrayString(String nom,String tipus) {
         return SG.getidArrayString(nom, tipus);
@@ -41,19 +45,19 @@ public class CtrlGraf {
         return SG.existeixnode(nom, tipus);
     }
     
-    public boolean afegirNode(String tipus,String nom) {
+    public int afegirNode(String tipus,String nom) {
         return SG.afegirNode(tipus, nom);
     }
     
-    public boolean eliminarNode(String nomNode, String tipus) {
+    public int eliminarNode(String nomNode, String tipus) {
         return SG.eliminarNode(nomNode, tipus);
     }
     
-    public boolean eliminarAresta(String nom1, String nom2, String tipus) {
+    public int eliminarAresta(String nom1, String nom2, String tipus) {
         return SG.eliminarAresta(nom1, nom2, tipus);
     }
     
-    public boolean afegirAresta(String nom1, String nom2, String tipus) {
+    public int afegirAresta(String nom1, String nom2, String tipus) {
         return SG.afegirAresta(nom1, nom2, tipus);
     }
     
@@ -63,5 +67,37 @@ public class CtrlGraf {
     
     public void actualitzar() {
         SG.actualitzar();
+    }
+    
+    public void load(ArrayList<Node> paper, ArrayList<Node> autor, ArrayList<Node> terme, ArrayList<Node> conf, ArrayList<Aresta> pc, ArrayList<Aresta> pa, ArrayList<Aresta> pt) {
+        ctrl.load(paper, autor, terme, conf, pc, pa, pt);
+    }
+    
+    public void saveAutor(ArrayList<Node> Autor) {
+        ctrl.saveAutor(Autor);
+    }
+    
+    public void saveConf(ArrayList<Node> conf) {
+        ctrl.saveConf(conf);
+    }
+    
+    public void saveTerme(ArrayList<Node> terme) {
+        ctrl.saveTerme(terme);
+    }
+    
+    public void saveArticle(ArrayList<Node> article) {
+        ctrl.saveArticle(article);
+    }
+    
+    public void savepa(ArrayList<Aresta> pa) {
+        ctrl.savepa(pa);
+    }
+    
+    public void savept(ArrayList<Aresta> pt) {
+        ctrl.savept(pt);
+    }
+    
+    public void savepc(ArrayList<Aresta> pc) {
+        ctrl.savepc(pc);
     }
 }
