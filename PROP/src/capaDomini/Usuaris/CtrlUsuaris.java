@@ -37,10 +37,8 @@ public class CtrlUsuaris {
         return id;
     }
     
-    public int modificar_password(String username, String password, String new_password) {
-        int id = ExisteixUsuari_contrasenya(username, password);
-        if (id == 2) du.modificar_password(username, password, new_password);
-        return id;
+    public void modificar_password(String username, String password, String new_password) {
+        du.modificar_password(username, password, new_password);
     }
 
     public int ExisteixUsuari_contrasenya(String username, String password) {
@@ -91,20 +89,20 @@ public class CtrlUsuaris {
         hist.esborrar(n);
     }
     
-    public void afegirNode(String tipus,String nom, CtrlGraf CG) {
-        CG.afegirNode(tipus, nom);
+    public int afegirNode(String tipus,String nom, CtrlGraf CG) {
+        return CG.afegirNode(tipus, nom);
     }
     
     
-    public void eliminarNode(String nomNode, String tipus, CtrlGraf CG) {
-        CG.eliminarNode(nomNode,tipus);
+    public int eliminarNode(String nomNode, String tipus, CtrlGraf CG) {
+        return CG.eliminarNode(nomNode,tipus);
     }
     
-    public void eliminarAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
-        CG.eliminarAresta(nom1, nom2, tipus);
+    public int eliminarAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
+        return CG.eliminarAresta(nom1, nom2, tipus);
     }
     
-    public void afegirAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
-        CG.afegirAresta(nom1, nom2, tipus);
+    public int afegirAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
+        return CG.afegirAresta(nom1, nom2, tipus);
     }
 }

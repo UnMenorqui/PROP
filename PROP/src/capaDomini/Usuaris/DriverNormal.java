@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package capaDomini.Usuaris;
-
 import capaDomini.Graf.CtrlGraf;
-import capaDomini.Perfils.DriverPerfil;
 import java.util.Scanner;
 
 /**
@@ -16,8 +14,6 @@ import java.util.Scanner;
 public class DriverNormal {
     public void main(String user, String pass, CtrlGraf G) {
         Boolean bool = false;
-        CtrlUsuaris ctrlusuaris = new CtrlUsuaris();
-        DriverPerfil ctrl = new DriverPerfil();
         String user1, pass1;
         Scanner sc = new Scanner(System.in);
         System.out.println("Login correcte.");
@@ -42,7 +38,7 @@ public class DriverNormal {
                 case 3:
                     System.out.println("Entra el nou nom d'usuari:");
                     user1 = sc.next();
-                    id = ctrlusuaris.modificar_usuari(user, pass, user1);
+                    id = usr.modifica_user(user1);
                     if (id == 3) System.out.println("El nou nom d'usuari ja EXISTEIX");
                     else if (id == 2) {
                         usr.modifica_user(user1);
@@ -52,15 +48,14 @@ public class DriverNormal {
                 case 4:
                     System.out.println("Entra la nova contrasenya:");
                     pass1 = sc.next();
-                    id = ctrlusuaris.modificar_password(user, pass, pass1);
                     usr.modifica_pass(pass1);
                     System.out.println("Contrasenya modificada correctament");
                     break;
                 case 5:
-                    ctrl.main(G,true);
+                    usr.consulta(G);
                     break;
                 case 6:
-                    ctrlusuaris.consultar(G);
+                    usr.consultar_historial(G);
                     break;
                 default:
                     bool = true;

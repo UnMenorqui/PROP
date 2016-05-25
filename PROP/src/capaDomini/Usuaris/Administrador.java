@@ -35,23 +35,23 @@ public class Administrador extends UsuariNormal {
         return pass;
     }
     
-    public void borra_user(String usuari) {
-        ctrl.borrarUsuariAdmin(usuari);
+    public int borra_user(String usuari) {
+        return ctrl.borrarUsuariAdmin(usuari);
     }
     
-    public void afegir_node(String tipus,String nom, CtrlGraf CG) {
-        ctrl.afegirNode(tipus, nom, CG);
+    public int afegir_node(String tipus,String nom, CtrlGraf CG) {
+        return ctrl.afegirNode(tipus, nom, CG);
     }
     
-    public void eliminar_node(String nomNode, String tipus, CtrlGraf CG) {
-        ctrl.eliminarNode(nomNode, tipus, CG);
+    public int eliminar_node(String nomNode, String tipus, CtrlGraf CG) {
+        return ctrl.eliminarNode(nomNode, tipus, CG);
     }
     
-    public void afegirAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
-        ctrl.afegirAresta(nom1, nom2, tipus, CG);
+    public int afegir_aresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
+        return ctrl.afegirAresta(nom1, nom2, tipus, CG);
     }
     
-    public void eliminarAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
-        ctrl.eliminarAresta(nom1, nom2, tipus, CG);
+    public int eliminar_aresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
+        return ctrl.eliminarAresta(nom1, nom2, tipus, CG);
     }
 }

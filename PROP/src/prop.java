@@ -1,11 +1,8 @@
 import capaDomini.Graf.CtrlGraf;
-import capaDomini.Usuaris.Administrador;
-import capaDomini.Usuaris.DriverConvidat;
 import capaDomini.Usuaris.DriverNormal;
 import capaDomini.Usuaris.CtrlUsuaris;
 import capaDomini.Usuaris.DriverAdministrador;
 import capaDomini.Usuaris.UsuariConvidat;
-import capaDomini.Usuaris.UsuariNormal;
 import java.io.IOException;
 import java.util.*;
 
@@ -65,13 +62,12 @@ public class prop {
                 break;
 
             case 3:
-                Administrador admin = new Administrador();
                 System.out.print("Entra l'usuari Administrador: ");
                 user = sc.next();
-                if (user.equals(admin.getNom())) { 
+                if (user.equals("admin")) { 
                     System.out.print("Entra la clau mestre: ");
                     pass = sc.next();
-                    if (pass.equals(admin.getPass())) {
+                    if (pass.equals("1234")) {
                         DriverAdministrador admin1 = new DriverAdministrador();
                         admin1.main(gf);
                     }

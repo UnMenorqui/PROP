@@ -1,5 +1,8 @@
 package capaDomini.Usuaris;
 
+import capaDomini.Graf.CtrlGraf;
+import capaDomini.consulta.DriverHistorial;
+
 
 /**
  *
@@ -34,14 +37,19 @@ public class UsuariNormal extends UsuariConvidat {
         return password;
     }   
     
-    public void modifica_user(String new_user) {
-        ctrl.modificar_usuari(user_name, password, new_user);
-        user_name = new_user;
+    public int modifica_user(String new_user) {
+        int id = ctrl.modificar_usuari(user_name, password, new_user);
+        if (id == 2) user_name = new_user;
+        return id;
     }
     
     public void modifica_pass(String new_password) {
         ctrl.modificar_password(user_name, password, new_password);
-        password = new_password;
+    }
+    
+    public void consultar_historial(CtrlGraf G) {
+        DriverHistorial dv = new DriverHistorial();
+        dv.main(G);
     }
 
     
