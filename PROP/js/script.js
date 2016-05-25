@@ -74,6 +74,12 @@
 		 		$("#collapsibleArticles .collapsible-body ul").append("<li>"+ "No existeixen Articles per aquest autor." +"</li>");
 		 	}
 
+		 	else { 
+		 		if (parseInt($("#rangeArticles").val()) > perfil[0].length) {
+		 			$("#collapsibleArticles .collapsible-body ul").append("<li>"+ "No existeixen suficients Articles per la quantitat demanada." +"</li>");
+		 		}
+		 	}
+
 
 		 	$("#collapsibleConferencies .collapsible-body ul").html("");
 		 	for(conf in perfil[1]) {
@@ -83,6 +89,11 @@
 		 	if (perfil[1].length == 0) {
 		 		$("#collapsibleConferencies .collapsible-body ul").append("<li>"+ "No existeixen Conferències per aquest autor." +"</li>");
 		 	}
+		 	else {
+		 		if (parseInt($("#rangeConferencies").val()) > perfil[1].length) {
+		 			$("#collapsibleConferencies .collapsible-body ul").append("<li>"+ "No existeixen suficientes Conferències per aquest autor." +"</li>");
+		 		}
+		 	}
 
 
 		 	$("#collapsibleCoautors .collapsible-body ul").html("");
@@ -90,10 +101,29 @@
 		 		$("#collapsibleCoautors .collapsible-body ul").append("<li>"+ perfil[2][coautor] +"</li>");
 		 	}
 
+		 	if (perfil[2].length == 0) {
+		 		$("#collapsibleCoautors .collapsible-body ul").append("<li>" + "No existeixen Co-Autors per aquest autor." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeAutors").val()) > perfil[2].length) {
+		 			$("#collapsibleCoautors .collapsible-body ul").append("<li>"+ "No existeixen suficients Articles per la quantitat demanada." +"</li>");
+		 		}
+		 	}
 
 		 	$("#collapsibleTermes .collapsible-body ul").html("");
 		 	for(terme in perfil[3]) {
 		 		$("#collapsibleTermes .collapsible-body ul").append("<li>"+ perfil[3][terme] +"</li>");
+		 	}
+
+		 	if (perfil[3].length == 0) {
+		 		$("#collapsibleTermes .collapsible-body ul").append("<li>" + "No existeixen Termes per aquest autor." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeTermes").val()) > perfil[3].length) {
+		 			$("#collapsibleTermes .collapsible-body ul").append("<li>" + "No existeixen suficients Termes per aquest autor." + "</li>");
+		 		}
 		 	}
 		}
 
@@ -108,16 +138,46 @@
 		 		$("#collapsibleConferencies .collapsible-body ul").append("<li>"+ perfil[0][conf] +"</li>");
 		 	}
 
+		 	if (perfil[0].length == 0) {
+		 		$("#collapsibleConferencies .collapsible-body ul").append("<li>" + "No existeixen Conferencies per aquest Article." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeConferencies").val()) > perfil[0].length) {
+		 			$("#collapsibleTermes .collapsible-body ul").append("<li>" + "No existeixen suficientes Conferencies per aquest Article." + "</li>");
+		 		}
+		 	}
+
 
 		 	$("#collapsibleAutors .collapsible-body ul").html("");
 		 	for(autor in perfil[1]) {
 		 		$("#collapsibleAutors .collapsible-body ul").append("<li>"+ perfil[1][autor] +"</li>");
 		 	}
 
+		 	if (perfil[1].length == 0) {
+		 		$("#collapsibleAutors .collapsible-body ul").append("<li>" + "No existeixen Autors per aquest Article." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeAutors").val()) > perfil[1].length) {
+		 			$("#collapsibleTermes .collapsible-body ul").append("<li>" + "No existeixen suficientes Autors per aquest Article." + "</li>");
+		 		}
+		 	}
+
 
 		 	$("#collapsibleTermes .collapsible-body ul").html("");
 		 	for(terme in perfil[2]) {
 		 		$("#collapsibleTermes .collapsible-body ul").append("<li>"+ perfil[2][terme] +"</li>");
+		 	}
+
+		 	if (perfil[2].length == 0) {
+		 		$("#collapsibleTermes .collapsible-body ul").append("<li>" + "No existeixen Termes per aquest Article." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeTermes").val()) > perfil[2].length) {
+		 			$("#collapsibleTermes .collapsible-body ul").append("<li>" + "No existeixen suficientes Conferencies per aquest Article." + "</li>");
+		 		}
 		 	}
 
 		}
@@ -132,10 +192,30 @@
 		 		$("#collapsibleArticles .collapsible-body ul").append("<li>"+ perfil[0][article] +"</li>");
 		 	}
 
+		 	if (perfil[0].length == 0) {
+		 		$("#collapsibleArticles .collapsible-body ul").append("<li>" + "No existeixen Articles per aquesta Conferencia." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeArticles").val()) > perfil[0].length) {
+		 			$("#collapsibleArticles .collapsible-body ul").append("<li>" + "No existeixen suficients Articles per aquesta Conferencia." + "</li>");
+		 		}
+		 	}
+
 
 		 	$("#collapsibleAutors .collapsible-body ul").html("");
 		 	for(autor in perfil[1]) {
 		 		$("#collapsibleAutors .collapsible-body ul").append("<li>"+ perfil[1][autor] +"</li>");
+		 	}
+
+		 	if (perfil[1].length == 0) {
+		 		$("#collapsibleAutors .collapsible-body ul").append("<li>" + "No existeixen Autors per aquesta Conferencia." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeAutors").val())> perfil[1].length) {
+		 			$("#collapsibleAutors .collapsible-body ul").append("<li>" + "No existeixen suficients Autors per aquesta Conferencia." + "</li>");
+		 		}
 		 	}
 
 
@@ -143,6 +223,17 @@
 		 	for(terme in perfil[2]) {
 		 		$("#collapsibleTermes .collapsible-body ul").append("<li>"+ perfil[2][terme] +"</li>");
 		 	}
+
+		 	if (perfil[2].length == 0) {
+		 		$("#collapsibleTermes .collapsible-body ul").append("<li>" + "No existeixen Termes per aquesta Conferencia." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeTermes").val()) > perfil[2].length) {
+		 			$("#collapsibleTermes .collapsible-body ul").append("<li>" + "No existeixen suficients Termes per aquesta Conferencia." + "</li>");
+		 		}
+		 	}
+
 		}
 
 		if (tipus == "Terme") {
@@ -155,16 +246,46 @@
 		 		$("#collapsibleArticles .collapsible-body ul").append("<li>"+ perfil[0][article] +"</li>");
 		 	}
 
+		 	if (perfil[0].length == 0) {
+		 		$("#collapsibleArticles .collapsible-body ul").append("<li>" + "No existeixen Articles per aquest Terme." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeArticles").val()) > perfil[0].length) {
+		 			$("#collapsibleArticles .collapsible-body ul").append("<li>" + "No existeixen suficients Articles per aquest Terme." + "</li>");
+		 		}
+		 	}
+
 
 		 	$("#collapsibleConferencies .collapsible-body ul").html("");
 		 	for(conf in perfil[1]) {
 		 		$("#collapsibleConferencies .collapsible-body ul").append("<li>"+ perfil[1][conf] +"</li>");
 		 	}
 
+		 	if (perfil[1].length == 0) {
+		 		$("#collapsibleConferencies .collapsible-body ul").append("<li>" + "No existeixen Conferencies per aquest Terme." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeConferencies").val()) > perfil[1].length) {
+		 			$("#collapsibleConferencies .collapsible-body ul").append("<li>" + "No existeixen suficientes Conferencies per aquest Terme." + "</li>");
+		 		}
+		 	}
+
 
 		 	$("#collapsibleAutors .collapsible-body ul").html("");
 		 	for(autor in perfil[2]) {
 		 		$("#collapsibleAutors .collapsible-body ul").append("<li>"+ perfil[2][autor] +"</li>");
+		 	}
+
+		 	if (perfil[2].length == 0) {
+		 		$("#collapsibleAutors .collapsible-body ul").append("<li>" + "No existeixen Autors per aquest Terme." + "</li>");
+		 	}
+
+		 	else {
+		 		if (parseInt($("#rangeAutors").val()) > perfil[2].length) {
+		 			$("#collapsibleAutors .collapsible-body ul").append("<li>" + "No existeixen suficients Autors per aquest Terme." + "</li>");
+		 		}
 		 	}
 		}
  }
