@@ -70,6 +70,7 @@ public class PerfilAutor extends Perfil {
         Consulta cs = new Consulta();
         cs.obtenir_articles(articles,nom,"Autor",quantitat_articles,G);
         cs.obtenir_termes(termes,articles,nom,"Autor",quantitat_termes,G);
+        cs.obtenir_conferencies(conferencies, articles, nom, nom, quantitat_conf, G);
         cs.obtenir_autors(co_autors,articles,nom,"Autor",quantitat_coautors,G);
         String json = null;
         if(articles.size()+termes.size()+conferencies.size()+co_autors.size() == 0) {

@@ -159,6 +159,21 @@
                 <a class="waves-effect waves-light btn col s6 modal-trigger" style="margin-top: 1em; height: 3em; line-height: 3em;" href="#modalOpcionsAvancades"><i class="material-icons left">cloud</i>opcions avançades</a>
             </div>
             <div id="resultatConsulta">
+                <div id="loadingConsulta" style="display: none; text-align: center; width: 100%; margin-top: 40px;">
+                    <div class="preloader-wrapper big active" style="width:7.5em;height: 7.5em;">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
 	            <ul id="collapsibleConsulta" class="collapsible popout" data-collapsible="expandable">
 	            	<li id="collapsibleArticles">
 	            		<div class="collapsible-header"> <i class="material-icons">description</i> Articles</div>
@@ -220,19 +235,23 @@
                 <h4>Opcions avançades</h4>
                 <h5>Número d'autors</h5>
                 <p class="range-field">
-                    <input type="range" id="rangeAutors" min="0" max="20" value="5" />
+                        <input type="range" id="rangeAutors" min="0" max="200" value="5" style="width: 89%; margin-left: 1em;" />
+                        <input type="number" id="rangeAutors_" value="5" style="width: 6%; display: inline-block; margin-left:1em;" />
                 </p>
                 <h5>Número de conferències</h5>
-                <p class="range-field">
-                    <input type="range" id="rangeConferencies" min="0" max="20" value="5" />
+                <p class="range-field" style="display: block; margin: 0 auto; float: none;">
+                    <input type="range" id="rangeConferencies" min="0" max="200" value="5" style="width: 89%; margin-left: 1em;" />
+                    <input type="number" id="rangeConferencies_" value="5" style="width: 6%; display: inline-block; margin-left:1em;" />
                 </p>
                 <h5>Número d'articles</h5>
-                <p class="range-field">
-                    <input type="range" id="rangeArticles" min="0" max="20" value="5" />
+                <p class="range-field" style="display: block; margin: 0 auto; float: none;">
+                    <input type="range" id="rangeArticles" min="0" max="200" value="5" style="width: 89%; margin-left: 1em;" />
+                    <input type="number" id="rangeArticles_" value="5" style="width: 6%; display: inline-block; margin-left:1em;" />
                 </p>
                 <h5>Número de termes</h5>
-                <p class="range-field">
-                    <input type="range" id="rangeTermes" min="0" max="20" value="5" />
+                <p class="range-field" style="display: block; margin: 0 auto; float: none;">
+                    <input type="range" id="rangeTermes" min="0" max="200" value="5" style="width: 89%; margin-left: 1em;" />
+                    <input type="number" id="rangeTermes_" value="5" style="width: 6%; display: inline-block; margin-left:1em;" />
                 </p>
             </div>
             <div class="modal-footer">

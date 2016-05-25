@@ -22,3 +22,11 @@ body {
 }
 
 #collapsibleConsulta .collapsible-body ul li { padding: 1em 2em }
+
+#rangeArticles_, #rangeConferencies_, #rangeAutors_, #rangeTermes_ {
+  border: 0;
+}
+
+#historial .collection-item {
+  cursor: pointer;
+}

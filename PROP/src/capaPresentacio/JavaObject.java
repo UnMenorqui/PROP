@@ -90,7 +90,7 @@ public class JavaObject {
                 if (CG.existeixnode(nom,"Conferencia")) tipus = "Conferencia";
                 else if (CG.existeixnode(nom,"Autor")) tipus = "Autor";
                 else if (CG.existeixnode(nom, "Terme")) tipus = "Terme";
-                else if (CG.existeixnode(nom, "Articles")) tipus = "Article";
+                else if (CG.existeixnode(nom, "Article")) tipus = "Article";
                 switch(tipus) {
                     case "Autor":
                         json = ctrl.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies, CG, usuaris);
