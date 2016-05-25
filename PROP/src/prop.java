@@ -1,8 +1,11 @@
 import capaDomini.Graf.CtrlGraf;
+import capaDomini.Usuaris.Administrador;
 import capaDomini.Usuaris.DriverConvidat;
 import capaDomini.Usuaris.DriverNormal;
 import capaDomini.Usuaris.CtrlUsuaris;
 import capaDomini.Usuaris.DriverAdministrador;
+import capaDomini.Usuaris.UsuariConvidat;
+import capaDomini.Usuaris.UsuariNormal;
 import java.io.IOException;
 import java.util.*;
 
@@ -16,10 +19,7 @@ public class prop {
     
     public static void main(String args[]) throws IOException {
         CtrlGraf gf = new CtrlGraf();
-        String usr_admin = "admin";
-        String admin_pass = "1234";
         CtrlUsuaris ctrl = new CtrlUsuaris();
-        
         System.out.println("BENVINGUT A L'APLICACIÓ DE PROP");
         System.out.println();
         System.out.println();
@@ -27,8 +27,6 @@ public class prop {
         System.out.println("Created by Aleix Abrie, Roger Oriol, Marc Anglada i Toni Riera");
         System.out.println();
         System.out.println();
-        
-        
         Scanner sc = new Scanner(System.in);
         boolean bool = false;
         boolean primer = false;
@@ -47,8 +45,8 @@ public class prop {
             int id = sc.nextInt();
             switch(id) {
             case 1:
-                DriverConvidat uc = new DriverConvidat();
-                uc.main(gf);
+                UsuariConvidat uc = new UsuariConvidat();
+                uc.consulta(gf);
                 break;
             case 2:
                 String user = null, pass = null;     
@@ -57,8 +55,7 @@ public class prop {
                 System.out.println();
                 System.out.print("Entra la contrasenya: ");
                 pass = sc.next();
-                System.out.println();
-                int k = ctrl.ExisteixUsuari_contrasenya(user,pass);
+                int k = ctrl.ExisteixUsuari_contrasenya(user, pass);
                 if (k == 0) System.out.println("Nom d'usuari INCORRECTE");
                 else if (k == 1) System.out.println("Contrasenya INCORRECTA");
                 else if (k == 2) {
@@ -68,18 +65,19 @@ public class prop {
                 break;
 
             case 3:
+                Administrador admin = new Administrador();
                 System.out.print("Entra l'usuari Administrador: ");
                 user = sc.next();
-                if (user.equals(usr_admin)) { 
+                if (user.equals(admin.getNom())) { 
                     System.out.print("Entra la clau mestre: ");
                     pass = sc.next();
-                    if (pass.equals(admin_pass)) {
-                        DriverAdministrador admin = new DriverAdministrador();
-                        admin.main(gf,ctrl);
+                    if (pass.equals(admin.getPass())) {
+                        DriverAdministrador admin1 = new DriverAdministrador();
+                        admin1.main(gf);
                     }
-                    else System.out.print("Clau mestre incorrecta.");
+                    else System.out.println("Clau mestre incorrecta.");
                 }
-                else System.out.print("Usuari Administrador incorrecte.");
+                else System.out.println("Usuari Administrador incorrecte.");
                 break;
 
             case 4:

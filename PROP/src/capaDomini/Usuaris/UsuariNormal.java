@@ -14,48 +14,33 @@ package capaDomini.Usuaris;
 public class UsuariNormal extends UsuariConvidat {
     private String user_name;
     private String password;
+    CtrlUsuaris ctrl;
     
-    
-    //CONSTRUCTORA SENSE PARÀMETRES
     public UsuariNormal() {
+        ctrl = new CtrlUsuaris();
     }
     
-    //CONSTRUCTORA AMB PARÀMETRES
     public UsuariNormal(String usuari, String password) {
         this.user_name = usuari;
         this.password = password;
+        ctrl = new CtrlUsuaris();
     }
     
-    /*  Retorna el nom de l'usuari.
-    Pre:    Cap.
-    Post:   Retorna el nom d'usuari.
-    */
     public String consultar_username() {
         return user_name;
     }
     
-    /*  Retorna la contrasenya.
-    Pre:    Cap.
-    Post:   Retorna la contrasenya.
-    */
     public String consultar_password() {
         return password;
     }   
     
-    /*  Modifca el nom de l'usuari.
-    Pre:    Cap.
-    Post:   El nom de l'usuari ha quedat modificat.
-    */
-    
     public void modifica_user(String new_user) {
+        ctrl.modificar_usuari(user_name, password, new_user);
         user_name = new_user;
     }
     
-    /*  Modifica l'atribut password.
-    Pre:    Cap.
-    Post:   password ha quedat modificada per unaltra.
-    */
     public void modifica_pass(String new_password) {
+        ctrl.modificar_password(user_name, password, new_password);
         password = new_password;
     }
 

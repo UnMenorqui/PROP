@@ -20,34 +20,26 @@ public class CtrlUsuaris {
     
     private CtrlDadesUsuari du;
     private CtrlHistorial hist;
-    private UsuariNormal un;
 
     
     public CtrlUsuaris() {
         du = new CtrlDadesUsuari();
-        //un = new UsuariNormal();
     }
     
-    public String consultar_username() {
+    public String consultar_username(UsuariNormal un) {
         return un.consultar_username();
     }
     
     public int modificar_usuari(String username, String password, String nou_user) {
         if (ExisteixUsuari(nou_user)) return 3;
         int id = ExisteixUsuari_contrasenya(username,password);
-        if (id == 2) {
-            du.modificar_usuari(username, nou_user, password);
-            return 2;
-        }
+        if (id == 2) du.modificar_usuari(username, nou_user, password);
         return id;
     }
     
     public int modificar_password(String username, String password, String new_password) {
         int id = ExisteixUsuari_contrasenya(username, password);
-        if (id == 2) {
-            du.modificar_password(username, password, new_password);
-            return 2;
-        }
+        if (id == 2) du.modificar_password(username, password, new_password);
         return id;
     }
 
@@ -61,10 +53,7 @@ public class CtrlUsuaris {
     
     public int borrarUsuari(String username, String password) {
         int id = ExisteixUsuari_contrasenya(username, password);
-        if (id == 2) {
-            du.borrarUsuari(username, password);
-            return 2;
-        }
+        if (id == 2) du.borrarUsuari(username, password);
         return id;
     }
     
