@@ -19,6 +19,7 @@ public class DriverAdministrador {
         String pass = null;
         String nom,tipus,node1,node2;
         int id;
+        String opcio;
         while(!bool) {
             System.out.println("Si vols consultar tots els usuaris de la BD marca 1.");     
             System.out.println("Si vols borrar algun usuari marca 2.");
@@ -62,8 +63,8 @@ public class DriverAdministrador {
                     System.out.println("Entra el nom del Node: ");
                     nom = sc.nextLine();
                     System.out.println("Estas segur que el vols afegir el node?(S/N)");
-                    nom = sc.nextLine();
-                    if (nom == "S") {
+                    opcio = sc.next();
+                    if (opcio.equals("S")) {
                         id = admin.afegir_node(tipus, nom, CG);
                         if (id == 0) System.out.println("Node ja existent");
                         else System.out.println("Node afegit correctament");
@@ -73,12 +74,12 @@ public class DriverAdministrador {
                 case 6:
                     System.out.println("Entra el nom del Node1: ");
                     sc.nextLine();
-                    node1 = sc.nextLine();
+                    node1 = sc.next();
                     System.out.println("Entra el tipus del Node1: ");
                     tipus = sc.nextLine();
                     System.out.println("Estas segur que el vols eliminar el node?(S/N)");
-                    nom = sc.nextLine();
-                    if (nom == "S") {
+                    opcio = sc.nextLine();
+                    if (opcio.equals("S")) {
                         id = admin.eliminar_node(node1, tipus, CG);
                         if (id == 0) System.out.println("Node NO existeix");
                         else System.out.println("Node eliminat correctament");
@@ -88,14 +89,14 @@ public class DriverAdministrador {
                 case 7:
                     System.out.println("Entra el nom del Node1: ");
                     sc.nextLine();
-                    node1 = sc.nextLine();
+                    node1 = sc.next();
                     System.out.println("Entra el nom del Node2: ");
                     node2 = sc.nextLine();
                     System.out.println("Entra el tipus del Node2: ");
                     tipus = sc.nextLine();
                     System.out.println("Estas segur que el vols afegir l'aresta?(S/N)");
-                    nom = sc.nextLine();
-                    if (nom == "S") {
+                    opcio = sc.nextLine();
+                    if (opcio.equals("S")) {
                         id = admin.afegir_aresta(node1, node2, tipus, CG);
                         if (id == 0) System.out.println("Node1 NO existent");
                         else if (id == 1) System.out.println("Node2 NO existent");
@@ -112,8 +113,8 @@ public class DriverAdministrador {
                     System.out.println("Entra el tipus del Node2: ");
                     tipus = sc.nextLine();
                     System.out.println("Estas segur que el vols afegir l'aresta?(S/N)");
-                    nom = sc.nextLine();
-                    if (nom == "S") {
+                    opcio = sc.next();
+                    if (opcio.equals("S")) {
                         id = admin.eliminar_aresta(node1,node2,tipus,CG);
                         if (id == 0) System.out.println("Node1 NO existent");
                         else if (id == 1) System.out.println("Node2 NO existent");
