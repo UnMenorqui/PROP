@@ -36,9 +36,9 @@ public class CtrlDadesUsuari {
         DadesUsuari.borrarUsuariAdmin(username);
     }
     
-    public void consultaUsuarisBD() {
+    public String consultaUsuarisBD() {
 
-        DadesUsuari.consultaUsuarisBD();
+        return DadesUsuari.consultaUsuarisBD();
     }
     
     public static String consultar_password(String username) {

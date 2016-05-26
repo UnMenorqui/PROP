@@ -345,7 +345,7 @@ public class Graf {
         return false;
     }
 
-    public int afegirNode(String nom,String tipus) {
+    public int afegirNode(String tipus,String nom) {
         int id;
         id = getidArrayString(nom,tipus);
         if (id != -1) return 0; 

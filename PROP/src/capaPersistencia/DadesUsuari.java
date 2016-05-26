@@ -1,5 +1,6 @@
 package capaPersistencia;
 
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  *
@@ -227,7 +229,9 @@ public class DadesUsuari {
         borrarUsuari(user,pass);
     }
     
-    public static void consultaUsuarisBD() {
+    public static String consultaUsuarisBD() {
+        ArrayList<String> usuaris = new ArrayList<>();
+        String json = null;
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
@@ -246,7 +250,10 @@ public class DadesUsuari {
                while (linea.charAt(i) != ' ') ++i;
                aux = linea.substring(0,i);
                System.out.println(aux);
+               usuaris.add(aux);
            }
+           Gson gson = new Gson();
+           json = gson.toJson(usuaris);
         }
         catch(Exception e){}
         finally{
@@ -258,5 +265,6 @@ public class DadesUsuari {
            }
            catch (Exception e2){}
         }
+        return json;
     }
 }

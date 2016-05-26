@@ -33,7 +33,7 @@ public class JavaObject {
     private CtrlHistorial ch = new CtrlHistorial();
     
     private String nom;
-    CtrlPerfils ctrl = new CtrlPerfils();
+
     
     public JavaObject() {
         
@@ -93,19 +93,19 @@ public class JavaObject {
                 else if (CG.existeixnode(nom, "Article")) tipus = "Article";
                 switch(tipus) {
                     case "Autor":
-                        json = ctrl.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies, CG, usuaris);
+                        json = cp.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies, CG, usuaris);
                         return json;
 
                     case "Conferencia":
-                        json = ctrl.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes,CG, usuaris);
+                        json = cp.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes,CG, usuaris);
                         return json;
 
                     case "Article":
-                        json = ctrl.crear_perfil_article(nom, q_autors, q_termes, q_conferencies,CG, usuaris);
+                        json = cp.crear_perfil_article(nom, q_autors, q_termes, q_conferencies,CG, usuaris);
                         return json;
 
                     case "Terme":
-                        json = ctrl.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies,CG, usuaris);
+                        json = cp.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies,CG, usuaris);
                         return json;
 
                     default:
@@ -113,19 +113,19 @@ public class JavaObject {
                 }
                 
             case "Autor":
-                        json = ctrl.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies,CG, usuaris);
+                        json = cp.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies,CG, usuaris);
                         return json;
 
             case "Conferencia":
-                json = ctrl.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes,CG, usuaris);
+                json = cp.crear_perfil_conferencia(nom, q_articles, q_autors, q_termes,CG, usuaris);
                 return json;
 
             case "Article":
-                json = ctrl.crear_perfil_article(nom, q_autors, q_termes, q_conferencies,CG, usuaris);
+                json = cp.crear_perfil_article(nom, q_autors, q_termes, q_conferencies,CG, usuaris);
                 return json;
 
             case "Terme":
-                json = ctrl.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies,CG, usuaris);
+                json = cp.crear_perfil_terme(nom, q_articles, q_autors, q_conferencies,CG, usuaris);
                 return json;
 
             default:
@@ -134,12 +134,12 @@ public class JavaObject {
     }
     
     public void historial_set(String nom, String tipus) {
-        ch.afegirCerca(nom, 0, tipus);
+        cp.afegirCerca(nom, 0, tipus);
     }
     
     public String historial_get() {
         Gson gson = new Gson();
-        ArrayList<Apunts> a = ch.getList();
+        ArrayList<Apunts> a = cp.getList();
         ArrayList<String> b = new ArrayList<>();
         Iterator<Apunts> i = a.iterator();
         while(i.hasNext()) {
@@ -149,12 +149,63 @@ public class JavaObject {
         }
         return gson.toJson(b);
     }
-    
-    public int historial_size() {
-        return ch.size();
-    }
+
     
     public void historial_remove(int n) {
-        ch.esborrar(n);
+        cp.esborra(n);
+    }
+    
+    public void afegirNode(String tipus,String nom) {
+        cp.afegirNode(tipus, nom);
+        System.out.println("tipus: ");System.out.println(tipus);
+        System.out.println("nom: ");System.out.println(nom);
+        System.out.println("Node afegit correctament!");
+    }
+    
+    
+    public void eliminarNode(String nomNode) {
+        System.out.println("nomNode: ");System.out.println(nomNode);
+        
+        String tip = "";
+        if (CG.existeixnode(nomNode,"Conferencia")) tip = "Conferencia";
+        else if (CG.existeixnode(nomNode,"Autor")) tip = "Autor";
+        else if (CG.existeixnode(nomNode, "Terme")) tip = "Terme";
+        else if (CG.existeixnode(nomNode, "Article")) tip = "Article";
+        cp.eliminarNode(nomNode,tip);
+        System.out.println("Node eliminat correctament!");
+    }
+    
+    public void eliminarAresta(String nom1, String nom2) {
+        System.out.println("nom1: ");System.out.println(nom1);
+        System.out.println("nom2: ");System.out.println(nom2);
+        
+        String tip = "";
+        if (CG.existeixnode(nom2,"Conferencia")) tip = "Conferencia";
+        else if (CG.existeixnode(nom2,"Autor")) tip = "Autor";
+        else if (CG.existeixnode(nom2, "Terme")) tip = "Terme";
+        else if (CG.existeixnode(nom2, "Article")) tip = "Article";
+        cp.eliminarAresta(nom1, nom2, tip);
+        System.out.println("Aresta afegida correctament!");
+    }
+    
+    public void afegirAresta(String nom1, String nom2) {
+        System.out.println("nom1: ");System.out.println(nom1);
+        System.out.println("nom2: ");System.out.println(nom2);
+        
+        String tip = "";
+        if (CG.existeixnode(nom2,"Conferencia")) tip = "Conferencia";
+        else if (CG.existeixnode(nom2,"Autor")) tip = "Autor";
+        else if (CG.existeixnode(nom2, "Terme")) tip = "Terme";
+        else if (CG.existeixnode(nom2, "Article")) tip = "Article";
+        cp.afegirAresta(nom1, nom2, tip);
+        System.out.println("Aresta eliminada correctament!");
+    }
+    
+    public String consultausuarisBD() {
+        return cp.consultaUsuarisBD();
+    }
+    
+    public int BorraUsuariAdmin(String nom) {
+        return cp.borrarUsuariAdmin(nom);
     }
 }

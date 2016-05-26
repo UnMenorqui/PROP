@@ -8,13 +8,18 @@ package capaPresentacio;
 
 import capaDomini.Graf.CtrlGraf;
 import capaDomini.Graf.Node;
+
+////
 import capaDomini.Perfils.PerfilArticle;
 import capaDomini.Perfils.PerfilAutor;
 import capaDomini.Perfils.PerfilConf;
 import capaDomini.Perfils.PerfilTerme;
-import capaPersistencia.CtrlDadesHistorial;
+///
+
 import capaDomini.Usuaris.CtrlUsuaris;
-import capaDomini.consulta.DriverHistorial;
+import capaDomini.consulta.Apunts;
+import capaDomini.consulta.CtrlHistorial;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,13 +30,28 @@ public class CtrlPresentacio {
     private CtrlGraf cg;
     
     // FUNCIONS CTRL DADES HISTORIAL
-    public static void saveHistorial(String json) {
-        CtrlDadesHistorial.saveHistorial(json);
+    CtrlHistorial ch = new CtrlHistorial();
+    
+    public void saveHistorial(String json) {
+        ch.save(json);
     }
     
-    public static void getHistorial(String json) {
-        CtrlDadesHistorial.getHistorial(json);
+    public void getHistorial(String json) {
+        ch.getHistorial(json);
     }
+    
+    public void afegirCerca(String nom, int id, String tipus) {
+         ch.afegirCerca(nom, id, tipus);
+    }
+    
+    public ArrayList<Apunts> getList() {
+        return ch.getList();
+    }
+
+    public void esborra(int n) {
+        ch.esborrar(n);
+    }
+    
     
     //FUNCIONS CTRL USUARIS
     
@@ -95,18 +115,14 @@ public class CtrlPresentacio {
         return id;
     }
     
-    public void consultaUsuarisBD() {
-        cu.consultaUsuarisBD();
+    public String consultaUsuarisBD() {
+        return cu.consultaUsuarisBD();
     }
     
     public String consultar_password(String username) {
             return cu.consultar_password(username);
     }
     
-    public void consultar(CtrlGraf G) {
-        DriverHistorial dr = new DriverHistorial();
-        dr.main(G);
-    }
 
     public void esborrar(int n) {
         cu.esborrar(n);
@@ -183,50 +199,45 @@ public class CtrlPresentacio {
     
     // FUNCIONS CTRL PERFILS
     PerfilAutor p_autor = new PerfilAutor();
-    public void crear_perfil_autor(String entitat, int articles, int co_autors, int termes, int conferencies, CtrlGraf G,boolean usuaris)
+    public String crear_perfil_autor(String entitat, int articles, int co_autors, int termes, int conferencies, CtrlGraf G,boolean usuaris)
     {
         p_autor.set_name(entitat);
         p_autor.set_quantitat_articles(articles);
         p_autor.set_quantitat_autors(co_autors);
         p_autor.set_quantitat_termes(termes);
         p_autor.set_quantitat_conf(conferencies);
-        p_autor.crear_perfil_autor(G,usuaris);
+        return p_autor.crear_perfil_autor(G,usuaris);
+        
     }
     
     PerfilTerme p_terme = new PerfilTerme();
-    public void crear_perfil_terme(String entitat, int articles, int autors, int conferencies, CtrlGraf G, boolean usuaris) 
+    public String crear_perfil_terme(String entitat, int articles, int autors, int conferencies, CtrlGraf G, boolean usuaris) 
     {
         p_terme.set_name(entitat);
         p_terme.set_quantitat_articles(articles);
         p_terme.set_quantitat_autors(autors);
         p_terme.set_quantitat_conf(conferencies);
-        p_terme.crear_perfil_terme(G,usuaris);
+        return p_terme.crear_perfil_terme(G,usuaris);
     }
     
     PerfilConf p_conf = new PerfilConf();
-    public void crear_perfil_conferencia(String entitat, int articles, int autors, int termes, CtrlGraf G, boolean usuaris) 
+    public String crear_perfil_conferencia(String entitat, int articles, int autors, int termes, CtrlGraf G, boolean usuaris) 
     {
         p_conf.set_name(entitat);
         p_conf.set_quantitat_articles(articles);
         p_conf.set_quantitat_autors(autors);
         p_conf.set_quantitat_termes(termes);
-        p_conf.crear_perfil_conf(G,usuaris);
+        return p_conf.crear_perfil_conf(G,usuaris);
         
     }
     
     PerfilArticle p_art = new PerfilArticle();
-    public void crear_perfil_article(String entitat, int autors, int termes, int conferencies, CtrlGraf G, boolean usuaris) 
+    public String crear_perfil_article(String entitat, int autors, int termes, int conferencies, CtrlGraf G, boolean usuaris) 
     {
         p_art.set_name(entitat);
         p_art.set_quantitat_autors(autors);
         p_art.set_quantitat_conf(conferencies);
         p_art.set_quantitat_termes(termes);
-        p_art.crear_perfil_article(G,usuaris);
+        return p_art.crear_perfil_article(G,usuaris);
     }
-    
-    
-
-    
-    // FUNCIONS CTRL CONSULTA
-    
 }

@@ -130,7 +130,8 @@
                 <div class="nav-wrapper" style="padding: 0 20px;">
                     <a href="#!" class="brand-logo">Creació Automàtica de Perfils</a>
                     <ul class="right hide-on-med-and-down">
-                        <li style="display: none;" id="opcions_admin"><a>Opcions d'administador</a></li>
+                        <li style="display: none;" id="opcions_admin"><a href="#modalConfigurarGraf" class="modal-trigger"> Administració del Graf </a></li>
+                        <li style="display: none;" id="admin_graf"><a href="#modalConfigurarUsuaris" class="modal-trigger"> Administració dels Usuaris </a></li>
                         <li><a id="historial_button">Historial</a></li>
                         <!-- Dropdown Trigger -->
                         <li><a class="dropdown-button" href="#!" data-activates="dropdown1">
@@ -235,23 +236,23 @@
                 <h4>Opcions avançades</h4>
                 <h5>Número d'autors</h5>
                 <p class="range-field">
-                        <input type="range" id="rangeAutors" min="0" max="200" value="5" style="width: 89%; margin-left: 1em;" />
-                        <input type="number" id="rangeAutors_" value="5" style="width: 6%; display: inline-block; margin-left:1em;" />
+                        <input type="range" id="rangeAutors" min="0" max="200" value="3" style="width: 89%; margin-left: 1em;" />
+                        <input type="number" id="rangeAutors_" value="3" style="width: 6%; display: inline-block; margin-left:1em;" />
                 </p>
                 <h5>Número de conferències</h5>
                 <p class="range-field" style="display: block; margin: 0 auto; float: none;">
-                    <input type="range" id="rangeConferencies" min="0" max="200" value="5" style="width: 89%; margin-left: 1em;" />
-                    <input type="number" id="rangeConferencies_" value="5" style="width: 6%; display: inline-block; margin-left:1em;" />
+                    <input type="range" id="rangeConferencies" min="0" max="200" value="3" style="width: 89%; margin-left: 1em;" />
+                    <input type="number" id="rangeConferencies_" value="3" style="width: 6%; display: inline-block; margin-left:1em;" />
                 </p>
                 <h5>Número d'articles</h5>
                 <p class="range-field" style="display: block; margin: 0 auto; float: none;">
-                    <input type="range" id="rangeArticles" min="0" max="200" value="5" style="width: 89%; margin-left: 1em;" />
-                    <input type="number" id="rangeArticles_" value="5" style="width: 6%; display: inline-block; margin-left:1em;" />
+                    <input type="range" id="rangeArticles" min="0" max="200" value="3" style="width: 89%; margin-left: 1em;" />
+                    <input type="number" id="rangeArticles_" value="3" style="width: 6%; display: inline-block; margin-left:1em;" />
                 </p>
                 <h5>Número de termes</h5>
                 <p class="range-field" style="display: block; margin: 0 auto; float: none;">
-                    <input type="range" id="rangeTermes" min="0" max="200" value="5" style="width: 89%; margin-left: 1em;" />
-                    <input type="number" id="rangeTermes_" value="5" style="width: 6%; display: inline-block; margin-left:1em;" />
+                    <input type="range" id="rangeTermes" min="0" max="200" value="3" style="width: 89%; margin-left: 1em;" />
+                    <input type="number" id="rangeTermes_" value="3" style="width: 6%; display: inline-block; margin-left:1em;" />
                 </p>
             </div>
             <div class="modal-footer">
@@ -283,6 +284,89 @@
             <button class="btn waves-effect waves-light" type="button" id="password_submit" name="action" style="width: 100%; margin-top: 20px;">CANVIAR CONTRASENYA
                     </button>
           </div>
+        </div>
+    </div>
+
+    <div id="modalConfigurarGraf" class="modal">
+        <div class="modal-content">
+          <h4>Administració del Graf</h4>
+          <br />
+          <h5>Afegir node</h5>
+          <div class="input-field col s6">
+              <input id="afegirNodeNom" type="text" class="validate">
+              <label for="afegirNodeNom">Nom del node</label>
+          </div>
+          <div class="input-field col s6">
+              <select id="afegirNodeTipus">
+                <option value="Article">Article</option>
+                <option value="Conferencia">Conferència</option>
+                <option value="Autor">Autor</option>
+                <option value="Terme">Terme</option>
+              </select>
+              <label for="afegirNodeTipus">Tipus del node</label>
+          </div>
+          <button class="btn waves-effect waves-light" type="button" id="afegirNodeSubmit" name="action" style="width: 100%; margin-top: 20px;" onclick="afegirNode()">AFEGIR NODE
+                    </button>
+                    <br />
+                    <br /><br />
+          <h5>Eliminar node</h5>
+          <div class="input-field col s6">
+              <input id="eliminarNodeNom" type="text" class="validate">
+              <label for="afegirNodeNom">Nom del node</label>
+          </div>
+          <button class="btn waves-effect waves-light col s6" type="button" id="eliminarNodeSubmit" name="action" onclick="eliminarNode()">ELIMINAR NODE
+                    </button>
+                    <br />
+                    <br /><br />
+        <h5>Afegir aresta</h5>
+          <div class="input-field col s6">
+              <input id="afegirArestaNom" type="text" class="validate">
+              <label for="afegirArestaNom">Nom del primer node (ha de ser un article)</label>
+          </div>
+          <div class="input-field col s6">
+              <input id="afegirArestaNom2" type="text" class="validate">
+              <label for="afegirArestaNom2">Nom del segon node</label>
+          </div>
+          <button class="btn waves-effect waves-light" type="button" id="afegirArestaSubmit" name="action" style="width: 100%; margin-top: 20px;" onclick="afegirAresta()">AFEGIR ARESTA
+                    </button>
+                    <br />
+                    <br /><br />
+        <h5>Eliminar aresta</h5>
+          <div class="input-field col s6">
+              <input id="eliminarArestaNom" type="text" class="validate">
+              <label for="eliminarArestaNom">Nom del primer node (ha de ser un article)</label>
+          </div>
+          <div class="input-field col s6">
+              <input id="eliminarArestaNom2" type="text" class="validate">
+              <label for="eliminarArestaNom2">Nom del segon node</label>
+          </div>
+          <button class="btn waves-effect waves-light" type="button" id="eliminarArestaSubmit" name="action" style="width: 100%; margin-top: 20px;" onclick="eliminarAresta()">ELIMINAR ARESTA
+                    </button>
+                    <br />
+                    <br /><br />
+        </div>
+    </div>
+
+    <div id="modalConfigurarUsuaris" class="modal">
+        <div class="modal-content">
+          <h4>Administració d'Usuaris</h4>
+          <br />
+          <h5>Eliminar usuari</h5>
+          <div class="input-field col s6">
+              <input id="eliminarUsuariNom" type="text" class="validate">
+              <label for="eliminarUsuariNom">Nom de l'usuari a eliminar</label>
+          </div>
+          <button class="btn waves-effect waves-light" type="button" name="action" style="width: 100%; margin-top: 20px;" onclick="eliminarUsuariAdmin()">ELIMINAR USUARI
+                    </button>
+                    <br />
+                    <br /><br />
+          <button class="btn waves-effect waves-light col s6" type="button" id="eliminarNodeSubmit" name="action" onclick="consultarUsuarisAdmin()" style="width: 100%; margin-top: 20px;">CONSULTAR USUARIS
+                    </button>
+            <div id="llistaUsuaris">
+                <ul>
+
+                </ul>
+            </div>
         </div>
     </div>
     </body>

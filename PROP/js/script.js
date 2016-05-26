@@ -24,6 +24,7 @@
  	$("#search").val(elem);
  	$("#Tipus_Node").val("General");
  	consulta();
+
  }
 
  function carrega() {
@@ -307,7 +308,41 @@
 		 		}
 		 	}
 		}
+
+		getHistorial();
 	},250);
+ }
+
+ function afegirNode() {
+ 	window.java.afegirNode($("#afegirNodeTipus").val(), $("#afegirNodeNom").val());
+ 	Materialize.toast("Node afegit correctament!",3000);
+ } 
+
+ function eliminarNode() {
+ 	window.java.eliminarNode($("#eliminarNodeNom").val());
+ 	Materialize.toast("Node eliminat correctament!",3000);
+ }
+
+ function afegirAresta() {
+ 	window.java.afegirAresta($("#afegirArestaNom").val(), $("#afegirArestaNom2").val());
+ 	Materialize.toast("Aresta afegida correctament!",3000);
+ }
+
+ function eliminarAresta() {
+ 	window.java.eliminarAresta($("#eliminarArestaNom").val(), $("#eliminarArestaNom2").val());
+ 	Materialize.toast("Aresta elminada correctament!",3000);
+ }
+
+ function eliminarUsuariAdmin() {
+ 	window.java.BorraUsuariAdmin($("#eliminarUsuariNom").val());
+ }
+
+ function consultarUsuarisAdmin() {
+ 	var llista = JSON.parse(window.java.consultausuarisBD());
+ 	$("#llistaUsuaris ul").html("");
+ 	llista.forEach(function(elem, i) {
+ 		$("#llistaUsuaris ul").append("<li>"+ elem +"</li>");
+ 	});
  }
 
  function getHistorial() {
@@ -315,13 +350,15 @@
 
      $("#historial .collection").html("");
      hist.forEach(function(elem, i) {
-     	$("#historial .collection").append("<li class='collection-item' onclick='loadHistorialElement(\"" + elem + "\")'><span>" + elem + "</span><a href='#!' class='secondary-content' onclick='borrarElementHistorial(" + i + ")'><i class='material-icons'>delete</i></a></li>");
+     	$("#historial .collection").append("<li class='collection-item'><span onclick='loadHistorialElement(\"" + elem + "\")'>" + elem + "</span><a href='#!' class='secondary-content' onclick='borrarElementHistorial(" + i + ")'><i class='material-icons'>delete</i></a></li>");
      });
  }
 
  function borrarElementHistorial(n) {
+ 	if(confirm("Estàs segur que vols borrar aquesta entrada de l'historial?")) {
      window.java.historial_remove(n);
      getHistorial();
+ 	}
  }
 
  function setConsultaHistorial(nom, tipus) {
@@ -389,7 +426,7 @@ $(document).ready(function() {
  		setTimeout(function() { $("#homepage").fadeIn(1000); }, 1000);
  	 });
  	 $("#adminform_submit").on("click", function(e) {
- 	 	if ($("#adminform_user").val() == "Administrador" && $("#adminform_pass").val() == "1234") {
+ 	 	if ($("#adminform_user").val() == "admin" && $("#adminform_pass").val() == "1234") {
  	 		username = $("#adminform_user").val();
  	 		password = $("#adminform_pass").val();
  	 		isAdmin = true;
@@ -400,6 +437,7 @@ $(document).ready(function() {
 	 		$("#logo_container h3").fadeOut(1000);
 	 		$("#logo_container img").fadeOut(1000);
 	 		$("#signin").fadeOut(1000);
+	 		$("#configurarCompteBtn").css({"display": "none"});
 	 		$('select').material_select();
 	 		getHistorial();
 	 		amagarCollapsible();
@@ -407,6 +445,7 @@ $(document).ready(function() {
 	 			$("#homepage").fadeIn(1000); 
 	 			$("#nomusuariContainer").text(username); 
 	 			$("#opcions_admin").css({ "display": "block" });
+	 			$("#admin_graf").css({ "display": "block" });
 	 		}, 1000);
  	 	}
  	 	else Materialize.toast("Login Incorrecte",2000);
@@ -512,7 +551,6 @@ $(document).ready(function() {
 
  	 $("#search").bind("enterKey",function(e) {
  	 	consulta();
- 	 	getHistorial();
  	 });
  	 $("#search").keyup(function(e) {
  	 	if(e.keyCode == 13) {

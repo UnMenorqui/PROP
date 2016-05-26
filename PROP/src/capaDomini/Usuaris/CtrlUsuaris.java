@@ -85,8 +85,8 @@ public class CtrlUsuaris {
         return id;
     }
     
-    public void consultaUsuarisBD() {
-        du.consultaUsuarisBD();
+    public String consultaUsuarisBD() {
+        return du.consultaUsuarisBD();
     }
     
     public String consultar_password(String username) {

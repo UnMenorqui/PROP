@@ -27,6 +27,6 @@ body {
   border: 0;
 }
 
-#historial .collection-item {
+#historial .collection-item span, #collapsibleConsulta .collapsible-body ul li span {
   cursor: pointer;
 }
