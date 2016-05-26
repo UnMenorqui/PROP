@@ -347,11 +347,8 @@ public class Graf {
         return false;
     }
 
-<<<<<<< HEAD
-    public int afegirNode(String tipus,String nom) {
-=======
-    public int afegirNode(String nom, String tipus) {
->>>>>>> duplicatproves
+
+    public int afegirNode(String nom,String tipus) {
         int id;
         id = getidArrayString(nom,tipus);
         if (id != -1) return 0; 

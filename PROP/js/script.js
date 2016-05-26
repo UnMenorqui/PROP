@@ -315,7 +315,10 @@
 
  function afegirNode() {
  	window.java.afegirNode($("#afegirNodeTipus").val(), $("#afegirNodeNom").val());
- 	Materialize.toast("Node afegit correctament!",3000);
+ 	
+ 	if (window.java.actualitzar()) {
+ 		Materialize.toast("Node afegit correctament!",3000);
+ 	}
  } 
 
  function eliminarNode() {
@@ -325,7 +328,10 @@
 
  function afegirAresta() {
  	window.java.afegirAresta($("#afegirArestaNom").val(), $("#afegirArestaNom2").val());
- 	Materialize.toast("Aresta afegida correctament!",3000);
+ 	
+ 	if (window.java.actualitzar()) {
+ 		Materialize.toast("Aresta afegida correctament!",3000);
+ 	}
  }
 
  function eliminarAresta() {

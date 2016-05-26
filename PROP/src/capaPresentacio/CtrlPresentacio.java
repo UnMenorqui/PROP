@@ -51,6 +51,7 @@ public class CtrlPresentacio {
     public void esborra(int n) {
         ch.esborrar(n);
     }
+ 
     
     
     //FUNCIONS CTRL USUARIS
@@ -59,7 +60,7 @@ public class CtrlPresentacio {
     
     
     public String consultar_username() {
-        return cu.consultar_username();
+        return cu.consultaUsuarisBD();
     }
     
     public int modificar_usuari(String username, String password, String nou_user) {
@@ -193,6 +194,10 @@ public class CtrlPresentacio {
     
     public void afegirAresta(String nom1, String nom2, String tipus) {
         cg.afegirAresta(nom1, nom2, tipus);
+    }
+    
+    public void actualitzar() {
+        cg.actualitzar();
     }
     
     

@@ -208,4 +208,9 @@ public class JavaObject {
     public int BorraUsuariAdmin(String nom) {
         return cp.borrarUsuariAdmin(nom);
     }
+    
+    public boolean actualitzar() {
+        cp.actualitzar();
+        return true;
+    }
 }

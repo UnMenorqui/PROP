@@ -36,5 +36,7 @@ public class prop {
                 window.asObject().setProperty("java", new JavaObject());
             }
         });
+        CtrlPresentacio cp = new CtrlPresentacio();
+        cp.actualitzar();
     }
 }
