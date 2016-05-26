@@ -46,8 +46,8 @@ public class CtrlGraf {
         return SG.existeixnode(nom, tipus);
     }
     
-    public int afegirNode(String tipus,String nom) {
-        return SG.afegirNode(tipus, nom);
+    public int afegirNode(String nom,String tipus) {
+        return SG.afegirNode(nom, tipus);
     }
     
     public int eliminarNode(String nomNode, String tipus) {

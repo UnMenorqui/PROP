@@ -1,2 +1,5 @@
+<<<<<<< HEAD
 toni  toni
 roger  roger
+=======
+>>>>>>> duplicatproves

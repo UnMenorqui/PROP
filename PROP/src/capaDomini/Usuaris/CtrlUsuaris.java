@@ -20,35 +20,32 @@ public class CtrlUsuaris {
     
     private CtrlDadesUsuari du;
     private CtrlHistorial hist;
-    private UsuariNormal un;
 
     
     public CtrlUsuaris() {
         du = new CtrlDadesUsuari();
-        //un = new UsuariNormal();
     }
     
-    public String consultar_username() {
+    public String consultar_username(UsuariNormal un) {
         return un.consultar_username();
     }
     
     public int modificar_usuari(String username, String password, String nou_user) {
         if (ExisteixUsuari(nou_user)) return 3;
         int id = ExisteixUsuari_contrasenya(username,password);
+<<<<<<< HEAD
         if (id == 2) {
             du.modificar_usuari(username, password, nou_user);
             return 2;
         }
+=======
+        if (id == 2) du.modificar_usuari(username, nou_user, password);
+>>>>>>> duplicatproves
         return id;
     }
     
-    public int modificar_password(String username, String password, String new_password) {
-        int id = ExisteixUsuari_contrasenya(username, password);
-        if (id == 2) {
-            du.modificar_password(username, password, new_password);
-            return 2;
-        }
-        return id;
+    public void modificar_password(String username, String password, String new_password) {
+        du.modificar_password(username, password, new_password);
     }
 
     public int ExisteixUsuari_contrasenya(String username, String password) {
@@ -61,10 +58,7 @@ public class CtrlUsuaris {
     
     public int borrarUsuari(String username, String password) {
         int id = ExisteixUsuari_contrasenya(username, password);
-        if (id == 2) {
-            du.borrarUsuari(username, password);
-            return 2;
-        }
+        if (id == 2) du.borrarUsuari(username, password);
         return id;
     }
     
@@ -102,20 +96,20 @@ public class CtrlUsuaris {
         hist.esborrar(n);
     }
     
-    public void afegirNode(String tipus,String nom, CtrlGraf CG) {
-        CG.afegirNode(tipus, nom);
+    public int afegirNode(String nom,String tipus, CtrlGraf CG) {
+        return CG.afegirNode(nom, tipus);
     }
     
     
-    public void eliminarNode(String nomNode, String tipus, CtrlGraf CG) {
-        CG.eliminarNode(nomNode,tipus);
+    public int eliminarNode(String nomNode, String tipus, CtrlGraf CG) {
+        return CG.eliminarNode(nomNode,tipus);
     }
     
-    public void eliminarAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
-        CG.eliminarAresta(nom1, nom2, tipus);
+    public int eliminarAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
+        return CG.eliminarAresta(nom1, nom2, tipus);
     }
     
-    public void afegirAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
-        CG.afegirAresta(nom1, nom2, tipus);
+    public int afegirAresta(String nom1, String nom2, String tipus, CtrlGraf CG) {
+        return CG.afegirAresta(nom1, nom2, tipus);
     }
 }

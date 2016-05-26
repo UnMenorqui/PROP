@@ -1,5 +1,8 @@
 package capaDomini.Usuaris;
 
+import capaDomini.Graf.CtrlGraf;
+import capaDomini.Perfils.DriverPerfil;
+
 
 /**
  *
@@ -8,7 +11,13 @@ package capaDomini.Usuaris;
 
 public class UsuariConvidat {
     
-    public static void consulta() {    
-        //Crida a perfil.
+    DriverPerfil ctrl;
+    
+    public UsuariConvidat() {
+        ctrl = new DriverPerfil();
+    }
+    
+    public void consulta(CtrlGraf G) {    
+        ctrl.main(G,false);
     }
 }

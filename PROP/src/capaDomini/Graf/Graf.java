@@ -14,7 +14,8 @@ import java.util.*;
  */
 
 public class Graf {
-    CtrlGraf cg;
+    
+    CtrlGraf cg1;
     
     //arraylist amb els nodes autor del graf
     protected ArrayList<Node> autor;
@@ -72,6 +73,7 @@ public class Graf {
        noms = new ArrayList<>();
        maxAutor = maxConf = maxTerme = maxArticle = 0;
        cg.load_autor(id,noms);
+       cg1 = cg;
        for (int i = 0; i < id.size(); ++i) {
            autor.add(new Node(id.get(i),noms.get(i),"Autor"));
            if (id.get(i) > maxAutor) maxAutor = id.get(i);
@@ -345,7 +347,11 @@ public class Graf {
         return false;
     }
 
+<<<<<<< HEAD
     public int afegirNode(String tipus,String nom) {
+=======
+    public int afegirNode(String nom, String tipus) {
+>>>>>>> duplicatproves
         int id;
         id = getidArrayString(nom,tipus);
         if (id != -1) return 0; 
@@ -367,6 +373,7 @@ public class Graf {
                 termeactualitzat = true;
                 break;
         }
+        if (!autoractualitzat && !confactualitzat && !articleactualitzat && !termeactualitzat) return 0;
         actualitzar = true;
         return 1;
     }
@@ -732,71 +739,69 @@ public class Graf {
     }
     
     public void actualitzar() {
+        System.out.println("Entra aqui");
         if (autoractualitzat) {
+            id.clear();
+            noms.clear();
             for (int i = 0; i < autor.size(); ++i) {
                 id.add(autor.get(i).getId());
                 noms.add(autor.get(i).getNom());
             }
-            cg.saveAutor(id,noms);
-            id.clear();
-            noms.clear();
+            cg1.saveAutor(id,noms);
         }
         if (confactualitzat) {
+            id.clear();
+            noms.clear();
             for (int i = 0; i < conf.size(); ++i) {
                 id.add(conf.get(i).getId());
                 noms.add(conf.get(i).getNom());
             }
-            cg.saveConf(id,noms);
-            id.clear();
-            noms.clear();
+            cg1.saveConf(id,noms);
         }
         if (termeactualitzat) {
+            id.clear();
+            noms.clear();
             for (int i = 0; i < terme.size(); ++i) {
                 id.add(terme.get(i).getId());
                 noms.add(terme.get(i).getNom());
             }
-            cg.saveTerme(id,noms);
-            id.clear();
-            noms.clear();
+            cg1.saveTerme(id,noms);
         }
         if (articleactualitzat) {
+            id.clear();
+            noms.clear();
             for (int i = 0; i < paper.size(); ++i) {
                 id.add(paper.get(i).getId());
                 noms.add(paper.get(i).getNom());
             }
-            cg.saveArticle(id,noms);
-            id.clear();
-            noms.clear();
+            cg1.saveArticle(id,noms);
         }
         if (paactualitzat) {
+            id.clear();
             id1.clear();
             for (int i = 0; i < pa.size(); ++i) {
                 id.add(pa.get(i).getNode1());
                 id1.add(pa.get(i).getNode2());
             }
-            cg.savepa(id,id1);
-            id.clear();
-            id1.clear();
+            cg1.savepa(id,id1);
         }
         if (pcactualitzat) {
+            id.clear();
             id1.clear();
             for (int i = 0; i < pc.size(); ++i) {
                 id.add(pc.get(i).getNode1());
                 id1.add(pc.get(i).getNode2());
             }
-            cg.savepc(id,id1);
-            id.clear();
-            id1.clear();
+            cg1.savepc(id,id1);
         }
         if (ptactualitzat) {
+            id.clear();
             id1.clear();
             for (int i = 0; i < pt.size(); ++i) {
                 id.add(pt.get(i).getNode1());
                 id1.add(pt.get(i).getNode2());
             }
-            cg.savept(id,id1);
-            id.clear();
-            id1.clear();
+            cg1.savept(id,id1);
         }
     }
 }
