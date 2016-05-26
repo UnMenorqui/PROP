@@ -156,10 +156,9 @@ public class JavaObject {
     }
     
     public void afegirNode(String tipus,String nom) {
-        cp.afegirNode(tipus, nom);
+        CG.afegirNode(nom, tipus);
         System.out.println("tipus: ");System.out.println(tipus);
         System.out.println("nom: ");System.out.println(nom);
-        System.out.println("Node afegit correctament!");
     }
     
     
@@ -189,16 +188,19 @@ public class JavaObject {
     }
     
     public void afegirAresta(String nom1, String nom2) {
-        System.out.println("nom1: ");System.out.println(nom1);
-        System.out.println("nom2: ");System.out.println(nom2);
+        
         
         String tip = "";
         if (CG.existeixnode(nom2,"Conferencia")) tip = "Conferencia";
         else if (CG.existeixnode(nom2,"Autor")) tip = "Autor";
         else if (CG.existeixnode(nom2, "Terme")) tip = "Terme";
         else if (CG.existeixnode(nom2, "Article")) tip = "Article";
-        cp.afegirAresta(nom1, nom2, tip);
-        System.out.println("Aresta eliminada correctament!");
+        
+        System.out.println("nom1: ");System.out.println(nom1);
+        System.out.println("nom2: ");System.out.println(nom2);
+        System.out.println("tipus: ");System.out.println(tip);
+        
+        CG.afegirAresta(nom1, nom2, tip);
     }
     
     public String consultausuarisBD() {
@@ -210,7 +212,7 @@ public class JavaObject {
     }
     
     public boolean actualitzar() {
-        cp.actualitzar();
+        CG.actualitzar();
         return true;
     }
 }

@@ -315,7 +315,8 @@
 
  function afegirNode() {
  	window.java.afegirNode($("#afegirNodeTipus").val(), $("#afegirNodeNom").val());
- 	
+ 	Materialize.toast("afegirNodeTipus",5000);
+ 	Materialize.toast($("#afegirNodeTipus").val(),5000);
  	if (window.java.actualitzar()) {
  		Materialize.toast("Node afegit correctament!",3000);
  	}

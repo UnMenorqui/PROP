@@ -149,6 +149,7 @@ public class Graf {
         Boolean existeix = false;
         switch (tipus) {
             case "Autor":
+                System.out.println("Arribo aqui.");
                 if (!existeixAresta(id,Node2,tipus)) {
                     pa.add(new Aresta(Node1,Node2));
                     existeix = true;
@@ -356,6 +357,7 @@ public class Graf {
             case "Autor":
                 autor.add(new Node(++maxAutor,nom,tipus));
                 autoractualitzat = true;
+                System.out.println("He afegit el node d'autor.");
                 break;
             case "Conferencia":
                 conf.add(new Node(++maxConf,nom,tipus));
