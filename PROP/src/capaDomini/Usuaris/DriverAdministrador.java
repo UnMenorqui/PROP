@@ -44,10 +44,16 @@ public class DriverAdministrador {
                     break;
                 case 2:
                     System.out.println("Entra el nom d'usuari: ");
-                    user = sc.next();
-                    id = admin.borra_user(user);
-                    if (id == 0) System.out.println("Nom d'usuari INCORRECTE");
-                    else System.out.println("Usuari borrat correctament");
+                    sc.nextLine();
+                    user = sc.nextLine();
+                    System.out.println("Estas segur que vols eliminar aquest usuari?(S/N)");
+                    opcio = sc.nextLine();
+                    if (opcio.equals("S")) {
+                        id = admin.borra_user(user);
+                        if (id == 0) System.out.println("Nom d'usuari INCORRECTE");
+                        else System.out.println("Usuari borrat correctament");
+                    }
+                    else System.out.println("Operació no realitzada");
                     break;
                 case 3:
                     admin.consulta(CG);
@@ -65,7 +71,7 @@ public class DriverAdministrador {
                     System.out.println("Estas segur que el vols afegir el node?(S/N)");
                     opcio = sc.next();
                     if (opcio.equals("S")) {
-                        id = admin.afegir_node(tipus, nom, CG);
+                        id = admin.afegir_node(nom, tipus, CG);
                         if (id == 0) System.out.println("Node ja existent");
                         else System.out.println("Node afegit correctament");
                     }
@@ -76,6 +82,7 @@ public class DriverAdministrador {
                     sc.nextLine();
                     node1 = sc.next();
                     System.out.println("Entra el tipus del Node1: ");
+                    sc.nextLine();
                     tipus = sc.nextLine();
                     System.out.println("Estas segur que el vols eliminar el node?(S/N)");
                     opcio = sc.nextLine();
@@ -87,12 +94,12 @@ public class DriverAdministrador {
                     else System.out.println("Operació no realitzada");
                     break;
                 case 7:
-                    System.out.println("Entra el nom del Node1: ");
+                    System.out.println("Entra el nom del Node1:");
                     sc.nextLine();
-                    node1 = sc.next();
-                    System.out.println("Entra el nom del Node2: ");
+                    node1 = sc.nextLine();
+                    System.out.println("Entra el nom del Node2:");
                     node2 = sc.nextLine();
-                    System.out.println("Entra el tipus del Node2: ");
+                    System.out.println("Entra el tipus del Node2:");
                     tipus = sc.nextLine();
                     System.out.println("Estas segur que el vols afegir l'aresta?(S/N)");
                     opcio = sc.nextLine();
@@ -106,11 +113,12 @@ public class DriverAdministrador {
                     else System.out.println("Operació no realitzada");
                     break;
                 case 8:
-                    System.out.println("Entra el nom del Node1: ");
+                    System.out.println("Entra el nom del Node1:");
                     node1 = sc.nextLine();
-                    System.out.println("Entra el nom del Node2: ");
+                    System.out.println("Entra el nom del Node2:");
+                    sc.next();
                     node2 = sc.nextLine();
-                    System.out.println("Entra el tipus del Node2: ");
+                    System.out.println("Entra el tipus del Node2:");
                     tipus = sc.nextLine();
                     System.out.println("Estas segur que el vols afegir l'aresta?(S/N)");
                     opcio = sc.next();
