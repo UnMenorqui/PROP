@@ -2,6 +2,7 @@
  var username = "";
  var password = "";
  var isAdmin = false;
+ var actua = false;
 
  function afterLoading() {
  	$("#loading_container").fadeOut(0);
@@ -317,27 +318,32 @@
  	window.java.afegirNode($("#afegirNodeTipus").val(), $("#afegirNodeNom").val());
  	Materialize.toast("afegirNodeTipus",5000);
  	Materialize.toast($("#afegirNodeTipus").val(),5000);
- 	if (window.java.actualitzar()) {
+ 	/*if (window.java.actualitzar()) {
  		Materialize.toast("Node afegit correctament!",3000);
- 	}
+ 	}*/
+ 	actua = true;
  } 
 
  function eliminarNode() {
  	window.java.eliminarNode($("#eliminarNodeNom").val());
  	Materialize.toast("Node eliminat correctament!",3000);
+ 	actua = true;
  }
 
  function afegirAresta() {
  	window.java.afegirAresta($("#afegirArestaNom").val(), $("#afegirArestaNom2").val());
  	
- 	if (window.java.actualitzar()) {
+ 	/*if (window.java.actualitzar()) {
+ 		
  		Materialize.toast("Aresta afegida correctament!",3000);
- 	}
+ 	}*/
+ 	actua = true;
  }
 
  function eliminarAresta() {
  	window.java.eliminarAresta($("#eliminarArestaNom").val(), $("#eliminarArestaNom2").val());
  	Materialize.toast("Aresta elminada correctament!",3000);
+ 	actua = true;
  }
 
  function eliminarUsuariAdmin() {
@@ -452,7 +458,7 @@ $(document).ready(function() {
 	 			$("#homepage").fadeIn(1000); 
 	 			$("#nomusuariContainer").text(username); 
 	 			$("#opcions_admin").css({ "display": "block" });
-	 			$("#admin_graf").css({ "display": "block" });
+	 			$("#admin_graf").css({ "display": "none" });
 	 		}, 1000);
  	 	}
  	 	else Materialize.toast("Login Incorrecte",2000);
@@ -489,7 +495,15 @@ $(document).ready(function() {
  	 	username = "";
  	 	password = "";
  	 	isAdmin = false;
+ 	 	if (actua) {
+ 	 		if(confirm("S'han produït canvis a la BD, vols canviar-los?")) {
+ 	 			actua = false;
+ 	 			window.java.actualitzar();
+				carrega();
+ 			}
+ 	 	}
  	 	$("#opcions_admin").css({ "display": "none" });
+ 	 	$("#admin_graf").css({ "display": "none" });
  	 	$("#configurarCompteBtn").css({"display": "block"});
  	 	$("#homepage").fadeOut(1000);
 	 	setTimeout(function() { 
