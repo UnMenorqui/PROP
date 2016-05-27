@@ -458,7 +458,7 @@ $(document).ready(function() {
 	 			$("#homepage").fadeIn(1000); 
 	 			$("#nomusuariContainer").text(username); 
 	 			$("#opcions_admin").css({ "display": "block" });
-	 			$("#admin_graf").css({ "display": "none" });
+	 			$("#admin_graf").css({ "display": "block" });
 	 		}, 1000);
  	 	}
  	 	else Materialize.toast("Login Incorrecte",2000);
