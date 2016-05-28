@@ -32,6 +32,7 @@
  	if(window.java.CreaGraf()) {
  		if (actua == true) {
  	 		Materialize.toast("Base de Dades Actualitzada.",2000);
+ 	 		afterLoading();
  	 		actua = false;
  	 	}
  	 	else {
@@ -504,8 +505,8 @@ $(document).ready(function() {
  	 		if(confirm("S'han produït canvis a la BD, vols canviar-los?")) {
  	 			$("#logo_container").fadeIn(500);
 	 			$("#logo_container h3").fadeIn(500);
+	 			$("#logo_container img").css({ "margin-top" : "10em", "width" : "200px" , "height" : "200px" });
 	 			$("#logo_container img").fadeIn(500);
- 	 			$("#logo_container").fadeIn(500);
  				$("#loading_container").fadeIn(500);
  				$("#authory").fadeIn(500);
  	 			Materialize.toast("S'està actualitzant la Base de Dades.",2000);
