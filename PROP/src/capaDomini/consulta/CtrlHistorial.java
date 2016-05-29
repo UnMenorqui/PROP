@@ -16,30 +16,30 @@ public class CtrlHistorial {
     private final Historial hist;    
 
     public CtrlHistorial() {
-        this.hist = new Historial(CtrlHistorial.this);
+        this.hist = new Historial();
     }
     
-    public void afegirCerca(String nom, int id, String tipus) {
-        hist.afegirCerca(id, nom, tipus, CtrlHistorial.this);
+    public void afegirCerca(String nom, int id, String tipus, String user) {
+        hist.afegirCerca(id, nom, tipus, CtrlHistorial.this, user);
     }
     
-    public void save(String json) {
-        CtrlDadesHistorial.saveHistorial(json);
+    public void save(String json, String user) {
+        CtrlDadesHistorial.saveHistorial(json, user);
     }
     
-    public void getHistorial(String json) {
-        CtrlDadesHistorial.getHistorial(json);
+    public String getHistorial(String user) {
+        return CtrlDadesHistorial.getHistorial(user);
     }
     
     public int size() {
         return hist.size();
     }
     
-    public ArrayList<Apunts> getList() {
-        return hist.getList();
+    public ArrayList<Apunts> getList(String user) {
+        return hist.getList(user, CtrlHistorial.this);
     }
 
-    public void esborrar(int n) {
-        hist.esborrar(n,CtrlHistorial.this);
+    public void esborrar(int n, String user) {
+        hist.esborrar(n,CtrlHistorial.this, user);
     }
 }

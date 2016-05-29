@@ -389,7 +389,7 @@
  }
 
  function getHistorial() {
-     var hist = JSON.parse(window.java.historial_get());
+     var hist = JSON.parse(window.java.historial_get(username));
 
      $("#historial .collection").html("");
      hist.forEach(function(elem, i) {
@@ -399,13 +399,13 @@
 
  function borrarElementHistorial(n) {
  	if(confirm("Estàs segur que vols borrar aquesta entrada de l'historial?")) {
-     window.java.historial_remove(n);
+     window.java.historial_remove(n, username);
      getHistorial();
  	}
  }
 
  function setConsultaHistorial(nom, tipus) {
-     window.java.historial_set(nom, tipus);
+     window.java.historial_set(nom, tipus, username);
  }
 
  function comprovaHistorial(nom) {

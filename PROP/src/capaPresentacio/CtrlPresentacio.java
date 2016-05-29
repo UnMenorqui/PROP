@@ -32,24 +32,24 @@ public class CtrlPresentacio {
     // FUNCIONS CTRL DADES HISTORIAL
     CtrlHistorial ch = new CtrlHistorial();
     
-    public void saveHistorial(String json) {
-        ch.save(json);
+    public void saveHistorial(String json, String user) {
+        ch.save(json, user);
     }
     
-    public void getHistorial(String json) {
-        ch.getHistorial(json);
+    public String getHistorial(String user) {
+        return ch.getHistorial(user);
     }
     
-    public void afegirCerca(String nom, int id, String tipus) {
-         ch.afegirCerca(nom, id, tipus);
+    public void afegirCerca(String nom, int id, String tipus, String user) {
+         ch.afegirCerca(nom, id, tipus, user);
     }
     
-    public ArrayList<Apunts> getList() {
-        return ch.getList();
+    public ArrayList<Apunts> getList(String user) {
+        return ch.getList(user);
     }
 
-    public void esborra(int n) {
-        ch.esborrar(n);
+    public void esborra(int n, String user) {
+        ch.esborrar(n, user);
     }
  
     
@@ -125,8 +125,8 @@ public class CtrlPresentacio {
     }
     
 
-    public void esborrar(int n) {
-        cu.esborrar(n);
+    public void esborrar(int n, String user) {
+        cu.esborrar(n, user);
     }
     
     public void afegirNode(String tipus,String nom, CtrlGraf CG) {

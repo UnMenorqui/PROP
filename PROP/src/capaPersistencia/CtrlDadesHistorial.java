@@ -11,11 +11,11 @@ package capaPersistencia;
  * @author rogia
  */
 public class CtrlDadesHistorial {
-    public static void saveHistorial(String json) {
-        DadesHistorial.saveHistorial(json);
+    public static void saveHistorial(String json, String user) {
+        DadesHistorial.saveHistorial(json, user);
     }
     
-    public static void getHistorial(String json) {
-        DadesHistorial.getHistorial(json);
+    public static String getHistorial(String user) {
+        return DadesHistorial.getHistorial(user);
     }
 }

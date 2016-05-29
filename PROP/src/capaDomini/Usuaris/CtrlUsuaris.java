@@ -87,8 +87,8 @@ public class CtrlUsuaris {
         dr.main(G);
     }*/
 
-    public void esborrar(int n) {
-        hist.esborrar(n);
+    public void esborrar(int n, String user) {
+        hist.esborrar(n, user);
     }
     
     public int afegirNode(String nom,String tipus, CtrlGraf CG) {

@@ -21,10 +21,10 @@ public class Historial {
     
     protected String json;
 
-    public Historial(CtrlHistorial ctrl) {
+    /*public Historial(CtrlHistorial ctrl) {
         LlistaConsultes = new ArrayList<>();
         loadHistorial(ctrl);
-    }
+    }*/
     
     public int size() {
         return LlistaConsultes.size();
@@ -34,35 +34,36 @@ public class Historial {
         return new Gson().fromJson(jsonString, type);
     }
 
-    public void afegirCerca(int id, String nom, String tipus, CtrlHistorial ctrl) {
+    public void afegirCerca(int id, String nom, String tipus, CtrlHistorial ctrl, String user) {
         LlistaConsultes.add(new Apunts(id,nom,tipus));
-        saveHistorial(ctrl);
+        saveHistorial(ctrl, user);
     }
     
-    public ArrayList<Apunts> getList() {
+    public ArrayList<Apunts> getList(String user, CtrlHistorial ctrl) {
+        loadHistorial(ctrl, user);
         return LlistaConsultes;
     }
 
-    public void esborrar(int n, CtrlHistorial ctrl) {
+    public void esborrar(int n, CtrlHistorial ctrl, String user) {
         if(n >= 0 && n < LlistaConsultes.size()) {
             LlistaConsultes.remove(n);
-            saveHistorial(ctrl);
+            saveHistorial(ctrl, user);
         }
     }
     
-    private void loadHistorial(CtrlHistorial ctrl) {
-        ctrl.getHistorial(json);
+    private void loadHistorial(CtrlHistorial ctrl, String user) {
+        json = ctrl.getHistorial(user);
         LlistaConsultes = (ArrayList<Apunts>) fromJson(json,
                     new TypeToken<ArrayList<Apunts>>() {}.getType());
         if(LlistaConsultes == null) {
             LlistaConsultes = new ArrayList<>();
-            saveHistorial(ctrl);
+            saveHistorial(ctrl, user);
         }
     }
     
-    private void saveHistorial(CtrlHistorial ctrl) {
+    private void saveHistorial(CtrlHistorial ctrl, String user) {
         Gson gson = new Gson();
         json = gson.toJson(LlistaConsultes);
-        ctrl.save(json);
+        ctrl.save(json, user);
     }
 }

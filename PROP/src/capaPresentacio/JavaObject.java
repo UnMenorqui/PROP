@@ -129,13 +129,13 @@ public class JavaObject {
         }
     }
     
-    public void historial_set(String nom, String tipus) {
-        cp.afegirCerca(nom, 0, tipus);
+    public void historial_set(String nom, String tipus, String user) {
+        cp.afegirCerca(nom, 0, tipus, user);
     }
     
-    public String historial_get() {
+    public String historial_get(String user) {
         Gson gson = new Gson();
-        ArrayList<Apunts> a = cp.getList();
+        ArrayList<Apunts> a = cp.getList(user);
         ArrayList<String> b = new ArrayList<>();
         Iterator<Apunts> i = a.iterator();
         while(i.hasNext()) {
@@ -147,8 +147,8 @@ public class JavaObject {
     }
 
     
-    public void historial_remove(int n) {
-        cp.esborra(n);
+    public void historial_remove(int n, String user) {
+        cp.esborra(n, user);
     }
     
     public boolean afegirNode(String tipus,String nom) {

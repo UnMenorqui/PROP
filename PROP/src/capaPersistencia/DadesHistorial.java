@@ -18,23 +18,23 @@ import java.io.IOException;
  */
 public class DadesHistorial {
     
-    private static final String path = "BDHistorial.json";
-    
-    public static void saveHistorial(String json) {        
-        try (FileWriter writer = new FileWriter(path)) {
+    public static void saveHistorial(String json, String user) {        
+        try (FileWriter writer = new FileWriter("BDHistorial"+user+".json")) {
 		writer.write(json);
 	} catch (IOException e) {}
     }
     
-    public static void getHistorial(String json) {      
+    public static String getHistorial(String user) { 
+        String json = "";
 	try {
 
 		BufferedReader br = new BufferedReader(
-		new FileReader(path));
+		new FileReader("BDHistorial"+user+".json"));
 
                 json = br.readLine();
 		
 	} catch (IOException e) {
 	}
+        return json;
     }
 }
