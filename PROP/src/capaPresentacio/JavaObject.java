@@ -155,14 +155,16 @@ public class JavaObject {
         cp.esborra(n);
     }
     
-    public void afegirNode(String tipus,String nom) {
-        CG.afegirNode(nom, tipus);
+    public boolean afegirNode(String tipus,String nom) {
+        int i = CG.afegirNode(nom, tipus);
         System.out.println("tipus: ");System.out.println(tipus);
         System.out.println("nom: ");System.out.println(nom);
+        if(i == 1) return true;
+        return false;
     }
     
     
-    public void eliminarNode(String nomNode) {
+    public boolean eliminarNode(String nomNode) {
         System.out.println("nomNode: ");System.out.println(nomNode);
         
         String tip = "";
@@ -170,37 +172,28 @@ public class JavaObject {
         else if (CG.existeixnode(nomNode,"Autor")) tip = "Autor";
         else if (CG.existeixnode(nomNode, "Terme")) tip = "Terme";
         else if (CG.existeixnode(nomNode, "Article")) tip = "Article";
-        cp.eliminarNode(nomNode,tip);
-        System.out.println("Node eliminat correctament!");
+        int i = cp.eliminarNode(nomNode,tip);
+        if(i == 1) return true;
+        return false;
     }
     
-    public void eliminarAresta(String nom1, String nom2) {
-        System.out.println("nom1: ");System.out.println(nom1);
-        System.out.println("nom2: ");System.out.println(nom2);
-        
+    public int eliminarAresta(String nom1, String nom2) {
         String tip = "";
         if (CG.existeixnode(nom2,"Conferencia")) tip = "Conferencia";
         else if (CG.existeixnode(nom2,"Autor")) tip = "Autor";
         else if (CG.existeixnode(nom2, "Terme")) tip = "Terme";
         else if (CG.existeixnode(nom2, "Article")) tip = "Article";
-        cp.eliminarAresta(nom1, nom2, tip);
-        System.out.println("Aresta afegida correctament!");
+        return cp.eliminarAresta(nom1, nom2, tip);
     }
     
-    public void afegirAresta(String nom1, String nom2) {
-        
-        
+    public int afegirAresta(String nom1, String nom2) {
         String tip = "";
         if (CG.existeixnode(nom2,"Conferencia")) tip = "Conferencia";
         else if (CG.existeixnode(nom2,"Autor")) tip = "Autor";
         else if (CG.existeixnode(nom2, "Terme")) tip = "Terme";
         else if (CG.existeixnode(nom2, "Article")) tip = "Article";
         
-        System.out.println("nom1: ");System.out.println(nom1);
-        System.out.println("nom2: ");System.out.println(nom2);
-        System.out.println("tipus: ");System.out.println(tip);
-        
-        CG.afegirAresta(nom1, nom2, tip);
+        return CG.afegirAresta(nom1, nom2, tip);
     }
     
     public String consultausuarisBD() {

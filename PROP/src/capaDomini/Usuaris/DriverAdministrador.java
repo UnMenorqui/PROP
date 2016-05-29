@@ -114,6 +114,7 @@ public class DriverAdministrador {
                     break;
                 case 8:
                     System.out.println("Entra el nom del Node1:");
+                    sc.next();
                     node1 = sc.nextLine();
                     System.out.println("Entra el nom del Node2:");
                     sc.next();

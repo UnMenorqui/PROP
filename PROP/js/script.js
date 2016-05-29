@@ -321,40 +321,64 @@
  }
 
  function afegirNode() {
- 	window.java.afegirNode($("#afegirNodeTipus").val(), $("#afegirNodeNom").val());
- 	Materialize.toast("afegirNodeTipus",5000);
- 	Materialize.toast($("#afegirNodeTipus").val(),5000);
- 	/*if (window.java.actualitzar()) {
- 		Materialize.toast("Node afegit correctament!",3000);
- 	}*/
- 	actua = true;
+ 	if(confirm("Estàs segur que d'afegir el Node?")) {
+	 	if (window.java.afegirNode($("#afegirNodeTipus").val(), $("#afegirNodeNom").val())) {
+	 		Materialize.toast("Node afegit correctament.",3000);
+	 		actua = true;
+	 	}
+	 	else {
+	 		Materialize.toast("Node ja existent.",3000);
+	 	}
+	 }
  } 
 
  function eliminarNode() {
- 	window.java.eliminarNode($("#eliminarNodeNom").val());
- 	Materialize.toast("Node eliminat correctament!",3000);
- 	actua = true;
+ 	if(confirm("Estàs segur d'eliminar el Node?")){
+	 	if (window.java.eliminarNode($("#eliminarNodeNom").val())) {
+	 		Materialize.toast("Node eliminat correctament.",3000);
+	 		actua = true;
+	 	}
+	 	else {
+	 		Materialize.toast("Node no existent.",3000);
+	 	}
+	 }
  }
 
  function afegirAresta() {
- 	window.java.afegirAresta($("#afegirArestaNom").val(), $("#afegirArestaNom2").val());
- 	
- 	/*if (window.java.actualitzar()) {
- 		
- 		Materialize.toast("Aresta afegida correctament!",3000);
- 	}*/
- 	actua = true;
+ 	if(confirm("Estàs segur que vols afegir l'aresta?")) {
+	 	var id = window.java.afegirAresta($("#afegirArestaNom").val(), $("#afegirArestaNom2").val());
+	 	if (id == '0') Materialize.toast("Node1 NO existent",3000);
+	 	else if (id == '1') Materialize.toast("Node2 NO existent",3000);
+		else if (id == '2') Materialize.toast("Aresta ja existent",3000);
+		else {
+			Materialize.toast("Aresta afegida correctament",3000);
+			actua = true;
+		}
+	}
  }
 
  function eliminarAresta() {
- 	window.java.eliminarAresta($("#eliminarArestaNom").val(), $("#eliminarArestaNom2").val());
- 	Materialize.toast("Aresta elminada correctament!",3000);
- 	actua = true;
+ 	if(confirm("Estàs segur que vols eliminar l'aresta?")) {
+	 	var id = window.java.eliminarAresta($("#eliminarArestaNom").val(), $("#eliminarArestaNom2").val());
+	 	if (id == '0') Materialize.toast("Node1 NO existent",3000);
+		if (id == '1') Materialize.toast("Node2 NO existent",3000);
+		if (id == '2') Materialize.toast("Aresta NO existent",3000);
+		if (id == '3') {
+			Materialize.toast("Aresta eliminada correctament",3000);
+			actua = true;
+		}
+	}
  }
 
  function eliminarUsuariAdmin() {
- 	window.java.BorraUsuariAdmin($("#eliminarUsuariNom").val());
- }
+ 	if(confirm("Estàs segur que vols borrar aquesta usuari de la BD?")){
+ 		var id = window.java.BorraUsuariAdmin($("#eliminarUsuariNom").val());
+ 		if (id == 0) Materialize.toast("Usuari no-existent.");
+ 		else {
+ 			Materialize.toast("Usuari eliminat correctament.")
+ 		}
+ 	}
+ }	
 
  function consultarUsuarisAdmin() {
  	var llista = JSON.parse(window.java.consultausuarisBD());

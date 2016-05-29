@@ -180,20 +180,20 @@ public class CtrlPresentacio {
         return cg.existeixnode(nom, tipus);
     }
     
-    public void afegirNode(String tipus,String nom) {
-        cg.afegirNode(tipus, nom);
+    public int afegirNode(String tipus,String nom) {
+        return cg.afegirNode(tipus, nom);
     }
     
-    public void eliminarNode(String nomNode, String tipus) {
-        cg.eliminarNode(nomNode, tipus);
+    public int eliminarNode(String nomNode, String tipus) {
+        return cg.eliminarNode(nomNode, tipus);
     }
     
-    public void eliminarAresta(String nom1, String nom2, String tipus) {
-        cg.eliminarAresta(nom1, nom2, tipus);
+    public int eliminarAresta(String nom1, String nom2, String tipus) {
+        return cg.eliminarAresta(nom1, nom2, tipus);
     }
     
-    public void afegirAresta(String nom1, String nom2, String tipus) {
-        cg.afegirAresta(nom1, nom2, tipus);
+    public int afegirAresta(String nom1, String nom2, String tipus) {
+        return cg.afegirAresta(nom1, nom2, tipus);
     }
     
     public void actualitzar() {

@@ -149,7 +149,6 @@ public class Graf {
         Boolean existeix = false;
         switch (tipus) {
             case "Autor":
-                System.out.println("Arribo aqui.");
                 if (!existeixAresta(id,Node2,tipus)) {
                     pa.add(new Aresta(Node1,Node2));
                     existeix = true;
@@ -183,8 +182,8 @@ public class Graf {
         int id, id1, node1, node2;
         id = getidArrayString(nom1,"Article");
         id1 = getidArrayString(nom2,tipus);
-        if (id == -1) return 0;
-        if (id1 == -1) return 1;
+        if (id == -1) return 0; // Primer entitat no existent
+        if (id1 == -1) return 1; // Segona entitat no existent
         node1 = GetIDnode(id,"Article");
         node2 = GetIDnode(id1,tipus);
         Boolean existeix = false;
