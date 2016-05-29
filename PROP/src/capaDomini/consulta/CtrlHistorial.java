@@ -13,7 +13,11 @@ import java.util.ArrayList;
  * @author Toni
  */
 public class CtrlHistorial {
-    private Historial hist = new Historial(CtrlHistorial.this);    
+    private final Historial hist;    
+
+    public CtrlHistorial() {
+        this.hist = new Historial(CtrlHistorial.this);
+    }
     
     public void afegirCerca(String nom, int id, String tipus) {
         hist.afegirCerca(id, nom, tipus, CtrlHistorial.this);

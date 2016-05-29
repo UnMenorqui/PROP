@@ -8,9 +8,7 @@ package capaDomini.Perfils;
 
 import capaDomini.consulta.Consulta;
 import capaDomini.Graf.CtrlGraf;
-import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
-import java.util.Scanner;
 import com.google.gson.Gson;
 
 /**
@@ -69,33 +67,24 @@ public class PerfilConf extends Perfil {
         if(articles.size()+termes.size()+autors.size() == 0) {
             json = ("No s'ha trobat cap conferència amb aquest nom.");
         } else {
-            System.out.println(nom);
-            System.out.println("");
-            System.out.println("Autors més rellevants d'aquesta conferencia:");
             for (int i = 0; i < autors.size(); ++i) {
                 String aux = autors.get(i);
                 System.out.println("\t- "+aux);
             }
             if (quantitat_autors > autors.size()) {
-                System.out.println("No hi ha tants autors per la quantitat desitjada");
+                //System.out.println("No hi ha tants autors per la quantitat desitjada");
             }
-            System.out.println("");
-            System.out.println("Articles més rellevants d'aquesta confrencia:");
             for (int i = 0; i < articles.size(); ++i) {
                 String aux = articles.get(i);
-                System.out.println("\t- "+aux);
             }
             if (quantitat_articles > articles.size()) {
-                System.out.println("No hi ha tants articles per la quantitat desitjada");
+                //System.out.println("No hi ha tants articles per la quantitat desitjada");
             }
-            System.out.println("");
-            System.out.println("Termes més rellevants d'aquesta conferencia:");
             for (int i = 0; i < termes.size(); ++i) {
                 String aux = termes.get(i);
-                System.out.println("\t- "+aux);
             }
             if (quantitat_termes > termes.size()) {
-                System.out.println("No hi ha tants termes per la quantitat desitjada");
+                //System.out.println("No hi ha tants termes per la quantitat desitjada");
             }
             if (usuaris) {/*
                 System.out.println("Vols Guardar la Consulta?(S/N)");

@@ -6,7 +6,6 @@
 package capaPresentacio;
 
 import capaDomini.Graf.CtrlGraf;
-import capaDomini.Perfils.CtrlPerfils;
 import capaDomini.consulta.Apunts;
 import capaDomini.consulta.CtrlHistorial;
 import com.google.gson.Gson;
@@ -39,9 +38,6 @@ public class JavaObject {
         
     }
     
-    public void print(String message) {
-        System.out.println(message);
-    }
     
     public int ExisteixUsuari_contrasenya(String username, String password) {
         return cp.ExisteixUsuari_contrasenya(username,password);
@@ -157,15 +153,12 @@ public class JavaObject {
     
     public boolean afegirNode(String tipus,String nom) {
         int i = CG.afegirNode(nom, tipus);
-        System.out.println("tipus: ");System.out.println(tipus);
-        System.out.println("nom: ");System.out.println(nom);
         if(i == 1) return true;
         return false;
     }
     
     
     public boolean eliminarNode(String nomNode) {
-        System.out.println("nomNode: ");System.out.println(nomNode);
         
         String tip = "";
         if (CG.existeixnode(nomNode,"Conferencia")) tip = "Conferencia";

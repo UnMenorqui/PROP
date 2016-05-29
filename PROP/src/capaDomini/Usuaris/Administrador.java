@@ -15,11 +15,13 @@ import capaDomini.Graf.CtrlGraf;
 
 public class Administrador extends UsuariNormal {
     
-    private String nom = "admin";
-    private String pass = "1234";
+    private final String nom;
+    private final String pass;
     CtrlUsuaris ctrl;
     
     public Administrador () {
+        this.pass = "1234";
+        this.nom = "admin";
         ctrl = new CtrlUsuaris();
     }
     

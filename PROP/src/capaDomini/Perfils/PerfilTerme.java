@@ -9,10 +9,7 @@ package capaDomini.Perfils;
 
 import capaDomini.consulta.Consulta;
 import capaDomini.Graf.CtrlGraf;
-import static capaDomini.Perfils.PerfilConf.termes;
-import capaDomini.consulta.CtrlHistorial;
 import java.util.ArrayList;
-import java.util.Scanner;
 import com.google.gson.Gson;
 
 /**
@@ -70,33 +67,24 @@ public class PerfilTerme extends Perfil {
         if(articles.size()+conferencies.size()+autors.size() == 0) {
             json = ("No s'ha trobat cap terme amb aquest nom.");
         } else {
-            System.out.println(nom);
-            System.out.println("");
-            System.out.println("Conferencies més rellevants d'aquest terme:");
             for (int i = 0; i < conferencies.size(); ++i) {
                 String aux = conferencies.get(i);
                 System.out.println("\t- "+aux);
             }
             if (quantitat_conf > conferencies.size()) {
-                System.out.println("No hi ha tantes conferències per la quantitat desitjada");
+                //System.out.println("No hi ha tantes conferències per la quantitat desitjada");
             }
-            System.out.println("");
-            System.out.println("Articles més rellevants d'aquest terme:");
             for (int i = 0; i < articles.size(); ++i) {
                 String aux = articles.get(i);
-                System.out.println("\t- "+aux);
             }
             if (quantitat_articles > articles.size()) {
-                System.out.println("No hi ha tants articles per la quantitat desitjada");
+                //System.out.println("No hi ha tants articles per la quantitat desitjada");
             }
-            System.out.println("");
-            System.out.println("Autors més rellevants d'aquest terme:");
             for (int i = 0; i < autors.size(); ++i) {
                 String aux = autors.get(i);
-                System.out.println("\t- "+aux);
             }
             if (quantitat_autors > autors.size()) {
-                System.out.println("No hi ha tants autors per la quantitat desitjada");
+                //System.out.println("No hi ha tants autors per la quantitat desitjada");
             }
             if (usuari) {/*
                 System.out.println("Vols Guardar la Consulta?(S/N)");

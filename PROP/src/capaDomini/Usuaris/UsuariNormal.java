@@ -1,8 +1,5 @@
 package capaDomini.Usuaris;
 
-import capaDomini.Graf.CtrlGraf;
-import capaDomini.consulta.DriverHistorial;
-
 
 /**
  *
@@ -47,10 +44,10 @@ public class UsuariNormal extends UsuariConvidat {
         ctrl.modificar_password(user_name, password, new_password);
     }
     
-    public void consultar_historial(CtrlGraf G) {
+    /*public void consultar_historial(CtrlGraf G) {
         DriverHistorial dv = new DriverHistorial();
         dv.main(G);
-    }
+    }*/
 
     
 }

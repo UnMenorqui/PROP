@@ -2,7 +2,6 @@
 
 import capaDomini.Graf.CtrlGraf;
 import capaDomini.consulta.CtrlHistorial;
-import capaDomini.consulta.DriverHistorial;
 import capaPersistencia.CtrlDadesUsuari;
 
 
@@ -18,7 +17,7 @@ import capaPersistencia.CtrlDadesUsuari;
 
 public class CtrlUsuaris {
     
-    private CtrlDadesUsuari du;
+    private final CtrlDadesUsuari du;
     private CtrlHistorial hist;
 
     
@@ -34,14 +33,14 @@ public class CtrlUsuaris {
         if (ExisteixUsuari(nou_user)) return 3;
         int id = ExisteixUsuari_contrasenya(username,password);
         if (id == 2) {
-            du.modificar_usuari(username, password, nou_user);
+            CtrlDadesUsuari.modificar_usuari(username, password, nou_user);
             return 2;
         }
         return id;
     }
     
     public void modificar_password(String username, String password, String new_password) {
-        du.modificar_password(username, password, new_password);
+        CtrlDadesUsuari.modificar_password(username, password, new_password);
     }
 
     public int ExisteixUsuari_contrasenya(String username, String password) {
@@ -49,7 +48,7 @@ public class CtrlUsuaris {
     }
     
     public Boolean ExisteixUsuari(String username) {
-        return du.ExisteixUsuari(username);
+        return CtrlDadesUsuari.ExisteixUsuari(username);
     }
     
     public int borrarUsuari(String username, String password) {
@@ -69,7 +68,7 @@ public class CtrlUsuaris {
     public int GuardarUsuari(String username, String password) {
         int id = ExisteixUsuari_contrasenya(username, password);
         if (id == 0) {
-            du.GuardarUsuari(username, password);
+            CtrlDadesUsuari.GuardarUsuari(username, password);
             return 0;
         }
         return id;
@@ -80,13 +79,13 @@ public class CtrlUsuaris {
     }
     
     public String consultar_password(String username) {
-            return du.consultar_password(username);
+            return CtrlDadesUsuari.consultar_password(username);
     }
     
-    public void consultar(CtrlGraf G) {
+    /*public void consultar(CtrlGraf G) {
         DriverHistorial dr = new DriverHistorial();
         dr.main(G);
-    }
+    }*/
 
     public void esborrar(int n) {
         hist.esborrar(n);

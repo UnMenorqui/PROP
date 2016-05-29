@@ -356,7 +356,6 @@ public class Graf {
             case "Autor":
                 autor.add(new Node(++maxAutor,nom,tipus));
                 autoractualitzat = true;
-                System.out.println("He afegit el node d'autor.");
                 break;
             case "Conferencia":
                 conf.add(new Node(++maxConf,nom,tipus));
@@ -737,7 +736,6 @@ public class Graf {
     }
     
     public void actualitzar() {
-        System.out.println("Entra aqui");
         if (autoractualitzat) {
             id.clear();
             noms.clear();
