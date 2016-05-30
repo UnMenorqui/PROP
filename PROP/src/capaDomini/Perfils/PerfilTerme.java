@@ -69,7 +69,7 @@ public class PerfilTerme extends Perfil {
         } else {
             for (int i = 0; i < conferencies.size(); ++i) {
                 String aux = conferencies.get(i);
-                System.out.println("\t- "+aux);
+                //System.out.println("\t- "+aux);
             }
             if (quantitat_conf > conferencies.size()) {
                 //System.out.println("No hi ha tantes conferències per la quantitat desitjada");

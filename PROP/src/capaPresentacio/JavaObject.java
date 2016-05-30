@@ -82,23 +82,18 @@ public class JavaObject {
         return cp.existeixnode(nom, tipus);
     }
     public String consulta_username() {
-        System.out.println("consulta user");
         return user.consultar_username();
     }
     
     public String consulta_password() {
-        System.out.println("consulta pass");
         return user.consultar_password();
     }
     
     public boolean login(String username, String password) {
-        System.out.println("login 1");
         if (ExisteixUsuari_contrasenya(username,password) == 2) {
-            System.out.println("login 2");
             user = new UsuariNormal(username,password);
             return true;
         }
-        System.out.println("login 3");
         return false;
     }
     

@@ -69,7 +69,7 @@ public class PerfilConf extends Perfil {
         } else {
             for (int i = 0; i < autors.size(); ++i) {
                 String aux = autors.get(i);
-                System.out.println("\t- "+aux);
+                //System.out.println("\t- "+aux);
             }
             if (quantitat_autors > autors.size()) {
                 //System.out.println("No hi ha tants autors per la quantitat desitjada");
