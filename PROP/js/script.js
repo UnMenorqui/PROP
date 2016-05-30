@@ -64,12 +64,13 @@
  	$("#loadingConsulta").css({ "display": "block" });
  	amagarCollapsible();
  	setTimeout(function() {
- 		var perfil = window.java.consulta($("#Tipus_Node").val(),$("#search").val(),parseInt($("#rangeAutors").val()),parseInt($("#rangeTermes").val()),parseInt($("#rangeConferencies").val()),parseInt($("#rangeArticles").val()),(username != ""));	 	$("#collapsibleConsulta").text(perfil);
+ 		var perfil = window.java.consulta($("#Tipus_Node").val(),$("#search").val(),parseInt($("#rangeAutors").val()),parseInt($("#rangeTermes").val()),parseInt($("#rangeConferencies").val()),parseInt($("#rangeArticles").val()),(username != ""));
 	 	if (perfil == "-1") {
 	 		$("#collapsibleConsulta").css({"display": "none"});
  			$("#loadingConsulta").css({ "display": "none" });
  			Materialize.toast("No s'ha trobat cap node amb aquesta entitat.",2000);
 	 	}
+
 	 	else {
 	 		perfil = JSON.parse(perfil);
 		 	var tipus = $("#Tipus_Node").val();
@@ -79,15 +80,7 @@
 		 		else if (window.java.existeixnode($("#search").val(),"Terme")) tipus = "Terme";
 		 		else if (window.java.existeixnode($("#search").val(),"Article")) tipus = "Article";
 		 	}
-		 
-		 	if (perfil != "No s'ha trobat") {
-		 		//if(!comprovaHistorial($("#search").val())) 
-		 			setConsultaHistorial($("#search").val(),tipus);
-		 	} else {
-		 		$("#collapsibleConsulta").css({"display": "block"});
-	 			$("#loadingConsulta").css({ "display": "none" });
-	 			Materialize.toast("No s'ha trobat cap resultat", 2000);
-		 	}
+
 		 	if (tipus == "Autor") {
 		 		$("#collapsibleConsulta").css({"display": "block"});
 	 			$("#loadingConsulta").css({ "display": "none" });
@@ -208,7 +201,6 @@
 			 			$("#collapsibleTermes .collapsible-body ul").append("<li>" + "No existeixen suficientes Conferencies per aquest Article." + "</li>");
 			 		}
 			 	}
-
 			}
 
 			if (tipus == "Conferencia") {
@@ -264,7 +256,6 @@
 			 			$("#collapsibleTermes .collapsible-body ul").append("<li>" + "No existeixen suficients Termes per aquesta Conferencia." + "</li>");
 			 		}
 			 	}
-
 			}
 
 			if (tipus == "Terme") {
@@ -321,11 +312,10 @@
 			 		}
 			 	}
 			}
-
 			getHistorial();
 		}
-	},250);
- }
+	} , 250);
+}
 
  function afegirNode() {
  	if(confirm("Estàs segur que d'afegir el Node?")) {
@@ -449,7 +439,7 @@ $(document).ready(function() {
  	 		password = window.java.consulta_password();
  	 		$("#formAccount_newUsername").val(username);
  	 		Materialize.updateTextFields();
- 	 		Materialize.toast('Accedint al teu compte...', 2000);
+ 	 		Materialize.toast("Accedint al teu compte...", 2000);
 	 		$("#logo_container").fadeOut(1000);
 	 		$("#logo_container h3").fadeOut(1000);
 	 		$("#logo_container img").fadeOut(1000);
@@ -547,7 +537,7 @@ $(document).ready(function() {
 	 	 	$("#opcions_admin").css({ "display": "none" });
 	 	 	$("#admin_graf").css({ "display": "none" });
 	 	 	$("#configurarCompteBtn").css({"display": "none"});
-	 	 	$("#homepage").fadeOut(1000);
+	 	 	$("#homepage").fadeOut(0);
 	 	 	$("#logo_container").fadeIn(1000);
 	 		$("#logo_container h3").fadeIn(1000);
 	 		$("#logo_container img").fadeIn(1000);

@@ -4,3 +4,4 @@ rogiia  rogiia
 joel  joel
 jaj  jaj
 abcd  abcd
+Usuari_Registrat  a
