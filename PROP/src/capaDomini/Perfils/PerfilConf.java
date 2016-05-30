@@ -65,7 +65,7 @@ public class PerfilConf extends Perfil {
         cs.obtenir_termes(termes,articles,nom,"Conferencia",quantitat_termes,G);
         String json;
         if(articles.size()+termes.size()+autors.size() == 0) {
-            json = ("No s'ha trobat cap conferència amb aquest nom.");
+            json = ("-1");
         } else {
             for (int i = 0; i < autors.size(); ++i) {
                 String aux = autors.get(i);

@@ -65,7 +65,7 @@ public class PerfilArticle extends Perfil {
         cs.obtenir_conferencies(conferencies,articles,nom,"Article",quantitat_conf,G);
         String json;
         if(termes.size()+conferencies.size()+autors.size() == 0) {
-            json = ("No s'ha trobat cap article amb aquest nom.");
+            json = "-1";
         } else {
             for (int i = 0; i < conferencies.size(); ++i) {
                 String aux = conferencies.get(i);

@@ -74,7 +74,7 @@ public class PerfilAutor extends Perfil {
         cs.obtenir_autors(co_autors,articles,nom,"Autor",quantitat_coautors,G);
         String json = null;
         if(articles.size()+termes.size()+conferencies.size()+co_autors.size() == 0) {
-            json = "No s'ha trobat cap autor amb aquest nom.";
+            json = "-1";
         } 
         else {
             for (int i = 0; i < conferencies.size(); ++i) {

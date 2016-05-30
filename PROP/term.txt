@@ -543,7 +543,6 @@
 584	subscribe
 585	approximate
 586	searches
-587	k
 588	neighbors
 589	answering
 590	aggregation
@@ -8919,3 +8918,5 @@
 13570	zonal
 13571	fractures
 13572	ala
+13573	Rogecito
+13574	cagada

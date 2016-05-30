@@ -6,6 +6,9 @@
 package capaPresentacio;
 
 import capaDomini.Graf.CtrlGraf;
+import capaDomini.Usuaris.Administrador;
+import capaDomini.Usuaris.UsuariConvidat;
+import capaDomini.Usuaris.UsuariNormal;
 import capaDomini.consulta.Apunts;
 import capaDomini.consulta.CtrlHistorial;
 import com.google.gson.Gson;
@@ -32,6 +35,9 @@ public class JavaObject {
     private CtrlHistorial ch = new CtrlHistorial();
     
     private String nom;
+    
+    private UsuariNormal user;
+    
 
     
     public JavaObject() {
@@ -62,17 +68,45 @@ public class JavaObject {
         return false;
     }
     
-    public int CanviarUsername(String username, String password, String new_username) {
-        return cp.modificar_usuari(username, password, new_username);
+    public int CanviarUsername(String new_username) {
+        //return cp.modificar_usuari(username, password, new_username);
+        return user.modifica_user(new_username);
     }
     
-    public int CanviarPassword(String username, String password, String new_password) {
-        return cp.modificar_password(username, password, new_password);
+    public int CanviarPassword(String new_password) {
+        //return cp.modificar_password(username, password, new_password);
+        return user.modifica_pass(new_password);
     }
     
     public boolean existeixnode(String nom, String tipus) {
         return cp.existeixnode(nom, tipus);
     }
+    public String consulta_username() {
+        System.out.println("consulta user");
+        return user.consultar_username();
+    }
+    
+    public String consulta_password() {
+        System.out.println("consulta pass");
+        return user.consultar_password();
+    }
+    
+    public boolean login(String username, String password) {
+        System.out.println("login 1");
+        if (ExisteixUsuari_contrasenya(username,password) == 2) {
+            System.out.println("login 2");
+            user = new UsuariNormal(username,password);
+            return true;
+        }
+        System.out.println("login 3");
+        return false;
+    }
+    
+    public void logout () {
+        user = null;
+    }
+   
+    
     
     public String consulta(String tipus, String nom, int q_autors, int q_termes, int q_conferencies, int q_articles, boolean usuaris) {
         Gson gson = new Gson();
@@ -87,6 +121,7 @@ public class JavaObject {
                 else if (CG.existeixnode(nom,"Autor")) tipus = "Autor";
                 else if (CG.existeixnode(nom, "Terme")) tipus = "Terme";
                 else if (CG.existeixnode(nom, "Article")) tipus = "Article";
+                else return "-1";
                 switch(tipus) {
                     case "Autor":
                         json = cp.crear_perfil_autor(nom, q_articles, q_autors, q_termes, q_conferencies, CG, usuaris);

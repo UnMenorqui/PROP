@@ -40,14 +40,7 @@ public class UsuariNormal extends UsuariConvidat {
         return id;
     }
     
-    public void modifica_pass(String new_password) {
-        ctrl.modificar_password(user_name, password, new_password);
+    public int modifica_pass(String new_password) {
+        return ctrl.modificar_password(user_name, password, new_password);
     }
-    
-    /*public void consultar_historial(CtrlGraf G) {
-        DriverHistorial dv = new DriverHistorial();
-        dv.main(G);
-    }*/
-
-    
 }

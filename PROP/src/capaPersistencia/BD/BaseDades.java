@@ -115,7 +115,7 @@ public class BaseDades  {
         try {
             File inFile = new File(nomfitxer);
             if (!inFile.isFile()) {
-              System.out.println("No existeix el ficher amb nom "+nomfitxer);
+              //System.out.println("No existeix el ficher amb nom "+nomfitxer);
             }
             else {
                 //Eliminamos el fichero existente

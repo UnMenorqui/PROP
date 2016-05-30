@@ -178,7 +178,6 @@ public class DadesUsuari {
         try {
             File inFile = new File(nom_BD);
             if (!inFile.isFile()) {
-              System.out.println("Parameter is not an existing file");
               return false;
             }
 
@@ -249,7 +248,6 @@ public class DadesUsuari {
                int i = 0;
                while (linea.charAt(i) != ' ') ++i;
                aux = linea.substring(0,i);
-               System.out.println(aux);
                usuaris.add(aux);
            }
            Gson gson = new Gson();

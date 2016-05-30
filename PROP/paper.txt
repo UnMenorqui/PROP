@@ -14382,7 +14382,9 @@
 654276	jaa
 654278	koko
 654279	ehe
-654280	kaka
 654281	keke
 654282	kke
 654283	
+654284	Rogi: Espècie en extinció
+654285	kk
+654286	cacota

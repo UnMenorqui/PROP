@@ -199,43 +199,6 @@ public class Graf {
                         }
                     }
                 }
-                if (existeix) {
-                    //Busca si el node2(autor) te alguna altra aresta, si no es
-                    //el cas, borra el node2
-                    segon = false;
-                    for (int i=0; i<pa.size() && !segon; ++i) {
-                        if (pa.get(i).getNode2() == node2) {
-                            segon = true;
-                        }
-                    }
-                    if (!segon) {
-                        eliminarNode(getNomNode(id1,"Autor"),"Autor");
-                        autoractualitzat = true;
-                    }
-                    //Busca si el node1(article) te alguna altra aresta, si no es
-                    //el cas, borra el node1
-                    primer = false;
-                    for (int i=0; i<pa.size() && !primer; ++i) {
-                        if (pa.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
-                    }
-                    for (int i=0; i<pc.size() && !primer; ++i) {
-                        if (pc.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
-                    }
-                    for (int i=0; i<pt.size() && !primer; ++i) {
-                        if (pt.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
-                    }
-                    if (!primer)  {
-                        eliminarNode(getNomNode(id,"Article"),"Article");
-                        articleactualitzat = true;
-                    }
-                }
-                else return 2;
                 break;
 
             case "Conferencia":
@@ -247,43 +210,6 @@ public class Graf {
                         }
                     }
                 }
-                if (existeix) {
-                    //Busca si el node2(conferencia) te alguna altra aresta, si no es
-                    //el cas, borra el node2
-                    segon = false;
-                    for (int i=0; i<pc.size() && !segon; ++i) {
-                        if (pc.get(i).getNode2() == node2) {
-                            segon = true;
-                        }
-                    }
-                    if (!segon) {
-                        eliminarNode(getNomNode(id1,"Conferencia"),"Conferencia");
-                        confactualitzat = true;
-                    }
-                    //Busca si el node1(article) te alguna altra aresta, si no es
-                    //el cas, borra el node1
-                    primer = false;
-                    for (int i=0; i<pa.size() && !primer; ++i) {
-                        if (pa.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
-                    }
-                    for (int i=0; i<pc.size() && !primer; ++i) {
-                        if (pc.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
-                    }
-                    for (int i=0; i<pt.size() && !primer; ++i) {
-                        if (pt.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
-                    }
-                    if (!primer) {
-                        eliminarNode(getNomNode(id,"Article"),"Article");
-                        articleactualitzat = true;
-                    }
-                }
-                else return 2;
                 break;
 
             case "Terme":
@@ -296,43 +222,6 @@ public class Graf {
                         }
                     }
                 }
-                if (existeix) {
-                    //Busca si el node2(terme) te alguna altra aresta, si no es
-                    //el cas, borra el node2
-                    segon = false;
-                    for (int i=0; i<pt.size() && !segon; ++i) {
-                        if (pt.get(i).getNode2() == node2) {
-                            segon = true;
-                        }
-                    }
-                    if (!segon) {
-                        eliminarNode(getNomNode(id1,"Terme"),"Terme");
-                        termeactualitzat = true;
-                    }
-                    //Busca si el node1(article) te alguna altra aresta, si no es
-                    //el cas, borra el node1
-                    primer = false;
-                    for (int i=0; i<pa.size() && !primer; ++i) {
-                        if (pa.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
-                    }
-                    for (int i=0; i<pc.size() && !primer; ++i) {
-                        if (pc.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
-                    }
-                    for (int i=0; i<pt.size() && !primer; ++i) {
-                        if (pt.get(i).getNode1() == node1) {
-                            primer = true;
-                        }
-                    }
-                    if (!primer) {
-                        eliminarNode(getNomNode(id,"Article"),"Article");
-                        articleactualitzat = true;
-                    }
-                }
-                else return 2;
                 break;
         }
         if (existeix) actualitzar = true;

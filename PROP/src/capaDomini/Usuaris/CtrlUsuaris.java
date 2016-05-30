@@ -39,8 +39,13 @@ public class CtrlUsuaris {
         return id;
     }
     
-    public void modificar_password(String username, String password, String new_password) {
-        CtrlDadesUsuari.modificar_password(username, password, new_password);
+    public int modificar_password(String username, String password, String new_password) {
+        int id = ExisteixUsuari_contrasenya(username,password);
+        if (id == 2) {
+            CtrlDadesUsuari.modificar_password(username, password, new_password);
+            return 2;
+        }
+        return id;
     }
 
     public int ExisteixUsuari_contrasenya(String username, String password) {
@@ -81,6 +86,7 @@ public class CtrlUsuaris {
     public String consultar_password(String username) {
             return CtrlDadesUsuari.consultar_password(username);
     }
+    
     
     /*public void consultar(CtrlGraf G) {
         DriverHistorial dr = new DriverHistorial();
