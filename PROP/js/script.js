@@ -68,7 +68,7 @@
 	 	if (perfil == "-1") {
 	 		$("#collapsibleConsulta").css({"display": "none"});
  			$("#loadingConsulta").css({ "display": "none" });
- 			Materialize.toast("No s'ha trobat cap node amb aquesta entitat.");
+ 			Materialize.toast("No s'ha trobat cap node amb aquesta entitat.",2000);
 	 	}
 	 	else {
 	 		perfil = JSON.parse(perfil);
@@ -380,9 +380,9 @@
  function eliminarUsuariAdmin() {
  	if(confirm("Estàs segur que vols borrar aquesta usuari de la BD?")){
  		var id = window.java.BorraUsuariAdmin($("#eliminarUsuariNom").val());
- 		if (id == 0) Materialize.toast("Usuari no-existent.");
+ 		if (id == 0) Materialize.toast("Usuari no-existent.",2000);
  		else {
- 			Materialize.toast("Usuari eliminat correctament.")
+ 			Materialize.toast("Usuari eliminat correctament.",2000);
  		}
  	}
  }	
@@ -465,7 +465,7 @@ $(document).ready(function() {
  	 $("#guest_entry").on("click", function(e) {
  	 	$("#nomusuariContainer").text("Convidat");
  	 	Materialize.updateTextFields();
- 	 	Materialize.toast('Accedint a l`aplicació...', 2000);
+ 	 	Materialize.toast("Accedint a l'aplicació...", 2000);
  	 	$("#logo_container").fadeOut(1000);
  		$("#logo_container h3").fadeOut(1000);
  		$("#logo_container img").fadeOut(1000);
@@ -482,7 +482,7 @@ $(document).ready(function() {
  	 		isAdmin = true;
  	 		$("#formAccount_newUsername").val(username);
  	 		Materialize.updateTextFields();
- 	 		Materialize.toast('Accedint al teu compte...', 2000);
+ 	 		Materialize.toast("Accedint al compte d'Administrador...", 2000);
 	 		$("#logo_container").fadeOut(1000);
 	 		$("#logo_container h3").fadeOut(1000);
 	 		$("#logo_container img").fadeOut(1000);
