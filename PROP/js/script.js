@@ -71,6 +71,7 @@
  			Materialize.toast("No s'ha trobat cap node amb aquesta entitat.",2000);
 	 	}
 
+
 	 	else {
 	 		perfil = JSON.parse(perfil);
 		 	var tipus = $("#Tipus_Node").val();
@@ -80,6 +81,19 @@
 		 		else if (window.java.existeixnode($("#search").val(),"Terme")) tipus = "Terme";
 		 		else if (window.java.existeixnode($("#search").val(),"Article")) tipus = "Article";
 		 	}
+
+		 	if (perfil != "-1") {
+	 		//if(!comprovaHistorial($("#search").val())) 
+	 			setConsultaHistorial($("#search").val(),tipus);
+		 	} else {
+		 		$("#collapsibleConsulta").css({"display": "block"});
+		 		var perfil = window.java.consulta($("#Tipus_Node").val(),$("#search").val(),parseInt($("#rangeAutors").val()),parseInt($("#rangeTermes").val()),parseInt($("#rangeConferencies").val()),parseInt($("#rangeArticles").val()),(username != ""));	 	$("#collapsibleConsulta").text(perfil);
+			 	if (perfil == "-1") {
+			 		$("#collapsibleConsulta").css({"display": "none"});
+		 			$("#loadingConsulta").css({ "display": "none" });
+		 			Materialize.toast("No s'ha trobat cap resultat", 2000);
+			 	}
+			 }
 
 		 	if (tipus == "Autor") {
 		 		$("#collapsibleConsulta").css({"display": "block"});
